@@ -8,6 +8,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>FlatOut PY</title>
     <style>
+        /* ========================================
+           PRESET DE CORES - FLATOUT PY
+           ======================================== */
+        :root {
+            /* Primary - Preto profundo (fundo principal) */
+            --color-primary: #121212;
+            --color-primary-rgb: 18, 18, 18;
+            
+            /* Secondary - Cinza grafite (fundo secundário) */
+            --color-secondary: #2C2C2C;
+            --color-secondary-rgb: 44, 44, 44;
+            
+            /* Detail - Cinza claro (texto, bordas, detalhes) */
+            --color-detail: #D1D1D1;
+            --color-detail-rgb: 209, 209, 209;
+            
+            /* Destaque - Vermelho destaque (botões, títulos, call-to-action) */
+            --color-destaque: #D62828;
+            --color-destaque-rgb: 214, 40, 40;
+            
+            /* Hover - Vermelho escuro (hover, estados ativos, contraste) */
+            --color-hover: #A4161A;
+            --color-hover-rgb: 164, 22, 26;
+        }
+
         .montserrat-global {
             font-family: "Montserrat", sans-serif;
             font-optical-sizing: auto;
@@ -22,6 +47,7 @@
             margin: 0;
             font-family: 'Montserrat', sans-serif;
             font-weight: 400;
+            background-color: var(--color-primary);
         }
         .section {
             height: 100vh;
@@ -29,7 +55,7 @@
         .black {
             position: relative;
             overflow: hidden;
-            color: white;
+            color: var(--color-detail);
         }
 
         .black::before {
@@ -48,13 +74,17 @@
 
         .title {
             text-align: center;
-            color: white;
+            color: var(--color-destaque);
             top: 2rem;
             position: absolute;
             width: 100%;
-            font-size: 3rem; /* Aumenta o tamanho da fonte */ /* Deixa o texto em negrito */
-            text-transform: uppercase; /* Transforma o texto em maiúsculas */
-            letter-spacing: 0.2rem; /* Adiciona espaçamento entre as letras */
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+        }
+
+        .title-py {
+            color: var(--color-detail);
         }
 
         @keyframes shimmer {
@@ -68,12 +98,12 @@
 
         .subtitle {
             text-align: center;
-            color: white;
+            color: var(--color-detail);
             top: 6rem;
             position: absolute;
             width: 100%;
-            font-size: 1rem; /* Aumenta o tamanho da fonte */ /* Deixa o texto em negrito */ /* Transforma o texto em maiúsculas */
-            letter-spacing: 0.2rem; /* Adiciona espaçamento entre as letras */
+            font-size: 1rem;
+            letter-spacing: 0.2rem;
         }
 
         .nav-menu-container {
@@ -82,14 +112,14 @@
             align-items: stretch;
             gap: 0.3rem;
             z-index: 100;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(20, 20, 20, 0.8) 100%);
+            background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.7) 0%, rgba(var(--color-secondary-rgb), 0.8) 100%);
             backdrop-filter: blur(30px);
-            border: 2px solid rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(var(--color-detail-rgb), 0.15);
             border-radius: 25px;
             padding: 1rem;
             box-shadow: 
-                0 10px 40px rgba(0, 0, 0, 0.6),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                0 10px 40px rgba(var(--color-primary-rgb), 0.6),
+                inset 0 1px 0 rgba(var(--color-detail-rgb), 0.1);
             overflow: hidden;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: fixed;
@@ -106,9 +136,9 @@
 
         .nav-menu-container:hover {
             box-shadow: 
-                0 15px 50px rgba(255, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 50, 50, 0.3);
+                0 15px 50px rgba(var(--color-destaque-rgb), 0.3),
+                inset 0 1px 0 rgba(var(--color-detail-rgb), 0.15);
+            border-color: rgba(var(--color-destaque-rgb), 0.3);
         }
 
         .nav-toggle-btn {
@@ -119,16 +149,16 @@
             z-index: 101;
             width: 3rem;
             height: 3rem;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(20, 20, 20, 0.9) 100%);
+            background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.8) 0%, rgba(var(--color-secondary-rgb), 0.9) 100%);
             backdrop-filter: blur(20px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(var(--color-detail-rgb), 0.2);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 5px 20px rgba(var(--color-primary-rgb), 0.5);
         }
 
         .nav-toggle-btn.menu-open {
@@ -140,10 +170,10 @@
         }
 
         .nav-toggle-btn:hover {
-            background: linear-gradient(135deg, rgba(255, 0, 0, 0.3) 0%, rgba(255, 50, 50, 0.4) 100%);
-            border-color: rgba(255, 100, 100, 0.6);
+            background: linear-gradient(135deg, rgba(var(--color-destaque-rgb), 0.3) 0%, rgba(var(--color-hover-rgb), 0.4) 100%);
+            border-color: rgba(var(--color-destaque-rgb), 0.6);
             transform: translateY(-50%) scale(1.1);
-            box-shadow: 0 8px 30px rgba(255, 0, 0, 0.4);
+            box-shadow: 0 8px 30px rgba(var(--color-destaque-rgb), 0.4);
         }
 
         .nav-toggle-btn:active {
@@ -153,26 +183,26 @@
         .nav-toggle-btn svg {
             width: 1.5rem;
             height: 1.5rem;
-            stroke: white;
+            stroke: var(--color-detail);
             fill: none;
             stroke-width: 2;
             transition: all 0.5s ease;
         }
 
         .nav-toggle-btn:hover svg {
-            stroke: #ff6666;
+            stroke: var(--color-destaque);
         }
 
         /* Animação de piscada para o botão */
         @keyframes pulseButton {
             0%, 100% {
-                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+                box-shadow: 0 5px 20px rgba(var(--color-primary-rgb), 0.5);
                 transform: translateY(-50%) scale(1);
             }
             50% {
-                box-shadow: 0 8px 30px rgba(255, 0, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.6);
+                box-shadow: 0 8px 30px rgba(var(--color-destaque-rgb), 0.8), 0 0 20px rgba(var(--color-destaque-rgb), 0.6);
                 transform: translateY(-50%) scale(1.1);
-                border-color: rgba(255, 100, 100, 0.8);
+                border-color: rgba(var(--color-destaque-rgb), 0.8);
             }
         }
 
@@ -215,14 +245,14 @@
             flex-direction: row;
             align-items: center;
             gap: 1rem;
-            color: white;
+            color: var(--color-detail);
             cursor: pointer;
             padding: 0.9rem 1.2rem;
             border-radius: 15px;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             text-decoration: none;
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(var(--color-detail-rgb), 0.03);
         }
 
         .nav-item::before {
@@ -233,7 +263,7 @@
             transform: translate(-50%, -50%) scale(0.8);
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(255, 0, 0, 0.2) 0%, rgba(255, 50, 50, 0.3) 100%);
+            background: linear-gradient(135deg, rgba(var(--color-destaque-rgb), 0.2) 0%, rgba(var(--color-hover-rgb), 0.3) 100%);
             opacity: 0;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             border-radius: 15px;
@@ -246,9 +276,9 @@
         }
 
         .nav-item:hover {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(var(--color-detail-rgb), 0.08);
             transform: translateX(5px);
-            box-shadow: 0 5px 20px rgba(255, 0, 0, 0.3);
+            box-shadow: 0 5px 20px rgba(var(--color-destaque-rgb), 0.3);
         }
 
         .nav-item:active {
@@ -265,17 +295,17 @@
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             z-index: 1;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(var(--color-detail-rgb), 0.05);
             border-radius: 50%;
             padding: 0.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(var(--color-detail-rgb), 0.1);
         }
 
         .nav-item:hover .nav-icon {
             transform: scale(1.1) rotate(5deg);
-            background: rgba(255, 50, 50, 0.15);
-            border-color: rgba(255, 100, 100, 0.4);
-            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+            background: rgba(var(--color-destaque-rgb), 0.15);
+            border-color: rgba(var(--color-destaque-rgb), 0.4);
+            box-shadow: 0 5px 15px rgba(var(--color-destaque-rgb), 0.3);
         }
 
         /* Desabilitar aumento no hover para Limpeza Estética */
@@ -294,16 +324,16 @@
         .nav-icon svg {
             width: 100%;
             height: 100%;
-            stroke: white;
+            stroke: var(--color-detail);
             fill: none;
             stroke-width: 2;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+            filter: drop-shadow(0 2px 4px rgba(var(--color-primary-rgb), 0.3));
         }
 
         .nav-item:hover .nav-icon svg {
-            stroke: #ff6666;
-            filter: drop-shadow(0 0 8px rgba(255, 100, 100, 0.6));
+            stroke: var(--color-destaque);
+            filter: drop-shadow(0 0 8px rgba(var(--color-destaque-rgb), 0.6));
         }
 
         .nav-text {
@@ -316,14 +346,14 @@
             position: relative;
             z-index: 1;
             opacity: 0.9;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 2px 4px rgba(var(--color-primary-rgb), 0.3);
         }
 
         .nav-item:hover .nav-text {
-            color: #ff6666;
+            color: var(--color-destaque);
             opacity: 1;
             letter-spacing: 0.08rem;
-            text-shadow: 0 0 10px rgba(255, 100, 100, 0.5);
+            text-shadow: 0 0 10px rgba(var(--color-destaque-rgb), 0.5);
         }
 
         .nav-separator {
@@ -331,9 +361,9 @@
             height: 1px;
             background: linear-gradient(90deg, 
                 transparent 0%, 
-                rgba(255, 255, 255, 0.1) 10%, 
-                rgba(255, 255, 255, 0.3) 50%, 
-                rgba(255, 255, 255, 0.1) 90%, 
+                rgba(var(--color-detail-rgb), 0.1) 10%, 
+                rgba(var(--color-detail-rgb), 0.3) 50%, 
+                rgba(var(--color-detail-rgb), 0.1) 90%, 
                 transparent 100%);
             margin: 0.2rem 0;
             border-radius: 2px;
@@ -343,9 +373,9 @@
         .nav-menu-container:hover .nav-separator {
             background: linear-gradient(90deg, 
                 transparent 0%, 
-                rgba(255, 100, 100, 0.2) 10%, 
-                rgba(255, 100, 100, 0.4) 50%, 
-                rgba(255, 100, 100, 0.2) 90%, 
+                rgba(var(--color-destaque-rgb), 0.2) 10%, 
+                rgba(var(--color-destaque-rgb), 0.4) 50%, 
+                rgba(var(--color-destaque-rgb), 0.2) 90%, 
                 transparent 100%);
         }
 
@@ -423,11 +453,11 @@
 
         footer {
             text-align: center;
-            color: white;
+            color: var(--color-detail);
             position: absolute;
             bottom: 2rem;
             width: 100%;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 2px 10px rgba(var(--color-primary-rgb), 0.5);
             animation: fadeInUp 1s ease-out;
             display: flex;
             flex-direction: column;
@@ -449,7 +479,7 @@
         .landpage1 {
             position: relative;
             overflow: hidden;
-            color: white;
+            color: var(--color-detail);
         }
         .landpage1::before {
             content: "";
@@ -466,14 +496,14 @@
         }
         .dust-particle {
             position: absolute;
-            background-color: rgba(255, 255, 255, 0.3);
+            background-color: rgba(var(--color-detail-rgb), 0.3);
             border-radius: 50%;
             pointer-events: none;
             filter: blur(1px);
             z-index: 1;
         }
         .landpage2 {
-            background-color: rgb(13, 13, 13);
+            background-color: var(--color-primary);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -497,9 +527,9 @@
             z-index: -1;
         }
         .button {
-            background-color: #42424200;
-            color: white;
-            border: 1px solid white;
+            background-color: transparent;
+            color: var(--color-detail);
+            border: 1px solid var(--color-detail);
             padding: 0.8rem 1.5rem;
             font-size: 1rem;
             text-transform: uppercase;
@@ -511,7 +541,7 @@
             white-space: nowrap;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 10px rgba(var(--color-primary-rgb), 0.2);
         }
         .button::before {
             content: "";
@@ -520,16 +550,16 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(var(--color-detail-rgb), 0.1), transparent);
             transition: left 0.5s ease;
         }
         .button:hover::before {
             left: 100%;
         }
         .button:hover {
-            background-color: #00060c;
-            border-color: #ff0000;
-            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.3);
+            background-color: rgba(var(--color-secondary-rgb), 0.5);
+            border-color: var(--color-destaque);
+            box-shadow: 0 4px 20px rgba(var(--color-destaque-rgb), 0.3);
             transform: translateY(-2px);
         }
         .grid-section {
@@ -545,24 +575,25 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1rem; /* Adjust font size for consistency */
-            color: white;
-            text-align: center; /* Center text alignment */
-            padding: 1rem; /* Add padding for better spacing */
-            box-sizing: border-box; /* Ensure padding doesn't affect size */
-            position: relative; /* Enable positioning for child elements */
+            font-size: 1rem;
+            color: var(--color-detail);
+            text-align: center;
+            padding: 1rem;
+            box-sizing: border-box;
+            position: relative;
         }
 
         .grid-item h2 {
             position: absolute;
-            top: 1rem; /* Consistent distance from the top */
+            top: 1rem;
             left: 50%;
-            transform: translateX(-50%); /* Center horizontally */
-            margin: 0; /* Remove default margin */
-            text-align: center; /* Ensure text alignment is centered */
-            font-weight: 400; /* Ensure consistent font weight */
-            font-size: 1rem; /* Reset to default font size */
-            white-space: nowrap; /* Prevent line breaks */
+            transform: translateX(-50%);
+            margin: 0;
+            text-align: center;
+            font-weight: 400;
+            font-size: 1rem;
+            white-space: nowrap;
+            color: var(--color-destaque);
         }
 
         .grid-item p, .grid-item ul {
@@ -588,11 +619,11 @@
         }
 
         .grid-item ul li::before {
-            content: "•"; /* Add a single bullet point */
-            position: absolute; /* Position the marker */
-            left: 0; /* Align marker to the left */
-            color: white; /* Match text color */
-            font-size: 1rem; /* Adjust marker size */
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--color-detail);
+            font-size: 1rem;
         }
 
         .grid-item {
@@ -604,19 +635,19 @@
         }
 
         .grid-item:nth-child(1) {
-            background: linear-gradient(135deg, #000000 0%, #1a0000 100%);
+            background: linear-gradient(135deg, var(--color-primary) 0%, rgba(var(--color-hover-rgb), 0.3) 100%);
         }
 
         .grid-item:nth-child(2) {
-            background: linear-gradient(135deg, #242424 0%, #1a1a1a 100%);
+            background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
         }
 
         .grid-item:nth-child(3) {
-            background: linear-gradient(135deg, #242424 0%, #1a1a1a 100%);
+            background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
         }
 
         .grid-item:nth-child(4) {
-            background: linear-gradient(135deg, #000000 0%, #1a0000 100%);
+            background: linear-gradient(135deg, var(--color-primary) 0%, rgba(var(--color-hover-rgb), 0.3) 100%);
         }
 
         /* Gradientes permanentes para botões de redes sociais */
@@ -676,6 +707,7 @@
         #overlay {
             backdrop-filter: blur(5px);
             animation: overlayFadeIn 0.3s ease-out;
+            background-color: rgba(var(--color-primary-rgb), 0.5);
         }
         
         @keyframes overlayFadeIn {
@@ -694,7 +726,7 @@
         
         .landpage4 a:hover svg {
             transform: scale(1.1) rotate(5deg);
-            filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.7));
+            filter: drop-shadow(0 0 15px rgba(var(--color-destaque-rgb), 0.7));
         }
 
         /* Adicionar efeito parallax sutil nas landpages */
@@ -780,7 +812,7 @@
 
         /* Efeito de brilho nos links sociais */
         .landpage4 a.button {
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 2px 10px rgba(var(--color-primary-rgb), 0.3);
         }
 
         .landpage4 a.button:hover {
@@ -791,7 +823,7 @@
 <body class="montserrat-global">
     <div class="section landpage1">
         <div class="title">
-            FLATOUT PY
+            FLATOUT <span class="title-py">PY</span>
         </div>
         <div class="subtitle">
             MotorSport Club
@@ -897,44 +929,44 @@
     </div>
     <!-- Rename grid-section to landpage4 -->
     <div class="section landpage4" style="position: relative; overflow: hidden;">
-        <div style="position: absolute; top: 0; left: 4rem; width: calc(100% - 8rem); height: 2px; background-color: white; z-index: 2;"></div>
+        <div style="position: absolute; top: 0; left: 4rem; width: calc(100% - 8rem); height: 2px; background-color: var(--color-detail); z-index: 2;"></div>
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('img/brpy.png'); background-size: cover; background-position: center; filter: grayscale(0%) brightness(50%); z-index: 0;"></div>
         <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 1;">
             <!-- Instagram Icon -->
             <a href="https://www.instagram.com/flatout_py/" target="_blank" style="display: inline-block; margin-bottom: 2rem;">
-                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));">
-                    <rect x="2" y="2" width="20" height="20" rx="5" stroke="white" stroke-width="2" fill="none"/>
-                    <circle cx="12" cy="12" r="4" stroke="white" stroke-width="2" fill="none"/>
-                    <circle cx="18" cy="6" r="1.5" fill="white"/>
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 0 10px rgba(var(--color-destaque-rgb),0.5));">
+                    <rect x="2" y="2" width="20" height="20" rx="5" stroke="var(--color-detail)" stroke-width="2" fill="none"/>
+                    <circle cx="12" cy="12" r="4" stroke="var(--color-detail)" stroke-width="2" fill="none"/>
+                    <circle cx="18" cy="6" r="1.5" fill="var(--color-detail)"/>
                 </svg>
             </a>
             <!-- Social Media Text -->
-            <h2 style="color: white; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.2rem; margin-bottom: 1.5rem; font-weight: 400;">Nossas redes sociais</h2>
+            <h2 style="color: var(--color-detail); font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.2rem; margin-bottom: 1.5rem; font-weight: 400;">Nossas redes sociais</h2>
             <!-- Social Media Buttons -->
             <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                <a href="https://www.instagram.com/flatout_py/" target="_blank" class="button" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem; background-color: rgba(66, 66, 66, 0.3); backdrop-filter: blur(1px); -webkit-backdrop-filter: blur(10px);">
+                <a href="https://www.instagram.com/flatout_py/" target="_blank" class="button" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem; background-color: rgba(var(--color-secondary-rgb), 0.3); backdrop-filter: blur(1px); -webkit-backdrop-filter: blur(10px);">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="2" y="2" width="20" height="20" rx="5" stroke="white" stroke-width="2"/>
-                        <circle cx="12" cy="12" r="4" stroke="white" stroke-width="2"/>
-                        <circle cx="18" cy="6" r="1.5" fill="white"/>
+                        <rect x="2" y="2" width="20" height="20" rx="5" stroke="var(--color-detail)" stroke-width="2"/>
+                        <circle cx="12" cy="12" r="4" stroke="var(--color-detail)" stroke-width="2"/>
+                        <circle cx="18" cy="6" r="1.5" fill="var(--color-detail)"/>
                     </svg>
                     Instagram
                 </a>
-                <a href="https://www.facebook.com/flatoutpy/" target="_blank" class="button" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem; background-color: rgba(66, 66, 66, 0.3); backdrop-filter: blur(1px); -webkit-backdrop-filter: blur(10px);">
+                <a href="https://www.facebook.com/flatoutpy/" target="_blank" class="button" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem; background-color: rgba(var(--color-secondary-rgb), 0.3); backdrop-filter: blur(1px); -webkit-backdrop-filter: blur(10px);">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 17.9895 4.3882 22.954 10.125 23.8542V15.4688H7.07812V12H10.125V9.35625C10.125 6.34875 11.9166 4.6875 14.6576 4.6875C15.9701 4.6875 17.3438 4.92188 17.3438 4.92188V7.875H15.8306C14.34 7.875 13.875 8.80008 13.875 9.75V12H17.2031L16.6711 15.4688H13.875V23.8542C19.6118 22.954 24 17.9895 24 12Z" fill="white"/>
+                        <path d="M24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 17.9895 4.3882 22.954 10.125 23.8542V15.4688H7.07812V12H10.125V9.35625C10.125 6.34875 11.9166 4.6875 14.6576 4.6875C15.9701 4.6875 17.3438 4.92188 17.3438 4.92188V7.875H15.8306C14.34 7.875 13.875 8.80008 13.875 9.75V12H17.2031L16.6711 15.4688H13.875V23.8542C19.6118 22.954 24 17.9895 24 12Z" fill="var(--color-detail)"/>
                     </svg>
                     Facebook
                 </a>
-                <a href="https://www.tiktok.com/@flatoutpy" target="_blank" class="button" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem; background-color: rgba(66, 66, 66, 0.3); backdrop-filter: blur(1px); -webkit-backdrop-filter: blur(10px);">
+                <a href="https://www.tiktok.com/@flatoutpy" target="_blank" class="button" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem; background-color: rgba(var(--color-secondary-rgb), 0.3); backdrop-filter: blur(1px); -webkit-backdrop-filter: blur(10px);">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" fill="white"/>
+                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" fill="var(--color-detail)"/>
                     </svg>
                     TikTok
                 </a>
-                <a href="https://wa.me/595981234567" target="_blank" class="button" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem; background-color: rgba(66, 66, 66, 0.3); backdrop-filter: blur(1px); -webkit-backdrop-filter: blur(10px);">
+                <a href="https://wa.me/595981234567" target="_blank" class="button" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem; background-color: rgba(var(--color-secondary-rgb), 0.3); backdrop-filter: blur(1px); -webkit-backdrop-filter: blur(10px);">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="white"/>
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="var(--color-detail)"/>
                     </svg>
                     WhatsApp
                 </a>
@@ -943,7 +975,7 @@
         </div>
     </div>
     </div>
-    <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
+    <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(var(--color-primary-rgb), 0.5); z-index: 999;"></div>
     <script>
         // Toggle Menu Functionality
         const navToggle = document.getElementById('navToggle');
