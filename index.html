@@ -242,12 +242,12 @@
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: fixed;
             left: 2rem;
-            top: 50%;
-            transform: translateY(-50%) translateX(0);
+            top: calc(80px + 2rem);
+            transform: translateY(0) translateX(0);
         }
 
         .nav-menu-container.hidden {
-            transform: translateY(-50%) translateX(-120%);
+            transform: translateY(0) translateX(-120%);
             opacity: 0;
             pointer-events: none;
         }
@@ -262,8 +262,8 @@
         .nav-toggle-btn {
             position: fixed;
             left: calc(2rem + 250px + 0.5rem);
-            top: 50%;
-            transform: translateY(-50%);
+            top: calc(80px + 2rem);
+            transform: translateY(0);
             z-index: 1001;
             width: 3rem;
             height: 3rem;
@@ -290,12 +290,12 @@
         .nav-toggle-btn:hover {
             background: linear-gradient(135deg, rgba(var(--color-destaque-rgb), 0.3) 0%, rgba(var(--color-hover-rgb), 0.4) 100%);
             border-color: rgba(var(--color-destaque-rgb), 0.6);
-            transform: translateY(-50%) scale(1.1);
+            transform: translateY(0) scale(1.1);
             box-shadow: 0 8px 30px rgba(var(--color-destaque-rgb), 0.4);
         }
 
         .nav-toggle-btn:active {
-            transform: translateY(-50%) scale(0.95);
+            transform: translateY(0) scale(0.95);
         }
 
         .nav-toggle-btn svg {
@@ -315,11 +315,11 @@
         @keyframes pulseButton {
             0%, 100% {
                 box-shadow: 0 5px 20px rgba(var(--color-primary-rgb), 0.5);
-                transform: translateY(-50%) scale(1);
+                transform: translateY(0) scale(1);
             }
             50% {
                 box-shadow: 0 8px 30px rgba(var(--color-destaque-rgb), 0.8), 0 0 20px rgba(var(--color-destaque-rgb), 0.6);
-                transform: translateY(-50%) scale(1.1);
+                transform: translateY(0) scale(1.1);
                 border-color: rgba(var(--color-destaque-rgb), 0.8);
             }
         }
@@ -339,11 +339,11 @@
         @keyframes fadeInLeft {
             from {
                 opacity: 0;
-                transform: translateY(-50%) translateX(-30px);
+                transform: translateY(0) translateX(-30px);
             }
             to {
                 opacity: 1;
-                transform: translateY(-50%) translateX(0);
+                transform: translateY(0) translateX(0);
             }
         }
 
@@ -1145,7 +1145,7 @@
             .nav-menu-container {
                 left: 0.5rem !important;
                 right: auto !important;
-                top: 1rem !important;
+                top: calc(80px + 1rem) !important;
                 transform: translateY(0) translateX(0) !important;
                 padding: 0.6rem !important;
                 border-radius: 15px !important;
@@ -1186,7 +1186,7 @@
                 width: 2.5rem !important;
                 height: 2.5rem !important;
                 left: 0.5rem !important;
-                top: 1rem !important;
+                top: calc(80px + 1rem) !important;
                 transform: none !important;
                 position: fixed !important;
                 z-index: 1001 !important;
@@ -2113,6 +2113,69 @@
             </div>
         </div>
     </div>
+    <!-- Seção 4: Localização e Horário de Funcionamento -->
+    <div class="section landpage4-location" style="background-color: var(--color-primary); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 4rem 2rem;">
+        <div class="location-hours-container" style="max-width: 1200px; width: 100%; margin: 0 auto;">
+            <h2 class="section-title" style="text-align: center; font-size: 2.5rem; color: var(--color-detail); text-transform: uppercase; letter-spacing: 0.15rem; margin-bottom: 3rem; font-weight: 600;">Onde Nos Encontrar</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <!-- Card de Localização -->
+                <div style="background: rgba(var(--color-secondary-rgb), 0.5); border: 2px solid rgba(var(--color-detail-rgb), 0.1); border-radius: 20px; padding: 2.5rem; text-align: center; transition: all 0.3s ease;">
+                    <div style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="var(--color-destaque)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="12" cy="10" r="3" stroke="var(--color-destaque)" stroke-width="2" fill="none"/>
+                        </svg>
+                    </div>
+                    <h3 style="color: var(--color-destaque); font-size: 1.5rem; margin-bottom: 1.5rem; font-weight: 600;">Nossa Localização</h3>
+                    <div style="color: var(--color-detail); font-size: 1rem; line-height: 1.8; opacity: 0.9;">
+                        <p style="margin: 0.5rem 0;"><strong>Endereço:</strong></p>
+                        <p style="margin: 0.5rem 0;">Rua Example, 1234</p>
+                        <p style="margin: 0.5rem 0;">Bairro Centro</p>
+                        <p style="margin: 0.5rem 0;">Ciudad del Este - PY</p>
+                        <p style="margin: 1.5rem 0 0.5rem 0;"><strong>CEP:</strong> 00000-000</p>
+                    </div>
+                    <a href="https://maps.google.com/" target="_blank" style="display: inline-block; margin-top: 1.5rem; background: linear-gradient(135deg, var(--color-destaque) 0%, var(--color-hover) 100%); color: white; padding: 0.8rem 1.8rem; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08rem; border-radius: 30px; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 5px 20px rgba(var(--color-destaque-rgb), 0.3);">
+                        Ver no Mapa
+                    </a>
+                </div>
+
+                <!-- Card de Horário de Funcionamento -->
+                <div style="background: rgba(var(--color-secondary-rgb), 0.5); border: 2px solid rgba(var(--color-detail-rgb), 0.1); border-radius: 20px; padding: 2.5rem; text-align: center; transition: all 0.3s ease;">
+                    <div style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="10" stroke="var(--color-destaque)" stroke-width="2"/>
+                            <path d="M12 6v6l4 2" stroke="var(--color-destaque)" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 style="color: var(--color-destaque); font-size: 1.5rem; margin-bottom: 1.5rem; font-weight: 600;">Horário de Funcionamento</h3>
+                    <div style="color: var(--color-detail); font-size: 1rem; line-height: 2; opacity: 0.9;">
+                        <p style="margin: 0.8rem 0;"><strong>Segunda a Sexta:</strong></p>
+                        <p style="margin: 0.5rem 0;">08:00 - 18:00</p>
+                        
+                        <p style="margin: 1.5rem 0 0.5rem 0;"><strong>Sábado:</strong></p>
+                        <p style="margin: 0.5rem 0;">08:00 - 13:00</p>
+                        
+                        <p style="margin: 1.5rem 0 0.5rem 0;"><strong>Domingo:</strong></p>
+                        <p style="margin: 0.5rem 0;">Fechado</p>
+                    </div>
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(var(--color-destaque-rgb), 0.1); border-radius: 10px; border: 1px solid rgba(var(--color-destaque-rgb), 0.3);">
+                        <p style="color: var(--color-destaque); font-size: 0.9rem; margin: 0; font-weight: 500;">
+                            ⚠️ Atendimento mediante agendamento
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA para contato -->
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="https://wa.me/595981234567?text=Olá!%20Gostaria%20de%20agendar%20uma%20visita" target="_blank" style="display: inline-block; background: transparent; color: var(--color-destaque); border: 2px solid var(--color-destaque); padding: 1rem 2.5rem; font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1rem; border-radius: 50px; text-decoration: none; transition: all 0.3s ease;">
+                    AGENDAR VISITA
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Rename grid-section to landpage4 -->
     <div class="section landpage4" style="position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center; justify-content: center;">
         <div style="position: absolute; top: 0; left: 4rem; width: calc(100% - 8rem); height: 2px; background-color: var(--color-detail); z-index: 2;"></div>
