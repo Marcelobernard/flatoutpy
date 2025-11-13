@@ -694,6 +694,12 @@
             box-shadow: 0 4px 20px rgba(var(--color-destaque-rgb), 0.3);
             transform: translateY(-2px);
         }
+        
+        /* Remover borda vermelha dos botões de redes sociais no hover */
+        .button[href*="instagram"]:hover,
+        .button[href*="wa.me"]:hover {
+            border-color: var(--color-detail);
+        }
         .grid-section {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -793,25 +799,9 @@
             background: linear-gradient(90deg, transparent, rgba(193, 53, 132, 0.8), rgba(225, 48, 108, 1)) !important;
         }
 
-        .button[href*="facebook"] {
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(90deg, transparent, rgba(24, 119, 242, 0.6), rgba(66, 133, 244, 0.8)) !important;
-        }
 
-        .button[href*="facebook"]:hover {
-            background: linear-gradient(90deg, transparent, rgba(24, 119, 242, 0.8), rgba(66, 133, 244, 1)) !important;
-        }
 
-        .button[href*="tiktok"] {
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.6), rgba(20, 20, 20, 0.8)) !important;
-        }
 
-        .button[href*="tiktok"]:hover {
-            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.8), rgba(20, 20, 20, 1)) !important;
-        }
 
         .button[href*="wa.me"] {
             position: relative;
@@ -1223,9 +1213,15 @@
                 margin-bottom: 1rem !important;
             }
 
+            /* Ícone principal de redes sociais maior em mobile */
+            .social-main-icon {
+                width: 160px !important;
+                height: 160px !important;
+            }
+
             .landpage4 a[href*="instagram"] svg {
-                width: 60px !important;
-                height: 60px !important;
+                width: 24px !important;
+                height: 24px !important;
             }
 
             .landpage4 > div:last-child > div {
@@ -1236,8 +1232,8 @@
             }
 
             .landpage4 .button {
-                width: 90% !important;
-                max-width: 300px !important;
+                width: 180px !important;
+                max-width: 180px !important;
                 justify-content: center !important;
             }
         }
@@ -1540,6 +1536,7 @@
         .problem-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
+            filter: brightness(0) saturate(100%) invert(13%) sepia(100%) saturate(7500%) hue-rotate(0deg) brightness(100%) contrast(120%);
         }
 
         .problem-card h3 {
@@ -1880,7 +1877,7 @@
                 
                 <!-- CTA Principal Destacado -->
                 <div class="cta-container">
-                    <a href="https://wa.me/595981234567?text=Olá!%20Quero%20solicitar%20um%20orçamento%20para%20meu%20carro" target="_blank" class="cta-primary">
+                    <a href="https://wa.me/5950986641668?text=Olá!%20Quero%20solicitar%20um%20orçamento%20para%20meu%20carro" target="_blank" class="cta-primary">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 0.5rem;">
                             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -2002,7 +1999,7 @@
                 
                 <div class="nav-separator"></div>
                 
-                <a href="https://wa.me/595981234567" target="_blank" class="nav-item" id="nav-contact">
+                <a href="https://wa.me/5950986641668" target="_blank" class="nav-item" id="nav-contact">
                     <div class="nav-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
@@ -2064,7 +2061,7 @@
             </div>
 
             <div class="cta-section-inline">
-                <a href="https://wa.me/595981234567?text=Quero%20saber%20mais%20sobre%20os%20serviços" target="_blank" class="cta-secondary">
+                <a href="https://wa.me/5950986641668?text=Quero%20saber%20mais%20sobre%20os%20serviços" target="_blank" class="cta-secondary">
                     QUERO TRANSFORMAR MEU CARRO
                 </a>
             </div>
@@ -2078,7 +2075,6 @@
 
             <div class="testimonials-grid">
                 <div class="testimonial-card" style="grid-column: 1 / -1; max-width: 800px; margin: 0 auto;">
-                    <div class="testimonial-stars">🚗 ✨ 🔧</div>
                     <p class="testimonial-text" style="font-size: 1.1rem; text-align: center; font-style: normal;">
                         Em breve iremos atualizar esta seção conforme os serviços forem prestados e nossos clientes compartilharem suas experiências.
                     </p>
@@ -2107,7 +2103,7 @@
             </div>
 
             <div class="cta-section-inline">
-                <a href="https://wa.me/595981234567?text=Vi%20os%20depoimentos%20e%20quero%20agendar" target="_blank" class="cta-secondary">
+                <a href="https://wa.me/5950986641668?text=Vi%20os%20depoimentos%20e%20quero%20agendar" target="_blank" class="cta-secondary">
                     QUERO ESSE RESULTADO NO MEU CARRO
                 </a>
             </div>
@@ -2130,12 +2126,12 @@
                     <h3 style="color: var(--color-destaque); font-size: 1.5rem; margin-bottom: 1.5rem; font-weight: 600;">Nossa Localização</h3>
                     <div style="color: var(--color-detail); font-size: 1rem; line-height: 1.8; opacity: 0.9;">
                         <p style="margin: 0.5rem 0;"><strong>Endereço:</strong></p>
-                        <p style="margin: 0.5rem 0;">Rua Example, 1234</p>
-                        <p style="margin: 0.5rem 0;">Bairro Centro</p>
-                        <p style="margin: 0.5rem 0;">Ciudad del Este - PY</p>
-                        <p style="margin: 1.5rem 0 0.5rem 0;"><strong>CEP:</strong> 00000-000</p>
+                        <p style="margin: 0.5rem 0;">Gral. Elizardo Aquino</p>
+                        <p style="margin: 0.5rem 0;">Bairro Santo Lorenzo</p>
+                        <p style="margin: 0.5rem 0;">Presidente Franco, Paraguay</p>
+                        <p style="margin: 1.5rem 0 0.5rem 0;"><strong>Código Postal:</strong> 100211</p>
                     </div>
-                    <a href="https://maps.google.com/" target="_blank" style="display: inline-block; margin-top: 1.5rem; background: linear-gradient(135deg, var(--color-destaque) 0%, var(--color-hover) 100%); color: white; padding: 0.8rem 1.8rem; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08rem; border-radius: 30px; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 5px 20px rgba(var(--color-destaque-rgb), 0.3);">
+                    <a href="https://maps.app.goo.gl/fXJZKTjRuh5jhuX16" target="_blank" style="display: inline-block; margin-top: 1.5rem; background: linear-gradient(135deg, var(--color-destaque) 0%, var(--color-hover) 100%); color: white; padding: 0.8rem 1.8rem; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08rem; border-radius: 30px; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 5px 20px rgba(var(--color-destaque-rgb), 0.3);">
                         Ver no Mapa
                     </a>
                 </div>
@@ -2169,7 +2165,7 @@
 
             <!-- CTA para contato -->
             <div style="text-align: center; margin-top: 3rem;">
-                <a href="https://wa.me/595981234567?text=Olá!%20Gostaria%20de%20agendar%20uma%20visita" target="_blank" style="display: inline-block; background: transparent; color: var(--color-destaque); border: 2px solid var(--color-destaque); padding: 1rem 2.5rem; font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1rem; border-radius: 50px; text-decoration: none; transition: all 0.3s ease;">
+                <a href="https://wa.me/5950986641668?text=Olá!%20Gostaria%20de%20agendar%20uma%20visita" target="_blank" style="display: inline-block; background: transparent; color: var(--color-destaque); border: 2px solid var(--color-destaque); padding: 1rem 2.5rem; font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1rem; border-radius: 50px; text-decoration: none; transition: all 0.3s ease;">
                     AGENDAR VISITA
                 </a>
             </div>
@@ -2181,40 +2177,29 @@
         <div style="position: absolute; top: 0; left: 4rem; width: calc(100% - 8rem); height: 2px; background-color: var(--color-detail); z-index: 2;"></div>
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('img/brpy.png'); background-size: cover; background-position: center; filter: grayscale(0%) brightness(50%); z-index: 0;"></div>
         <div style="position: relative; text-align: center; z-index: 1; padding: 2rem;">
-            <!-- Instagram Icon -->
-            <a href="https://www.instagram.com/flatout_py/" target="_blank" style="display: inline-block; margin-bottom: 2rem;">
-                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 0 10px rgba(var(--color-destaque-rgb),0.5));">
-                    <rect x="2" y="2" width="20" height="20" rx="5" stroke="var(--color-detail)" stroke-width="2" fill="none"/>
-                    <circle cx="12" cy="12" r="4" stroke="var(--color-detail)" stroke-width="2" fill="none"/>
-                    <circle cx="18" cy="6" r="1.5" fill="var(--color-detail)"/>
+            <!-- Chat/Message Balloon Icon -->
+            <a href="https://www.instagram.com/flatout_py/" target="_blank" class="social-icon-link" style="display: inline-block; margin-bottom: 2rem;">
+                <svg clavss="social-main-icon" width="120" height="120" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 0 15px rgba(var(--color-destaque-rgb),0.6));">
+                    <path d="M20 2H4C2.9 2 2 2.9 2 4V16C2 17.1 2.9 18 4 18H8L12 22L16 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" stroke="var(--color-detail)" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+                    <circle cx="8" cy="10" r="1.5" fill="var(--color-detail)"/>
+                    <circle cx="12" cy="10" r="1.5" fill="var(--color-detail)"/>
+                    <circle cx="16" cy="10" r="1.5" fill="var(--color-detail)"/>
                 </svg>
             </a>
             <!-- Social Media Text -->
             <h2 style="color: var(--color-detail); font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.2rem; margin-bottom: 1.5rem; font-weight: 400;">Nossas redes sociais</h2>
             <!-- Social Media Buttons -->
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                <a href="https://www.instagram.com/flatout_py/" target="_blank" class="button" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem; background-color: rgba(var(--color-secondary-rgb), 0.3); backdrop-filter: blur(1px); -webkit-backdrop-filter: blur(10px);">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                <a href="https://www.instagram.com/flatout_py/" target="_blank" class="button" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.8rem; background-color: rgba(var(--color-secondary-rgb), 0.3); backdrop-filter: blur(1px); -webkit-backdrop-filter: blur(10px); width: 240px; padding: 1rem 1.5rem; font-size: 1.1rem;">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="2" y="2" width="20" height="20" rx="5" stroke="var(--color-detail)" stroke-width="2"/>
                         <circle cx="12" cy="12" r="4" stroke="var(--color-detail)" stroke-width="2"/>
                         <circle cx="18" cy="6" r="1.5" fill="var(--color-detail)"/>
                     </svg>
                     Instagram
                 </a>
-                <a href="https://www.facebook.com/flatoutpy/" target="_blank" class="button" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem; background-color: rgba(var(--color-secondary-rgb), 0.3); backdrop-filter: blur(1px); -webkit-backdrop-filter: blur(10px);">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 17.9895 4.3882 22.954 10.125 23.8542V15.4688H7.07812V12H10.125V9.35625C10.125 6.34875 11.9166 4.6875 14.6576 4.6875C15.9701 4.6875 17.3438 4.92188 17.3438 4.92188V7.875H15.8306C14.34 7.875 13.875 8.80008 13.875 9.75V12H17.2031L16.6711 15.4688H13.875V23.8542C19.6118 22.954 24 17.9895 24 12Z" fill="var(--color-detail)"/>
-                    </svg>
-                    Facebook
-                </a>
-                <a href="https://www.tiktok.com/@flatoutpy" target="_blank" class="button" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem; background-color: rgba(var(--color-secondary-rgb), 0.3); backdrop-filter: blur(1px); -webkit-backdrop-filter: blur(10px);">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" fill="var(--color-detail)"/>
-                    </svg>
-                    TikTok
-                </a>
-                <a href="https://wa.me/595981234567" target="_blank" class="button" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem; background-color: rgba(var(--color-secondary-rgb), 0.3); backdrop-filter: blur(1px); -webkit-backdrop-filter: blur(10px);">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <a href="https://wa.me/5950986641668" target="_blank" class="button" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.8rem; background-color: rgba(var(--color-secondary-rgb), 0.3); backdrop-filter: blur(1px); -webkit-backdrop-filter: blur(10px); width: 240px; padding: 1rem 1.5rem; font-size: 1.1rem;">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="var(--color-detail)"/>
                     </svg>
                     WhatsApp
