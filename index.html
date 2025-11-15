@@ -803,13 +803,15 @@
 
 
 
-        .button[href*="wa.me"] {
+        .button[href*="wa.me"],
+        #whatsapp-btn {
             position: relative;
             overflow: hidden;
             background: linear-gradient(90deg, transparent, rgba(37, 211, 102, 0.6), rgba(34, 190, 92, 0.8)) !important;
         }
 
-        .button[href*="wa.me"]:hover {
+        .button[href*="wa.me"]:hover,
+        #whatsapp-btn:hover {
             background: linear-gradient(90deg, transparent, rgba(37, 211, 102, 0.8), rgba(34, 190, 92, 1)) !important;
         }
 
@@ -1338,6 +1340,209 @@
 
         .landpage4 a.button:hover {
             transform: translateY(-2px) scale(1.05);
+        }
+
+        /* ========================================
+           POPUP DE CONTATO
+           ======================================== */
+        #contact-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(var(--color-primary-rgb), 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #contact-popup.active {
+            display: flex;
+        }
+
+        .popup-content {
+            background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.95) 0%, rgba(var(--color-secondary-rgb), 0.95) 100%);
+            border: 2px solid rgba(var(--color-detail-rgb), 0.2);
+            border-radius: 25px;
+            padding: 3rem 2rem;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(var(--color-primary-rgb), 0.8);
+            animation: popupSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes popupSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: 2px solid rgba(var(--color-detail-rgb), 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .popup-close:hover {
+            background: rgba(var(--color-destaque-rgb), 0.2);
+            border-color: var(--color-destaque);
+            transform: rotate(90deg);
+        }
+
+        .popup-close svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--color-detail);
+            stroke-width: 2;
+        }
+
+        .popup-title {
+            text-align: center;
+            color: var(--color-detail);
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 0 0 1rem 0;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+        }
+
+        .popup-subtitle {
+            text-align: center;
+            color: var(--color-detail);
+            font-size: 1rem;
+            opacity: 0.8;
+            margin: 0 0 2.5rem 0;
+        }
+
+        .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1.2rem 2rem;
+            border-radius: 15px;
+            border: 2px solid rgba(var(--color-detail-rgb), 0.3);
+            background: rgba(var(--color-secondary-rgb), 0.5);
+            text-decoration: none;
+            width: 100%;
+            max-width: 400px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .contact-btn:hover::before {
+            left: 100%;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            border-color: var(--color-destaque);
+            box-shadow: 0 10px 30px rgba(var(--color-destaque-rgb), 0.4);
+        }
+
+        .contact-btn svg {
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
+        }
+
+        .contact-number {
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 0.05rem;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Cores da bandeira paraguaia (vermelho, branco, azul) */
+        .paraguay-number span:nth-child(1) { color: #D62828; } /* vermelho */
+        .paraguay-number span:nth-child(2) { color: #D62828; }
+        .paraguay-number span:nth-child(3) { color: #D62828; }
+        .paraguay-number span:nth-child(4) { color: #D62828; }
+        .paraguay-number span:nth-child(5) { color: #ffffff; } /* branco */
+        .paraguay-number span:nth-child(6) { color: #ffffff; }
+        .paraguay-number span:nth-child(7) { color: #ffffff; }
+        .paraguay-number span:nth-child(8) { color: #ffffff; }
+        .paraguay-number span:nth-child(9) { color: #0038A8; } /* azul */
+        .paraguay-number span:nth-child(10) { color: #0038A8; }
+        .paraguay-number span:nth-child(11) { color: #0038A8; }
+        .paraguay-number span:nth-child(12) { color: #0038A8; }
+
+        /* Cores da bandeira brasileira (verde, amarelo, azul, branco) */
+        .brazil-number span:nth-child(1) { color: #009c3b; } /* verde */
+        .brazil-number span:nth-child(2) { color: #009c3b; }
+        .brazil-number span:nth-child(3) { color: #009c3b; }
+        .brazil-number span:nth-child(4) { color: #FFDF00; } /* amarelo */
+        .brazil-number span:nth-child(5) { color: #FFDF00; }
+        .brazil-number span:nth-child(6) { color: #FFDF00; }
+        .brazil-number span:nth-child(7) { color: #FFDF00; }
+        .brazil-number span:nth-child(8) { color: #002776; } /* azul */
+        .brazil-number span:nth-child(9) { color: #002776; }
+        .brazil-number span:nth-child(10) { color: #002776; }
+        .brazil-number span:nth-child(11) { color: #ffffff; } /* branco */
+        .brazil-number span:nth-child(12) { color: #ffffff; }
+        .brazil-number span:nth-child(13) { color: #ffffff; }
+        .brazil-number span:nth-child(14) { color: #ffffff; }
+
+        @media (max-width: 768px) {
+            .popup-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .popup-title {
+                font-size: 1.4rem;
+            }
+
+            .popup-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .contact-number {
+                font-size: 1.1rem;
+            }
+
+            .contact-btn svg {
+                width: 24px;
+                height: 24px;
+            }
         }
 
         /* ========================================
@@ -1956,7 +2161,7 @@
                 
                 <div class="nav-separator"></div>
                 
-                <a href="clear.html" class="nav-item" id="nav-clear">
+                <a href="detail.html" class="nav-item" id="nav-clear">
                     <div class="nav-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
@@ -2090,7 +2295,94 @@
             </div>
         </div>
     </div>
-    <!-- Seção 4: Localização e Horário de Funcionamento -->
+    <!-- Seção 4: Sobre Nós -->
+    <div class="section landpage-about" id="about-section" style="background-color: var(--color-primary); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 4rem 2rem; position: relative;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('img/bg1.png'); background-size: cover; background-position: center; filter: grayscale(100%) brightness(0.15); z-index: 0;"></div>
+        
+        <div class="about-container" style="max-width: 1200px; width: 100%; margin: 0 auto; position: relative; z-index: 1;">
+            <h2 class="section-title" style="text-align: center; font-size: 2.5rem; color: var(--color-detail); text-transform: uppercase; letter-spacing: 0.15rem; margin-bottom: 3rem; font-weight: 600;">Sobre Nós</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                <!-- Nossa História -->
+                <div style="background: rgba(var(--color-secondary-rgb), 0.7); border: 2px solid rgba(var(--color-detail-rgb), 0.15); border-radius: 20px; padding: 2.5rem; transition: all 0.3s ease;">
+                    <div style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="var(--color-destaque)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 17L12 22L22 17" stroke="var(--color-destaque)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 12L12 17L22 12" stroke="var(--color-destaque)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 style="color: var(--color-destaque); font-size: 1.5rem; margin-bottom: 1rem; font-weight: 600; text-align: center;">Nossa História</h3>
+                    <p style="color: var(--color-detail); font-size: 1rem; line-height: 1.8; opacity: 0.9; text-align: center;">
+                        A FlatOut PY nasceu da paixão por automóveis e performance. Somos especialistas dedicados a transformar cada veículo em uma obra de arte sobre rodas.
+                    </p>
+                </div>
+
+                <!-- Nossa Missão -->
+                <div style="background: rgba(var(--color-secondary-rgb), 0.7); border: 2px solid rgba(var(--color-detail-rgb), 0.15); border-radius: 20px; padding: 2.5rem; transition: all 0.3s ease;">
+                    <div style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="var(--color-destaque)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <polyline points="22 4 12 14.01 9 11.01" stroke="var(--color-destaque)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 style="color: var(--color-destaque); font-size: 1.5rem; margin-bottom: 1rem; font-weight: 600; text-align: center;">Nossa Missão</h3>
+                    <p style="color: var(--color-detail); font-size: 1rem; line-height: 1.8; opacity: 0.9; text-align: center;">
+                        Oferecer serviços de alta qualidade em escape esportivo e estética automotiva, superando as expectativas dos entusiastas mais exigentes.
+                    </p>
+                </div>
+
+                <!-- Nossos Valores -->
+                <div style="background: rgba(var(--color-secondary-rgb), 0.7); border: 2px solid rgba(var(--color-detail-rgb), 0.15); border-radius: 20px; padding: 2.5rem; transition: all 0.3s ease;">
+                    <div style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="var(--color-destaque)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 style="color: var(--color-destaque); font-size: 1.5rem; margin-bottom: 1rem; font-weight: 600; text-align: center;">Nossos Valores</h3>
+                    <p style="color: var(--color-detail); font-size: 1rem; line-height: 1.8; opacity: 0.9; text-align: center;">
+                        Paixão, qualidade, inovação e compromisso com a excelência. Cada detalhe importa para nós e para seu carro.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Por que escolher a FlatOut PY -->
+            <div style="background: linear-gradient(135deg, rgba(var(--color-destaque-rgb), 0.15) 0%, rgba(var(--color-hover-rgb), 0.1) 100%); border: 2px solid rgba(var(--color-destaque-rgb), 0.3); border-radius: 20px; padding: 3rem 2rem; text-align: center;">
+                <h3 style="color: var(--color-detail); font-size: 2rem; margin-bottom: 2rem; font-weight: 600;">Por Que Escolher a FlatOut PY?</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                    <div>
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">⚡</div>
+                        <h4 style="color: var(--color-destaque); font-size: 1.1rem; margin-bottom: 0.5rem;">Performance Real</h4>
+                        <p style="color: var(--color-detail); font-size: 0.9rem; opacity: 0.8;">Resultados comprovados</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🎯</div>
+                        <h4 style="color: var(--color-destaque); font-size: 1.1rem; margin-bottom: 0.5rem;">Precisão Técnica</h4>
+                        <p style="color: var(--color-detail); font-size: 0.9rem; opacity: 0.8;">Instalação profissional</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">💎</div>
+                        <h4 style="color: var(--color-destaque); font-size: 1.1rem; margin-bottom: 0.5rem;">Qualidade Premium</h4>
+                        <p style="color: var(--color-detail); font-size: 0.9rem; opacity: 0.8;">Materiais de primeira</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🛡️</div>
+                        <h4 style="color: var(--color-destaque); font-size: 1.1rem; margin-bottom: 0.5rem;">Garantia Total</h4>
+                        <p style="color: var(--color-detail); font-size: 0.9rem; opacity: 0.8;">Serviços garantidos</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="https://wa.me/5950986641668?text=Olá!%20Quero%20conhecer%20mais%20sobre%20a%20FlatOut%20PY" target="_blank" style="display: inline-block; background: linear-gradient(135deg, var(--color-destaque) 0%, var(--color-hover) 100%); color: white; padding: 1.2rem 3rem; font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1rem; border-radius: 50px; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(var(--color-destaque-rgb), 0.4);">
+                    FALE CONOSCO
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seção 5: Localização e Horário de Funcionamento -->
     <div class="section landpage4-location" style="background-color: var(--color-primary); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 4rem 2rem;">
         <div class="location-hours-container" style="max-width: 1200px; width: 100%; margin: 0 auto;">
             <h2 class="section-title" style="text-align: center; font-size: 2.5rem; color: var(--color-detail); text-transform: uppercase; letter-spacing: 0.15rem; margin-bottom: 3rem; font-weight: 600;">Onde Nos Encontrar</h2>
@@ -2179,7 +2471,7 @@
                     </svg>
                     Instagram
                 </a>
-                <a href="https://wa.me/5950986641668" target="_blank" class="button" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.8rem; background-color: rgba(var(--color-secondary-rgb), 0.3); backdrop-filter: blur(1px); -webkit-backdrop-filter: blur(10px); width: 240px; padding: 1rem 1.5rem; font-size: 1.1rem;">
+                <a href="#" id="whatsapp-btn" class="button" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.8rem; background-color: rgba(var(--color-secondary-rgb), 0.3); backdrop-filter: blur(1px); -webkit-backdrop-filter: blur(10px); width: 240px; padding: 1rem 1.5rem; font-size: 1.1rem;">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="var(--color-detail)"/>
                     </svg>
@@ -2191,6 +2483,43 @@
     </div>
     </div>
     <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(var(--color-primary-rgb), 0.5); z-index: 999;"></div>
+    
+    <!-- Popup de Contato -->
+    <div id="contact-popup">
+        <div class="popup-content">
+            <button class="popup-close" id="popup-close" aria-label="Fechar">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            
+            <h2 class="popup-title">Entre em Contato</h2>
+            <p class="popup-subtitle">Escolha o número do seu país</p>
+            
+            <div class="contact-buttons">
+                <!-- Número Paraguaio -->
+                <a href="https://wa.me/5950986641668" target="_blank" class="contact-btn">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="#25D366"/>
+                    </svg>
+                    <span class="contact-number paraguay-number">
+                        <span>+</span><span>5</span><span>9</span><span>5</span><span>0</span><span>9</span><span>8</span><span>6</span><span>6</span><span>4</span><span>1</span><span>6</span><span>6</span><span>8</span>
+                    </span>
+                </a>
+                
+                <!-- Número Brasileiro -->
+                <a href="https://wa.me/5521993345401" target="_blank" class="contact-btn">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="#25D366"/>
+                    </svg>
+                    <span class="contact-number brazil-number">
+                        <span>+</span><span>5</span><span>5</span><span> </span><span>2</span><span>1</span><span>9</span><span>9</span><span>3</span><span>3</span><span>4</span><span>5</span><span>4</span><span>0</span><span>1</span>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
     <script>
         // Loading Screen
         window.addEventListener('load', function() {
@@ -2226,6 +2555,69 @@
                 navToggle.classList.remove('menu-open');
             }
         });
+
+        // Navegação do Menu
+        document.getElementById('nav-location').addEventListener('click', function() {
+            document.querySelector('.landpage4-location').scrollIntoView({ behavior: 'smooth' });
+            navMenu.classList.add('hidden');
+            navToggle.classList.remove('menu-open');
+            menuOpen = false;
+        });
+
+        document.getElementById('nav-about').addEventListener('click', function() {
+            document.getElementById('about-section').scrollIntoView({ behavior: 'smooth' });
+            navMenu.classList.add('hidden');
+            navToggle.classList.remove('menu-open');
+            menuOpen = false;
+        });
+
+        document.getElementById('nav-social').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('.landpage4').scrollIntoView({ behavior: 'smooth' });
+            navMenu.classList.add('hidden');
+            navToggle.classList.remove('menu-open');
+            menuOpen = false;
+        });
+
+        // Popup de Contato
+        const contactPopup = document.getElementById('contact-popup');
+        const popupClose = document.getElementById('popup-close');
+        const navContact = document.getElementById('nav-contact');
+
+        navContact.addEventListener('click', function(e) {
+            e.preventDefault();
+            contactPopup.classList.add('active');
+            navMenu.classList.add('hidden');
+            navToggle.classList.remove('menu-open');
+            menuOpen = false;
+        });
+
+        popupClose.addEventListener('click', function() {
+            contactPopup.classList.remove('active');
+        });
+
+        // Fechar popup ao clicar fora
+        contactPopup.addEventListener('click', function(e) {
+            if (e.target === contactPopup) {
+                contactPopup.classList.remove('active');
+            }
+        });
+
+        // Fechar popup com ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && contactPopup.classList.contains('active')) {
+                contactPopup.classList.remove('active');
+            }
+        });
+
+        // Botão WhatsApp da seção de redes sociais
+        const whatsappBtn = document.getElementById('whatsapp-btn');
+        if (whatsappBtn) {
+            whatsappBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                contactPopup.classList.add('active');
+            });
+        }
     </script>
 </body>
 </html>
