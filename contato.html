@@ -216,6 +216,7 @@
             box-shadow: 
                 0 10px 40px rgba(var(--color-primary-rgb), 0.6),
                 inset 0 1px 0 rgba(var(--color-detail-rgb), 0.1);
+            width: 100%;
         }
 
         .contact-button:hover {
@@ -230,6 +231,13 @@
             width: 24px;
             height: 24px;
             flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-button span {
+            text-align: center;
         }
 
         .contact-button .whatsapp-icon {
