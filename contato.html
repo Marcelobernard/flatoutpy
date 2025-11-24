@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="shortcut icon" href="favicon/favicon.ico">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>FlatOutPY - Contacto</title>
+    <style>
+        /* ========================================
+           PRESET DE CORES - FLATOUT PY
+           ======================================== */
+        :root {
+            /* Primary - Preto profundo (fundo principal) */
+            --color-primary: #121212;
+            --color-primary-rgb: 18, 18, 18;
+            
+            /* Secondary - Cinza grafite (fundo secundário) */
+            --color-secondary: #2C2C2C;
+            --color-secondary-rgb: 44, 44, 44;
+            
+            /* Detail - Cinza claro (texto, bordas, detalhes) */
+            --color-detail: #D1D1D1;
+            --color-detail-rgb: 209, 209, 209;
+            
+            /* Destaque - Vermelho destaque (botões, títulos, call-to-action) */
+            --color-destaque: #D62828;
+            --color-destaque-rgb: 214, 40, 40;
+            
+            /* Hover - Vermelho escuro (hover, estados ativos, contraste) */
+            --color-hover: #A4161A;
+            --color-hover-rgb: 164, 22, 26;
+        }
+
+        * {
+            cursor: crosshair !important;
+            box-sizing: border-box;
+        }
+        
+        html {
+            overflow-x: hidden;
+            max-width: 100vw;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            background-color: var(--color-primary);
+            overflow-x: hidden;
+            max-width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.5rem 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        /* Logo */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            padding: 0.5rem 0;
+        }
+
+        .logo-container img {
+            max-height: 100px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Descrição */
+        .description {
+            text-align: center;
+            color: var(--color-detail);
+            font-size: 0.8rem;
+            line-height: 1.6;
+            max-width: 800px;
+            padding: 0 1rem;
+        }
+
+        /* Linha Divisória */
+        .divider-line {
+            width: 100%;
+            max-width: 800px;
+            height: 1px;
+            background: linear-gradient(to right, 
+                transparent 0%, 
+                rgba(255, 255, 255, 0.3) 15%, 
+                rgba(255, 255, 255, 0.8) 50%, 
+                rgba(255, 255, 255, 0.8) 50%, 
+                rgba(255, 255, 255, 0.3) 85%, 
+                transparent 100%);
+            margin: 1.5rem auto;
+        }
+
+        /* Quadrados de Serviços */
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .service-box {
+            background: linear-gradient(135deg, rgba(var(--color-secondary-rgb), 0.8) 0%, rgba(var(--color-primary-rgb), 0.9) 100%);
+            border: 2px solid rgba(var(--color-detail-rgb), 0.15);
+            border-radius: 20px;
+            padding: 2.5rem;
+            color: var(--color-detail);
+            box-shadow: 
+                0 10px 40px rgba(var(--color-primary-rgb), 0.6),
+                inset 0 1px 0 rgba(var(--color-detail-rgb), 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .service-box:hover {
+            border-color: rgba(var(--color-destaque-rgb), 0.3);
+            box-shadow: 
+                0 15px 50px rgba(var(--color-destaque-rgb), 0.3),
+                inset 0 1px 0 rgba(var(--color-detail-rgb), 0.15);
+        }
+
+        .services-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--color-destaque);
+            text-align: center;
+            width: 100%;
+            margin-bottom: 0.1rem;
+        }
+
+        .service-category {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--color-destaque);
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            text-align: center;
+        }
+
+        .service-category:first-of-type {
+            margin-top: 0;
+        }
+
+        .service-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .service-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .service-list li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--color-destaque);
+            font-weight: bold;
+        }
+
+        .service-item {
+            margin-bottom: 0.3rem;
+        }
+
+        /* Botões de Contato */
+        .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+            max-width: 500px;
+            margin-top: 2rem;
+        }
+
+        .contact-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1.2rem 2rem;
+            background: linear-gradient(135deg, rgba(var(--color-secondary-rgb), 0.8) 0%, rgba(var(--color-primary-rgb), 0.9) 100%);
+            border: 2px solid rgba(var(--color-detail-rgb), 0.15);
+            border-radius: 15px;
+            color: var(--color-detail);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 10px 40px rgba(var(--color-primary-rgb), 0.6),
+                inset 0 1px 0 rgba(var(--color-detail-rgb), 0.1);
+        }
+
+        .contact-button:hover {
+            border-color: rgba(var(--color-destaque-rgb), 0.3);
+            box-shadow: 
+                0 15px 50px rgba(var(--color-destaque-rgb), 0.3),
+                inset 0 1px 0 rgba(var(--color-detail-rgb), 0.15);
+            color: var(--color-destaque);
+        }
+
+        .contact-button svg {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .contact-button .whatsapp-icon {
+            fill: currentColor;
+        }
+
+        .contact-button .instagram-icon {
+            fill: currentColor;
+        }
+
+        .contact-button .location-icon {
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .contact-button .location-icon path,
+        .contact-button .location-icon circle {
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .services-container {
+                grid-template-columns: 1fr;
+            }
+
+            .service-box {
+                padding: 1.5rem;
+            }
+
+            .services-title {
+                font-size: 1.5rem;
+            }
+
+            .description {
+                font-size: 0.8rem;
+            }
+
+            .contact-button {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .contact-buttons {
+                max-width: 100%;
+            }
+
+            .footer {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            width: 100%;
+            text-align: center;
+            color: var(--color-detail);
+            font-size: 1rem;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <div class="logo-container">
+            <img src="img/title.png" alt="Flatout PY">
+        </div>
+
+        <!-- Descrição -->
+        <div class="description">
+            Taller especializado en modificaciones y preparaciones exclusivas, creando experiencias únicas y apasionantes al conducir.
+        </div>
+
+        <!-- Linha Divisória -->
+        <div class="divider-line"></div>
+
+        <!-- Título dos Serviços -->
+        <h2 class="services-title">Nuestros servicios</h2>
+
+        <!-- Quadrados de Serviços -->
+        <div class="services-container">
+            <!-- Quadrado 1 -->
+            <div class="service-box">
+                <div class="service-category">PERFORMANCE</div>
+                <ul class="service-list">
+                    <li class="service-item"><strong>LÍNEA DE ESCAPE COMPLETA</strong><br>Múltiple, Downpipe, MidPipe, Catback.</li>
+                    <li class="service-item"><strong>SISTEMA DE ADMISIÓN</strong><br>Cañería, Intake, Inlet, ChargePipes, BOV, Intercooler.</li>
+                    <li class="service-item"><strong>FABRICACIÓN</strong><br>Soportes a medida, Refuerzos, Ajustes & Personalizaciones Racing.</li>
+                    <li class="service-item"><strong>ELECTRÓNICA</strong><br>Módulos, Add-Ons (Launch Control, Rev. Limiter), Panel Racing (Switches), Bypass de sistema, Harness.</li>
+                    <li class="service-item"><strong>SOLDADURA EN PROCESO TIG.</strong><br>ACERO-INOX-ALUMINIO-TITÂNIO.</li>
+                </ul>
+            </div>
+
+            <!-- Quadrado 2 -->
+            <div class="service-box">
+                <div class="service-category">ESTÉTICA</div>
+                <ul class="service-list">
+                    <li class="service-item"><strong>LAVADO DETALLADO - INTERNO|EXTERNO.</strong><br>Hidratación de Plásticos & Cueros.</li>
+                    <li class="service-item"><strong>LAVADO TECNICO DE MOTOR.</strong><br>Líquido no conductor, Vapor, Productos especiales.</li>
+                    <li class="service-item"><strong>PULIDO TÉCNICO DE PINTURA - RESTAURACIÓN DE FAROS.</strong><br>Corrección de imperfecciones leves.</li>
+                    <li class="service-item"><strong>TRATAMIENTO DE PINTURA.</strong><br>Descontaminación, Coat Nano-Cerámico.</li>
+                    <li class="service-item"><strong>CUSTOMIZACIONES INTERNAS.</strong><br>Multimedia, Ambient Light, Star Roof, etc...</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Botões de Contato -->
+        <div class="contact-buttons">
+            <!-- Botão WhatsApp -->
+            <a href="https://wa.me/595986641668" target="_blank" class="contact-button">
+                <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+                <span>+595 986 641668</span>
+            </a>
+
+            <!-- Botão Instagram -->
+            <a href="https://www.instagram.com/flatoutpy/" target="_blank" class="contact-button">
+                <svg class="instagram-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+                <span>Instagram</span>
+            </a>
+
+            <!-- Botão Ubicación -->
+            <a href="https://maps.app.goo.gl/bjTmPqTZEkWAqAmZA" target="_blank" class="contact-button">
+                <svg class="location-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                </svg>
+                <span>Ubicación</span>
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            @FlatoutPY - MotorSport Club
+        </footer>
+    </div>
+</body>
+</html>
