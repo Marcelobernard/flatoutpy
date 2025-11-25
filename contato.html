@@ -33,7 +33,7 @@
             --color-detail-rgb: 209, 209, 209;
             
             /* Destaque - Vermelho destaque (botões, títulos, call-to-action) */
-            --color-destaque: #D62828;
+            --color-destaque: #ff0000;
             --color-destaque-rgb: 214, 40, 40;
             
             /* Hover - Vermelho escuro (hover, estados ativos, contraste) */
@@ -84,7 +84,7 @@
         }
 
         .logo-container img {
-            max-height: 100px;
+            max-height: 2rem;
             width: auto;
             object-fit: contain;
         }
@@ -97,6 +97,7 @@
             line-height: 1.6;
             max-width: 800px;
             padding: 0 1rem;
+            letter-spacing: 0.2em;
         }
 
         /* Linha Divisória */
@@ -145,10 +146,11 @@
         .services-title {
             font-size: 1.8rem;
             font-weight: 600;
-            color: var(--color-destaque);
+            color: var(--color-detail);
             text-align: center;
             width: 100%;
             margin-bottom: 0.1rem;
+            letter-spacing: 0.2em;
         }
 
         .service-category {
@@ -158,6 +160,7 @@
             margin-top: 1.5rem;
             margin-bottom: 0.8rem;
             text-align: center;
+            letter-spacing: 0.2em;
         }
 
         .service-category:first-of-type {
@@ -291,9 +294,51 @@
             .footer {
                 font-size: 0.9rem;
             }
+
+            .map-wrapper {
+                height: 300px;
+            }
+
+            .map-title {
+                font-size: 1.5rem;
+            }
         }
 
         /* Footer */
+        /* Mapa */
+        .map-container {
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .map-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--color-detail);
+            text-align: center;
+            width: 100%;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.2em;
+        }
+
+        .map-wrapper {
+            width: 100%;
+            height: 450px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 
+                0 10px 40px rgba(var(--color-primary-rgb), 0.6),
+                inset 0 1px 0 rgba(var(--color-detail-rgb), 0.1);
+            border: 2px solid rgba(var(--color-detail-rgb), 0.15);
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
         .footer {
             width: 100%;
             text-align: center;
@@ -309,7 +354,7 @@
     <div class="container">
         <!-- Logo -->
         <div class="logo-container">
-            <img src="img/title.png" alt="Flatout PY">
+            <img src="img/title3.png" alt="Flatout PY">
         </div>
 
         <!-- Descrição -->
@@ -376,6 +421,33 @@
                 </svg>
                 <span>Ubicación</span>
             </a>
+        </div>
+
+        <!-- Mapa -->
+        <div class="map-container">
+            <h2 class="map-title">Ubicación</h2>
+            <div class="map-wrapper">
+                <!-- 
+                    INSTRUÇÕES PARA OBTER O LINK DE INCORPORAÇÃO:
+                    1. Acesse https://www.google.com/maps
+                    2. Encontre sua localização (ou use: https://maps.app.goo.gl/bjTmPqTZEkWAqAmZA)
+                    3. Clique no botão "Compartilhar" (Share)
+                    4. Selecione a aba "Incorporar um mapa" (Embed a map)
+                    5. Copie o código do iframe fornecido e substitua o src abaixo
+                    
+                    Exemplo de link que você receberá:
+                    https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d...
+                -->
+                <iframe 
+                    id="map"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3599.651309130373!2d-54.63067292500069!3d-25.549989377485552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94f68ffbb716cc81%3A0xcb31cbefce999f34!2sFlatoutPY!5e0!3m2!1sen!2spy!4v1764098627847!5m2!1sen!2spy"
+                    style="border:0; width:100%; height:100%;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Ubicación FlatOutPY">
+                </iframe>
+            </div>
         </div>
 
         <!-- Footer -->
