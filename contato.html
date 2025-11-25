@@ -58,7 +58,7 @@
             font-optical-sizing: auto;
             font-weight: 400;
             font-style: normal;
-            background-color: var(--color-primary);
+            background-color: rgb(9, 9, 9);
             overflow-x: hidden;
             max-width: 100vw;
             min-height: 100vh;
@@ -66,6 +66,67 @@
             flex-direction: column;
             align-items: center;
             padding: 0.5rem 1rem;
+            position: relative;
+        }
+
+        /* Efeito de Poeira 3D */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(255, 0, 0, 0.075) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(var(--color-detail-rgb), 0.02) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(46, 0, 0, 0.277) 0%, transparent 50%),
+                radial-gradient(circle at 60% 60%, rgba(var(--color-detail-rgb), 0.02) 0%, transparent 50%),
+                radial-gradient(circle at 10% 90%, rgba(var(--color-detail-rgb), 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 90% 30%, rgba(var(--color-detail-rgb), 0.025) 0%, transparent 50%);
+            background-size: 200% 200%, 180% 180%, 220% 220%, 190% 190%, 210% 210%, 200% 200%;
+            background-position: 0% 0%, 100% 100%, 50% 50%, 30% 70%, 80% 20%, 60% 40%;
+            animation: dustMove 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 30% 40%, rgba(var(--color-detail-rgb), 0.015) 0%, transparent 40%),
+                radial-gradient(circle at 70% 70%, rgba(var(--color-detail-rgb), 0.01) 0%, transparent 40%),
+                radial-gradient(circle at 50% 10%, rgba(var(--color-detail-rgb), 0.02) 0%, transparent 40%),
+                radial-gradient(circle at 15% 60%, rgba(var(--color-detail-rgb), 0.015) 0%, transparent 40%),
+                radial-gradient(circle at 85% 25%, rgba(var(--color-detail-rgb), 0.01) 0%, transparent 40%);
+            background-size: 250% 250%, 230% 230%, 240% 240%, 220% 220%, 260% 260%;
+            background-position: 20% 20%, 80% 80%, 50% 50%, 10% 90%, 90% 10%;
+            animation: dustMove 25s ease-in-out infinite reverse;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes dustMove {
+            0% {
+                background-position: 0% 0%, 100% 100%, 50% 50%, 30% 70%, 80% 20%, 60% 40%;
+            }
+            25% {
+                background-position: 25% 15%, 75% 85%, 60% 40%, 50% 60%, 70% 30%, 40% 50%;
+            }
+            50% {
+                background-position: 50% 30%, 50% 70%, 70% 30%, 70% 50%, 60% 40%, 20% 60%;
+            }
+            75% {
+                background-position: 75% 45%, 25% 55%, 40% 20%, 90% 40%, 50% 50%, 80% 70%;
+            }
+            100% {
+                background-position: 100% 60%, 0% 40%, 20% 10%, 110% 30%, 40% 60%, 100% 80%;
+            }
         }
 
         .container {
@@ -75,6 +136,8 @@
             flex-direction: column;
             align-items: center;
             gap: 1.5rem;
+            position: relative;
+            z-index: 1;
         }
 
         /* Logo */
@@ -95,12 +158,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 2.5rem;
-            padding: 1.5rem 0 1rem 0;
+            gap: 1rem;
+            padding: 0.5rem 0.5rem 1rem 0.5rem;
             flex-wrap: nowrap;
             white-space: nowrap;
-            overflow-x: auto;
+            overflow-x: hidden;
             width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         .nav-button {
@@ -111,13 +176,15 @@
             letter-spacing: 0.15em;
             text-transform: uppercase;
             position: relative;
-            padding: 0.5rem 0;
-            transition: color 0.3s ease;
+            padding: 0.4rem 0.6rem;
+            transition: all 0.3s ease;
             background: none;
-            border: none;
+            border: 1px solid rgba(var(--color-detail-rgb), 0.2);
+            border-radius: 4px;
             cursor: pointer;
             white-space: nowrap;
-            flex-shrink: 0;
+            flex-shrink: 1;
+            min-width: 0;
         }
 
         .nav-button::after {
@@ -133,6 +200,7 @@
 
         .nav-button:hover {
             color: var(--color-detail);
+            border-color: rgba(var(--color-detail-rgb), 0.4);
         }
 
         .nav-button:hover::after {
@@ -199,7 +267,7 @@
         }
 
         .services-title {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 600;
             color: var(--color-detail);
             text-align: center;
@@ -209,7 +277,7 @@
         }
 
         .service-category {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: 500;
             color: var(--color-destaque);
             margin-top: 1.5rem;
@@ -246,6 +314,7 @@
 
         .service-item {
             margin-bottom: 0.3rem;
+            font-size: 0.8rem;
         }
 
         /* Botões de Contato */
@@ -330,7 +399,7 @@
             }
 
             .services-title {
-                font-size: 1.5rem;
+                font-size: 1.2rem;
             }
 
             .description {
@@ -359,80 +428,93 @@
             }
 
             .nav-buttons {
-                gap: 1.8rem;
-                padding: 1rem 0 0.5rem 0;
+                gap: 0.5rem;
+                padding: 0.5rem 0.5rem 0.5rem 0.5rem;
             }
 
             .nav-button {
                 font-size: 0.75rem;
                 letter-spacing: 0.12em;
+                padding: 0.35rem 0.5rem;
             }
         }
 
         /* Media queries progressivas para botões de navegação */
         @media (max-width: 900px) {
             .nav-buttons {
-                gap: 2rem;
+                gap: 0.8rem;
+                padding: 0.5rem 0.5rem 1rem 0.5rem;
             }
 
             .nav-button {
                 font-size: 0.8rem;
                 letter-spacing: 0.14em;
+                padding: 0.4rem 0.5rem;
             }
         }
 
         @media (max-width: 700px) {
             .nav-buttons {
-                gap: 1.5rem;
+                gap: 0.6rem;
+                padding: 0.5rem 0.5rem 1rem 0.5rem;
             }
 
             .nav-button {
                 font-size: 0.7rem;
                 letter-spacing: 0.12em;
+                padding: 0.35rem 0.45rem;
             }
         }
 
         @media (max-width: 550px) {
             .nav-buttons {
-                gap: 1.2rem;
+                gap: 0.5rem;
+                padding: 0.5rem 0.5rem 1rem 0.5rem;
             }
 
             .nav-button {
                 font-size: 0.65rem;
                 letter-spacing: 0.1em;
+                padding: 0.3rem 0.4rem;
             }
         }
 
         @media (max-width: 450px) {
             .nav-buttons {
-                gap: 1rem;
+                gap: 0.4rem;
+                padding: 0.5rem 0.5rem 1rem 0.5rem;
             }
 
             .nav-button {
                 font-size: 0.6rem;
                 letter-spacing: 0.08em;
+                padding: 0.3rem 0.35rem;
             }
         }
 
         @media (max-width: 380px) {
             .nav-buttons {
-                gap: 0.8rem;
+                gap: 0.3rem;
+                padding: 0.5rem 0.5rem 1rem 0.5rem;
             }
 
             .nav-button {
                 font-size: 0.55rem;
                 letter-spacing: 0.06em;
+                padding: 0.25rem 0.3rem;
             }
         }
 
         @media (max-width: 320px) {
             .nav-buttons {
-                gap: 0.6rem;
+                gap: 0.2rem;
+                padding: 0.5rem 0.5rem 1rem 0.5rem;
             }
 
             .nav-button {
                 font-size: 0.5rem;
                 letter-spacing: 0.05em;
+                padding: 0.25rem 0.25rem;
             }
         }
 
@@ -509,6 +591,7 @@
             margin-top: 3rem;
             opacity: 0.7;
         }
+        /* End of styles */
     </style>
 </head>
 <body>
