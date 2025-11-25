@@ -84,7 +84,7 @@
         }
 
         .logo-container img {
-            max-height: 2rem;
+            max-height: 1.5rem;
             width: auto;
             object-fit: contain;
         }
@@ -302,6 +302,29 @@
             .map-title {
                 font-size: 1.5rem;
             }
+
+        /* Media query específica para telas muito verticais (celulares em retrato) */
+        @media (max-width: 480px) and (orientation: portrait) {
+            .logo-container {
+                padding: 0.5rem 1rem;
+            }
+
+            .logo-container img {
+                max-width: 80%;
+                max-height: 1.5rem;
+            }
+        }
+
+        /* Media query para telas muito pequenas e verticais */
+        @media (max-width: 360px) {
+            .logo-container {
+                padding: 0.5rem 1.5rem;
+            }
+
+            .logo-container img {
+                max-width: 80%;
+                max-height: 1.5rem;
+            }
         }
 
         /* Footer */
@@ -347,6 +370,7 @@
             padding: 2rem 1rem;
             margin-top: 3rem;
             opacity: 0.7;
+        }
         }
     </style>
 </head>
@@ -394,9 +418,32 @@
                 </ul>
             </div>
         </div>
+                <!-- Mapa -->
+                <div class="map-container">
+                    <h2 class="map-title">Ubicación</h2>
+                    <div class="map-wrapper">
+                        <iframe 
+                            id="map"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3599.651309130373!2d-54.63067292500069!3d-25.549989377485552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94f68ffbb716cc81%3A0xcb31cbefce999f34!2sFlatoutPY!5e0!3m2!1sen!2spy!4v1764098627847!5m2!1sen!2spy"
+                            style="border:0; width:100%; height:100%;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Ubicación FlatOutPY">
+                        </iframe>
+                    </div>
+                </div>
 
         <!-- Botões de Contato -->
         <div class="contact-buttons">
+            <!-- Botão Ubicación -->
+            <a href="https://maps.app.goo.gl/bjTmPqTZEkWAqAmZA" target="_blank" class="contact-button">
+                <svg class="location-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                </svg>
+                <span>Ubicación</span>
+            </a>
             <!-- Botão WhatsApp -->
             <a href="https://wa.me/595986641668" target="_blank" class="contact-button">
                 <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -412,42 +459,6 @@
                 </svg>
                 <span>Instagram</span>
             </a>
-
-            <!-- Botão Ubicación -->
-            <a href="https://maps.app.goo.gl/bjTmPqTZEkWAqAmZA" target="_blank" class="contact-button">
-                <svg class="location-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                    <circle cx="12" cy="10" r="3"/>
-                </svg>
-                <span>Ubicación</span>
-            </a>
-        </div>
-
-        <!-- Mapa -->
-        <div class="map-container">
-            <h2 class="map-title">Ubicación</h2>
-            <div class="map-wrapper">
-                <!-- 
-                    INSTRUÇÕES PARA OBTER O LINK DE INCORPORAÇÃO:
-                    1. Acesse https://www.google.com/maps
-                    2. Encontre sua localização (ou use: https://maps.app.goo.gl/bjTmPqTZEkWAqAmZA)
-                    3. Clique no botão "Compartilhar" (Share)
-                    4. Selecione a aba "Incorporar um mapa" (Embed a map)
-                    5. Copie o código do iframe fornecido e substitua o src abaixo
-                    
-                    Exemplo de link que você receberá:
-                    https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d...
-                -->
-                <iframe 
-                    id="map"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3599.651309130373!2d-54.63067292500069!3d-25.549989377485552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94f68ffbb716cc81%3A0xcb31cbefce999f34!2sFlatoutPY!5e0!3m2!1sen!2spy!4v1764098627847!5m2!1sen!2spy"
-                    style="border:0; width:100%; height:100%;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade"
-                    title="Ubicación FlatOutPY">
-                </iframe>
-            </div>
         </div>
 
         <!-- Footer -->
