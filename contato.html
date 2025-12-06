@@ -227,26 +227,43 @@
             margin-bottom: 0;
         }
 
+        /* Espaçamento mínimo entre botões para evitar toques acidentais */
+        .service-item-wrapper {
+            margin-bottom: 0.5rem;
+        }
+
         /* Botão de Categoria */
         .service-button {
             background: rgba(255, 0, 0, 0.436);
-            border: 1px solid rgb(0, 0, 0);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-top: 3px solid rgba(255, 255, 255, 0.3);
             border-radius: 15px;
-            padding: 1.5rem 2rem;
+            padding: 1.5rem 3.5rem 1.5rem 1.5rem;
             color: rgb(255, 255, 255);
             font-size: 1.2rem;
             font-weight: 600;
             text-align: center;
             cursor: pointer;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
             backdrop-filter: blur(10px);
+            /* Box-shadow 3D - Profundidade e elevação */
             box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.4),
-                0 2px 8px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05),
-                inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                /* Sombra externa profunda - cria a base 3D */
+                0 16px 48px rgba(0, 0, 0, 0.7),
+                /* Sombra média - define a forma */
+                0 6px 20px rgba(0, 0, 0, 0.5),
+                /* Sombra próxima - detalhe fino */
+                0 2px 8px rgba(0, 0, 0, 0.4),
+                /* Brilho vermelho sutil */
+                0 0 30px rgba(255, 0, 0, 0.2),
+                /* Sombra interna superior - profundidade */
+                inset 0 2px 4px rgba(0, 0, 0, 0.4),
+                /* Highlight interno sutil - brilho superior */
+                inset 0 -2px 6px rgba(0, 0, 0, 0.3),
+                /* Brilho interno superior sutil */
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             letter-spacing: 0.25em;
             text-transform: uppercase;
             z-index: 2;
@@ -254,19 +271,136 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 1rem;
+            min-height: 60px;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
+        }
+
+        /* Indicador de seta/chevron - estilo aba */
+        .service-button::after {
+            content: '▼';
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+            position: absolute;
+            right: 1.5rem;
+        }
+
+
+        /* Seta rotaciona quando ativo */
+        .service-button.active::after {
+            transform: rotate(180deg);
+            color: rgba(255, 255, 255, 1);
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Efeito ripple ao tocar */
+        .service-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Estado ativo ao tocar - feedback imediato */
+        .service-button:active {
+            transform: scale(0.97);
+            background: rgba(255, 0, 0, 0.6);
+            border-top: 3px solid rgba(255, 255, 255, 0.4);
+            /* Box-shadow 3D pressionado - mais próximo da superfície */
+            box-shadow: 
+                /* Sombra externa reduzida - botão pressionado */
+                0 8px 24px rgba(0, 0, 0, 0.8),
+                /* Sombra média reduzida */
+                0 3px 12px rgba(0, 0, 0, 0.6),
+                /* Sombra próxima */
+                0 1px 4px rgba(0, 0, 0, 0.5),
+                /* Brilho vermelho intensificado */
+                0 0 25px rgba(255, 0, 0, 0.5),
+                /* Sombra interna superior intensificada - pressionado */
+                inset 0 3px 8px rgba(0, 0, 0, 0.6),
+                /* Sombra interna inferior */
+                inset 0 -2px 8px rgba(0, 0, 0, 0.5),
+                /* Brilho interno reduzido */
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .service-button:active::after {
+            transform: scale(0.9);
+        }
+
+        .service-button:active::before {
+            width: 300px;
+            height: 300px;
+            opacity: 1;
+            transition: width 0.3s ease, height 0.3s ease, opacity 0.2s ease;
         }
 
         .service-button.active {
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            background: rgba(255, 0, 0, 0.55);
+            border-top: 3px solid rgba(255, 255, 255, 0.5);
+            border-color: rgba(255, 255, 255, 0.3);
+            /* Box-shadow 3D quando ativo - mais elevação */
+            box-shadow: 
+                /* Sombra externa profunda intensificada */
+                0 20px 60px rgba(0, 0, 0, 0.8),
+                /* Sombra média ampliada */
+                0 8px 24px rgba(0, 0, 0, 0.6),
+                /* Sombra próxima */
+                0 3px 10px rgba(0, 0, 0, 0.5),
+                /* Brilho vermelho mais intenso */
+                0 0 40px rgba(255, 0, 0, 0.4),
+                /* Sombra interna superior */
+                inset 0 2px 5px rgba(0, 0, 0, 0.5),
+                /* Highlight interno */
+                inset 0 -2px 8px rgba(0, 0, 0, 0.4),
+                /* Brilho interno superior */
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .service-button.active:active {
+            transform: scale(0.97);
+            background: rgba(255, 0, 0, 0.7);
+            /* Box-shadow 3D quando ativo e pressionado */
+            box-shadow: 
+                0 12px 36px rgba(0, 0, 0, 0.9),
+                0 5px 16px rgba(0, 0, 0, 0.7),
+                0 2px 6px rgba(0, 0, 0, 0.6),
+                0 0 30px rgba(255, 0, 0, 0.6),
+                inset 0 3px 10px rgba(0, 0, 0, 0.7),
+                inset 0 -2px 10px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+
+        /* Estado focus para acessibilidade (navegação por teclado) */
+        .service-button:focus-visible {
+            outline: 3px solid rgba(255, 0, 0, 0.6);
+            outline-offset: 3px;
         }
 
         /* Painel de Serviços que desce */
         .service-panel {
-            background: linear-gradient(135deg, 
-                rgba(var(--color-secondary-rgb), 0.98) 0%, 
-                rgba(var(--color-primary-rgb), 0.99) 50%,
-                rgba(var(--color-secondary-rgb), 0.98) 100%);
-            border: 1px solid rgba(var(--color-detail-rgb), 0.2);
+            background: rgba(0, 0, 0, 0.15);
+            border: white;
             border-top: 2px solid rgba(var(--color-destaque-rgb), 0);
             border-radius: 0 0 24px 24px;
             padding: 0;
@@ -274,10 +408,18 @@
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(10px);
+            /* Box-shadow 3D - Profundidade e elevação */
             box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.4),
-                0 2px 8px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+                /* Sombra externa profunda - cria a base 3D */
+                0 20px 60px rgba(0, 0, 0, 0.8),
+                /* Sombra média - define a forma */
+                0 8px 24px rgba(0, 0, 0, 0.6),
+                /* Sombra próxima - detalhe fino */
+                0 2px 8px rgba(0, 0, 0, 0.4),
+                /* Sombra interna superior - profundidade */
+                inset 0 2px 4px rgba(0, 0, 0, 0.5),
+                /* Highlight interno sutil - brilho superior */
+                inset 0 -2px 8px rgba(0, 0, 0, 0.3);
             max-height: 0;
             opacity: 0;
             transform: translateY(-30px) scale(0.98);
@@ -310,11 +452,22 @@
             padding: 3rem;
             margin-bottom: 1rem;
             border-top-color: rgba(var(--color-destaque-rgb), 0.5);
+            /* Box-shadow 3D intensificado quando ativo - mais elevação */
             box-shadow: 
-                0 12px 48px rgba(0, 0, 0, 0.5),
-                0 4px 16px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05),
-                0 0 40px rgba(var(--color-destaque-rgb), 0.2);
+                /* Sombra externa profunda - elevação máxima */
+                0 30px 80px rgba(0, 0, 0, 0.9),
+                /* Sombra média ampliada */
+                0 12px 32px rgba(0, 0, 0, 0.7),
+                /* Sombra próxima - definição */
+                0 4px 12px rgba(0, 0, 0, 0.5),
+                /* Brilho vermelho sutil nas bordas */
+                0 0 50px rgba(var(--color-destaque-rgb), 0.25),
+                /* Sombra interna superior - profundidade */
+                inset 0 2px 6px rgba(0, 0, 0, 0.6),
+                /* Highlight interno sutil */
+                inset 0 -3px 10px rgba(0, 0, 0, 0.4),
+                /* Brilho interno superior sutil */
+                inset 0 1px 0 rgba(255, 255, 255, 0.03);
         }
 
         .service-panel.active::before {
@@ -357,8 +510,9 @@
             transition: transform 0.3s ease;
         }
 
-        .seal:hover {
-            transform: scale(1.05);
+        .seal:active {
+            transform: scale(0.95);
+            transition: transform 0.15s ease;
         }
 
         .services-title {
@@ -413,11 +567,11 @@
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
-        .service-list li:hover {
+        .service-list li:active {
             color: rgba(var(--color-detail-rgb), 0.95);
         }
 
-        .service-list li:hover::before {
+        .service-list li:active::before {
             opacity: 1;
             transform: translateX(2px);
         }
@@ -431,7 +585,7 @@
         .contact-buttons {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.2rem;
             width: 100%;
             max-width: 500px;
         }
@@ -449,19 +603,87 @@
             text-decoration: none;
             font-size: 1.1rem;
             font-weight: 500;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Box-shadow 3D - Profundidade e elevação */
             box-shadow: 
-                0 10px 40px rgba(var(--color-primary-rgb), 0.6),
-                inset 0 1px 0 rgba(var(--color-detail-rgb), 0.1);
+                /* Sombra externa profunda - cria a base 3D */
+                0 16px 48px rgba(var(--color-primary-rgb), 0.8),
+                /* Sombra média - define a forma */
+                0 6px 20px rgba(var(--color-primary-rgb), 0.6),
+                /* Sombra próxima - detalhe fino */
+                0 2px 8px rgba(0, 0, 0, 0.5),
+                /* Sombra interna superior - profundidade */
+                inset 0 2px 4px rgba(0, 0, 0, 0.4),
+                /* Highlight interno sutil - brilho superior */
+                inset 0 -2px 6px rgba(0, 0, 0, 0.3),
+                /* Brilho interno superior sutil */
+                inset 0 1px 0 rgba(var(--color-detail-rgb), 0.12);
             width: 100%;
+            min-height: 56px;
+            position: relative;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
         }
 
-        .contact-button:hover {
-            border-color: rgba(var(--color-destaque-rgb), 0.3);
-            box-shadow: 
-                0 10px 40px rgba(var(--color-primary-rgb), 0.6),
-                inset 0 1px 0 rgba(var(--color-detail-rgb), 0.1);
+        /* Efeito ripple ao tocar */
+        .contact-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(var(--color-destaque-rgb), 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Estado ativo ao tocar - feedback imediato e claro */
+        .contact-button:active {
+            transform: scale(0.96);
+            background: linear-gradient(135deg, rgba(var(--color-secondary-rgb), 0.95) 0%, rgba(var(--color-primary-rgb), 0.98) 100%);
+            border-color: rgba(var(--color-destaque-rgb), 0.5);
             color: var(--color-destaque);
+            /* Box-shadow 3D pressionado - mais próximo da superfície */
+            box-shadow: 
+                /* Sombra externa reduzida - botão pressionado */
+                0 8px 24px rgba(var(--color-primary-rgb), 0.9),
+                /* Sombra média reduzida */
+                0 3px 12px rgba(var(--color-primary-rgb), 0.7),
+                /* Sombra próxima */
+                0 1px 4px rgba(0, 0, 0, 0.6),
+                /* Brilho vermelho intensificado */
+                0 0 30px rgba(var(--color-destaque-rgb), 0.5),
+                /* Sombra interna superior intensificada - pressionado */
+                inset 0 3px 8px rgba(0, 0, 0, 0.6),
+                /* Sombra interna inferior */
+                inset 0 -2px 8px rgba(0, 0, 0, 0.5),
+                /* Brilho interno reduzido */
+                inset 0 1px 0 rgba(var(--color-detail-rgb), 0.08);
+        }
+
+        .contact-button:active::before {
+            width: 400px;
+            height: 400px;
+            opacity: 1;
+            transition: width 0.3s ease, height 0.3s ease, opacity 0.2s ease;
+        }
+
+        /* Estado focus para acessibilidade (navegação por teclado) */
+        .contact-button:focus-visible {
+            outline: 3px solid rgba(var(--color-destaque-rgb), 0.6);
+            outline-offset: 3px;
+        }
+
+        /* Melhor feedback visual para ícones ao tocar */
+        .contact-button:active svg {
+            transform: scale(1.1);
+            transition: transform 0.2s ease;
         }
 
         .contact-button svg {
@@ -471,6 +693,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: transform 0.2s ease;
         }
 
         .contact-button span {
@@ -512,6 +735,7 @@
             .service-button {
                 padding: 1.2rem 1.5rem;
                 font-size: 1rem;
+                min-height: 56px;
             }
 
             .service-panel.active {
@@ -544,6 +768,7 @@
             .contact-button {
                 padding: 1rem 1.5rem;
                 font-size: 1rem;
+                min-height: 52px;
             }
 
             .contact-buttons {
@@ -654,13 +879,164 @@
             color: var(--color-detail);
             font-size: 0.8rem;
             padding: 2rem 1rem;
-            margin-top: 3rem;
             opacity: 0.7;
         }
 
         .service-item-wrapper {
             position: relative;
             width: 100%;
+        }
+
+        /* Botão de Download */
+        .download-button {
+            margin-top: 1.5rem;
+            padding: 1rem 2rem;
+            background: rgba(18, 76, 0, 0.432);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: rgb(255, 255, 255);
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
+            box-shadow: 
+                0 8px 24px rgba(0, 0, 0, 0.6),
+                0 3px 10px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .download-button:active {
+            transform: scale(0.97);
+            box-shadow: 
+                0 4px 12px rgba(0, 0, 0, 0.7),
+                0 1px 4px rgba(0, 0, 0, 0.5),
+                inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Popup Overlay */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Popup Container */
+        .popup-container {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 0;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.9),
+                0 8px 24px rgba(0, 0, 0, 0.7),
+                0 0 40px rgba(255, 0, 0, 0.3);
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            overflow: hidden;
+        }
+
+        .popup-overlay.active .popup-container {
+            transform: scale(1);
+        }
+
+        /* Botão de Fechar */
+        .popup-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 0, 0, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10001;
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            box-shadow: 
+                0 4px 12px rgba(0, 0, 0, 0.6),
+                0 0 15px rgba(255, 0, 0, 0.4);
+        }
+
+        .popup-close:hover,
+        .popup-close:active {
+            background: rgba(255, 0, 0, 1);
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 
+                0 6px 16px rgba(0, 0, 0, 0.7),
+                0 0 20px rgba(255, 0, 0, 0.6);
+        }
+
+        /* Imagem do Popup */
+        .popup-image {
+            width: 100%;
+            height: auto;
+            max-height: 90vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .popup-container {
+                max-width: 95%;
+                max-height: 95vh;
+            }
+
+            .popup-close {
+                width: 36px;
+                height: 36px;
+                font-size: 1.2rem;
+                top: 0.75rem;
+                right: 0.75rem;
+            }
+
+            .download-button {
+                padding: 0.9rem 1.5rem;
+                font-size: 0.9rem;
+                min-height: 44px;
+            }
         }
         /* End of styles */
     </style>
@@ -717,6 +1093,7 @@
                         <li class="service-item"><strong>TRATAMIENTO DE PINTURA.</strong><br>Descontaminación, Coat Nano-Cerámico.</li>
                         <li class="service-item"><strong>CUSTOMIZACIONES INTERNAS.</strong><br>Multimedia, Ambient Light, Star Roof, etc...</li>
                     </ul>
+                    <button class="download-button" onclick="openPopup('img/estetica-menu.PNG')">Mostrar precios</button>
                 </div>
             </div>
 
@@ -780,6 +1157,7 @@
                     </svg>
                     <span>+595 986 641668</span>
                 </a>
+                <div><br><br></div>
             </div>
         </div>
     </div>
@@ -789,6 +1167,14 @@
         <footer class="footer">
             @FlatoutPY - MotorSport Club
         </footer>
+    </div>
+
+    <!-- Popup de Imagem -->
+    <div id="image-popup-overlay" class="popup-overlay">
+        <div class="popup-container">
+            <button class="popup-close" onclick="closePopup()" aria-label="Cerrar">×</button>
+            <img id="popup-image" class="popup-image" src="" alt="Menu de servicios">
+        </div>
     </div>
 
     <script>
@@ -967,6 +1353,56 @@
         
         // Aplicar efeito na seção do mapa
         createDustEffect('.map-section-wrapper');
+
+        // Função para abrir popup
+        function openPopup(imageSrc) {
+            const overlay = document.getElementById('image-popup-overlay');
+            const img = document.getElementById('popup-image');
+            if (overlay && img) {
+                img.src = imageSrc;
+                overlay.classList.add('active');
+                // Prevenir scroll do body quando popup está aberto
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // Função para fechar popup
+        function closePopup() {
+            const overlay = document.getElementById('image-popup-overlay');
+            if (overlay) {
+                overlay.classList.remove('active');
+                // Restaurar scroll do body
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Fechar popup ao clicar no overlay (fora da imagem)
+        document.addEventListener('DOMContentLoaded', function() {
+            const overlay = document.getElementById('image-popup-overlay');
+            if (overlay) {
+                overlay.addEventListener('click', function(e) {
+                    // Fechar apenas se clicar no overlay, não na imagem ou no botão
+                    if (e.target === overlay || e.target.classList.contains('popup-container')) {
+                        closePopup();
+                    }
+                });
+
+                // Prevenir fechamento ao clicar na imagem
+                const container = overlay.querySelector('.popup-container');
+                if (container) {
+                    container.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                    });
+                }
+            }
+
+            // Fechar com tecla ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closePopup();
+                }
+            });
+        });
     </script>
 </body>
 </html>
