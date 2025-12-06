@@ -69,6 +69,7 @@
 
         body {
             margin: 0;
+            padding: 0;
             font-family: 'Montserrat', sans-serif;
             font-optical-sizing: auto;
             font-weight: 400;
@@ -79,8 +80,6 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 0.5rem 1rem;
             position: relative;
         }
 
@@ -150,78 +149,60 @@
             gap: 1.5rem;
             position: relative;
             z-index: 1;
+            padding: 0 1rem;
+            box-sizing: border-box;
+        }
+
+        /* Header */
+        .header {
+            width: 100%;
+            background-color: #000000;
+            position: relative;
+            overflow: hidden;
+            padding: 4rem 1rem;
+            margin: 0;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            box-sizing: border-box;
+            align-self: stretch;
+        }
+
+        /* Container para partículas de poeira */
+        .dust-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .dust-particle {
+            position: absolute;
+            pointer-events: none;
+            will-change: transform, opacity;
+            transform-origin: center;
         }
 
         /* Logo */
         .logo-container {
-            margin-top: 1rem;
-            display: flex;
-            justify-content: center;
-            padding: 0.5rem 0;
-        }
-
-        .logo-container img {
-            max-height: 1.5rem;
-            width: auto;
-            object-fit: contain;
-        }
-
-        /* Botões de Navegação */
-        .nav-buttons {
+            position: relative;
+            z-index: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 1rem;
-            padding: 0.5rem 0.5rem 1rem 0.5rem;
-            flex-wrap: nowrap;
-            white-space: nowrap;
-            overflow-x: hidden;
-            width: 100%;
-            max-width: 100%;
-            box-sizing: border-box;
-        }
-
-        .nav-button {
-            color: var(--color-detail);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 400;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            position: relative;
-            padding: 0.4rem 0.6rem;
-            transition: all 0.3s ease;
-            background: none;
-            border: 1px solid rgba(var(--color-detail-rgb), 0.2);
-            border-radius: 4px;
-            cursor: pointer;
-            white-space: nowrap;
-            flex-shrink: 1;
-            min-width: 0;
-        }
-
-        .nav-button::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background-color: var(--color-detail);
-            transition: width 0.3s ease;
-        }
-
-        .nav-button:hover {
-            color: var(--color-detail);
-            border-color: rgba(var(--color-detail-rgb), 0.4);
-        }
-
-        .nav-button:hover::after {
             width: 100%;
         }
 
-        .nav-button:active::after {
-            width: 100%;
+        .logo-container img {
+            max-height: 5rem;
+            width: auto;
+            object-fit: contain;
         }
 
         /* Descrição */
@@ -235,40 +216,28 @@
             letter-spacing: 0.2em;
         }
 
-        /* Linha Divisória */
-        .divider-line {
-            width: 100%;
-            max-width: 800px;
-            height: 0.06rem;
-            background: linear-gradient(to right, 
-                transparent 0%, 
-                rgba(255, 255, 255, 0.3) 15%, 
-                rgba(255, 255, 255, 0.8) 50%, 
-                rgba(255, 255, 255, 0.8) 50%, 
-                rgba(255, 255, 255, 0.3) 85%, 
-                transparent 100%);
-            margin: 1.5rem 1.5rem;
-        }
-
-        /* Quadrados de Serviços */
+        /* Container de Botões de Serviços */
         .services-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 2rem;
-            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            width: calc(100% - 2rem);
             max-width: 1200px;
+            margin: 0 auto;
             margin-bottom: 0;
         }
 
-        .service-box {
-            background: linear-gradient(135deg, 
-                rgba(var(--color-secondary-rgb), 0.95) 0%, 
-                rgba(var(--color-primary-rgb), 0.98) 50%,
-                rgba(var(--color-secondary-rgb), 0.95) 100%);
-            border: 1px solid rgba(var(--color-detail-rgb), 0.2);
-            border-radius: 24px;
-            padding: 3rem;
-            color: var(--color-detail);
+        /* Botão de Categoria */
+        .service-button {
+            background: rgba(255, 0, 0, 0.436);
+            border: 1px solid rgb(0, 0, 0);
+            border-radius: 15px;
+            padding: 1.5rem 2rem;
+            color: rgb(255, 255, 255);
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(10px);
@@ -277,17 +246,119 @@
                 0 2px 8px rgba(0, 0, 0, 0.2),
                 inset 0 1px 0 rgba(255, 255, 255, 0.05),
                 inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            z-index: 2;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
+        .service-button.active {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
 
-        .service-box:hover {
-            border-color: rgba(var(--color-destaque-rgb), 0.4);
+        /* Painel de Serviços que desce */
+        .service-panel {
+            background: linear-gradient(135deg, 
+                rgba(var(--color-secondary-rgb), 0.98) 0%, 
+                rgba(var(--color-primary-rgb), 0.99) 50%,
+                rgba(var(--color-secondary-rgb), 0.98) 100%);
+            border: 1px solid rgba(var(--color-detail-rgb), 0.2);
+            border-top: 2px solid rgba(var(--color-destaque-rgb), 0);
+            border-radius: 0 0 24px 24px;
+            padding: 0;
+            color: var(--color-detail);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
             box-shadow: 
                 0 8px 32px rgba(0, 0, 0, 0.4),
                 0 2px 8px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            max-height: 0;
+            opacity: 0;
+            transform: translateY(-30px) scale(0.98);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            margin-top: -1.5rem;
+            margin-bottom: 0.5rem;
+            z-index: 1;
+            width: 100%;
+        }
+
+        .service-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 0%,
+                rgba(var(--color-destaque-rgb), 0.8) 50%,
+                transparent 100%);
+            opacity: 0;
+            transition: opacity 0.6s ease 0.2s;
+        }
+
+        .service-panel.active {
+            max-height: 2000px;
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            padding: 3rem;
+            margin-bottom: 1rem;
+            border-top-color: rgba(var(--color-destaque-rgb), 0.5);
+            box-shadow: 
+                0 12px 48px rgba(0, 0, 0, 0.5),
+                0 4px 16px rgba(0, 0, 0, 0.3),
                 inset 0 1px 0 rgba(255, 255, 255, 0.05),
-                inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+                0 0 40px rgba(var(--color-destaque-rgb), 0.2);
+        }
+
+        .service-panel.active::before {
+            opacity: 1;
+        }
+
+        .service-panel .service-list {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease 0.1s;
+        }
+
+        .service-panel.active .service-list {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-box {
+            display: none;
+        }
+
+        /* Container de Selos */
+        .seals-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            width: 100%;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .seal {
+            max-width: 120px;
+            max-height: 120px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .seal:hover {
+            transform: scale(1.05);
         }
 
         .services-title {
@@ -429,13 +500,32 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .services-container {
-                grid-template-columns: 1fr;
+            .header {
+                padding: 3rem 1rem;
+                min-height: 160px;
             }
 
-            .service-box {
+            .logo-container img {
+                max-height: 2rem;
+            }
+
+            .service-button {
+                padding: 1.2rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .service-panel.active {
                 padding: 2rem 1.5rem;
-                border-radius: 20px;
+            }
+
+            .seals-container {
+                gap: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .seal {
+                max-width: 90px;
+                max-height: 90px;
             }
 
             .services-title {
@@ -448,7 +538,7 @@
             }
 
             .description {
-                font-size: 0.6rem;
+                font-size: 0.68rem;
             }
 
             .contact-button {
@@ -471,119 +561,31 @@
             .map-title {
                 font-size: 1.5rem;
             }
-
-            .nav-buttons {
-                gap: 0.5rem;
-                padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-            }
-
-            .nav-button {
-                font-size: 0.75rem;
-                letter-spacing: 0.12em;
-                padding: 0.35rem 0.5rem;
-            }
-        }
-
-        /* Media queries progressivas para botões de navegação */
-        @media (max-width: 900px) {
-            .nav-buttons {
-                gap: 0.8rem;
-                padding: 0.5rem 0.5rem 1rem 0.5rem;
-            }
-
-            .nav-button {
-                font-size: 0.8rem;
-                letter-spacing: 0.14em;
-                padding: 0.4rem 0.5rem;
-            }
-        }
-
-        @media (max-width: 700px) {
-            .nav-buttons {
-                gap: 0.6rem;
-                padding: 0.5rem 0.5rem 1rem 0.5rem;
-            }
-
-            .nav-button {
-                font-size: 0.7rem;
-                letter-spacing: 0.12em;
-                padding: 0.35rem 0.45rem;
-            }
-        }
-
-        @media (max-width: 550px) {
-            .nav-buttons {
-                gap: 0.5rem;
-                padding: 0.5rem 0.5rem 1rem 0.5rem;
-            }
-
-            .nav-button {
-                font-size: 0.65rem;
-                letter-spacing: 0.1em;
-                padding: 0.3rem 0.4rem;
-            }
-        }
-
-        @media (max-width: 450px) {
-            .nav-buttons {
-                gap: 0.4rem;
-                padding: 0.5rem 0.5rem 1rem 0.5rem;
-            }
-
-            .nav-button {
-                font-size: 0.6rem;
-                letter-spacing: 0.08em;
-                padding: 0.3rem 0.35rem;
-            }
-        }
-
-        @media (max-width: 380px) {
-            .nav-buttons {
-                gap: 0.3rem;
-                padding: 0.5rem 0.5rem 1rem 0.5rem;
-            }
-
-            .nav-button {
-                font-size: 0.55rem;
-                letter-spacing: 0.06em;
-                padding: 0.25rem 0.3rem;
-            }
-        }
-
-        @media (max-width: 320px) {
-            .nav-buttons {
-                gap: 0.2rem;
-                padding: 0.5rem 0.5rem 1rem 0.5rem;
-            }
-
-            .nav-button {
-                font-size: 0.5rem;
-                letter-spacing: 0.05em;
-                padding: 0.25rem 0.25rem;
-            }
         }
 
         /* Media query específica para telas muito verticais (celulares em retrato) */
         @media (max-width: 480px) and (orientation: portrait) {
-            .logo-container {
-                padding: 0.5rem 1rem;
+            .header {
+                padding: 2.5rem 1rem;
+                min-height: 140px;
             }
 
             .logo-container img {
                 max-width: 80%;
-                max-height: 1.5rem;
+                max-height: 3.5rem;
             }
         }
 
         /* Media query para telas muito pequenas e verticais */
         @media (max-width: 360px) {
-            .logo-container {
-                padding: 0.5rem 1.5rem;
+            .header {
+                padding: 2rem 0.8rem;
+                min-height: 120px;
             }
 
             .logo-container img {
                 max-width: 80%;
-                max-height: 1.5rem;
+                max-height: 3rem;
             }
         }
 
@@ -593,10 +595,30 @@
             width: 100%;
             max-width: 1200px;
             margin-top: 0;
+            position: relative;
+            z-index: 1;
         }
 
-        .map-container .divider-line {
-            margin: 1rem auto 2rem auto;
+        .map-section-wrapper {
+            position: relative;
+            width: 100%;
+            background-color: #000000;
+            padding: 2rem 1rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-sizing: border-box;
+            align-self: stretch;
+        }
+
+        .map-section-wrapper .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-buttons {
+            position: relative;
+            z-index: 1;
         }
 
         .map-title {
@@ -635,99 +657,316 @@
             margin-top: 3rem;
             opacity: 0.7;
         }
+
+        .service-item-wrapper {
+            position: relative;
+            width: 100%;
+        }
         /* End of styles */
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Logo -->
+    <!-- Header com Logo -->
+    <header class="header">
         <div class="logo-container">
             <img src="img/title3.png" alt="Flatout PY">
         </div>
+    </header>
 
-        <!-- Botões de Navegação -->
-        <nav class="nav-buttons">
-            <a href="#ubicacion" class="nav-button">Ubicación</a>
-            <a href="#performance" class="nav-button">Performance</a>
-            <a href="#estetica" class="nav-button">Estética</a>
-            <a href="#contacto" class="nav-button">Contacto</a>
-        </nav>
+    <div class="container">
 
-        <!-- Descrição -->
-        <div class="description">
-            Taller especializado en modificaciones y preparaciones exclusivas, creando experiencias únicas y apasionantes al conducir.
+        <h2 class="services-title">SERVICIOS PROFISSIONALES</h2>
+        <div class="description">Estamos bien equipados, con equipos profesionales y un amplio sentido de responsabilidad para garantizar su confianza y satisfacción.</div>
+        <!-- Selos -->
+        <div class="seals-container">
+            <img src="img/elevador_selo.png" alt="Elevador" class="seal">
+            <img src="img/escape_selo.png" alt="Escape" class="seal">
+            <img src="img/estetica_selo.png" alt="Estética" class="seal">
         </div>
-
-        <!-- Linha Divisória -->
-        <div class="divider-line"></div>
 
         <!-- Título dos Serviços -->
         <h2 class="services-title">Nuestros servicios</h2>
-
-        <!-- Quadrados de Serviços -->
+        <!-- Botões e Painéis de Serviços -->
         <div class="services-container">
-            <!-- Quadrado 1 -->
-            <div id="performance" class="service-box">
-                <div class="service-category">PERFORMANCE</div>
-                <ul class="service-list">
-                    <li class="service-item"><strong>LÍNEA DE ESCAPE COMPLETA</strong><br>Múltiple, Downpipe, MidPipe, Catback.</li>
-                    <li class="service-item"><strong>SISTEMA DE ADMISIÓN</strong><br>Cañería, Intake, Inlet, ChargePipes, BOV, Intercooler.</li>
-                    <li class="service-item"><strong>FABRICACIÓN</strong><br>Soportes a medida, Refuerzos, Ajustes & Personalizaciones Racing.</li>
-                    <li class="service-item"><strong>ELECTRÓNICA</strong><br>Módulos, Add-Ons (Launch Control, Rev. Limiter), Panel Racing (Switches), Bypass de sistema, Harness.</li>
-                    <li class="service-item"><strong>SOLDADURA EN PROCESO TIG.</strong><br>ACERO-INOX-ALUMINIO-TITÂNIO.</li>
-                </ul>
+            <!-- PERFORMANCE -->
+            <div class="service-item-wrapper">
+                <button class="service-button" onclick="toggleService('performance')">
+                    PERFORMANCE
+                </button>
+                <div id="performance-panel" class="service-panel">
+                    <ul class="service-list">
+                        <li class="service-item"><strong>LÍNEA DE ESCAPE COMPLETA</strong><br>Múltiple, Downpipe, MidPipe, Catback.</li>
+                        <li class="service-item"><strong>SISTEMA DE ADMISIÓN</strong><br>Cañería, Intake, Inlet, ChargePipes, BOV, Intercooler.</li>
+                        <li class="service-item"><strong>FABRICACIÓN</strong><br>Soportes a medida, Refuerzos, Ajustes & Personalizaciones Racing.</li>
+                        <li class="service-item"><strong>ELECTRÓNICA</strong><br>Módulos, Add-Ons (Launch Control, Rev. Limiter), Panel Racing (Switches), Bypass de sistema, Harness.</li>
+                        <li class="service-item"><strong>SOLDADURA EN PROCESO TIG.</strong><br>ACERO-INOX-ALUMINIO-TITÂNIO.</li>
+                    </ul>
+                </div>
             </div>
 
-            <!-- Quadrado 2 -->
-            <div id="estetica" class="service-box">
-                <div class="service-category">ESTÉTICA</div>
-                <ul class="service-list">
-                    <li class="service-item"><strong>LAVADO DETALLADO - INTERNO|EXTERNO.</strong><br>Hidratación de Plásticos & Cueros.</li>
-                    <li class="service-item"><strong>LAVADO TECNICO DE MOTOR.</strong><br>Líquido no conductor, Vapor, Productos especiales.</li>
-                    <li class="service-item"><strong>PULIDO TÉCNICO DE PINTURA - RESTAURACIÓN DE FAROS.</strong><br>Corrección de imperfecciones leves.</li>
-                    <li class="service-item"><strong>TRATAMIENTO DE PINTURA.</strong><br>Descontaminación, Coat Nano-Cerámico.</li>
-                    <li class="service-item"><strong>CUSTOMIZACIONES INTERNAS.</strong><br>Multimedia, Ambient Light, Star Roof, etc...</li>
-                </ul>
+            <!-- ESTÉTICA -->
+            <div class="service-item-wrapper">
+                <button class="service-button" onclick="toggleService('estetica')">
+                    ESTÉTICA
+                </button>
+                <div id="estetica-panel" class="service-panel">
+                    <ul class="service-list">
+                        <li class="service-item"><strong>LAVADO DETALLADO - INTERNO|EXTERNO.</strong><br>Hidratación de Plásticos & Cueros.</li>
+                        <li class="service-item"><strong>LAVADO TECNICO DE MOTOR.</strong><br>Líquido no conductor, Vapor, Productos especiales.</li>
+                        <li class="service-item"><strong>PULIDO TÉCNICO DE PINTURA - RESTAURACIÓN DE FAROS.</strong><br>Corrección de imperfecciones leves.</li>
+                        <li class="service-item"><strong>TRATAMIENTO DE PINTURA.</strong><br>Descontaminación, Coat Nano-Cerámico.</li>
+                        <li class="service-item"><strong>CUSTOMIZACIONES INTERNAS.</strong><br>Multimedia, Ambient Light, Star Roof, etc...</li>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <!-- Mapa -->
-        <div id="ubicacion" class="map-container">
-            <div class="divider-line"></div>
-            <div class="map-wrapper">
-                <iframe 
-                    id="map"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3599.651309130373!2d-54.63067292500069!3d-25.549989377485552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94f68ffbb716cc81%3A0xcb31cbefce999f34!2sFlatoutPY!5e0!3m2!1sen!2spy!4v1764098627847!5m2!1sen!2spy"
-                    style="border:0; width:100%; height:100%;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade"
-                    title="Ubicación FlatOutPY">
-                </iframe>
-            </div>
-        </div>
-        <!-- Botões de Contato -->
-        <div id="contacto" class="contact-buttons">
-            <!-- Botão Ubicación -->
-            <a href="https://maps.app.goo.gl/bjTmPqTZEkWAqAmZA" target="_blank" class="contact-button">
-                <svg class="location-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                    <circle cx="12" cy="10" r="3"/>
-                </svg>
-                <span>Ubicación</span>
-            </a>
-            <!-- Botão WhatsApp -->
-            <a href="https://wa.me/595986641668" target="_blank" class="contact-button">
-                <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                </svg>
-                <span>+595 986 641668</span>
-            </a>
-        </div>
 
+            <!-- MECÁNICA LIGERA -->
+            <div class="service-item-wrapper">
+                <button class="service-button" onclick="toggleService('mecanica')">
+                    MECÁNICA LIGERA
+                </button>
+                <div id="mecanica-panel" class="service-panel">
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <strong>MANTENIMIENTO GENERAL</strong><br>
+                            Revisión y mantenimiento preventivo de aceite, filtros, frenos y correas externas.
+                        </li>
+                        <li class="service-item">
+                            <strong>AJUSTES Y REPARACIONES LIGERAS</strong><br>
+                            Reparación de vidrios eléctricos, cierres de puertas, suspensiones leves y pequeños componentes, incluyendo piezas internas o soportes dañados que requieran ajustes o soldadura.
+                        </li>                        
+                        <li class="service-item">
+                            <strong>INSPECCIÓN COMPLETA</strong><br>
+                            Levantamos el vehículo para revisar visualmente motor, suspensión, frenos y sistema de escape, identificando posibles problemas de mantenimiento.
+                        </li>
+                    </ul>
+                </div>
+            </div>            
+        </div>
+        <div><br></div>
+    </div>
+
+    <!-- Seção Mapa e Botões com Background -->
+    <div class="map-section-wrapper">
+        <div class="container">
+            <!-- Mapa -->
+            <div id="ubicacion" class="map-container">
+                <div class="map-wrapper">
+                    <iframe 
+                        id="map"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3599.651309130373!2d-54.63067292500069!3d-25.549989377485552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94f68ffbb716cc81%3A0xcb31cbefce999f34!2sFlatoutPY!5e0!3m2!1sen!2spy!4v1764098627847!5m2!1sen!2spy"
+                        style="border:0; width:100%; height:100%;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Ubicación FlatOutPY">
+                    </iframe>
+                </div>
+            </div>
+            <!-- Botões de Contato -->
+            <div id="contacto" class="contact-buttons">
+                <!-- Botão Ubicación -->
+                <a href="https://maps.app.goo.gl/bjTmPqTZEkWAqAmZA" target="_blank" class="contact-button">
+                    <svg class="location-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    <span>Ubicación</span>
+                </a>
+                <!-- Botão WhatsApp -->
+                <a href="https://wa.me/595986641668" target="_blank" class="contact-button">
+                    <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                    <span>+595 986 641668</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
         <!-- Footer -->
         <footer class="footer">
             @FlatoutPY - MotorSport Club
         </footer>
     </div>
+
+    <script>
+        function toggleService(serviceId) {
+            const panel = document.getElementById(serviceId + '-panel');
+            const button = event.target;
+            
+            // Fechar todos os outros painéis
+            const allPanels = document.querySelectorAll('.service-panel');
+            const allButtons = document.querySelectorAll('.service-button');
+            
+            allPanels.forEach(p => {
+                if (p !== panel) {
+                    p.classList.remove('active');
+                }
+            });
+            
+            allButtons.forEach(b => {
+                if (b !== button) {
+                    b.classList.remove('active');
+                }
+            });
+            
+            // Toggle do painel atual
+            panel.classList.toggle('active');
+            button.classList.toggle('active');
+        }
+
+        // Função reutilizável para efeito de poeira
+        function createDustEffect(containerSelector) {
+            const container = document.querySelector(containerSelector);
+            if (!container) return;
+
+            const dustContainer = document.createElement('div');
+            dustContainer.className = 'dust-container';
+            container.appendChild(dustContainer);
+
+            const particles = [];
+            let lastSpawnTime = 0;
+            const spawnInterval = 200; // Gerar nova partícula a cada 200ms
+
+            // Função para gerar número aleatório
+            function random(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            // Criar partículas com forma de nuvem
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.className = 'dust-particle';
+                
+                // Tamanhos variados para parecer nuvem
+                const width = random(100, 300);
+                const height = random(80, 250);
+                
+                // Cores aleatórias (branco ou vermelho)
+                const isRed = Math.random() > 0.5;
+                const opacity = random(0.02, 0.04);
+                const color = isRed 
+                    ? `rgba(255, 0, 0, ${opacity})` 
+                    : `rgba(255, 255, 255, ${opacity})`;
+                
+                // Forma mais orgânica, não circular
+                const borderRadius = random(40, 60) + '%';
+                
+                particle.style.width = width + 'px';
+                particle.style.height = height + 'px';
+                particle.style.borderRadius = borderRadius;
+                particle.style.background = `radial-gradient(ellipse, ${color} 0%, transparent 65%)`;
+                
+                const containerHeight = container.offsetHeight;
+                const containerWidth = container.offsetWidth;
+                
+                // Sempre começar da esquerda (fora da tela)
+                particle.style.left = -width + 'px';
+                particle.style.top = random(-20, containerHeight + 20) + 'px';
+                
+                // Movimento principal da esquerda para direita, com variação vertical
+                particle.vx = random(0.4, 0.8); // Sempre positivo (esquerda para direita)
+                particle.vy = random(-0.15, 0.15); // Movimento vertical sutil
+                particle.rotation = random(0, 360);
+                particle.rotationSpeed = random(-0.3, 0.3);
+                
+                // Variação de escala para efeito de nuvem
+                particle.scale = random(0.8, 1.2);
+                particle.scaleSpeed = random(-0.001, 0.001);
+                
+                dustContainer.appendChild(particle);
+                particles.push(particle);
+            }
+
+            // Inicializar algumas partículas
+            for (let i = 0; i < 15; i++) {
+                createParticle();
+                // Distribuir no tempo
+                lastSpawnTime = Date.now() - (spawnInterval * i);
+            }
+
+            // Animar partículas
+            function animate() {
+                const currentTime = Date.now();
+                const containerWidth = container.offsetWidth;
+                const containerHeight = container.offsetHeight;
+
+                // Gerar novas partículas continuamente
+                if (currentTime - lastSpawnTime >= spawnInterval) {
+                    createParticle();
+                    lastSpawnTime = currentTime;
+                }
+
+                // Animar e remover partículas que saíram
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const particle = particles[i];
+                    let left = parseFloat(particle.style.left);
+                    let top = parseFloat(particle.style.top);
+
+                    // Movimento da esquerda para direita com variação vertical
+                    left += particle.vx;
+                    top += particle.vy;
+                    
+                    // Rotação suave
+                    particle.rotation += particle.rotationSpeed;
+                    particle.style.transform = `rotate(${particle.rotation}deg) scale(${particle.scale})`;
+                    
+                    // Variação de escala
+                    particle.scale += particle.scaleSpeed;
+                    if (particle.scale > 1.3 || particle.scale < 0.7) {
+                        particle.scaleSpeed *= -1;
+                    }
+                    
+                    const particleWidth = parseFloat(particle.style.width);
+                    
+                    // Remover partículas que saíram pela direita
+                    if (left > containerWidth + particleWidth) {
+                        particle.remove();
+                        particles.splice(i, 1);
+                        continue;
+                    }
+                    
+                    // Manter partículas dentro dos limites verticais (com margem)
+                    if (top < -50) {
+                        top = -50;
+                        particle.vy *= -0.5;
+                    } else if (top > containerHeight + 50) {
+                        top = containerHeight + 50;
+                        particle.vy *= -0.5;
+                    }
+
+                    particle.style.left = left + 'px';
+                    particle.style.top = top + 'px';
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            // Iniciar animação
+            animate();
+
+            // Limpar e reiniciar se o container mudar de tamanho
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    particles.forEach(p => p.remove());
+                    particles.length = 0;
+                    lastSpawnTime = Date.now();
+                    for (let i = 0; i < 15; i++) {
+                        createParticle();
+                    }
+                }, 250);
+            });
+        }
+
+        // Aplicar efeito no header
+        createDustEffect('.header');
+        
+        // Aplicar efeito na seção do mapa
+        createDustEffect('.map-section-wrapper');
+    </script>
 </body>
 </html>
