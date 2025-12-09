@@ -1,7 +1,7 @@
 import json
 import boto3
-from decimal import Decimal
 import uuid
+from decimal import Decimal
 from datetime import datetime
 
 TABLE_NAME = "LocalizacaoTable"
@@ -42,19 +42,18 @@ def lambda_handler(event, context):
 
             return {
                 "statusCode": 200,
-                "headers": headers,  # ADICIONAR HEADERS CORS AQUI
+                "headers": headers,
                 "body": json.dumps(items, default=convert_decimal)
             }
 
         elif http_method == 'POST':
-            # Inserção de dados
+            # Inserção de dados - apenas coordenadas e data
             body = event.get('body', {})
             if isinstance(body, str):
                 body = json.loads(body)
 
             latitude = body.get('latitude')
             longitude = body.get('longitude')
-            info = body.get('info', '')
 
             item = {
                 "id": str(uuid.uuid4()),
@@ -64,14 +63,12 @@ def lambda_handler(event, context):
                 item["latitude"] = Decimal(str(latitude))
             if longitude is not None:
                 item["longitude"] = Decimal(str(longitude))
-            if info:
-                item["info"] = info
 
             table.put_item(Item=item)
 
             return {
                 "statusCode": 200,
-                "headers": headers,  # ADICIONAR HEADERS CORS AQUI
+                "headers": headers,
                 "body": json.dumps({"message": "Dados recebidos"})
             }
 
@@ -89,4 +86,3 @@ def lambda_handler(event, context):
             "headers": headers,
             "body": json.dumps({"error": str(e)})
         }
-

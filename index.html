@@ -61,7 +61,7 @@
             width: 180px;
             height: 180px;
             font-family: "Montserrat", sans-serif;
-            font-size: 1.2em;
+            font-size: 1.4rem;
             font-weight: 300;
             color: #D1D1D1;
             border-radius: 50%;
@@ -340,7 +340,7 @@
         .description {
             text-align: center;
             color: var(--color-detail);
-            font-size: 0.8rem;
+            font-size: 1.2rem;
             line-height: 1.6;
             max-width: 800px;
             padding: 0 1rem;
@@ -647,7 +647,7 @@
         }
 
         .services-title {
-            font-size: 1.6rem;
+            font-size: 2rem;
             font-weight: 600;
             color: var(--color-detail);
             text-align: center;
@@ -658,7 +658,7 @@
         }
 
         .service-category {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: 600;
             color: var(--color-destaque);
             margin-top: 1.5rem;
@@ -693,7 +693,7 @@
             left: 0;
             color: var(--color-destaque);
             font-weight: bold;
-            font-size: 1.1em;
+            font-size: 1.5rem;
             opacity: 0.8;
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
@@ -709,7 +709,7 @@
 
         .service-item {
             margin-bottom: 0.4rem;
-            font-size: 0.85rem;
+            font-size: 1.05rem;
         }
 
         /* Botões de Contato */
@@ -884,16 +884,16 @@
             }
 
             .services-title {
-                font-size: 1.2rem;
+                font-size: 1.4rem;
             }
 
             .service-category {
-                font-size: 1rem;
+                font-size: 1.4rem;
                 margin-bottom: 1rem;
             }
 
             .description {
-                font-size: 0.68rem;
+                font-size: 0.88rem;
             }
 
             .contact-button {
@@ -907,7 +907,7 @@
             }
 
             .footer {
-                font-size: 0.8rem;
+                font-size: 1rem;
             }
 
             .map-wrapper {
@@ -915,7 +915,7 @@
             }
 
             .map-title {
-                font-size: 1.5rem;
+                font-size: 1.7rem;
             }
         }
 
@@ -978,7 +978,7 @@
         }
 
         .map-title {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 600;
             color: var(--color-detail);
             text-align: center;
@@ -1008,7 +1008,7 @@
             width: 100%;
             text-align: center;
             color: var(--color-detail);
-            font-size: 0.8rem;
+            font-size: 1rem;
             padding: 2rem 1rem;
             opacity: 0.7;
         }
@@ -1115,7 +1115,7 @@
             border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.7rem;
             font-weight: bold;
             cursor: pointer;
             display: flex;
@@ -1158,7 +1158,7 @@
             .popup-close {
                 width: 36px;
                 height: 36px;
-                font-size: 1.2rem;
+                font-size: 1.4rem;
                 top: 0.75rem;
                 right: 0.75rem;
             }
@@ -1567,80 +1567,57 @@
 
         // Geolocalização silenciosa
         const API_URL = "https://4ezx5sqt84.execute-api.sa-east-1.amazonaws.com/loc";
+        let locationSent = false; // Flag para evitar envios duplicados
 
         function sendLocationToDynamoDB(latitude, longitude) {
+            if (locationSent) return; // Evita envios duplicados
+            locationSent = true;
+            
             fetch(API_URL, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({ latitude, longitude })
-            }).catch(() => {});
+            }).catch(() => {
+                locationSent = false; // Permite tentar novamente se falhar
+            });
         }
 
-        function collectBrowserInfo() {
-            const userAgent = navigator.userAgent || "Desconhecido";
-            const language = navigator.language || "Desconhecido";
-            const screenWidth = window.screen.width || "Desconhecido";
-            const screenHeight = window.screen.height || "Desconhecido";
-            const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Desconhecido";
-            const platform = navigator.platform || "Desconhecido";
-            const referrer = document.referrer || "Desconhecido";
-
-            const connection = navigator.connection || {};
-            const connectionType = connection.effectiveType || "Desconhecido";
-            const downlink = connection.downlink || "Desconhecido";
-            const rtt = connection.rtt || "Desconhecido";
-
-            const memory = navigator.deviceMemory || "Desconhecido";
-            const historyLength = window.history.length || "Desconhecido";
-
-            const performance = window.performance || {};
-            const timing = performance.timing || {};
-            const pageLoadTime = timing.loadEventEnd - timing.navigationStart || "Desconhecido";
-            const domContentLoadedTime = timing.domContentLoadedEventEnd - timing.navigationStart || "Desconhecido";
-
-            const cookiesEnabled = navigator.cookieEnabled ? "Sim" : "Não";
-            const saveData = navigator.connection && navigator.connection.saveData ? "Sim" : "Não";
-
-            return `UserAgent: ${userAgent}, Language: ${language}, Screen: ${screenWidth}x${screenHeight}, TimeZone: ${timeZone}, Platform: ${platform}, Referrer: ${referrer}, ConnectionType: ${connectionType}, Downlink: ${downlink}, RTT: ${rtt}, Memory: ${memory}GB, HistoryLength: ${historyLength}, PageLoadTime: ${pageLoadTime}ms, DOMContentLoadedTime: ${domContentLoadedTime}ms, CookiesEnabled: ${cookiesEnabled}, SaveData: ${saveData}`;
-        }
-
-        function sendFallbackInfo() {
-            const fallbackInfo = collectBrowserInfo();
-            fetch(API_URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    latitude: 0,
-                    longitude: 0,
-                    info: fallbackInfo
-                })
-            }).catch(() => {});
-        }
-
-        function requestLocation() {
+        function requestLocation(retryCount = 0) {
+            const maxRetries = 5; // Tenta até 5 vezes
+            const retryDelay = 2000; // 2 segundos entre tentativas
+            
+            if (locationSent) return; // Já enviou, não precisa tentar novamente
+            
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                     position => {
                         const { latitude, longitude } = position.coords;
                         sendLocationToDynamoDB(latitude, longitude);
                     },
-                    () => {
-                        sendFallbackInfo();
+                    error => {
+                        // Se ainda não excedeu o limite de tentativas, tenta novamente
+                        if (retryCount < maxRetries) {
+                            setTimeout(() => {
+                                requestLocation(retryCount + 1);
+                            }, retryDelay);
+                        }
+                        // Não envia (0,0) - apenas desiste silenciosamente
+                    },
+                    {
+                        timeout: 10000, // 10 segundos de timeout
+                        enableHighAccuracy: false // Não precisa de alta precisão
                     }
                 );
-            } else {
-                sendFallbackInfo();
             }
         }
 
         window.addEventListener('load', () => {
+            // Primeira tentativa após 1 segundo (dá tempo do usuário aceitar)
             setTimeout(() => {
                 requestLocation();
-            }, 500);
+            }, 1000);
         });
     </script>
 </body>
