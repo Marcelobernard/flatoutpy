@@ -266,31 +266,145 @@
     pdf.text('Serviços: ' + selectedServices.map(k=>FLOWS[k].title).join(' • '), margin, y);
     y += 8;
 
-    // Seção ANTES e DEPOIS
-    await renderSection(pdf, 'ANTES', margin, () => {
-      // percorrer services e suas imagens ANTES
-      selectedServices.forEach(s => {
-        const arr = imageStore[s].ANTES || [];
-        if(arr && arr.length){
-          pdf.setFontSize(12); pdf.setTextColor(0); pdf.text(`${FLOWS[s].title} — ANTES`, margin, y); y += 6;
-          arr.forEach(item=>{
-            y = addImageToPdf(pdf, item.dataURL, item.label, margin, y, 80);
-          });
-        }
-      });
-    });
+    // Seção Comparação ANTES x DEPOIS — renderiza lado a lado por etapa
+    // Para cada serviço, percorre o número máximo de etapas entre ANTES/DEPOIS
+    for(const s of selectedServices){
+      pdf.setFontSize(12); pdf.setTextColor(0); pdf.text(`${FLOWS[s].title} — ANTES / DEPOIS`, margin, y); y += 8;
+      const antes = imageStore[s].ANTES || [];
+      const depois = imageStore[s].DEPOIS || [];
+      const maxSteps = Math.max(antes.length, depois.length);
 
-    await renderSection(pdf, 'DEPOIS', margin, () => {
-      selectedServices.forEach(s => {
-        const arr = imageStore[s].DEPOIS || [];
-        if(arr && arr.length){
-          pdf.setFontSize(12); pdf.setTextColor(0); pdf.text(`${FLOWS[s].title} — DEPOIS`, margin, y); y += 6;
-          arr.forEach(item=>{
-            y = addImageToPdf(pdf, item.dataURL, item.label, margin, y, 80);
-          });
-        }
+      for(let i=0;i<maxSteps;i++){
+        const beforeItem = antes[i] || null;
+        const afterItem = depois[i] || null;
+        // Se nenhum dos dois existir, pula
+        if(!beforeItem && !afterItem) continue;
+        // adiciona linha de duas imagens lado a lado
+        y = await addSideBySideImagesToPdf(pdf,
+          beforeItem ? beforeItem.dataURL : null,
+          afterItem ? afterItem.dataURL : null,
+          beforeItem ? beforeItem.label : '—',
+          afterItem ? afterItem.label : '—',
+          margin,
+          y
+        );
+      }
+
+      // espaço entre serviços
+      y += 6;
+      // checar página
+      if(y > 270){ pdf.addPage(); y = 20; }
+    }
+
+    // helper para carregar dimensões de imagem
+    function loadImageSize(dataURL){
+      return new Promise((res)=>{
+        if(!dataURL) return res(null);
+        const img = new Image();
+        img.onload = ()=> res({w: img.naturalWidth, h: img.naturalHeight});
+        img.onerror = ()=> res(null);
+        img.src = dataURL;
       });
-    });
+    }
+
+    // Adiciona duas imagens lado a lado (ANTES | DEPOIS). Retorna novo y
+    async function addSideBySideImagesToPdf(pdf, beforeDataURL, afterDataURL, beforeCaption, afterCaption, margin, yPos){
+      const pageWidth = 210; const pageHeight = 297; const bottomMargin = 20;
+      const usableWidth = pageWidth - margin*2; const gap = 6;
+      const colW = (usableWidth - gap) / 2; // largura disponível por coluna (mm)
+
+      // Carrega tamanhos naturais
+      const [bSize, aSize] = await Promise.all([loadImageSize(beforeDataURL), loadImageSize(afterDataURL)]);
+
+      // calcula proporções (em mm) usando coluna como referência
+      let bW = 0, bH = 0, aW = 0, aH = 0;
+      if(bSize){ bW = colW; bH = (bSize.h / bSize.w) * bW; }
+      if(aSize){ aW = colW; aH = (aSize.h / aSize.w) * aW; }
+
+      // Limite máximo de altura por linha (para caber bem na página A4)
+      const maxRowH = 90; // mm
+      // Se alguma imagem ultrapassar maxRowH, reduz proporcionalmente
+      const maxImgH = Math.max(bH || 0, aH || 0);
+      if(maxImgH > maxRowH){
+        const scale = maxRowH / maxImgH;
+        bW = bW * scale; bH = bH * scale;
+        aW = aW * scale; aH = aH * scale;
+      }
+
+      const rowH = Math.max(bH || 0, aH || 0, 20); // altura reservada para imagens
+      const captionH = 6;
+
+      // quebra de página se necessário
+      if(yPos + rowH + captionH + 10 > pageHeight - bottomMargin){ pdf.addPage(); yPos = 20; }
+
+      const leftX = margin;
+      const rightX = margin + colW + gap;
+
+      // desenha antes (coluna esquerda)
+      if(beforeDataURL){
+        try{
+          const beforeType = beforeDataURL.startsWith('data:image/png') ? 'PNG' : 'JPEG';
+          pdf.addImage(beforeDataURL, beforeType, leftX, yPos, bW, bH);
+        }catch(e){ pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('[Imagem não carregada]', leftX, yPos+6); }
+      } else {
+        pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('Sem foto', leftX, yPos + 10);
+      }
+
+      // desenha depois (coluna direita)
+      if(afterDataURL){
+        try{
+          const afterType = afterDataURL.startsWith('data:image/png') ? 'PNG' : 'JPEG';
+          pdf.addImage(afterDataURL, afterType, rightX, yPos, aW, aH);
+        }catch(e){ pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('[Imagem não carregada]', rightX, yPos+6); }
+      } else {
+        pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('Sem foto', rightX, yPos + 10);
+      }
+
+      // legendas (ajustar cor e tamanho)
+      pdf.setFontSize(9); pdf.setTextColor(80);
+      if(beforeCaption) pdf.text(beforeCaption, leftX, yPos + rowH + 4, {maxWidth: colW});
+      if(afterCaption) pdf.text(afterCaption, rightX, yPos + rowH + 4, {maxWidth: colW});
+
+      // retorna novo y posicionando após a legenda
+      return yPos + rowH + captionH + 8;
+    }
+
+    // Dev helper: cria uma imagem placeholder (canvas) para testes
+    function createPlaceholder(text, bg = '#333', w = 1200, h = 800){
+      const c = document.createElement('canvas'); c.width = w; c.height = h;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = bg; ctx.fillRect(0,0,w,h);
+      ctx.fillStyle = '#fff'; ctx.font = 'bold 120px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(text, w/2, h/2);
+      return c.toDataURL('image/jpeg', 0.9);
+    }
+
+    // Dev helper: gera um PDF de teste com imagens de placeholder
+    async function generateTestPdf(){
+      // limpa e popula imageStore com dados de teste
+      for(const k in imageStore) delete imageStore[k];
+      imageStore['interior_detallado'] = { ANTES: [], LIMPEZA: [], DEPOIS: [] };
+      imageStore['interior_detallado'].ANTES[0] = { label: 'Remover estepe e lavar', dataURL: createPlaceholder('ANTES 1', '#444') };
+      imageStore['interior_detallado'].DEPOIS[0] = { label: 'Remover estepe e lavar (DEPOIS)', dataURL: createPlaceholder('DEPOIS 1', '#1a5') };
+      imageStore['interior_detallado'].ANTES[1] = { label: 'Foto chão + volante', dataURL: createPlaceholder('ANTES 2', '#333') };
+      // sem DEPOIS correspondente para testar a coluna vazia
+
+      statusBar.textContent = 'Gerando PDF de teste...';
+      const blob = await generatePDF();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = `checklist_teste_${(new Date()).toISOString().slice(0,19)}.pdf`; a.click();
+      statusBar.textContent = 'PDF de teste gerado';
+    }
+
+    // Adiciona botão de teste na UI (dev-only)
+    try{
+      const testBtn = document.createElement('button');
+      testBtn.id = 'testPdfBtn'; testBtn.textContent = 'Gerar PDF de Teste';
+      testBtn.style.marginTop = '8px'; testBtn.style.background = '#444'; testBtn.style.color = '#fff';
+      const actions = selectionSection.querySelector('.actions');
+      if(actions) actions.appendChild(testBtn);
+      testBtn.addEventListener('click', generateTestPdf);
+    }catch(e){ /* silencioso se DOM não disponível */ }
 
     // Retorna Blob para download
     const blob = pdf.output('blob');
