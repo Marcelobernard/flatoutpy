@@ -1,6 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } 
+        from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAnTdYwFqsMgKPSlsY8HUnznFJj3zEhn5w",
+            authDomain: "contabilidade-flatoutpy.firebaseapp.com",
+            projectId: "contabilidade-flatoutpy",
+            storageBucket: "contabilidade-flatoutpy.appspot.com",
+            messagingSenderId: "540834879646",
+            appId: "1:540834879646:web:7528028fdf1378438ac38f",
+            measurementId: "G-MZSN6NVK4T"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Protege a página: se não logado, redireciona para login
+        onAuthStateChanged(auth, user => {
+            if (!user) window.location.href = "/login.html";
+        });
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="mobile-web-app-capable" content="yes">
