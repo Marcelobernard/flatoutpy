@@ -259,27 +259,41 @@
     return new Promise((resolve)=>{
       const img = new Image();
       const reader = new FileReader();
+
       reader.onload = () => {
         img.onload = () => {
+          const srcW = img.naturalWidth;
+          const srcH = img.naturalHeight;
+
+          // 🔲 corte central quadrado (1:1)
+          const cropSize = Math.min(srcW, srcH);
+          const cropX = Math.floor((srcW - cropSize) / 2);
+          const cropY = Math.floor((srcH - cropSize) / 2);
+
+          // limita resolução final
+          const finalSize = Math.min(cropSize, maxDim);
+
           const canvas = document.createElement('canvas');
-          let { width, height } = img;
-          const ratio = width / height;
-          if(width > height){
-            if(width > maxDim){ width = maxDim; height = Math.round(maxDim/ratio); }
-          } else {
-            if(height > maxDim){ height = maxDim; width = Math.round(maxDim*ratio); }
-          }
-          canvas.width = width; canvas.height = height;
+          canvas.width = finalSize;
+          canvas.height = finalSize;
+
           const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, width, height);
-          const compressed = canvas.toDataURL('image/jpeg', quality);
-          resolve(compressed);
+          ctx.drawImage(
+            img,
+            cropX, cropY, cropSize, cropSize,
+            0, 0, finalSize, finalSize
+          );
+
+          resolve(canvas.toDataURL('image/jpeg', quality));
         };
+
         img.src = reader.result;
       };
+
       reader.readAsDataURL(file);
     });
   }
+
 
   // Fim da fila: gerar PDF automaticamente e mostrar botão de download
   // Pergunta opcional pelo veículo antes de gerar o PDF
