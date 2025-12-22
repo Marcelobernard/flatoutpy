@@ -78,10 +78,33 @@
   // Prioridade: garantir que fluxos internos ocorram antes dos externos, conforme pedido
   const PRIORITY = ['interior_detallado','interior','exterior_detallado','exterior'];
 
-  // Helper: toggle seleção de serviços
+  // Helper: toggle seleção de serviços com exclusividade entre detalhado/normal
   serviceBtns.forEach(btn => {
+    btn.setAttribute('role', 'button');
+    btn.setAttribute('aria-pressed', 'false');
     btn.addEventListener('click', ()=>{
-      btn.classList.toggle('selected');
+      const key = btn.dataset.key;
+      // alterna seleção atual
+      const isSelected = btn.classList.toggle('selected');
+      btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+
+      // regras de exclusividade: se selecionar uma variante, desmarca a outra
+      const conflicts = {
+        exterior: ['exterior_detallado'],
+        exterior_detallado: ['exterior'],
+        interior: ['interior_detallado'],
+        interior_detallado: ['interior']
+      };
+
+      if(isSelected && conflicts[key]){
+        conflicts[key].forEach(conflictKey => {
+          const other = serviceBtns.find(b => b.dataset.key === conflictKey);
+          if(other && other.classList.contains('selected')){
+            other.classList.remove('selected');
+            other.setAttribute('aria-pressed', 'false');
+          }
+        });
+      }
     });
   });
 
@@ -234,6 +257,36 @@
     statusBar.textContent = 'Concluído';
   }
 
+  // Cria placeholder para testes (top-level, reutilizável)
+  function createPlaceholder(text, bg = '#333', w = 1200, h = 800){
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    const ctx = c.getContext('2d');
+    ctx.fillStyle = bg; ctx.fillRect(0,0,w,h);
+    ctx.fillStyle = '#fff'; ctx.font = 'bold 120px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(text, w/2, h/2);
+    return c.toDataURL('image/jpeg', 0.9);
+  }
+
+  // Gerador de PDF de teste acionável a partir da UI (top-level)
+  async function generateTestPdfGlobal(){
+    // limpa e popula imageStore com dados de teste
+    for(const k in imageStore) delete imageStore[k];
+    imageStore['interior_detallado'] = { ANTES: [], LIMPEZA: [], DEPOIS: [] };
+    imageStore['interior_detallado'].ANTES[0] = { label: 'Remover estepe e lavar', dataURL: createPlaceholder('ANTES 1', '#444') };
+    imageStore['interior_detallado'].DEPOIS[0] = { label: 'Remover estepe e lavar (DEPOIS)', dataURL: createPlaceholder('DEPOIS 1', '#1a5') };
+    imageStore['interior_detallado'].ANTES[1] = { label: 'Foto chão + volante', dataURL: createPlaceholder('ANTES 2', '#333') };
+
+    statusBar.textContent = 'Gerando PDF de teste...';
+    const blob = await generatePDF();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = `checklist_teste_${(new Date()).toISOString().slice(0,19)}.pdf`; a.click();
+    statusBar.textContent = 'PDF de teste gerado';
+  }
+
+  // Vincula o botão de teste estático que foi inserido em HTML
+  const testPdfStaticBtn = document.getElementById('testPdfBtn');
+  if(testPdfStaticBtn) testPdfStaticBtn.addEventListener('click', generateTestPdfGlobal);
+
   // Geração do PDF com jsPDF
   async function generatePDF(){
     const { jsPDF } = window.jspdf;
@@ -313,6 +366,25 @@
       const usableWidth = pageWidth - margin*2; const gap = 6;
       const colW = (usableWidth - gap) / 2; // largura disponível por coluna (mm)
 
+      // Cabeçalhos das colunas (ANTES | DEPOIS)
+      const headerH = 8; const captionH = 6; const minRowH = 40;
+      // quebra de página se necessário para cabeçalho + imagem mínima
+      if(yPos + headerH + minRowH + captionH + 10 > pageHeight - bottomMargin){ pdf.addPage(); yPos = 20; }
+
+      const leftX = margin;
+      const rightX = margin + colW + gap;
+
+      // desenha cabeçalhos das colunas centralizados
+      pdf.setFontSize(10); pdf.setFont(undefined, 'bold'); pdf.setTextColor(0);
+      pdf.text('ANTES', leftX + colW/2, yPos + 6, { align: 'center' });
+      pdf.text('DEPOIS', rightX + colW/2, yPos + 6, { align: 'center' });
+      // divisor vertical sutil
+      pdf.setDrawColor(200); pdf.setLineWidth(0.3);
+      pdf.line(margin + colW + gap/2, yPos - 2, margin + colW + gap/2, yPos + headerH + minRowH + captionH + 6);
+
+      // Avança o cursor para onde as imagens serão desenhadas
+      let imgY = yPos + headerH + 2;
+
       // Carrega tamanhos naturais
       const [bSize, aSize] = await Promise.all([loadImageSize(beforeDataURL), loadImageSize(afterDataURL)]);
 
@@ -323,7 +395,6 @@
 
       // Limite máximo de altura por linha (para caber bem na página A4)
       const maxRowH = 90; // mm
-      // Se alguma imagem ultrapassar maxRowH, reduz proporcionalmente
       const maxImgH = Math.max(bH || 0, aH || 0);
       if(maxImgH > maxRowH){
         const scale = maxRowH / maxImgH;
@@ -331,79 +402,55 @@
         aW = aW * scale; aH = aH * scale;
       }
 
-      const rowH = Math.max(bH || 0, aH || 0, 20); // altura reservada para imagens
-      const captionH = 6;
+      const rowH = Math.max(bH || 0, aH || 0, minRowH); // altura reservada para imagens
 
-      // quebra de página se necessário
-      if(yPos + rowH + captionH + 10 > pageHeight - bottomMargin){ pdf.addPage(); yPos = 20; }
-
-      const leftX = margin;
-      const rightX = margin + colW + gap;
-
-      // desenha antes (coluna esquerda)
+      // Desenha a imagem da esquerda (ANTES)
       if(beforeDataURL){
         try{
           const beforeType = beforeDataURL.startsWith('data:image/png') ? 'PNG' : 'JPEG';
-          pdf.addImage(beforeDataURL, beforeType, leftX, yPos, bW, bH);
-        }catch(e){ pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('[Imagem não carregada]', leftX, yPos+6); }
+          // centraliza verticalmente na área reservada (se a altura for menor que rowH, coloca no topo com pequeno padding)
+          const bTop = imgY + Math.max(0, (rowH - bH) / 2);
+          pdf.addImage(beforeDataURL, beforeType, leftX, bTop, bW, bH);
+        }catch(e){ pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('[Imagem não carregada]', leftX, imgY + 6); }
       } else {
-        pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('Sem foto', leftX, yPos + 10);
+        pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('Sem foto', leftX + 6, imgY + 10);
       }
 
-      // desenha depois (coluna direita)
+      // Desenha a imagem da direita (DEPOIS)
       if(afterDataURL){
         try{
           const afterType = afterDataURL.startsWith('data:image/png') ? 'PNG' : 'JPEG';
-          pdf.addImage(afterDataURL, afterType, rightX, yPos, aW, aH);
-        }catch(e){ pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('[Imagem não carregada]', rightX, yPos+6); }
+          const aTop = imgY + Math.max(0, (rowH - aH) / 2);
+          pdf.addImage(afterDataURL, afterType, rightX, aTop, aW, aH);
+        }catch(e){ pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('[Imagem não carregada]', rightX, imgY + 6); }
       } else {
-        pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('Sem foto', rightX, yPos + 10);
+        pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('Sem foto', rightX + 6, imgY + 10);
       }
 
       // legendas (ajustar cor e tamanho)
-      pdf.setFontSize(9); pdf.setTextColor(80);
-      if(beforeCaption) pdf.text(beforeCaption, leftX, yPos + rowH + 4, {maxWidth: colW});
-      if(afterCaption) pdf.text(afterCaption, rightX, yPos + rowH + 4, {maxWidth: colW});
+      pdf.setFont(undefined, 'normal'); pdf.setFontSize(9); pdf.setTextColor(80);
+      if(beforeCaption) pdf.text(beforeCaption, leftX, imgY + rowH + 4, {maxWidth: colW});
+      if(afterCaption) pdf.text(afterCaption, rightX, imgY + rowH + 4, {maxWidth: colW});
 
       // retorna novo y posicionando após a legenda
-      return yPos + rowH + captionH + 8;
+      return yPos + headerH + rowH + captionH + 8;
     }
 
-    // Dev helper: cria uma imagem placeholder (canvas) para testes
-    function createPlaceholder(text, bg = '#333', w = 1200, h = 800){
-      const c = document.createElement('canvas'); c.width = w; c.height = h;
-      const ctx = c.getContext('2d');
-      ctx.fillStyle = bg; ctx.fillRect(0,0,w,h);
-      ctx.fillStyle = '#fff'; ctx.font = 'bold 120px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      ctx.fillText(text, w/2, h/2);
-      return c.toDataURL('image/jpeg', 0.9);
-    }
+    // (Removed inner dev-only helpers here to expose a single top-level test generator)
 
-    // Dev helper: gera um PDF de teste com imagens de placeholder
-    async function generateTestPdf(){
-      // limpa e popula imageStore com dados de teste
-      for(const k in imageStore) delete imageStore[k];
-      imageStore['interior_detallado'] = { ANTES: [], LIMPEZA: [], DEPOIS: [] };
-      imageStore['interior_detallado'].ANTES[0] = { label: 'Remover estepe e lavar', dataURL: createPlaceholder('ANTES 1', '#444') };
-      imageStore['interior_detallado'].DEPOIS[0] = { label: 'Remover estepe e lavar (DEPOIS)', dataURL: createPlaceholder('DEPOIS 1', '#1a5') };
-      imageStore['interior_detallado'].ANTES[1] = { label: 'Foto chão + volante', dataURL: createPlaceholder('ANTES 2', '#333') };
-      // sem DEPOIS correspondente para testar a coluna vazia
-
-      statusBar.textContent = 'Gerando PDF de teste...';
-      const blob = await generatePDF();
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = `checklist_teste_${(new Date()).toISOString().slice(0,19)}.pdf`; a.click();
-      statusBar.textContent = 'PDF de teste gerado';
-    }
-
-    // Adiciona botão de teste na UI (dev-only)
+    // Adiciona botão de teste na UI (dev-only) — caso a função generatePDF seja chamada já, garante listener
     try{
-      const testBtn = document.createElement('button');
-      testBtn.id = 'testPdfBtn'; testBtn.textContent = 'Gerar PDF de Teste';
-      testBtn.style.marginTop = '8px'; testBtn.style.background = '#444'; testBtn.style.color = '#fff';
-      const actions = selectionSection.querySelector('.actions');
-      if(actions) actions.appendChild(testBtn);
-      testBtn.addEventListener('click', generateTestPdf);
+      let testBtn = document.getElementById('testPdfBtn');
+      if(!testBtn){
+        testBtn = document.createElement('button');
+        testBtn.id = 'testPdfBtn';
+        testBtn.textContent = 'Gerar PDF de Teste';
+        testBtn.style.marginTop = '8px'; testBtn.style.background = '#444'; testBtn.style.color = '#fff';
+        const actions = selectionSection.querySelector('.actions');
+        if(actions) actions.appendChild(testBtn);
+      }
+      // connect to top-level test generator (defined outside)
+      testBtn.addEventListener('click', generateTestPdfGlobal);
     }catch(e){ /* silencioso se DOM não disponível */ }
 
     // Retorna Blob para download
