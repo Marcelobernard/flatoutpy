@@ -93,6 +93,15 @@
         ]
       }
     }
+    ,
+    motor: {
+      title: 'Motor',
+      phases: {
+        ANTES: [
+          'Foto do motor'
+        ]
+      }
+    }
   };
 
 
@@ -105,6 +114,8 @@
 
   // Prioridade: garantir que fluxos internos ocorram antes dos externos, conforme pedido
   const PRIORITY = ['interior_detallado','interior','exterior_detallado','exterior'];
+  // Motor não conflita; adicionamos ao final da prioridade
+  PRIORITY.push('motor');
 
   // Helper: toggle seleção de serviços com exclusividade entre detalhado/normal
   serviceBtns.forEach(btn => {
