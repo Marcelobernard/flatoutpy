@@ -37,45 +37,64 @@
   // Definição dos fluxos e etapas (labels conforme pedido)
   const FLOWS = {
     interior_detallado: {
-      title: 'Interior Detalhado',
+      title: 'Limpieza Interior Detallada',
       phases: {
         ANTES: [
-          'Remover estepe e lavar',
-          'Foto chão + volante',
-          'Foto painel',
-          'Foto bancos dianteiros pela porta do motorista',
-          'Foto bancos traseiros pela porta traseira do motorista',
-          'Foto porta malas',
-          'Foto geral traseira até frente'
+          'Retirar la rueda de auxilio y lavar',
+          'Foto del piso y volante',
+          'Foto del tablero',
+          'Foto de los asientos delanteros desde la puerta del conductor',
+          'Foto de los asientos traseros desde la puerta trasera del conductor',
+          'Foto del baúl',
+          'Foto general desde la parte trasera hasta el frente'
         ],
-        LIMPEZA: [
-          'Tapetes',
-          'Painel e saídas de ar',
-          'Bancos',
-          'Chão',
-          'Finalização interna'
+        LIMPIEZA: [
+          'Alfombras',
+          'Tablero y salidas de aire',
+          'Asientos',
+          'Piso',
+          'Finalización interior'
         ]
       }
     },
     interior: {
-      title: 'Interior',
+      title: 'Limpieza Interior',
       phases: {
-        ANTES: ['Foto geral interna', 'Bancos dianteiros', 'Bancos traseiros', 'Porta-malas']
+        ANTES: [
+          'Foto general del interior',
+          'Asientos delanteros',
+          'Asientos traseros',
+          'Baúl'
+        ]
       }
     },
     exterior_detallado: {
-      title: 'Exterior Detallado',
+      title: 'Limpieza Exterior Detallada',
       phases: {
-        ANTES: ['Foto frontal', 'Foto lateral esquerda', 'Foto lateral direita', 'Foto traseira', 'Foto capô', 'Foto teto', 'Rodas e pneus']
+        ANTES: [
+          'Foto frontal',
+          'Foto lateral izquierda',
+          'Foto lateral derecha',
+          'Foto trasera',
+          'Foto del capó',
+          'Foto del techo',
+          'Ruedas y neumáticos'
+        ]
       }
     },
     exterior: {
-      title: 'Exterior',
+      title: 'Limpieza Exterior',
       phases: {
-        ANTES: ['Foto frontal', 'Foto lateral', 'Foto traseira', 'Foto geral']
+        ANTES: [
+          'Foto frontal',
+          'Foto lateral',
+          'Foto trasera',
+          'Foto general'
+        ]
       }
     }
   };
+
 
   // Armazena imagens: fluxo -> fase -> array de {label,dataURL}
   const imageStore = {};
@@ -135,9 +154,18 @@
     // ordena por prioridade
     selected.sort((a,b)=>PRIORITY.indexOf(a) - PRIORITY.indexOf(b));
 
-    // inicializa imageStore
+    // Remove chaves antigas do imageStore que não fazem parte da seleção atual
+    Object.keys(imageStore).forEach(k => {
+      if(!selected.includes(k)) delete imageStore[k];
+    });
+
+    // inicializa/normaliza imageStore apenas para os serviços selecionados
     selected.forEach(s => {
-      imageStore[s] = imageStore[s] || { ANTES: [], LIMPEZA: [], DEPOIS: [] };
+      imageStore[s] = {
+        ANTES: (imageStore[s] && imageStore[s].ANTES) ? imageStore[s].ANTES : [],
+        LIMPEZA: (imageStore[s] && imageStore[s].LIMPEZA) ? imageStore[s].LIMPEZA : [],
+        DEPOIS: (imageStore[s] && imageStore[s].DEPOIS) ? imageStore[s].DEPOIS : []
+      };
     });
 
     // adicionar ANTES e LIMPEZA (se houver)
@@ -254,12 +282,52 @@
   }
 
   // Fim da fila: gerar PDF automaticamente e mostrar botão de download
+  // Pergunta opcional pelo veículo antes de gerar o PDF
+  function askForVehicleInfo(){
+    return new Promise((resolve)=>{
+      // cria modal leve
+      const modal = document.createElement('div');
+      modal.id = 'vehicleModal';
+      modal.tabIndex = -1;
+      modal.style = 'position:fixed;left:0;top:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:9999;';
+      modal.innerHTML = `
+        <div style="background:#fff;padding:16px;border-radius:8px;max-width:360px;width:90%;box-shadow:0 8px 24px rgba(0,0,0,0.2);">
+          <h3 style="margin:0 0 8px 0;font-size:16px">Información opcional del vehículo</h3>
+          <p style="margin:0 0 12px 0;color:#555;font-size:13px">Rellene la placa y/o modelo para incluirlos en la primera página del PDF (opcional).</p>
+          <div style="display:flex;gap:8px;margin-bottom:8px">
+            <input id="vehiclePlateInput" placeholder="Placa (ej: ABC123)" style="flex:1;padding:8px;border:1px solid #ccc;border-radius:4px" />
+            <input id="vehicleModelInput" placeholder="Carro (ej: Toyota Corolla)" style="flex:2;padding:8px;border:1px solid #ccc;border-radius:4px" />
+          </div>
+          <div style="display:flex;gap:8px;justify-content:flex-end">
+            <button id="vehicleSkipBtn" style="background:#eee;padding:8px 10px;border-radius:4px;border:0">Pular</button>
+            <button id="vehicleSaveBtn" style="background:#007bff;color:#fff;padding:8px 10px;border-radius:4px;border:0">Adicionar</button>
+          </div>
+        </div>`;
+      document.body.appendChild(modal);
+      const plateInput = modal.querySelector('#vehiclePlateInput');
+      const modelInput = modal.querySelector('#vehicleModelInput');
+      plateInput.focus();
+      function cleanAndResolve(obj){ document.body.removeChild(modal); resolve(obj); }
+      modal.querySelector('#vehicleSaveBtn').addEventListener('click', ()=>{
+        const placa = (plateInput.value || '').trim();
+        const carro = (modelInput.value || '').trim();
+        cleanAndResolve({ placa: placa ? placa.toUpperCase().replace(/\s+/g,'') : '', carro: carro || '' });
+      });
+      modal.querySelector('#vehicleSkipBtn').addEventListener('click', ()=> cleanAndResolve({}));
+      modal.addEventListener('keydown', e=>{ if(e.key === 'Escape') cleanAndResolve({}); if(e.key === 'Enter'){ modal.querySelector('#vehicleSaveBtn').click(); }});
+    });
+  }
+
   async function finishAll(){
     checklistSection.classList.add('hidden');
     doneSection.classList.remove('hidden');
+
+    // pergunta opcional antes de gerar o PDF
+    const vehicleInfo = await askForVehicleInfo();
+
     setStatus('Gerando PDF...', 'loading');
 
-    const pdfBlob = await generatePDF();
+    const pdfBlob = await generatePDF(vehicleInfo);
     setStatus('Completado', 'success');
 
     // Salva referência para ações futuras (compartilhar)
@@ -291,12 +359,14 @@
 
   // Gerador de PDF de teste acionável a partir da UI (top-level)
   async function generateTestPdfGlobal(){
-    // limpa e popula imageStore com dados de teste
-    for(const k in imageStore) delete imageStore[k];
-    imageStore['interior_detallado'] = { ANTES: [], LIMPEZA: [], DEPOIS: [] };
-    imageStore['interior_detallado'].ANTES[0] = { label: 'Quitar la rueda de repuesto y lavar', dataURL: createPlaceholder('ANTES 1', '#444') };
-    imageStore['interior_detallado'].DEPOIS[0] = { label: 'Quitar la rueda de repuesto y lavar (DESPUÉS)', dataURL: createPlaceholder('DESPUÉS 1', '#1a5') };
-    imageStore['interior_detallado'].ANTES[1] = { label: 'Foto suelo y volante', dataURL: createPlaceholder('ANTES 2', '#333') };
+    // preserva o estado atual e usa dados de teste temporários para não poluir imageStore
+    const prev = JSON.parse(JSON.stringify(imageStore));
+    try{
+      for(const k in imageStore) delete imageStore[k];
+      imageStore['interior_detallado'] = { ANTES: [], LIMPEZA: [], DEPOIS: [] };
+      imageStore['interior_detallado'].ANTES[0] = { label: 'Quitar la rueda de repuesto y lavar', dataURL: createPlaceholder('ANTES 1', '#444') };
+      imageStore['interior_detallado'].DEPOIS[0] = { label: 'Quitar la rueda de repuesto y lavar (DESPUÉS)', dataURL: createPlaceholder('DESPUÉS 1', '#1a5') };
+      imageStore['interior_detallado'].ANTES[1] = { label: 'Foto suelo y volante', dataURL: createPlaceholder('ANTES 2', '#333') };
 
       setStatus('Gerando PDF de teste...', 'loading');
       const blob = await generatePDF();
@@ -304,6 +374,11 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a'); a.href = url; a.download = `checklist_prueba_${(new Date()).toISOString().slice(0,19)}.pdf`; a.click();
       setStatus('PDF de teste gerado', 'success');
+    }finally{
+      // restaura o imageStore anterior
+      for(const k in imageStore) delete imageStore[k];
+      Object.keys(prev).forEach(k => { imageStore[k] = prev[k]; });
+    }
   }
 
   // Guarda último PDF gerado para ações como compartilhar
@@ -315,103 +390,26 @@
 
 
   // Geração do PDF com jsPDF
-  async function generatePDF(){
+  async function generatePDF(vehicleInfo = {}){
+    // Objetivo: manter a lógica existente, mas melhorar visual e estrutura do PDF
+    // - Adiciona capa
+    // - Cabeçalho e rodapé fixos (exceto capa)
+    // - Tipografia (Helvetica), bordas nas imagens, espaçamento maior
+    // - Seções por serviço com separador visual
+
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF({ unit: 'mm', format: 'a4' });
-    const margin = 15; let y = 15;
+    const pageWidth = 210; const pageHeight = 297;
+    const margin = 15;
 
-    // Cabeçalho: logo (img/LOGO.png) e info
-    pdf.setFontSize(14);
-    pdf.setTextColor(0,0,0);
+    // Fonte: usar Helvetica (padrão do jsPDF)
+    pdf.setFont('helvetica');
 
-    // Tenta carregar o logo do projeto a partir de possíveis caminhos (relativo a esta página)
-    try{
-      const candidates = [
-        new URL('../img/LOGO.png', window.location.href).href, // indo um nível acima (tool/ -> /)
-        new URL('/img/LOGO.png', window.location.href).href,   // caminho absoluto do site
-        new URL('img/LOGO.png', window.location.href).href    // caminho relativo à mesma pasta
-      ];
-      let logoDataURL = null;
-      for(const c of candidates){
-        logoDataURL = await loadImageDataURL(c);
-        if(logoDataURL) break;
-      }
+    // Helpers reutilizáveis dentro da função
+    function formatDate(){ return (new Date()).toLocaleDateString('es-ES'); }
 
-      if(logoDataURL){
-        try{
-          // largura 24mm, altura 12mm para boa visibilidade
-          pdf.addImage(logoDataURL, 'PNG', margin, y, 18, 18);
-        }catch(e){
-          pdf.setFillColor(16,23,36);
-          pdf.rect(margin, y, 20, 12, 'F');
-          pdf.setTextColor(255,255,255);
-          pdf.text(' F', margin+5, y+9);
-        }
-      } else {
-        pdf.setFillColor(16,23,36);
-        pdf.rect(margin, y, 20, 12, 'F');
-        pdf.setTextColor(255,255,255);
-        pdf.text(' F', margin+5, y+9);
-      }
-    }catch(e){
-      // fallback silencioso
-      pdf.setFillColor(16,23,36);
-      pdf.rect(margin, y, 20, 12, 'F');
-      pdf.setTextColor(255,255,255);
-      pdf.text(' F', margin+5, y+9);
-    }
-
-    pdf.setTextColor(0,0,0);
-    pdf.setFontSize(16);
-    // Título en español
-    pdf.text('Documentación — FLATOUTPY', margin+26, y+9);
-
-    pdf.setFontSize(10);
-    pdf.setTextColor(100);
-    // Fecha en formato local (sólo fecha, sin hora) en español
-    pdf.text(`Fecha: ${(new Date()).toLocaleDateString('es-ES')}`, margin+26, y+16);
-
-    y += 22;
-
-    // Serviços selecionados
-    const selectedServices = Object.keys(imageStore).filter(k=>Object.values(imageStore[k]).some(arr=>arr.length>0));
-    pdf.setFontSize(12);
-    pdf.setTextColor(0,0,0);
-    pdf.text('Servicios: ' + selectedServices.map(k=>FLOWS[k].title).join(' • '), margin, y);
-    y += 8;
-
-    // Seção Comparação ANTES x DEPOIS — renderiza lado a lado por etapa
-    // Para cada serviço, percorre o número máximo de etapas entre ANTES/DEPOIS
-    for(const s of selectedServices){
-      pdf.setFontSize(12); pdf.setTextColor(0); pdf.text(`${FLOWS[s].title} — ANTES / DESPUÉS`, margin, y); y += 8;
-      const antes = imageStore[s].ANTES || [];
-      const depois = imageStore[s].DEPOIS || [];
-      const maxSteps = Math.max(antes.length, depois.length);
-
-      for(let i=0;i<maxSteps;i++){
-        const beforeItem = antes[i] || null;
-        const afterItem = depois[i] || null;
-        // Se nenhum dos dois existir, pula
-        if(!beforeItem && !afterItem) continue;
-        // adiciona linha de duas imagens lado a lado
-        y = await addSideBySideImagesToPdf(pdf,
-          beforeItem ? beforeItem.dataURL : null,
-          afterItem ? afterItem.dataURL : null,
-          beforeItem ? beforeItem.label : '—',
-          afterItem ? afterItem.label : '—',
-          margin,
-          y
-        );
-      }
-
-      // espaço entre serviços
-      y += 6;
-      // checar página
-      if(y > 270){ pdf.addPage(); y = 20; }
-    }
-
-    // helper para carregar dataURL a partir de uma URL (por exemplo 'img/LOGO.png')
-    function loadImageDataURL(url){
+    // Helper para carregar dataURL a partir de uma URL (por exemplo 'img/LOGO.png')
+    async function loadImageDataURL(url){
       return new Promise((res)=>{
         if(!url) return res(null);
         const img = new Image();
@@ -432,14 +430,7 @@
       });
     }
 
-    // WhatsApp sharing removed.
-
-
-    // Upload helpers removed (file.io no longer used for sharing from web).
-
-    // Upload helpers removed (transfer.sh no longer used).
-
-    // helper para carregar dimensões de imagem
+    // Helper para carregar dimensões de imagem
     function loadImageSize(dataURL){
       return new Promise((res)=>{
         if(!dataURL) return res(null);
@@ -450,85 +441,238 @@
       });
     }
 
-    // Adiciona duas imagens lado a lado (ANTES | DEPOIS). Retorna novo y
-    async function addSideBySideImagesToPdf(pdf, beforeDataURL, afterDataURL, beforeCaption, afterCaption, margin, yPos){
-      const pageWidth = 210; const pageHeight = 297; const bottomMargin = 20;
-      const usableWidth = pageWidth - margin*2; const gap = 6;
-      const colW = (usableWidth - gap) / 2; // largura disponível por coluna (mm)
+    // Tenta carregar logo (mesma lógica anterior, encapsulada)
+    async function findLogo(){
+      const candidates = [
+        new URL('../img/logob.png', window.location.href).href,
+        new URL('/img/logob.png', window.location.href).href,
+        new URL('img/logob.png', window.location.href).href
+      ];
+      for(const c of candidates){
+        const d = await loadImageDataURL(c);
+        if(d) return d;
+      }
+      return null;
+    }
 
-      // Cabeçalhos das colunas (ANTES | DEPOIS)
-      const headerH = 8; const captionH = 6; const minRowH = 40;
-      // quebra de página se necessário para cabeçalho + imagem mínima
-      if(yPos + headerH + minRowH + captionH + 10 > pageHeight - bottomMargin){ pdf.addPage(); yPos = 20; }
+    // --- 1) CAPA (primeira página) ---
+    // Construir capa limpa e corporativa sem fotos
+    pdf.setFillColor(255,255,255);
+    pdf.rect(0,0,pageWidth,pageHeight,'F');
+
+    const logoDataURL = await findLogo();
+    // Logo no topo center-left
+    if(logoDataURL){
+      try{ pdf.addImage(logoDataURL, 'PNG', margin, 18, 180, 14); }catch(e){}
+    }
+
+    // Título grande centralizado
+    pdf.setFontSize(28); pdf.setFont(undefined, 'bold'); pdf.setTextColor(20);
+    pdf.text('Documentación del Servicio', pageWidth/2, 110, { align: 'center' });
+
+    // Subtítulo / data
+    pdf.setFontSize(11); pdf.setFont(undefined, 'normal'); pdf.setTextColor(100);
+    pdf.text(`Fecha: ${formatDate()}`, pageWidth/2, 122, { align: 'center' });
+
+    // Información del vehículo (opcional) — aparece en la primera página si fue provisto
+    let listY = 140;
+    if(vehicleInfo && (vehicleInfo.carro || vehicleInfo.placa)){
+      let vehText = '';
+      if(vehicleInfo.carro && vehicleInfo.placa) vehText = `Vehículo: ${vehicleInfo.carro} - ${String(vehicleInfo.placa).toUpperCase()}`;
+      else if(vehicleInfo.placa) vehText = `Placa: ${String(vehicleInfo.placa).toUpperCase()}`;
+      else if(vehicleInfo.carro) vehText = `Vehículo: ${vehicleInfo.carro}`;
+      pdf.setFontSize(12); pdf.setFont(undefined, 'normal'); pdf.setTextColor(40);
+      pdf.text(vehText, pageWidth/2, 132, { align: 'center' });
+      listY = 150;
+    }
+
+    // Lista de servicios
+    const selectedServices = Object.keys(imageStore).filter(k=>Object.values(imageStore[k]).some(arr=>arr.length>0));
+    pdf.setFontSize(12); pdf.setTextColor(40); pdf.setFont(undefined, 'normal');
+    const servicesText = selectedServices.map(k=>`• ${FLOWS[k].title}`).join('\n');
+    // Imprimir a lista centralizada em bloco
+    const listX = pageWidth/2;
+    selectedServices.forEach((k,i)=>{
+      pdf.text(`• ${FLOWS[k].title}`, listX, listY + (i*8), { align: 'center' });
+    });
+
+    // Espaço para identidade (opcional)
+    pdf.setFontSize(10); pdf.setTextColor(120);
+    pdf.text('FLATOUTPY — Documentación profesional', pageWidth/2, 200, { align: 'center' });
+
+    // Adiciona nova página para o conteúdo (conteúdo terá header/footer)
+    pdf.addPage();
+
+    // Espaços reservados para header/rodapé
+    const headerH = 14; const footerH = 12;
+    let y = margin + headerH + 4;
+
+    // --- helpers para header e footer (serão aplicados em todas as páginas depois de gerar conteúdo) ---
+    async function drawHeader(pageNumber){
+      pdf.setPage(pageNumber);
+      // fundo branco para garantir limpeza
+      pdf.setFillColor(255,255,255);
+      pdf.rect(0, 0, pageWidth, margin + headerH, 'F');
+
+      // logo pequeno à esquerda
+      if(logoDataURL){
+        try{ pdf.addImage(logoDataURL, 'PNG', margin, 8, 48, 12); }catch(e){}
+      } else {
+        // bloco simples quando não há logo
+        pdf.setFillColor(20,20,20); pdf.rect(margin, 8, 12, 12, 'F');
+      }
+
+      // Nome da empresa à direita
+      pdf.setFontSize(11); pdf.setFont(undefined, 'bold'); pdf.setTextColor(30);
+      pdf.text('FLATOUTPY', pageWidth - margin, 16, { align: 'right' });
+
+      // linha divisória
+      pdf.setDrawColor(200); pdf.setLineWidth(0.5);
+      pdf.line(margin, margin + headerH - 2, pageWidth - margin, margin + headerH - 2);
+    }
+
+    function drawFooter(pageNumber, totalPages){
+      pdf.setPage(pageNumber);
+      pdf.setFontSize(9); pdf.setFont(undefined, 'normal'); pdf.setTextColor(110);
+      // linha sutil acima do rodapé
+      pdf.setDrawColor(230); pdf.setLineWidth(0.5);
+      pdf.line(margin, pageHeight - margin - footerH + 6, pageWidth - margin, pageHeight - margin - footerH + 6);
+
+      // data à esquerda
+      pdf.text(`Fecha: ${formatDate()}`, margin, pageHeight - margin - footerH + 2);
+      // paginação à direita (em espanhol)
+      pdf.text(`Página ${pageNumber} de ${totalPages}`, pageWidth - margin, pageHeight - margin - footerH + 2, { align: 'right' });
+    }
+
+    // --- 4) Layout das fotos: ANTES | DESPUÉS (mantém lógica) ---
+    // Função revisada para adicionar duas imagens lado a lado com bordas e melhor espaçamento
+    async function addSideBySideImagesToPdf_refined(pdf, beforeDataURL, afterDataURL, beforeCaption, afterCaption, margin, yPos){
+      const usableWidth = pageWidth - margin*2; const gap = 8; // gap aumentado
+      const colW = (usableWidth - gap) / 2; // largura por coluna (mm)
+
+      const headerH = 8; const captionH = 6; const minRowH = 48; // row min aumentado para mais espaço
+
+      // Quebra de página se necessário (respeitando footer)
+      if(yPos + headerH + minRowH + captionH + footerH > pageHeight - margin){ pdf.addPage(); yPos = margin + headerH + 4; }
 
       const leftX = margin;
       const rightX = margin + colW + gap;
 
-      // desenha cabeçalhos das colunas centralizados (español)
+      // Cabeçalhos das colunas
       pdf.setFontSize(10); pdf.setFont(undefined, 'bold'); pdf.setTextColor(0);
       pdf.text('ANTES', leftX + colW/2, yPos + 6, { align: 'center' });
       pdf.text('DESPUÉS', rightX + colW/2, yPos + 6, { align: 'center' });
-      // divisor vertical sutil
-      pdf.setDrawColor(200); pdf.setLineWidth(0.3);
-      pdf.line(margin + colW + gap/2, yPos - 2, margin + colW + gap/2, yPos + headerH + minRowH + captionH + 6);
 
-      // Avança o cursor para onde as imagens serão desenhadas
-      let imgY = yPos + headerH + 2;
+      // divisor vertical sutil
+      pdf.setDrawColor(220); pdf.setLineWidth(0.3);
+      pdf.line(margin + colW + gap/2, yPos - 2, margin + colW + gap/2, yPos + headerH + minRowH + captionH + 10);
+
+      // Posicionamento da área de imagem
+      let imgY = yPos + headerH + 3;
 
       // Carrega tamanhos naturais
       const [bSize, aSize] = await Promise.all([loadImageSize(beforeDataURL), loadImageSize(afterDataURL)]);
 
-      // calcula proporções (em mm) usando coluna como referência
+      // Calcula proporções usando coluna como referência
       let bW = 0, bH = 0, aW = 0, aH = 0;
       if(bSize){ bW = colW; bH = (bSize.h / bSize.w) * bW; }
       if(aSize){ aW = colW; aH = (aSize.h / aSize.w) * aW; }
 
-      // Limite máximo de altura por linha (para caber bem na página A4)
-      const maxRowH = 90; // mm
+      // Ajuste de escala máximo
+      const maxRowH = 110; // aumentado para mais espaço
       const maxImgH = Math.max(bH || 0, aH || 0);
-      if(maxImgH > maxRowH){
-        const scale = maxRowH / maxImgH;
-        bW = bW * scale; bH = bH * scale;
-        aW = aW * scale; aH = aH * scale;
-      }
+      if(maxImgH > maxRowH){ const scale = maxRowH / maxImgH; bW *= scale; bH *= scale; aW *= scale; aH *= scale; }
 
-      const rowH = Math.max(bH || 0, aH || 0, minRowH); // altura reservada para imagens
+      const rowH = Math.max(bH || 0, aH || 0, minRowH);
 
-      // Desenha a imagem da esquerda (ANTES)
+      // Desenhar borda leve ao redor das áreas de imagem para aparência premium
+      pdf.setDrawColor(180); pdf.setLineWidth(0.5);
+
+      // Imagem esquerda
       if(beforeDataURL){
         try{
           const beforeType = beforeDataURL.startsWith('data:image/png') ? 'PNG' : 'JPEG';
-          // centraliza verticalmente na área reservada (se a altura for menor que rowH, coloca no topo com pequeno padding)
           const bTop = imgY + Math.max(0, (rowH - bH) / 2);
           pdf.addImage(beforeDataURL, beforeType, leftX, bTop, bW, bH);
+          // Borda ao redor da imagem
+          pdf.rect(leftX - 0.8, bTop - 0.8, bW + 1.6, bH + 1.6);
         }catch(e){ pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('[Imagen no cargada]', leftX, imgY + 6); }
-      } else {
-        pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('Sin foto', leftX + 6, imgY + 10);
-      }
+      } else { pdf.setFontSize(10); pdf.setTextColor(130); pdf.text('Sin foto', leftX + 6, imgY + 10); }
 
-      // Desenha a imagem da direita (DESPUÉS)
+      // Imagem direita
       if(afterDataURL){
         try{
           const afterType = afterDataURL.startsWith('data:image/png') ? 'PNG' : 'JPEG';
           const aTop = imgY + Math.max(0, (rowH - aH) / 2);
           pdf.addImage(afterDataURL, afterType, rightX, aTop, aW, aH);
+          pdf.rect(rightX - 0.8, aTop - 0.8, aW + 1.6, aH + 1.6);
         }catch(e){ pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('[Imagen no cargada]', rightX, imgY + 6); }
-      } else {
-        pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('Sin foto', rightX + 6, imgY + 10);
-      }
+      } else { pdf.setFontSize(10); pdf.setTextColor(130); pdf.text('Sin foto', rightX + 6, imgY + 10); }
 
-      // legendas (ajustar cor e tamanho)
-      pdf.setFont(undefined, 'normal'); pdf.setFontSize(9); pdf.setTextColor(80);
-      if(beforeCaption) pdf.text(beforeCaption, leftX, imgY + rowH + 4, {maxWidth: colW});
-      if(afterCaption) pdf.text(afterCaption, rightX, imgY + rowH + 4, {maxWidth: colW});
+      // Legendas (tipografia consistente)
+      pdf.setFont(undefined, 'normal'); pdf.setFontSize(9); pdf.setTextColor(110);
+      if(beforeCaption) pdf.text(beforeCaption, leftX, imgY + rowH + 6, {maxWidth: colW});
+      if(afterCaption) pdf.text(afterCaption, rightX, imgY + rowH + 6, {maxWidth: colW});
 
-      // retorna novo y posicionando após a legenda
-      return yPos + headerH + rowH + captionH + 8;
+      // Retorna nova posição Y com maior espaçamento vertical
+      return yPos + headerH + rowH + captionH + 14;
     }
 
-    // (Removed inner dev-only helpers here to expose a single top-level test generator)
+    // --- 6) Organização: uma seção por serviço com separador visual ---
+    const services = selectedServices;
+    for(const s of services){
+      // Verifica se há espaço para título de seção, caso contrário, nova página
+      if(y + 20 > pageHeight - margin - footerH){ pdf.addPage(); y = margin + headerH + 4; }
 
-    // Adiciona botão de teste na UI (dev-only) — caso a função generatePDF seja chamada já, garante listener
+      // Título da seção (12-13 bold, em espanhol)
+      pdf.setFontSize(13); pdf.setFont(undefined, 'bold'); pdf.setTextColor(10);
+      pdf.text(`${FLOWS[s].title}`, margin, y);
+      y += 8;
+
+      // Subtítulo comparativo
+      pdf.setFontSize(11); pdf.setFont(undefined, 'normal'); pdf.setTextColor(80);
+      pdf.text('ANTES / DESPUÉS', margin, y);
+      y += 6;
+
+      const antes = imageStore[s].ANTES || [];
+      const depois = imageStore[s].DEPOIS || [];
+      const maxSteps = Math.max(antes.length, depois.length);
+
+      for(let i=0;i<maxSteps;i++){
+        const beforeItem = antes[i] || null;
+        const afterItem = depois[i] || null;
+        if(!beforeItem && !afterItem) continue;
+        y = await addSideBySideImagesToPdf_refined(pdf,
+          beforeItem ? beforeItem.dataURL : null,
+          afterItem ? afterItem.dataURL : null,
+          beforeItem ? beforeItem.label : '—',
+          afterItem ? afterItem.label : '—',
+          margin,
+          y
+        );
+      }
+
+      // Sepador visual entre serviços
+      y += 6;
+      pdf.setDrawColor(220); pdf.setLineWidth(0.6);
+      pdf.line(margin, y, pageWidth - margin, y);
+      y += 10;
+
+      // Se necessidade de nova página por falta de espaço
+      if(y > pageHeight - margin - footerH - 20){ pdf.addPage(); y = margin + headerH + 4; }
+    }
+
+    // --- 2) e 3) Cabeçalho e Rodapé fixos: aplicar em todas as páginas exceto a capa ---
+    const totalPages = pdf.getNumberOfPages();
+    // A capa é página 1, então começamos em 2
+    for(let p = 2; p <= totalPages; p++){
+      // Desenha header e footer em cada página de conteúdo
+      // (drawHeader pode ser async devido ao logo, mas logo já carregada)
+      await drawHeader(p);
+      drawFooter(p, totalPages);
+    }
+
+    // Botão de teste dev (mantêm compatibilidade com o resto do app)
     try{
       let testBtn = document.getElementById('testPdfBtn');
       if(!testBtn){
@@ -539,7 +683,7 @@
         const actions = selectionSection.querySelector('.actions');
         if(actions) actions.appendChild(testBtn);
       }
-      // connect to top-level test generator (defined outside)
+      testBtn.removeEventListener('click', generateTestPdfGlobal);
       testBtn.addEventListener('click', generateTestPdfGlobal);
     }catch(e){ /* silencioso se DOM não disponível */ }
 
@@ -547,40 +691,7 @@
     const blob = pdf.output('blob');
     return blob;
 
-    // Função helper: renderiza seção e adiciona uma nova página se necessário
-    async function renderSection(pdf, sectionTitle, margin, renderFn){
-      pdf.setFontSize(14); pdf.setTextColor(0); pdf.text(sectionTitle, margin, y); y += 6;
-      renderFn();
-    }
-
-    // Adiciona imagem e legenda ao PDF, retorna novo y
-    function addImageToPdf(pdf, dataURL, caption, margin, yPos, maxWmm){
-      // Calcula proporção para caber na largura
-      const img = new Image();
-      img.src = dataURL;
-      // Tamanho aprox (mm) => assumimos 96dpi 1px ~ 0.264583 mm; mas melhor escalar por pixel ratio
-      // Usaremos uma abordagem simples: carregar e calcular proporção via canvas
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      // draw via temp image sync is tricky, use naturalWidth/naturalHeight after loaded
-      // Para simplicidade, tentamos adicionar imagem com width maxWmm
-      const imgProps = { width: 120, height: 80 };
-
-      // Se espaço vertical insuficiente, cria nova página
-      const pageHeight = 297; // A4
-      if(yPos + 60 > pageHeight - 20){ pdf.addPage(); yPos = 20; }
-
-      const w = Math.min(maxWmm, 170 - margin*2);
-      const h = (w * imgProps.height) / imgProps.width || 60;
-      try{ pdf.addImage(dataURL, 'JPEG', margin, yPos, w, h); }catch(e){
-        // fallback: apenas texto
-        pdf.setFontSize(10); pdf.text('[Imagem não carregada]', margin, yPos+6);
-      }
-      yPos += h + 4;
-      pdf.setFontSize(9); pdf.setTextColor(80); pdf.text(caption, margin, yPos);
-      yPos += 8;
-      return yPos;
-    }
+    // --- OBS: Não removi helpers auxiliares (loadImageDataURL, loadImageSize) existentes — eles ficam disponíveis e são usados acima ---
   }
 
   // Pequenina ajuda para abrir a página rapidamente (console)
