@@ -102,7 +102,16 @@ h2{margin:0 0 12px 0;font-size:18px}
 .hidden{display:none} 
 .progress{color:var(--color-detail);margin-bottom:8px}
 .photo-area{display:flex;gap:12px;align-items:center}
-.preview{width:320px;height:auto;border-radius:12px;object-fit:cover;border:1px solid rgba(255,255,255,0.03);box-shadow:0 12px 40px rgba(0,0,0,0.6);background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);min-height:160px;transition:opacity .22s ease,transform .18s ease;opacity:1}
+.preview{
+  width:320px;
+  aspect-ratio: 1 / 1;   /* 🔲 força quadrado */
+  height:auto;
+  border-radius:12px;
+  object-fit:cover;      /* corta visualmente */
+  border:1px solid rgba(255,255,255,0.03);
+  box-shadow:0 12px 40px rgba(0,0,0,0.6);
+  background:#111;
+}
 .preview.hidden{opacity:0;transform:scale(.996)}
 .card{transition:box-shadow .18s ease} 
 .card:hover{box-shadow:0 22px 60px rgba(0,0,0,0.55)} 
