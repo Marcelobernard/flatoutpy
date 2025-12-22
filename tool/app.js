@@ -240,7 +240,7 @@
   async function finishAll(){
     checklistSection.classList.add('hidden');
     doneSection.classList.remove('hidden');
-    statusBar.textContent = 'Gerando PDF...';
+    statusBar.textContent = 'Generando PDF...';
 
     const pdfBlob = await generatePDF();
 
@@ -254,7 +254,7 @@
 
     // Auto-download
     downloadPdfBtn.click();
-    statusBar.textContent = 'Concluído';
+    statusBar.textContent = 'Completado';
   }
 
   // Cria placeholder para testes (top-level, reutilizável)
@@ -272,15 +272,15 @@
     // limpa e popula imageStore com dados de teste
     for(const k in imageStore) delete imageStore[k];
     imageStore['interior_detallado'] = { ANTES: [], LIMPEZA: [], DEPOIS: [] };
-    imageStore['interior_detallado'].ANTES[0] = { label: 'Remover estepe e lavar', dataURL: createPlaceholder('ANTES 1', '#444') };
-    imageStore['interior_detallado'].DEPOIS[0] = { label: 'Remover estepe e lavar (DEPOIS)', dataURL: createPlaceholder('DEPOIS 1', '#1a5') };
-    imageStore['interior_detallado'].ANTES[1] = { label: 'Foto chão + volante', dataURL: createPlaceholder('ANTES 2', '#333') };
+    imageStore['interior_detallado'].ANTES[0] = { label: 'Quitar la rueda de repuesto y lavar', dataURL: createPlaceholder('ANTES 1', '#444') };
+    imageStore['interior_detallado'].DEPOIS[0] = { label: 'Quitar la rueda de repuesto y lavar (DESPUÉS)', dataURL: createPlaceholder('DESPUÉS 1', '#1a5') };
+    imageStore['interior_detallado'].ANTES[1] = { label: 'Foto suelo y volante', dataURL: createPlaceholder('ANTES 2', '#333') };
 
-    statusBar.textContent = 'Gerando PDF de teste...';
-    const blob = await generatePDF();
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a'); a.href = url; a.download = `checklist_teste_${(new Date()).toISOString().slice(0,19)}.pdf`; a.click();
-    statusBar.textContent = 'PDF de teste gerado';
+      statusBar.textContent = 'Generando PDF de prueba...';
+      const blob = await generatePDF();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = `checklist_prueba_${(new Date()).toISOString().slice(0,19)}.pdf`; a.click();
+      statusBar.textContent = 'PDF de prueba generado';
   }
 
   // Vincula o botão de teste estático que foi inserido em HTML
@@ -293,22 +293,56 @@
     const pdf = new jsPDF({ unit: 'mm', format: 'a4' });
     const margin = 15; let y = 15;
 
-    // Cabeçalho: logo simples (retângulo) e info
+    // Cabeçalho: logo (img/title3.png) e info
     pdf.setFontSize(14);
     pdf.setTextColor(0,0,0);
-    // Desenha um bloco escuro como 'logo' e o título
-    pdf.setFillColor(16,23,36);
-    pdf.rect(margin, y, 20, 12, 'F');
-    pdf.setTextColor(255,255,255);
-    pdf.text(' F', margin+5, y+9);
+
+    // Tenta carregar o logo do projeto a partir de possíveis caminhos (relativo a esta página)
+    try{
+      const candidates = [
+        new URL('../img/title3.png', window.location.href).href, // indo um nível acima (tool/ -> /)
+        new URL('/img/title3.png', window.location.href).href,   // caminho absoluto do site
+        new URL('img/title3.png', window.location.href).href    // caminho relativo à mesma pasta
+      ];
+      let logoDataURL = null;
+      for(const c of candidates){
+        logoDataURL = await loadImageDataURL(c);
+        if(logoDataURL) break;
+      }
+
+      if(logoDataURL){
+        try{
+          // largura 24mm, altura 12mm para boa visibilidade
+          pdf.addImage(logoDataURL, 'PNG', margin, y, 24, 12);
+        }catch(e){
+          pdf.setFillColor(16,23,36);
+          pdf.rect(margin, y, 20, 12, 'F');
+          pdf.setTextColor(255,255,255);
+          pdf.text(' F', margin+5, y+9);
+        }
+      } else {
+        pdf.setFillColor(16,23,36);
+        pdf.rect(margin, y, 20, 12, 'F');
+        pdf.setTextColor(255,255,255);
+        pdf.text(' F', margin+5, y+9);
+      }
+    }catch(e){
+      // fallback silencioso
+      pdf.setFillColor(16,23,36);
+      pdf.rect(margin, y, 20, 12, 'F');
+      pdf.setTextColor(255,255,255);
+      pdf.text(' F', margin+5, y+9);
+    }
 
     pdf.setTextColor(0,0,0);
     pdf.setFontSize(16);
-    pdf.text('Checklist Detalhado — FlatOut', margin+26, y+9);
+    // Título en español
+    pdf.text('Checklist — FLATOUTPY', margin+26, y+9);
 
     pdf.setFontSize(10);
     pdf.setTextColor(100);
-    pdf.text(`Data: ${(new Date()).toLocaleString()}`, margin+26, y+16);
+    // Fecha en formato local (sólo fecha, sin hora) en español
+    pdf.text(`Fecha: ${(new Date()).toLocaleDateString('es-ES')}`, margin+26, y+16);
 
     y += 22;
 
@@ -316,13 +350,13 @@
     const selectedServices = Object.keys(imageStore).filter(k=>Object.values(imageStore[k]).some(arr=>arr.length>0));
     pdf.setFontSize(12);
     pdf.setTextColor(0,0,0);
-    pdf.text('Serviços: ' + selectedServices.map(k=>FLOWS[k].title).join(' • '), margin, y);
+    pdf.text('Servicios: ' + selectedServices.map(k=>FLOWS[k].title).join(' • '), margin, y);
     y += 8;
 
     // Seção Comparação ANTES x DEPOIS — renderiza lado a lado por etapa
     // Para cada serviço, percorre o número máximo de etapas entre ANTES/DEPOIS
     for(const s of selectedServices){
-      pdf.setFontSize(12); pdf.setTextColor(0); pdf.text(`${FLOWS[s].title} — ANTES / DEPOIS`, margin, y); y += 8;
+      pdf.setFontSize(12); pdf.setTextColor(0); pdf.text(`${FLOWS[s].title} — ANTES / DESPUÉS`, margin, y); y += 8;
       const antes = imageStore[s].ANTES || [];
       const depois = imageStore[s].DEPOIS || [];
       const maxSteps = Math.max(antes.length, depois.length);
@@ -347,6 +381,28 @@
       y += 6;
       // checar página
       if(y > 270){ pdf.addPage(); y = 20; }
+    }
+
+    // helper para carregar dataURL a partir de uma URL (por exemplo 'img/title3.png')
+    function loadImageDataURL(url){
+      return new Promise((res)=>{
+        if(!url) return res(null);
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = ()=>{
+          try{
+            const canvas = document.createElement('canvas');
+            canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+            res(canvas.toDataURL('image/png'));
+          }catch(e){
+            res(null);
+          }
+        };
+        img.onerror = ()=> res(null);
+        img.src = url;
+      });
     }
 
     // helper para carregar dimensões de imagem
@@ -374,10 +430,10 @@
       const leftX = margin;
       const rightX = margin + colW + gap;
 
-      // desenha cabeçalhos das colunas centralizados
+      // desenha cabeçalhos das colunas centralizados (español)
       pdf.setFontSize(10); pdf.setFont(undefined, 'bold'); pdf.setTextColor(0);
       pdf.text('ANTES', leftX + colW/2, yPos + 6, { align: 'center' });
-      pdf.text('DEPOIS', rightX + colW/2, yPos + 6, { align: 'center' });
+      pdf.text('DESPUÉS', rightX + colW/2, yPos + 6, { align: 'center' });
       // divisor vertical sutil
       pdf.setDrawColor(200); pdf.setLineWidth(0.3);
       pdf.line(margin + colW + gap/2, yPos - 2, margin + colW + gap/2, yPos + headerH + minRowH + captionH + 6);
@@ -411,20 +467,20 @@
           // centraliza verticalmente na área reservada (se a altura for menor que rowH, coloca no topo com pequeno padding)
           const bTop = imgY + Math.max(0, (rowH - bH) / 2);
           pdf.addImage(beforeDataURL, beforeType, leftX, bTop, bW, bH);
-        }catch(e){ pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('[Imagem não carregada]', leftX, imgY + 6); }
+        }catch(e){ pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('[Imagen no cargada]', leftX, imgY + 6); }
       } else {
-        pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('Sem foto', leftX + 6, imgY + 10);
+        pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('Sin foto', leftX + 6, imgY + 10);
       }
 
-      // Desenha a imagem da direita (DEPOIS)
+      // Desenha a imagem da direita (DESPUÉS)
       if(afterDataURL){
         try{
           const afterType = afterDataURL.startsWith('data:image/png') ? 'PNG' : 'JPEG';
           const aTop = imgY + Math.max(0, (rowH - aH) / 2);
           pdf.addImage(afterDataURL, afterType, rightX, aTop, aW, aH);
-        }catch(e){ pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('[Imagem não carregada]', rightX, imgY + 6); }
+        }catch(e){ pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('[Imagen no cargada]', rightX, imgY + 6); }
       } else {
-        pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('Sem foto', rightX + 6, imgY + 10);
+        pdf.setFontSize(10); pdf.setTextColor(120); pdf.text('Sin foto', rightX + 6, imgY + 10);
       }
 
       // legendas (ajustar cor e tamanho)

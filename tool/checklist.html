@@ -3,25 +3,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>Checklist Detalhado - FlatOut (iPad)</title>
+  <title>Checklist</title>
   <link rel="stylesheet" href="styles.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
   <header class="topbar">
     <div class="logo" aria-hidden="true">
-      <svg width="48" height="48" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img">
-        <rect width="100" height="100" rx="14" fill="#0f1724"></rect>
-        <text x="50" y="62" font-size="46" text-anchor="middle" fill="#fff" font-family="Montserrat">F</text>
-      </svg>
+      <img src="../img/title3.png" alt="FlatOut PY" class="logo-img">
     </div>
-    <h1>Checklist Detalhado</h1>
+    <h1>Checklist</h1>
     <div id="date"></div>
-  </header>
+  </header>"
 
   <main class="container">
     <section id="selection" class="card">
-      <h2>Serviços (selecione um ou mais)</h2>
       <div class="services">
         <button class="service-btn" data-key="exterior">Exterior</button>
         <button class="service-btn" data-key="exterior_detallado">Exterior Detallado</button>
@@ -54,9 +50,9 @@
     </section>
 
     <section id="done" class="card hidden">
-      <h2>Concluído ✅</h2>
-      <p>O checklist foi concluído. O PDF será gerado automaticamente.</p>
-      <button id="downloadPdfBtn">Download do PDF</button>
+      <h2>Completado ✅</h2>
+      <p>La lista de verificación se ha completado. El PDF se generará automáticamente.</p>
+      <button id="downloadPdfBtn">Descargar PDF</button>
     </section>
 
     <div id="statusBar" class="status">Pronto</div>
