@@ -8,15 +8,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
+  <a href="#main" class="sr-only" style="position:absolute;left:8px;top:8px;padding:8px 12px;border-radius:6px;background:rgba(255,255,255,0.02);z-index:50">Saltar al contenido</a>
   <header class="topbar">
     <div class="logo" aria-hidden="true">
       <img src="../img/title3.png" alt="FlatOut PY" class="logo-img">
     </div>
     <h1>Checklist</h1>
-    <div id="date"></div>
-  </header>"
+    <div id="date" aria-hidden="true"></div>
+  </header>
 
-  <main class="container">
+  <main id="main" class="container">
     <section id="selection" class="card">
       <div class="services">
         <button class="service-btn" data-key="exterior">Exterior</button>
@@ -25,8 +26,8 @@
         <button class="service-btn" data-key="interior_detallado">Interior Detallado</button>
       </div>
       <div class="actions">
-        <button id="startBtn" class="start-btn">Iniciar</button>
-        <button id="testPdfBtn" class="small-test-btn">Gerar PDF Teste</button>
+        <button id="startBtn" class="start-btn btn">Iniciar</button>
+        <button id="testPdfBtn" class="small-test-btn btn">Gerar PDF Teste</button>
       </div>
     </section>
 
@@ -36,14 +37,14 @@
 
       <div class="photo-area">
         <img id="preview" alt="Pré-visualização" class="preview hidden">
-        <label class="take-photo">
-          <input id="photoInput" type="file" accept="image/*" capture="environment" required>
+        <label class="take-photo" for="photoInput" role="button" aria-label="Tirar foto" tabindex="0">
+          <input id="photoInput" class="sr-only" type="file" accept="image/*" capture="environment" required aria-label="Tirar foto">
           <span>Tirar foto</span>
         </label>
       </div>
 
       <div class="controls">
-        <button id="nextBtn" disabled>Confirmar e Avançar</button>
+        <button id="nextBtn" class="btn" disabled>Confirmar e Avançar</button>
       </div>
 
       <div id="currentService" class="meta"></div>
@@ -51,14 +52,13 @@
 
     <section id="done" class="card hidden">
       <h2>Completado ✅</h2>
-      <p>La lista de verificación se ha completado. El PDF se generará automáticamente.</p>
+      <p>Checklist concluído. O PDF será gerado automaticamente.</p>
       <div class="done-actions">
-        <button id="downloadPdfBtn">Descargar PDF</button>
-        <button id="sendWhatsappBtn" class="send-whatsapp-btn">Enviar por WhatsApp</button>
+        <button id="downloadPdfBtn" class="btn">Baixar PDF</button>
       </div>
     </section>
 
-    <div id="statusBar" class="status">Pronto</div>
+    <div id="statusBar" class="status" role="status" aria-live="polite">Pronto</div>
   </main>
 
   <script src="app.js"></script>
