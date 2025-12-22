@@ -244,6 +244,9 @@
 
     const pdfBlob = await generatePDF();
 
+    // Salva referência para ações futuras (compartilhar)
+    lastPdfBlob = pdfBlob;
+
     // Cria URL para download local
     const url = URL.createObjectURL(pdfBlob);
     downloadPdfBtn.onclick = ()=>{
@@ -252,10 +255,18 @@
       a.click();
     };
 
+    // Exibe botão de enviar por WhatsApp (se estiver oculto)
+    const sendBtnEl = document.getElementById('sendWhatsappBtn');
+    if(sendBtnEl) sendBtnEl.disabled = false;
+
     // Auto-download
     downloadPdfBtn.click();
     statusBar.textContent = 'Completado';
   }
+
+  // Número fixo para enviar WhatsApp (formato internacional sem +, ex: '5511999999999')
+  const WHATSAPP_NUMBER = '5521993345401'; // altere para o número que deseja usar
+  const DEFAULT_WHATSAPP_MESSAGE = 'Envío del checklist:';
 
   // Cria placeholder para testes (top-level, reutilizável)
   function createPlaceholder(text, bg = '#333', w = 1200, h = 800){
@@ -283,9 +294,19 @@
       statusBar.textContent = 'PDF de prueba generado';
   }
 
+  // Guarda último PDF gerado para ações como compartilhar
+  let lastPdfBlob = null;
+
   // Vincula o botão de teste estático que foi inserido em HTML
   const testPdfStaticBtn = document.getElementById('testPdfBtn');
   if(testPdfStaticBtn) testPdfStaticBtn.addEventListener('click', generateTestPdfGlobal);
+
+  // Botão de enviar por WhatsApp
+  const sendWhatsappBtn = document.getElementById('sendWhatsappBtn');
+  if(sendWhatsappBtn) sendWhatsappBtn.addEventListener('click', async ()=>{
+    if(!lastPdfBlob) return alert('PDF não gerado ainda.');
+    await sendPdfToWhatsApp(lastPdfBlob);
+  });
 
   // Geração do PDF com jsPDF
   async function generatePDF(){
@@ -403,6 +424,52 @@
         img.onerror = ()=> res(null);
         img.src = url;
       });
+    }
+
+    // Envia PDF para WhatsApp: tenta Web Share API, senão faz upload ao file.io e abre WhatsApp com link
+    async function sendPdfToWhatsApp(blob){
+      const filename = `checklist_${(new Date()).toISOString().slice(0,19)}.pdf`;
+
+      // Tenta Web Share API com arquivos (dispositivo móvel/Chrome suporta)
+      try{
+        const file = new File([blob], filename, { type: 'application/pdf' });
+        if(navigator.canShare && navigator.canShare({ files: [file] })){
+          statusBar.textContent = 'Compartilhando via app...';
+          await navigator.share({ files: [file], text: DEFAULT_WHATSAPP_MESSAGE });
+          statusBar.textContent = 'Compartilhado';
+          return;
+        }
+      }catch(e){ /* não disponível */ }
+
+      // Fallback: faz upload a file.io e abre WhatsApp com link
+      try{
+        statusBar.textContent = 'Subiendo archivo...';
+        const url = await uploadToFileIo(blob, filename);
+        if(!url) throw new Error('Upload fallido');
+        const text = `${DEFAULT_WHATSAPP_MESSAGE} ${url}`;
+        const waUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(text)}`;
+        window.open(waUrl, '_blank');
+        statusBar.textContent = 'Abrir WhatsApp...';
+      }catch(e){
+        statusBar.textContent = 'Error al compartir';
+        alert('No fue posible subir el archivo para compartir.');
+      }
+    }
+
+    // Upload para file.io (retorna link público) - nota: depende de CORS del servicio
+    async function uploadToFileIo(blob, filename){
+      try{
+        const form = new FormData();
+        form.append('file', blob, filename);
+        const res = await fetch('https://file.io/', { method: 'POST', body: form });
+        const j = await res.json();
+        if(j && j.success && j.link) return j.link;
+        // file.io pode retornar { success: true, link } ou outro formato
+        if(j && j.link) return j.link;
+        return null;
+      }catch(e){
+        return null;
+      }
     }
 
     // helper para carregar dimensões de imagem

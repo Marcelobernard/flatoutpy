@@ -71,6 +71,9 @@ h2{margin:0 0 12px 0;font-size:18px}
 .service-btn.selected{background:linear-gradient(135deg, rgba(var(--color-destaque-rgb),0.5), rgba(0,0,0,0.35));border-top:3px solid rgba(255,255,255,0.2);box-shadow: 0 20px 60px rgba(0,0,0,0.85), 0 8px 30px rgba(0,0,0,0.6), 0 0 50px rgba(var(--color-destaque-rgb),0.25);color:#fff} 
 .start-btn{margin-top:14px;padding:18px;border-radius:15px;border:2px solid rgba(var(--color-detail-rgb),0.12);background:linear-gradient(135deg, rgba(var(--color-secondary-rgb),0.9) 0%, rgba(var(--color-primary-rgb),1) 100%);color:var(--color-detail);font-weight:800;font-size:18px;width:100%;box-shadow: 0 18px 50px rgba(0,0,0,0.75), inset 0 1px 0 rgba(255,255,255,0.03)}
 .small-test-btn{margin-top:10px;padding:12px;border-radius:12px;border:2px solid rgba(var(--color-detail-rgb),0.08);background:linear-gradient(135deg, rgba(var(--color-secondary-rgb),0.6), rgba(var(--color-primary-rgb),0.8));color:var(--color-detail);font-weight:700;font-size:15px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,0.6)}
+.done-actions{display:flex;gap:10px;align-items:center}
+.send-whatsapp-btn{padding:12px 16px;border-radius:12px;border:none;background:linear-gradient(135deg, #25D366 0%, #128C7E 100%);color:#fff;font-weight:700;font-size:15px;box-shadow:0 8px 30px rgba(18,140,126,0.25);cursor:pointer}
+.send-whatsapp-btn:active{transform:scale(0.98)}
 .hidden{display:none}
 .progress{color:var(--color-detail);margin-bottom:8px}
 .photo-area{display:flex;gap:12px;align-items:center}
