@@ -320,16 +320,16 @@
     const pdf = new jsPDF({ unit: 'mm', format: 'a4' });
     const margin = 15; let y = 15;
 
-    // Cabeçalho: logo (img/title3.png) e info
+    // Cabeçalho: logo (img/LOGO.png) e info
     pdf.setFontSize(14);
     pdf.setTextColor(0,0,0);
 
     // Tenta carregar o logo do projeto a partir de possíveis caminhos (relativo a esta página)
     try{
       const candidates = [
-        new URL('../img/title3.png', window.location.href).href, // indo um nível acima (tool/ -> /)
-        new URL('/img/title3.png', window.location.href).href,   // caminho absoluto do site
-        new URL('img/title3.png', window.location.href).href    // caminho relativo à mesma pasta
+        new URL('../img/LOGO.png', window.location.href).href, // indo um nível acima (tool/ -> /)
+        new URL('/img/LOGO.png', window.location.href).href,   // caminho absoluto do site
+        new URL('img/LOGO.png', window.location.href).href    // caminho relativo à mesma pasta
       ];
       let logoDataURL = null;
       for(const c of candidates){
@@ -340,7 +340,7 @@
       if(logoDataURL){
         try{
           // largura 24mm, altura 12mm para boa visibilidade
-          pdf.addImage(logoDataURL, 'PNG', margin, y, 24, 12);
+          pdf.addImage(logoDataURL, 'PNG', margin, y, 18, 18);
         }catch(e){
           pdf.setFillColor(16,23,36);
           pdf.rect(margin, y, 20, 12, 'F');
@@ -364,7 +364,7 @@
     pdf.setTextColor(0,0,0);
     pdf.setFontSize(16);
     // Título en español
-    pdf.text('Checklist — FLATOUTPY', margin+26, y+9);
+    pdf.text('Documentación — FLATOUTPY', margin+26, y+9);
 
     pdf.setFontSize(10);
     pdf.setTextColor(100);
@@ -410,7 +410,7 @@
       if(y > 270){ pdf.addPage(); y = 20; }
     }
 
-    // helper para carregar dataURL a partir de uma URL (por exemplo 'img/title3.png')
+    // helper para carregar dataURL a partir de uma URL (por exemplo 'img/LOGO.png')
     function loadImageDataURL(url){
       return new Promise((res)=>{
         if(!url) return res(null);

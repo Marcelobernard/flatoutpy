@@ -12,6 +12,13 @@
   --accent-weak: rgba(214,40,40,0.08);
   --success: #25D366;
   --shadow: rgba(0,0,0,0.6);
+
+  /* Legacy / token fallbacks used elsewhere in stylesheet */
+  --color-destaque-rgb: 214,40,40; /* falls back to --accent-rgb */
+  --color-detail: var(--text);
+  --color-detail-rgb: 231,231,231;
+  --color-primary-rgb: 214,40,40;
+  --color-secondary-rgb: 214,40,40;
 }
 *{box-sizing:border-box}
 html,body{height:100%;}
@@ -46,7 +53,7 @@ body::after {
 .topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:16px;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,0.04);background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);backdrop-filter:blur(6px)}
 .topbar .logo{flex:0 0 auto;display:flex;align-items:center}
 .topbar .logo img.logo-img{
-  height:52px; max-height:56px; width:auto; max-width:240px; object-fit:contain; border-radius:8px; box-shadow:0 10px 30px rgba(0,0,0,0.55);
+  height:52px; max-height:56px; width:auto; max-width:240px; object-fit:contain; border-radius:8px;;
 } 
 @media (min-width:1024px){
   .topbar .logo img.logo-img{height:56px;max-height:56px}
