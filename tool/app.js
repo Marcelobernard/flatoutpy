@@ -372,7 +372,7 @@
       const blob = await generatePDF();
       lastPdfBlob = blob;
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = `checklist_prueba_${(new Date()).toISOString().slice(0,19)}.pdf`; a.click();
+      const a = document.createElement('a'); a.href = url; a.download = `flatoutpy_servicio_${(new Date()).toISOString().slice(0,19)}.pdf`; a.click();
       setStatus('PDF de teste gerado', 'success');
     }finally{
       // restaura o imageStore anterior
