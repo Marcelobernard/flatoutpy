@@ -206,6 +206,12 @@
     selectionSection.classList.add('hidden');
     checklistSection.classList.remove('hidden');
     doneSection.classList.add('hidden');
+    // Reset Open/Share buttons (desabilita até que novo PDF seja gerado)
+    const openBtn = document.getElementById('openPdfBtn');
+    const shareBtn = document.getElementById('sharePdfBtn');
+    if(openBtn) openBtn.disabled = true;
+    if(shareBtn) shareBtn.disabled = true;
+
     setStatus('Checklist iniciado');
     showStep(0);
   }
@@ -358,14 +364,44 @@
     // Salva referência para ações futuras (compartilhar)
     lastPdfBlob = pdfBlob;
 
-    // Cria URL para download local
+    // Cria URL para download local (revoga a anterior se existir)
+    if(window.lastPdfUrl){ try{ URL.revokeObjectURL(window.lastPdfUrl); }catch(e){} }
     const url = URL.createObjectURL(pdfBlob);
+    window.lastPdfUrl = url; // armazena globalmente para reuse
+    window.lastPdfBlob = pdfBlob;
+
+    // Atualiza botão de download
     downloadPdfBtn.onclick = ()=>{
       const a = document.createElement('a');
       a.href = url; a.download = `checklist_${(new Date()).toISOString().slice(0,19)}.pdf`;
       a.click();
     };
 
+    // Habilita ações adicionais (Abrir / Compartilhar)
+    const openBtn = document.getElementById('openPdfBtn');
+    const shareBtn = document.getElementById('sharePdfBtn');
+    if(openBtn){ openBtn.disabled = false; openBtn.onclick = ()=>{ window.open(window.lastPdfUrl, '_blank', 'noopener'); setStatus('Abrindo PDF...', 'loading'); } }
+    if(shareBtn){ shareBtn.disabled = false; shareBtn.onclick = async ()=>{
+      setStatus('Preparando compartilhamento...', 'loading');
+      try{
+        // Preferência: compartilhar arquivo (Web Share Level 2) se suportado
+        const file = new File([pdfBlob], `checklist_${(new Date()).toISOString().slice(0,19)}.pdf`, { type: 'application/pdf' });
+        if(navigator.canShare && navigator.canShare({ files: [file] })){
+          await navigator.share({ files: [file], title: 'Checklist', text: 'PDF do checklist.' });
+          setStatus('Compartilhado', 'success');
+          return;
+        }
+
+        // Fallback: compartilhar URL via navigator.share se disponível
+        if(navigator.share){ await navigator.share({ title: 'Checklist', text: 'PDF do checklist', url: window.lastPdfUrl }); setStatus('Compartilhado', 'success'); return; }
+
+        // Fallback: copiar URL para clipboard
+        if(navigator.clipboard && navigator.clipboard.writeText){ await navigator.clipboard.writeText(window.lastPdfUrl); alert('URL do PDF copiada para a área de transferência.'); setStatus('URL copiada para clipboard', 'success'); return; }
+
+        // Último recurso: abrir em nova aba e informar o usuário
+        window.open(window.lastPdfUrl, '_blank', 'noopener'); alert('Compartilhamento não suportado neste navegador. O PDF foi aberto em outra aba.'); setStatus('Abrido (fallback)', 'success');
+      }catch(err){ console.error(err); setStatus('Erro ao compartilhar', 'error'); alert('Erro ao compartilhar: '+ (err && err.message ? err.message : err)); }
+    }; }
 
     // Auto-download
     downloadPdfBtn.click();
@@ -488,7 +524,7 @@
     const logoDataURL = await findLogo();
     // Logo no topo center-left
     if(logoDataURL){
-      try{ pdf.addImage(logoDataURL, 'PNG', margin, 18, 180, 14); }catch(e){}
+      try{ pdf.addImage(logoDataURL, 'PNG', margin, 18, 180, 12); }catch(e){}
     }
 
     // Título grande centralizado
@@ -539,18 +575,9 @@
       pdf.setFillColor(255,255,255);
       pdf.rect(0, 0, pageWidth, margin + headerH, 'F');
 
-      // logo pequeno à esquerda
-      if(logoDataURL){
-        try{ pdf.addImage(logoDataURL, 'PNG', margin, 8, 48, 12); }catch(e){}
-      } else {
-        // bloco simples quando não há logo
-        pdf.setFillColor(20,20,20); pdf.rect(margin, 8, 12, 12, 'F');
-      }
-
       // Nome da empresa à direita
       pdf.setFontSize(11); pdf.setFont(undefined, 'bold'); pdf.setTextColor(30);
       pdf.text('FLATOUTPY', pageWidth - margin, 16, { align: 'right' });
-
       // linha divisória
       pdf.setDrawColor(200); pdf.setLineWidth(0.5);
       pdf.line(margin, margin + headerH - 2, pageWidth - margin, margin + headerH - 2);
