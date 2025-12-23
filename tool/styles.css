@@ -325,6 +325,7 @@ h2 {
   margin-top:12px;
 }
 .status {
+  justify-content: center;
   margin-top:12px;
   color:var(--muted);
   background:rgba(255,255,255,0.02);
