@@ -202,7 +202,7 @@ h2 {
   box-shadow:0 4px 12px rgba(0,0,0,0.5);
 }
 .start-btn {
-  margin-top:16px;
+  margin-top:0.2rem;
   padding:18px 20px;
   border-radius:16px;
   border:1px solid rgba(var(--color-detail-rgb),0.06);
@@ -224,7 +224,7 @@ h2 {
 }
 .small-test-btn {
   justify-content: center;
-  margin-top:10px;
+  margin-top:0.2rem;
   padding:12px 16px;
   border-radius:12px;
   border:1px solid rgba(var(--color-detail-rgb),0.08);
@@ -233,7 +233,7 @@ h2 {
   font-weight:700;
   font-size:15px;
   width:auto;
-  min-width:160px;
+  min-width:100%;
   padding-left:18px;
   padding-right:18px;
   box-shadow:0 10px 30px rgba(0,0,0,0.6);
