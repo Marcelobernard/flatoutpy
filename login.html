@@ -1,9 +1,69 @@
 <!doctype html>
-<html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Login — Flatoutpy</title>
+<style>
+:root { --bg1:#071122; --bg2:#0b1220; --accent:#7c3aed; }
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial,sans-serif;color:#fff;background:#000;}
+body{
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  background:linear-gradient(180deg,var(--bg1),var(--bg2));
+}
+.background {
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(closest-side at 8% 22%, rgba(124,58,237,0.16), transparent 22%),
+    radial-gradient(closest-side at 82% 78%, rgba(6,182,212,0.10), transparent 22%),
+    radial-gradient(closest-side at 52% 42%, rgba(99,102,241,0.06), transparent 20%);
+  filter:blur(40px);
+  transform-origin:center;
+  animation: float 14s ease-in-out infinite;
+}
+@keyframes float {
+  0%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-6%) scale(1.05) rotate(2deg)}
+  100%{transform:translateY(0) scale(1)}
+}
+.container {
+  position:relative;z-index:1;display:flex;align-items:center;justify-content:center;
+  width:100%;height:100%;padding:24px;
+}
+.card {
+  background: rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.04);
+  padding:28px;
+  border-radius:12px;
+  box-shadow: 0 14px 40px rgba(2,6,23,0.6);
+  display:flex;align-items:center;justify-content:center;
+  backdrop-filter: blur(6px);
+}
+.github-btn{
+  display:inline-flex;align-items:center;gap:12px;
+  background:#0b1117;color:#fff;border:0;padding:14px 20px;border-radius:10px;
+  font-weight:700;font-size:16px;cursor:pointer;
+  box-shadow: 0 8px 30px rgba(2,6,23,0.7);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.github-btn svg{width:20px;height:20px;fill:#fff}
+.github-btn:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(124,58,237,0.12)}
+@media (prefers-reduced-motion: reduce){ .background, .github-btn{animation:none;transition:none} }
+</style>
+</head>
 <body>
-
-<h2>Login com GitHub</h2>
-<button id="loginGithub">Login com GitHub</button>
+<div class="background" aria-hidden="true"></div>
+<main class="container">
+  <div class="card" role="main" aria-labelledby="loginDesc">
+    <button id="loginGithub" class="github-btn" aria-label="Login com GitHub">
+      <!-- GitHub Mark (octicon) -->
+      <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82a7.53 7.53 0 012.01-.27c.68.003 1.36.092 2 .27 1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      <span>Login com GitHub</span>
+    </button>
+  </div>
+</main>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
