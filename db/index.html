@@ -20,7 +20,7 @@
         const auth = getAuth(app);
 
         // UID do seu usuário GitHub no Firebase
-        const ADMIN_UID = "1InTvAUXblWySAzqRBunANUj0Xh1";
+        const ADMIN_UID = "1InTvAUXbIWySAzqRBunANUj0Xh1";
 
         onAuthStateChanged(auth, user => {
             if (!user || user.uid !== ADMIN_UID) {
@@ -293,9 +293,6 @@
         .floating-add-btn:hover {
             box-shadow: 0 6px 25px rgba(234, 102, 102, 0.6);
         }
-
-        /* floating-add-btn active movement removed */
-        .floating-add-btn:active {}
 
         /* Responsividade do botão flutuante */
         @media (max-width: 768px) {
