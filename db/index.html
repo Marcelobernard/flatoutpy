@@ -23,10 +23,17 @@
         const ADMIN_UID = "1InTvAUXbIWySAzqRBunANUj0Xh1";
 
         onAuthStateChanged(auth, user => {
-            if (!user || user.uid !== ADMIN_UID) {
-                window.location.href = "/login.html"; // bloqueia qualquer outro
+            if (user) {
+                if (user.uid !== ADMIN_UID) {
+                    window.location.href = "/login.html";
+                } else {
+                    console.log("Usuário logado corretamente:", user.uid);
+                }
+            } else {
+                console.log("Nenhum usuário logado ainda...");
             }
         });
+
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
