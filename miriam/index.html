@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page Miriam</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+        :root {
+            --principal: #250029;
+            --secundaria: #9b59b6;
+            --terciaria: #34495e;
+        }
+        .montserrat-global {
+            font-family: "Montserrat", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+        }
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .entrada {
+            position: relative;
+            overflow: hidden;
+            background-color: var(--principal); /* Purple - odd */
+        }
+        .entrada::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(37, 0, 41, 0.7), rgba(37, 0, 41, 0.7)), url('arvorebg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(3px);
+            transform: scale(1.05);
+            z-index: 0;
+        }
+        .entrada > * {
+            position: relative;
+            z-index: 1;
+        }
+        .entrada h1 {
+            color: #f3b7ff;
+            text-shadow:
+                0 0 8px rgba(255, 128, 255, 0.8),
+                0 0 18px rgba(179, 0, 255, 0.7),
+                0 0 28px rgba(120, 0, 255, 0.6),
+                0 0 40px rgba(140, 0, 220, 0.5);
+        }
+        .entrada .btn-servicos {
+            display: inline-block;
+            margin-top: 24px;
+            padding: 14px 32px;
+            border: 2px solid rgba(255, 128, 255, 0.6);
+            border-radius: 999px;
+            background: rgba(149, 35, 246, 0.18);
+            color: #f9f1ff;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            box-shadow:
+                0 0 12px rgba(179, 0, 255, 0.4),
+                0 0 20px rgba(149, 35, 246, 0.25);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+        }
+        .entrada .btn-servicos:hover {
+            transform: translateY(-2px);
+            background: rgba(179, 0, 255, 0.28);
+            box-shadow:
+                0 0 18px rgba(255, 128, 255, 0.55),
+                0 0 28px rgba(149, 35, 246, 0.35);
+        }
+        .highlight-primary {
+            color: #d29bff;
+            font-weight: 700;
+        }
+        .highlight-secondary {
+            color: #9b59b6;
+            font-weight: 600;
+        }
+        .sobre {
+            background-color: black; /* Black - even */
+        }
+        .sobre h2 {
+            color: #d9b3ff;
+            text-shadow:
+                0 0 6px rgb(149, 0, 255),
+                0 0 14px rgba(183, 0, 255, 0.596);
+        }
+        .services {
+            background-color: var(--principal); /* Purple - odd */
+        }        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 18px;
+            width: 100%;
+            max-width: 980px;
+            margin-top: 24px;
+        }
+        .service-card {
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 24px;
+            padding: 32px 24px;
+            min-height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+            transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(4px);
+            transform: scale(1.05);
+            opacity: 0.9;
+            z-index: 0;
+        }
+        .service-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(37, 0, 41, 0.35), rgba(37, 0, 41, 0.75));
+            z-index: 1;
+        }
+        .service-amor::before {
+            background-image: url('amor.png');
+        }
+        .service-trabalho::before {
+            background-image: url('trabalho.png');
+        }
+        .service-perguntas::before {
+            background-image: url('perguntas.png');
+        }
+        .service-leitura-completa::before {
+            background-image: url('leitura-completa.png');
+        }
+        .service-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.12);
+        }
+        .service-card span {
+            position: relative;
+            z-index: 2;
+            color: #f7f0ff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+        }
+        .terceira {
+            background-color: black; /* Black - even */
+        }
+        .contato {
+            background-color: var(--principal); /* Purple - odd */
+        }
+        h1, h2 {
+            margin: 0 0 20px 0;
+        }
+        p {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        @media (max-width: 768px) {
+            section {
+                padding: 40px 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="entrada">
+        <h1>MIRIAM MAIA</h1>
+        <p>Leitura de Cartas Lenormand com precisão, sensibilidade e experiência.
+Descubra caminhos, esclareça dúvidas e obtenha orientação para suas decisões.</p>
+        <a href="#services" class="btn-servicos">VER SERVIÇOS</a>
+    </section>
+    <section class="sobre">
+        <h2>O que são Cartas Lenormand?</h2>
+        <p>As <span class="highlight-primary">Cartas Lenormand</span> são um baralho divinatório usado para trazer respostas claras e objetivas sobre <span class="highlight-primary">amor</span>, <span class="highlight-primary">trabalho</span> e <span class="highlight-primary">decisões da vida</span>. Diferente de outros métodos, sua leitura é direta e focada no que realmente importa.</p>
+    </section>
+    <section class="services" id="services">
+        <h2>Sobre o que você procura?</h2>
+        <div class="services-grid">
+            <div class="service-card service-amor"><span>AMOR</span></div>
+            <div class="service-card service-trabalho"><span>TRABALHO</span></div>
+            <div class="service-card service-perguntas"><span>PERGUNTAS</span></div>
+            <div class="service-card service-leitura-completa"><span>LEITURA COMPLETA</span></div>
+        </div>
+    </section>
+    <section class="terceira">
+        <h2>Depoimentos</h2>
+        <p>"Excelente serviço!" - Cliente Satisfeito</p>
+    </section>
+    <section class="contato">
+        <h2>Contato</h2>
+        <p>Entre em contato conosco para mais informações.</p>
+    </section>
+</body>
+</html>
