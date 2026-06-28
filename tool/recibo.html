@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FLATOUTPY — Gerador de Recibo</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  :root {
+    --orange: #FF6B2B;
+    --dark: #1C1C1E;
+    --steel: #2C4A7C;
+    --bg: #F0EFE9;
+    --card: #FAFAF7;
+    --border: #D8D6CE;
+    --text: #1C1C1E;
+    --muted: #7A7870;
+    --danger: #C0392B;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--dark);
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 3px solid var(--orange);
+  }
+
+  .logo-mark {
+    width: 42px; height: 42px;
+    background: var(--orange);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800; font-size: 14px;
+    color: white; letter-spacing: -0.5px;
+  }
+
+  header h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px; font-weight: 800;
+    color: white; letter-spacing: 2px;
+  }
+
+  header span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; color: var(--orange);
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-top: 2px; display: block;
+  }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+  }
+
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: var(--border);
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+
+  /* FORM ELEMENTS */
+  label {
+    display: block;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+  }
+
+  input[type="text"], input[type="number"], textarea, select {
+    width: 100%;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--orange);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+    line-height: 1.5;
+  }
+
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .field { margin-bottom: 16px; }
+  .field:last-child { margin-bottom: 0; }
+
+  /* SERVICES */
+  .service-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .service-item {
+    display: grid;
+    grid-template-columns: 1fr 160px 36px;
+    gap: 10px;
+    align-items: center;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 12px;
+  }
+
+  .service-item input {
+    border: none; padding: 0;
+    font-size: 14px;
+  }
+
+  .service-item input:focus { border: none; outline: none; box-shadow: none; }
+
+  .service-price-wrap {
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  .currency-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 600;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .service-item input[type="number"] {
+    text-align: right;
+    padding: 0;
+  }
+
+  .btn-remove {
+    background: none; border: none;
+    color: var(--border);
+    font-size: 18px; cursor: pointer;
+    line-height: 1;
+    transition: color 0.15s;
+    padding: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .btn-remove:hover { color: var(--danger); }
+
+  .btn-add {
+    margin-top: 10px;
+    background: none;
+    border: 1px dashed var(--border);
+    border-radius: 4px;
+    padding: 9px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.15s;
+  }
+
+  .btn-add:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+  }
+
+  /* DISCOUNT */
+  .discount-toggle {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .toggle {
+    width: 40px; height: 22px;
+    background: var(--border);
+    border-radius: 11px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.2s;
+    border: none;
+    flex-shrink: 0;
+  }
+
+  .toggle.on { background: var(--orange); }
+
+  .toggle::after {
+    content: '';
+    width: 16px; height: 16px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 3px; left: 3px;
+    transition: left 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+
+  .toggle.on::after { left: 21px; }
+
+  .toggle-label { font-size: 14px; font-weight: 500; cursor: pointer; }
+
+  .discount-section { display: none; }
+  .discount-section.visible { display: block; }
+
+  .discount-type-row {
+    display: flex; gap: 8px; margin-bottom: 12px;
+  }
+
+  .type-btn {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .type-btn.active {
+    background: var(--dark);
+    border-color: var(--dark);
+    color: white;
+  }
+
+  /* TOTALS */
+  .totals-area {
+    background: var(--dark);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    color: white;
+  }
+
+  .totals-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    font-size: 14px;
+  }
+
+  .totals-row.subtotal { color: rgba(255,255,255,0.6); }
+
+  .totals-row.discount-row { color: #FF9F7A; }
+
+  .totals-row.final {
+    border-top: 1px solid rgba(255,255,255,0.15);
+    margin-top: 8px; padding-top: 14px;
+  }
+
+  .totals-row.final .label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px; font-weight: 700; letter-spacing: 1px;
+  }
+
+  .totals-row.final .value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 26px; font-weight: 600;
+    color: var(--orange);
+  }
+
+  .totals-row .value {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* GENERATE BUTTON */
+  .btn-generate {
+    width: 100%;
+    background: var(--orange);
+    border: none;
+    border-radius: 6px;
+    padding: 16px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: white; cursor: pointer;
+    transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+
+  .btn-generate:hover {
+    background: #e85a1a;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(255,107,43,0.35);
+  }
+
+  .btn-generate:active { transform: translateY(0); }
+
+  /* MODAL */
+  .modal-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: none; align-items: center; justify-content: center;
+    z-index: 1000; padding: 20px;
+  }
+
+  .modal-backdrop.visible { display: flex; }
+
+  .modal {
+    background: white;
+    border-radius: 8px;
+    width: 100%; max-width: 680px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 32px;
+  }
+
+  .modal-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 24px;
+  }
+
+  .btn-close {
+    background: none; border: none;
+    font-size: 22px; cursor: pointer;
+    color: var(--muted);
+    line-height: 1;
+  }
+
+  /* RECEIPT PREVIEW */
+  #receipt-preview {
+    font-family: 'Inter', sans-serif;
+    color: #1a1a1a;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .receipt-header {
+    text-align: center;
+    border-bottom: 2px solid #1C1C1E;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+  }
+
+  .receipt-company {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 32px; font-weight: 800;
+    letter-spacing: 4px;
+    color: #1C1C1E;
+  }
+
+  .receipt-tagline {
+    font-size: 11px; letter-spacing: 2px;
+    color: #888; text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .receipt-address {
+    font-size: 11px; color: #666;
+    margin-top: 6px;
+  }
+
+  .receipt-meta {
+    display: flex; justify-content: space-between;
+    background: #f7f7f5;
+    border-radius: 4px;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    font-size: 12px;
+  }
+
+  .receipt-meta-item strong {
+    display: block;
+    font-size: 10px; letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 2px;
+  }
+
+  .receipt-section-heading {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: #FF6B2B; font-weight: 700;
+    margin-bottom: 8px; margin-top: 16px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 4px;
+  }
+
+  .receipt-services-table {
+    width: 100%; border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .receipt-services-table th {
+    text-align: left;
+    font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+    color: #999; font-weight: 600;
+    padding: 4px 0; border-bottom: 1px solid #eee;
+  }
+
+  .receipt-services-table th:last-child { text-align: right; }
+
+  .receipt-services-table td {
+    padding: 7px 0;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: top;
+  }
+
+  .receipt-services-table td:last-child {
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; white-space: nowrap;
+  }
+
+  .receipt-text-block {
+    font-size: 12.5px; line-height: 1.6;
+    color: #333; white-space: pre-wrap;
+  }
+
+  .receipt-totals {
+    margin-top: 16px;
+    border-top: 2px solid #1C1C1E;
+    padding-top: 12px;
+  }
+
+  .receipt-total-row {
+    display: flex; justify-content: space-between;
+    padding: 4px 0; font-size: 13px;
+  }
+
+  .receipt-total-row.final-total {
+    font-weight: 700; font-size: 16px;
+    border-top: 1px solid #eee;
+    margin-top: 8px; padding-top: 10px;
+  }
+
+  .receipt-total-row.final-total .val {
+    font-family: 'JetBrains Mono', monospace;
+    color: #FF6B2B;
+  }
+
+  .receipt-footer {
+    text-align: center;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px dashed #ccc;
+    font-size: 11px; color: #aaa;
+  }
+
+  .receipt-issued-by {
+    font-size: 11px; color: #666;
+    margin-top: 4px;
+  }
+
+  .modal-actions {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .modal-actions-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .modal-actions-label {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted);
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .modal-actions-label::before,
+  .modal-actions-label::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: var(--border);
+  }
+
+  .btn-modal {
+    padding: 12px 8px;
+    border-radius: 5px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px; font-weight: 700;
+    letter-spacing: 1px; cursor: pointer;
+    border: none; transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+    white-space: nowrap;
+  }
+
+  .btn-modal.pdf {
+    background: var(--orange); color: white;
+  }
+  .btn-modal.pdf:hover { background: #e85a1a; }
+
+  .btn-modal.html-btn {
+    background: var(--dark); color: white;
+  }
+  .btn-modal.html-btn:hover { background: #333; }
+
+  .btn-modal.wpp {
+    background: #25D366; color: white;
+  }
+  .btn-modal.wpp:hover { background: #1eb858; }
+
+  .btn-modal.wpp-html {
+    background: #128C7E; color: white;
+  }
+  .btn-modal.wpp-html:hover { background: #0f7a6d; }
+
+  .btn-modal.secondary {
+    background: var(--bg); color: var(--dark);
+    border: 1px solid var(--border);
+    grid-column: 1 / -1;
+    font-size: 14px;
+  }
+  .btn-modal.secondary:hover { border-color: var(--dark); }
+
+  @media (max-width: 480px) {
+    .modal-actions-row { grid-template-columns: 1fr; }
+  }
+
+  /* Responsive */
+  @media (max-width: 580px) {
+    .row-2, .row-3 { grid-template-columns: 1fr; }
+    .service-item { grid-template-columns: 1fr 130px 36px; }
+    header { padding: 14px 16px; }
+    .container { padding: 20px 14px 60px; }
+    .modal { padding: 20px; }
+    .receipt-meta { flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-mark">FO</div>
+  <div>
+    <h1>FLATOUTPY</h1>
+    <span>Gerador de Recibo</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- INFO BÁSICA -->
+  <div class="section-title">Informações do Recibo</div>
+  <div class="card">
+    <div class="row-3" style="margin-bottom:16px">
+      <div class="field">
+        <label>Moeda</label>
+        <select id="currency" onchange="updateTotals()">
+          <option value="BRL">Real (BRL)</option>
+          <option value="USD">Dólar (USD)</option>
+          <option value="PYG">Guarani (PYG)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Mecânico / Responsável</label>
+        <input type="text" id="issuer" placeholder="Seu nome">
+      </div>
+      <div class="field">
+        <label>Cliente</label>
+        <input type="text" id="client" placeholder="Nome do cliente (opcional)">
+      </div>
+    </div>
+    <div class="row-2">
+      <div class="field">
+        <label>Veículo</label>
+        <input type="text" id="vehicle" placeholder="Ex: Honda Civic 2019 Prata">
+      </div>
+      <div class="field">
+        <label>Placa</label>
+        <input type="text" id="plate" placeholder="Ex: ABC-1234">
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVIÇOS -->
+  <div class="section-title">Serviços Realizados</div>
+  <div class="card">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+      <p style="font-size:12px; color:var(--muted)">O valor é opcional — deixe em branco se não quiser exibir.</p>
+    </div>
+
+    <div style="display:grid; grid-template-columns: 1fr 160px 36px; gap:10px; padding: 0 12px 6px; font-size:11px; font-weight:600; letter-spacing:.5px; color:var(--muted); text-transform:uppercase;">
+      <span>Descrição do Serviço</span>
+      <span style="text-align:right">Valor</span>
+      <span></span>
+    </div>
+
+    <div class="service-list" id="service-list"></div>
+
+    <button class="btn-add" onclick="addService()">+ Adicionar serviço</button>
+  </div>
+
+  <!-- DESCONTO -->
+  <div class="section-title">Desconto</div>
+  <div class="card">
+    <div class="discount-toggle">
+      <button class="toggle" id="discount-toggle" onclick="toggleDiscount()"></button>
+      <span class="toggle-label" onclick="toggleDiscount()">Aplicar desconto neste recibo</span>
+    </div>
+    <div class="discount-section" id="discount-section">
+      <div class="discount-type-row">
+        <button class="type-btn active" id="btn-value" onclick="setDiscountType('value')">Valor fixo</button>
+        <button class="type-btn" id="btn-percent" onclick="setDiscountType('percent')">Percentual (%)</button>
+      </div>
+      <div class="field">
+        <label id="discount-label">Valor do desconto</label>
+        <input type="number" id="discount-input" placeholder="0" min="0" oninput="updateTotals()">
+      </div>
+    </div>
+  </div>
+
+  <!-- DIAGNÓSTICO INICIAL -->
+  <div class="section-title">Diagnóstico Inicial</div>
+  <div class="card">
+    <div class="field">
+      <label>O que foi observado / relatado pelo cliente</label>
+      <textarea id="diag-initial" placeholder="Descreva o que foi observado visualmente ao receber o veículo, e o que o cliente relatou..."></textarea>
+    </div>
+  </div>
+
+  <!-- DIAGNÓSTICO FINAL -->
+  <div class="section-title">Diagnóstico Final</div>
+  <div class="card">
+    <div class="field">
+      <label>Conclusão e pendências</label>
+      <textarea id="diag-final" placeholder="Descreva o que foi encontrado, o que foi resolvido, e o que ficou pendente..."></textarea>
+    </div>
+  </div>
+
+  <!-- TOTAIS -->
+  <div class="totals-area">
+    <div class="totals-row subtotal">
+      <span class="label">Subtotal</span>
+      <span class="value" id="display-subtotal">0.00</span>
+    </div>
+    <div class="totals-row discount-row" id="display-discount-row" style="display:none">
+      <span class="label">Desconto</span>
+      <span class="value" id="display-discount">−0.00</span>
+    </div>
+    <div class="totals-row final">
+      <span class="label">TOTAL</span>
+      <span class="value" id="display-total">0.00</span>
+    </div>
+  </div>
+
+  <button class="btn-generate" onclick="openPreview()">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+    Gerar Recibo PDF
+  </button>
+
+</div>
+
+<!-- MODAL PREVIEW -->
+<div class="modal-backdrop" id="modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <h2 style="font-family:'Barlow Condensed',sans-serif; font-size:22px; font-weight:700; letter-spacing:1px;">Pré-visualização do Recibo</h2>
+        <p style="font-size:12px; color:var(--muted); margin-top:2px;">Confira antes de baixar o PDF</p>
+      </div>
+      <button class="btn-close" onclick="closeModal()">✕</button>
+    </div>
+
+    <div id="receipt-preview"></div>
+
+    <div class="modal-actions">
+      <div class="modal-actions-label">Baixar</div>
+      <div class="modal-actions-row">
+        <button class="btn-modal pdf" onclick="downloadPDF()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Baixar PDF
+        </button>
+        <button class="btn-modal html-btn" onclick="downloadHTML()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Baixar HTML
+        </button>
+      </div>
+      <div class="modal-actions-label" style="margin-top:4px">Enviar via WhatsApp</div>
+      <div class="modal-actions-row">
+        <button class="btn-modal wpp" onclick="downloadPDF(true)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          Enviar PDF
+        </button>
+        <button class="btn-modal wpp-html" onclick="downloadHTML(true)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          Enviar HTML
+        </button>
+      </div>
+      <button class="btn-modal secondary" onclick="closeModal()">&#8592; Voltar e Editar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // STATE
+  let services = [];
+  let discountActive = false;
+  let discountType = 'value'; // 'value' or 'percent'
+  let serviceCounter = 0;
+
+  // Init with one service
+  addService();
+
+  function addService() {
+    serviceCounter++;
+    const id = serviceCounter;
+    services.push({ id, desc: '', price: '' });
+    renderServices();
+  }
+
+  function removeService(id) {
+    services = services.filter(s => s.id !== id);
+    if (services.length === 0) addService();
+    else renderServices();
+  }
+
+  function renderServices() {
+    const list = document.getElementById('service-list');
+    list.innerHTML = '';
+    const currency = document.getElementById('currency').value;
+
+    services.forEach(s => {
+      const item = document.createElement('div');
+      item.className = 'service-item';
+      item.innerHTML = `
+        <input type="text" placeholder="Descrição do serviço" value="${escHTML(s.desc)}"
+          oninput="updateServiceDesc(${s.id}, this.value)">
+        <div class="service-price-wrap">
+          <span class="currency-badge">${currency}</span>
+          <input type="number" placeholder="—" min="0" step="0.01"
+            value="${s.price}"
+            oninput="updateServicePrice(${s.id}, this.value)" style="width:90px">
+        </div>
+        <button class="btn-remove" onclick="removeService(${s.id})" title="Remover">×</button>
+      `;
+      list.appendChild(item);
+    });
+
+    updateTotals();
+  }
+
+  function updateServiceDesc(id, val) {
+    const s = services.find(x => x.id === id);
+    if (s) s.desc = val;
+  }
+
+  function updateServicePrice(id, val) {
+    const s = services.find(x => x.id === id);
+    if (s) s.price = val;
+    updateTotals();
+  }
+
+  function toggleDiscount() {
+    discountActive = !discountActive;
+    const toggle = document.getElementById('discount-toggle');
+    const section = document.getElementById('discount-section');
+    toggle.classList.toggle('on', discountActive);
+    section.classList.toggle('visible', discountActive);
+    updateTotals();
+  }
+
+  function setDiscountType(type) {
+    discountType = type;
+    document.getElementById('btn-value').classList.toggle('active', type === 'value');
+    document.getElementById('btn-percent').classList.toggle('active', type === 'percent');
+    document.getElementById('discount-label').textContent = type === 'value' ? 'Valor do desconto' : 'Percentual de desconto (%)';
+    document.getElementById('discount-input').placeholder = type === 'value' ? '0' : '0';
+    updateTotals();
+  }
+
+  function updateTotals() {
+    const currency = document.getElementById('currency').value;
+    const subtotal = services.reduce((sum, s) => sum + (parseFloat(s.price) || 0), 0);
+    let discountAmt = 0;
+
+    if (discountActive) {
+      const dVal = parseFloat(document.getElementById('discount-input').value) || 0;
+      if (discountType === 'percent') {
+        discountAmt = subtotal * (dVal / 100);
+      } else {
+        discountAmt = Math.min(dVal, subtotal);
+      }
+    }
+
+    const total = subtotal - discountAmt;
+    const fmt = (v) => formatCurrency(v, currency);
+
+    document.getElementById('display-subtotal').textContent = fmt(subtotal);
+    document.getElementById('display-total').textContent = fmt(total);
+
+    const discRow = document.getElementById('display-discount-row');
+    if (discountActive && discountAmt > 0) {
+      discRow.style.display = 'flex';
+      document.getElementById('display-discount').textContent = '−' + fmt(discountAmt);
+    } else {
+      discRow.style.display = 'none';
+    }
+  }
+
+  function formatCurrency(val, currency) {
+    const isPYG = currency === 'PYG';
+    const formatted = isPYG
+      ? Math.round(val).toLocaleString('es-PY')
+      : val.toLocaleString('es-PY', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return formatted + ' ' + currency;
+  }
+
+  function generateReceiptNumber() {
+    const now = new Date();
+    const pad = n => String(n).padStart(2, '0');
+    return `RCB-${now.getFullYear()}${pad(now.getMonth()+1)}${pad(now.getDate())}-${pad(now.getHours())}${pad(now.getMinutes())}`;
+  }
+
+  function formatDate(d) {
+    return d.toLocaleDateString('pt-BR', { day:'2-digit', month:'2-digit', year:'numeric' }) +
+      ' ' + d.toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit' });
+  }
+
+  function escHTML(str) {
+    return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function openPreview() {
+    buildPreview();
+    document.getElementById('modal').classList.add('visible');
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('visible');
+  }
+
+  function getReceiptMarkup() {
+    const currency = document.getElementById('currency').value;
+    const issuer = document.getElementById('issuer').value.trim() || '—';
+    const client = document.getElementById('client').value.trim();
+    const vehicle = document.getElementById('vehicle').value.trim();
+    const plate = document.getElementById('plate').value.trim();
+    const diagInitial = document.getElementById('diag-initial').value.trim();
+    const diagFinal = document.getElementById('diag-final').value.trim();
+    const recNum = generateReceiptNumber();
+    const now = new Date();
+    const fmt = v => formatCurrency(v, currency);
+
+    const subtotal = services.reduce((sum, s) => sum + (parseFloat(s.price) || 0), 0);
+    let discountAmt = 0;
+    let discountLabel = '';
+    if (discountActive) {
+      const dVal = parseFloat(document.getElementById('discount-input').value) || 0;
+      if (discountType === 'percent') {
+        discountAmt = subtotal * (dVal / 100);
+        discountLabel = `Desconto (${dVal}%)`;
+      } else {
+        discountAmt = Math.min(dVal, subtotal);
+        discountLabel = 'Desconto';
+      }
+    }
+    const total = subtotal - discountAmt;
+
+    const servicesRows = services.filter(s => s.desc.trim()).map(s => {
+      const price = parseFloat(s.price);
+      const hasPrice = s.price !== '' && !isNaN(price);
+      return `<tr>
+        <td>${escHTML(s.desc)}</td>
+        <td>${hasPrice ? fmt(price) : '—'}</td>
+      </tr>`;
+    }).join('');
+
+    return `
+      <div class="receipt-header">
+        <div class="receipt-company">FLATOUTPY</div>
+        <div class="receipt-tagline">Oficina Mecânica & Performance</div>
+        <div class="receipt-address">Flatoutpy, Presidente Franco, Alto Paraná — Paraguay</div>
+      </div>
+
+      <div class="receipt-meta">
+        <div class="receipt-meta-item">
+          <strong>Nº do Recibo</strong>
+          ${recNum}
+        </div>
+        <div class="receipt-meta-item">
+          <strong>Data / Hora</strong>
+          ${formatDate(now)}
+        </div>
+        <div class="receipt-meta-item">
+          <strong>Cliente</strong>
+          ${escHTML(client) || '—'}
+        </div>
+        ${vehicle ? `<div class="receipt-meta-item"><strong>Veículo</strong>${escHTML(vehicle)}${plate ? ' · ' + escHTML(plate) : ''}</div>` : ''}
+      </div>
+
+      ${servicesRows ? `
+        <div class="receipt-section-heading">Serviços Realizados</div>
+        <table class="receipt-services-table">
+          <thead>
+            <tr><th>Descrição</th><th style="text-align:right">Valor</th></tr>
+          </thead>
+          <tbody>${servicesRows}</tbody>
+        </table>
+      ` : ''}
+
+      ${diagInitial ? `
+        <div class="receipt-section-heading">Diagnóstico Inicial</div>
+        <div class="receipt-text-block">${escHTML(diagInitial)}</div>
+      ` : ''}
+
+      ${diagFinal ? `
+        <div class="receipt-section-heading">Diagnóstico Final</div>
+        <div class="receipt-text-block">${escHTML(diagFinal)}</div>
+      ` : ''}
+
+      <div class="receipt-totals">
+        <div class="receipt-total-row">
+          <span>Subtotal</span>
+          <span class="val">${fmt(subtotal)}</span>
+        </div>
+        ${discountAmt > 0 ? `
+          <div class="receipt-total-row" style="color:#c0392b">
+            <span>${escHTML(discountLabel)}</span>
+            <span class="val">−${fmt(discountAmt)}</span>
+          </div>
+        ` : ''}
+        <div class="receipt-total-row final-total">
+          <span>TOTAL</span>
+          <span class="val">${fmt(total)}</span>
+        </div>
+      </div>
+
+      <div class="receipt-footer">
+        <div>Agradecemos a preferência — FLATOUTPY</div>
+        <div class="receipt-issued-by">Emitido por: ${escHTML(issuer)}</div>
+      </div>
+    `;
+  }
+
+  function buildPreview() {
+    document.getElementById('receipt-preview').innerHTML = getReceiptMarkup();
+  }
+
+  function shareReceiptFile(file, fallbackMessage) {
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file], title: 'Recibo FLATOUTPY', text: fallbackMessage })) {
+      navigator.share({ files: [file], title: 'Recibo FLATOUTPY', text: fallbackMessage });
+      return true;
+    }
+
+    const link = document.createElement('a');
+    link.href = 'https://wa.me/?text=' + encodeURIComponent(fallbackMessage);
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    return false;
+  }
+
+  function downloadHTML(share = false) {
+    const receiptMarkup = getReceiptMarkup();
+    const html = `<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recibo FLATOUTPY</title>
+<style>
+  body {
+    margin: 0;
+    padding: 24px;
+    background: #f3f2ee;
+    font-family: 'Inter', Arial, sans-serif;
+    color: #1a1a1a;
+  }
+  .receipt-sheet {
+    max-width: 760px;
+    margin: 0 auto;
+    background: white;
+    padding: 32px;
+    border: 1px solid #e2e0d9;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  }
+  .receipt-header { text-align: center; border-bottom: 2px solid #1C1C1E; padding-bottom: 16px; margin-bottom: 16px; }
+  .receipt-company { font-family: 'Barlow Condensed', sans-serif; font-size: 32px; font-weight: 800; letter-spacing: 4px; color: #1C1C1E; }
+  .receipt-tagline { font-size: 11px; letter-spacing: 2px; color: #888; text-transform: uppercase; margin-top: 2px; }
+  .receipt-address { font-size: 11px; color: #666; margin-top: 6px; }
+  .receipt-meta { display: flex; justify-content: space-between; background: #f7f7f5; border-radius: 4px; padding: 10px 14px; margin-bottom: 16px; font-size: 12px; }
+  .receipt-meta-item strong { display: block; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #999; margin-bottom: 2px; }
+  .receipt-section-heading { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #FF6B2B; font-weight: 700; margin-bottom: 8px; margin-top: 16px; border-bottom: 1px solid #eee; padding-bottom: 4px; }
+  .receipt-services-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .receipt-services-table th { text-align: left; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #999; font-weight: 600; padding: 4px 0; border-bottom: 1px solid #eee; }
+  .receipt-services-table th:last-child { text-align: right; }
+  .receipt-services-table td { padding: 7px 0; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+  .receipt-services-table td:last-child { text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 12px; white-space: nowrap; }
+  .receipt-text-block { font-size: 12.5px; line-height: 1.6; color: #333; white-space: pre-wrap; }
+  .receipt-totals { margin-top: 16px; border-top: 2px solid #1C1C1E; padding-top: 12px; }
+  .receipt-total-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 13px; }
+  .receipt-total-row.final-total { font-weight: 700; font-size: 16px; border-top: 1px solid #eee; margin-top: 8px; padding-top: 10px; }
+  .receipt-total-row.final-total .val { font-family: 'JetBrains Mono', monospace; color: #FF6B2B; }
+  .receipt-footer { text-align: center; margin-top: 24px; padding-top: 16px; border-top: 1px dashed #ccc; font-size: 11px; color: #aaa; }
+  .receipt-issued-by { font-size: 11px; color: #666; margin-top: 4px; }
+</style>
+</head>
+<body>
+  <div class="receipt-sheet">
+    ${receiptMarkup}
+  </div>
+</body>
+</html>`;
+
+    const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    const filename = `${generateReceiptNumber()}.html`;
+    const file = new File([blob], filename, { type: 'text/html;charset=utf-8' });
+
+    if (share) {
+      shareReceiptFile(file, 'Olá! Aqui está o recibo em HTML do FLATOUTPY.');
+    }
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
+
+  function downloadPDF(share = false) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+
+    const currency = document.getElementById('currency').value;
+    const issuer = document.getElementById('issuer').value.trim() || '—';
+    const client = document.getElementById('client').value.trim();
+    const vehicle = document.getElementById('vehicle').value.trim();
+    const plate = document.getElementById('plate').value.trim();
+    const diagInitial = document.getElementById('diag-initial').value.trim();
+    const diagFinal = document.getElementById('diag-final').value.trim();
+    const recNum = generateReceiptNumber();
+    const now = new Date();
+    const fmt = v => formatCurrency(v, currency);
+
+    const subtotal = services.reduce((sum, s) => sum + (parseFloat(s.price) || 0), 0);
+    let discountAmt = 0;
+    let discountLabel = '';
+    if (discountActive) {
+      const dVal = parseFloat(document.getElementById('discount-input').value) || 0;
+      if (discountType === 'percent') {
+        discountAmt = subtotal * (dVal / 100);
+        discountLabel = `Desconto (${dVal}%)`;
+      } else {
+        discountAmt = Math.min(dVal, subtotal);
+        discountLabel = 'Desconto';
+      }
+    }
+    const total = subtotal - discountAmt;
+
+    const W = 210;
+    const margin = 18;
+    const col = W - margin * 2;
+    let y = 0;
+
+    // Header bg
+    doc.setFillColor(28, 28, 30);
+    doc.rect(0, 0, W, 38, 'F');
+    doc.setFillColor(255, 107, 43);
+    doc.rect(0, 38, W, 2, 'F');
+
+    // Company name
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(28);
+    doc.setFont('helvetica', 'bold');
+    doc.text('FLATOUTPY', W / 2, 18, { align: 'center' });
+    doc.setFontSize(8.5);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(180, 180, 180);
+    doc.text('OFICINA MECÂNICA & PERFORMANCE', W / 2, 25, { align: 'center' });
+    doc.text('Flatoutpy, Presidente Franco, Alto Paraná — Paraguay', W / 2, 31, { align: 'center' });
+
+    y = 50;
+
+    // Meta block
+    doc.setFillColor(247, 247, 245);
+    doc.roundedRect(margin, y, col, 22, 2, 2, 'F');
+    doc.setFontSize(7); doc.setFont('helvetica', 'bold'); doc.setTextColor(150, 150, 150);
+    doc.text('Nº DO RECIBO', margin + 4, y + 6);
+    doc.text('DATA / HORA', margin + 68, y + 6);
+    doc.text('CLIENTE', margin + 138, y + 6);
+    doc.setFontSize(9); doc.setFont('helvetica', 'normal'); doc.setTextColor(28, 28, 30);
+    doc.text(recNum, margin + 4, y + 13);
+    doc.text(formatDate(now), margin + 68, y + 13);
+    doc.text(client || '—', margin + 138, y + 13);
+
+    if (vehicle) {
+      doc.setFontSize(7); doc.setFont('helvetica', 'bold'); doc.setTextColor(150, 150, 150);
+      doc.text('VEÍCULO', margin + 4, y + 19.5);
+      doc.setFontSize(8.5); doc.setFont('helvetica', 'normal'); doc.setTextColor(28, 28, 30);
+      doc.text((vehicle + (plate ? ' · ' + plate : '')).substring(0, 60), margin + 4, y + 26);
+      y += 8;
+    }
+
+    y += 30;
+
+    // Helper: section heading
+    function sectionHeading(title) {
+      doc.setFontSize(7); doc.setFont('helvetica', 'bold');
+      doc.setTextColor(255, 107, 43);
+      doc.text(title, margin, y);
+      doc.setDrawColor(220, 220, 215);
+      doc.line(margin + doc.getTextWidth(title) + 3, y - 0.5, margin + col, y - 0.5);
+      y += 6;
+    }
+
+    // Helper: text block with wrap
+    function textBlock(text, maxH) {
+      doc.setFontSize(9); doc.setFont('helvetica', 'normal'); doc.setTextColor(60, 60, 60);
+      const lines = doc.splitTextToSize(text, col);
+      lines.forEach(line => {
+        if (y > 270) { doc.addPage(); y = 20; }
+        doc.text(line, margin, y);
+        y += 5;
+      });
+      y += 3;
+    }
+
+    // Services
+    const validServices = services.filter(s => s.desc.trim());
+    if (validServices.length > 0) {
+      sectionHeading('SERVIÇOS REALIZADOS');
+      // Table header
+      doc.setFontSize(7.5); doc.setFont('helvetica', 'bold'); doc.setTextColor(150,150,150);
+      doc.text('DESCRIÇÃO', margin, y);
+      doc.text('VALOR', margin + col, y, { align: 'right' });
+      y += 3;
+      doc.setDrawColor(230, 230, 228); doc.line(margin, y, margin + col, y);
+      y += 4;
+
+      validServices.forEach(s => {
+        if (y > 268) { doc.addPage(); y = 20; }
+        const price = parseFloat(s.price);
+        const hasPrice = s.price !== '' && !isNaN(price);
+        doc.setFontSize(9); doc.setFont('helvetica', 'normal'); doc.setTextColor(28, 28, 30);
+        const descLines = doc.splitTextToSize(s.desc, col - 50);
+        doc.text(descLines, margin, y);
+        doc.text(hasPrice ? fmt(price) : '—', margin + col, y, { align: 'right' });
+        y += descLines.length * 5 + 2;
+        doc.setDrawColor(242, 242, 240); doc.line(margin, y, margin + col, y);
+        y += 3;
+      });
+      y += 2;
+    }
+
+    if (diagInitial) {
+      if (y > 240) { doc.addPage(); y = 20; }
+      sectionHeading('DIAGNÓSTICO INICIAL');
+      textBlock(diagInitial);
+    }
+
+    if (diagFinal) {
+      if (y > 240) { doc.addPage(); y = 20; }
+      sectionHeading('DIAGNÓSTICO FINAL');
+      textBlock(diagFinal);
+    }
+
+    // Totals
+    if (y > 250) { doc.addPage(); y = 20; }
+    doc.setDrawColor(28, 28, 30); doc.setLineWidth(0.6);
+    doc.line(margin, y, margin + col, y); y += 5;
+
+    if (discountAmt > 0) {
+      doc.setFontSize(9.5); doc.setFont('helvetica', 'normal'); doc.setTextColor(80, 80, 80);
+      doc.text('Subtotal', margin, y);
+      doc.text(fmt(subtotal), margin + col, y, { align: 'right' });
+      y += 7;
+      doc.setTextColor(192, 57, 43);
+      doc.text(discountLabel, margin, y);
+      doc.text('−' + fmt(discountAmt), margin + col, y, { align: 'right' });
+      y += 4;
+      doc.setDrawColor(230, 230, 230); doc.setLineWidth(0.3);
+      doc.line(margin, y, margin + col, y); y += 5;
+    }
+
+    doc.setFillColor(28, 28, 30);
+    doc.roundedRect(margin, y, col, 16, 2, 2, 'F');
+    doc.setFontSize(10); doc.setFont('helvetica', 'bold'); doc.setTextColor(255, 255, 255);
+    doc.text('TOTAL', margin + 6, y + 10);
+    doc.setFontSize(13); doc.setTextColor(255, 107, 43);
+    doc.text(fmt(total), margin + col - 6, y + 10, { align: 'right' });
+    y += 22;
+
+    // Footer
+    doc.setDrawColor(200, 200, 195); doc.setLineWidth(0.3);
+    doc.setLineDash([2, 2]);
+    doc.line(margin, y, margin + col, y);
+    doc.setLineDash([]);
+    y += 6;
+    doc.setFontSize(8); doc.setFont('helvetica', 'normal'); doc.setTextColor(150, 150, 150);
+    doc.text('Agradecemos a preferência — FLATOUTPY', W / 2, y, { align: 'center' });
+    y += 5;
+    doc.text('Emitido por: ' + issuer, W / 2, y, { align: 'center' });
+
+    doc.save(`${recNum}.pdf`);
+  }
+
+  // Init update
+  updateTotals();
+</script>
+</body>
+</html>
