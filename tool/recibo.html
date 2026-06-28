@@ -385,12 +385,19 @@
   }
 
   .receipt-meta {
-    display: flex; justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
     background: #f7f7f5;
     border-radius: 4px;
     padding: 10px 14px;
     margin-bottom: 16px;
     font-size: 12px;
+  }
+
+  .receipt-meta-item {
+    min-width: 0;
+    word-break: break-word;
   }
 
   .receipt-meta-item strong {
@@ -966,8 +973,32 @@
   }
 
   function shareReceiptFile(file, fallbackMessage) {
-    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file], title: 'Recibo FLATOUTPY', text: fallbackMessage })) {
-      navigator.share({ files: [file], title: 'Recibo FLATOUTPY', text: fallbackMessage });
+    const shareData = {
+      title: 'Recibo FLATOUTPY',
+      text: fallbackMessage
+    };
+
+    let canShareFiles = false;
+    try {
+      canShareFiles = !!file && typeof navigator.canShare === 'function' && navigator.canShare({ files: [file] });
+    } catch (err) {
+      canShareFiles = false;
+    }
+
+    if (canShareFiles) {
+      shareData.files = [file];
+    }
+
+    if (navigator.share) {
+      navigator.share(shareData).catch(() => {
+        const link = document.createElement('a');
+        link.href = 'https://wa.me/?text=' + encodeURIComponent(fallbackMessage);
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
       return true;
     }
 
@@ -979,6 +1010,17 @@
     link.click();
     document.body.removeChild(link);
     return false;
+  }
+
+  function downloadFile(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   }
 
   function downloadHTML(share = false) {
@@ -1009,7 +1051,8 @@
   .receipt-company { font-family: 'Barlow Condensed', sans-serif; font-size: 32px; font-weight: 800; letter-spacing: 4px; color: #1C1C1E; }
   .receipt-tagline { font-size: 11px; letter-spacing: 2px; color: #888; text-transform: uppercase; margin-top: 2px; }
   .receipt-address { font-size: 11px; color: #666; margin-top: 6px; }
-  .receipt-meta { display: flex; justify-content: space-between; background: #f7f7f5; border-radius: 4px; padding: 10px 14px; margin-bottom: 16px; font-size: 12px; }
+  .receipt-meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; background: #f7f7f5; border-radius: 4px; padding: 10px 14px; margin-bottom: 16px; font-size: 12px; }
+  .receipt-meta-item { min-width: 0; word-break: break-word; }
   .receipt-meta-item strong { display: block; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #999; margin-bottom: 2px; }
   .receipt-section-heading { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #FF6B2B; font-weight: 700; margin-bottom: 8px; margin-top: 16px; border-bottom: 1px solid #eee; padding-bottom: 4px; }
   .receipt-services-table { width: 100%; border-collapse: collapse; font-size: 13px; }
@@ -1039,16 +1082,10 @@
 
     if (share) {
       shareReceiptFile(file, 'Olá! Aqui está o recibo em HTML do FLATOUTPY.');
+      return;
     }
 
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+    downloadFile(blob, filename);
   }
 
   function downloadPDF(share = false) {
@@ -1105,27 +1142,33 @@
 
     y = 50;
 
-    // Meta block
+    // Meta block (2x2)
+    const metaItems = [
+      { label: 'Nº DO RECIBO', value: recNum },
+      { label: 'DATA / HORA', value: formatDate(now) },
+      { label: 'CLIENTE', value: client || '—' },
+      { label: 'VEÍCULO', value: vehicle ? `${vehicle}${plate ? ' · ' + plate : ''}` : '—' }
+    ];
+
     doc.setFillColor(247, 247, 245);
-    doc.roundedRect(margin, y, col, 22, 2, 2, 'F');
-    doc.setFontSize(7); doc.setFont('helvetica', 'bold'); doc.setTextColor(150, 150, 150);
-    doc.text('Nº DO RECIBO', margin + 4, y + 6);
-    doc.text('DATA / HORA', margin + 68, y + 6);
-    doc.text('CLIENTE', margin + 138, y + 6);
-    doc.setFontSize(9); doc.setFont('helvetica', 'normal'); doc.setTextColor(28, 28, 30);
-    doc.text(recNum, margin + 4, y + 13);
-    doc.text(formatDate(now), margin + 68, y + 13);
-    doc.text(client || '—', margin + 138, y + 13);
+    doc.roundedRect(margin, y, col, 28, 2, 2, 'F');
+    const boxW = (col - 8) / 2;
+    const boxH = 10;
 
-    if (vehicle) {
-      doc.setFontSize(7); doc.setFont('helvetica', 'bold'); doc.setTextColor(150, 150, 150);
-      doc.text('VEÍCULO', margin + 4, y + 19.5);
-      doc.setFontSize(8.5); doc.setFont('helvetica', 'normal'); doc.setTextColor(28, 28, 30);
-      doc.text((vehicle + (plate ? ' · ' + plate : '')).substring(0, 60), margin + 4, y + 26);
-      y += 8;
-    }
+    metaItems.forEach((item, index) => {
+      const colIndex = index % 2;
+      const rowIndex = Math.floor(index / 2);
+      const boxX = margin + 4 + colIndex * (boxW + 4);
+      const boxY = y + 4 + rowIndex * (boxH + 4);
 
-    y += 30;
+      doc.setFontSize(6.5); doc.setFont('helvetica', 'bold'); doc.setTextColor(150, 150, 150);
+      doc.text(item.label, boxX, boxY + 3.5);
+      doc.setFontSize(8.3); doc.setFont('helvetica', 'normal'); doc.setTextColor(28, 28, 30);
+      const valueLines = doc.splitTextToSize(String(item.value), boxW - 2);
+      doc.text(valueLines, boxX, boxY + 8.2);
+    });
+
+    y += 32;
 
     // Helper: section heading
     function sectionHeading(title) {
@@ -1225,7 +1268,16 @@
     y += 5;
     doc.text('Emitido por: ' + issuer, W / 2, y, { align: 'center' });
 
-    doc.save(`${recNum}.pdf`);
+    const pdfBlob = doc.output('blob');
+    const filename = `${recNum}.pdf`;
+    const file = new File([pdfBlob], filename, { type: 'application/pdf' });
+
+    if (share) {
+      shareReceiptFile(file, 'Olá! Aqui está o recibo em PDF do FLATOUTPY.');
+      return;
+    }
+
+    downloadFile(pdfBlob, filename);
   }
 
   // Init update
