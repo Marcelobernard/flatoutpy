@@ -4,10 +4,10 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>FLATOUTPY — Performance & Estética · Presidente Franco, PY</title>
-<meta name="description" content="Oficina de performance y estética premium en Presidente Franco, Paraguay. Escape inox, tuning, detailing y más."/>
+<meta name="description" content="Oficina de performance e estética premium em Presidente Franco, Paraguay. Escape inox, reprogramação ECU, detailing e mais."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700;1,900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
   :root {
     --red: #D10000;
@@ -24,9 +24,7 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
-
   body {
     background: var(--bg);
     color: var(--white);
@@ -56,575 +54,316 @@
   }
   .lang-popup .logo-popup {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 2.6rem;
-    font-weight: 900;
-    letter-spacing: -1px;
-    margin-bottom: 24px;
+    font-size: 2.6rem; font-weight: 900; letter-spacing: -1px; margin-bottom: 24px;
   }
   .lang-popup .logo-popup span.r { color: var(--red); }
   .lang-popup .logo-popup span.w { color: var(--white); }
-  .lang-popup p {
-    color: var(--gray-light);
-    font-size: 0.95rem;
-    margin-bottom: 32px;
-    line-height: 1.5;
-  }
-  .lang-btns {
-    display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
-  }
+  .lang-popup p { color: var(--gray-light); font-size: 0.95rem; margin-bottom: 32px; line-height: 1.5; }
+  .lang-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
   .lang-btn {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    color: var(--white);
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    padding: 14px 28px;
-    cursor: pointer;
-    transition: all .2s;
-    text-transform: uppercase;
+    background: var(--bg3); border: 1px solid var(--border);
+    color: var(--white); font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem; font-weight: 700; letter-spacing: 1px;
+    padding: 14px 28px; cursor: pointer; transition: all .2s; text-transform: uppercase;
   }
-  .lang-btn:hover, .lang-btn.active {
-    background: var(--red);
-    border-color: var(--red);
-    color: #fff;
-  }
+  .lang-btn:hover, .lang-btn.active { background: var(--red); border-color: var(--red); color: #fff; }
 
   /* ─── HEADER ─── */
   header {
     position: fixed; top: 0; left: 0; right: 0;
-    z-index: 1000;
-    background: rgba(8,8,8,0.95);
+    z-index: 1000; background: rgba(8,8,8,0.95);
     border-bottom: 1px solid var(--border);
     backdrop-filter: blur(12px);
-    transition: background .3s;
   }
   .header-inner {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 32px;
-    height: 68px;
-    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1280px; margin: 0 auto; padding: 0 32px;
+    height: 68px; display: flex; align-items: center; justify-content: space-between;
   }
-  .logo {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.8rem;
-    font-weight: 900;
-    letter-spacing: -0.5px;
-    text-decoration: none;
-    line-height: 1;
-  }
+  .logo { font-family: 'Barlow Condensed', sans-serif; font-size: 1.8rem; font-weight: 900; letter-spacing: -0.5px; text-decoration: none; line-height: 1; }
   .logo .r { color: var(--red); }
   .logo .w { color: var(--white); }
-
   nav { display: flex; align-items: center; gap: 36px; }
-  nav a {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--gray-light);
-    text-decoration: none;
-    transition: color .2s;
-  }
+  nav a { font-family: 'Barlow Condensed', sans-serif; font-size: 0.95rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray-light); text-decoration: none; transition: color .2s; }
   nav a:hover { color: var(--white); }
-
-  .lang-switcher {
-    display: flex; gap: 4px; margin-left: 16px;
-  }
-  .ls-btn {
-    background: transparent;
-    border: 1px solid transparent;
-    color: var(--gray);
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    padding: 4px 8px;
-    cursor: pointer;
-    transition: all .2s;
-    text-transform: uppercase;
-  }
+  .lang-switcher { display: flex; gap: 4px; margin-left: 16px; }
+  .ls-btn { background: transparent; border: 1px solid transparent; color: var(--gray); font-family: 'Barlow Condensed', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 1px; padding: 4px 8px; cursor: pointer; transition: all .2s; text-transform: uppercase; }
   .ls-btn:hover { color: var(--white); }
-  .ls-btn.active {
-    color: var(--red);
-    border-color: var(--red);
-  }
-
-  .header-cta {
-    background: var(--red);
-    color: #fff;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 10px 20px;
-    text-decoration: none;
-    transition: background .2s;
-    white-space: nowrap;
-  }
+  .ls-btn.active { color: var(--red); border-color: var(--red); }
+  .header-cta { background: var(--red); color: #fff; font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 10px 20px; text-decoration: none; transition: background .2s; white-space: nowrap; }
   .header-cta:hover { background: var(--red-dark); }
-
-  .hamburger {
-    display: none;
-    flex-direction: column; gap: 5px;
-    cursor: pointer; background: none; border: none; padding: 4px;
-  }
-  .hamburger span {
-    display: block; width: 24px; height: 2px;
-    background: var(--white); transition: all .3s;
-  }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); transition: all .3s; }
 
   /* ─── HERO ─── */
-  #hero {
-    min-height: 100vh;
-    display: flex; align-items: center;
-    position: relative;
-    overflow: hidden;
-    padding-top: 68px;
-  }
+  #hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; padding-top: 68px; }
   .hero-bg {
     position: absolute; inset: 0;
-    background: 
+    background:
       linear-gradient(135deg, rgba(209,0,0,0.08) 0%, transparent 50%),
-      repeating-linear-gradient(
-        -55deg,
-        transparent,
-        transparent 60px,
-        rgba(255,255,255,0.013) 60px,
-        rgba(255,255,255,0.013) 61px
-      ),
+      repeating-linear-gradient(-55deg, transparent, transparent 60px, rgba(255,255,255,0.013) 60px, rgba(255,255,255,0.013) 61px),
       var(--bg);
   }
-  .hero-accent {
-    position: absolute;
-    top: 0; left: 0;
-    width: 4px; height: 100%;
-    background: var(--red);
-  }
-  .hero-red-bar {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--red) 0%, transparent 60%);
-  }
-
+  .hero-accent { position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--red); }
+  .hero-red-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--red) 0%, transparent 60%); }
   .hero-inner {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 64px;
+    max-width: 1280px; margin: 0 auto; padding: 80px 64px;
     position: relative; z-index: 1;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
   }
-
-  .hero-eyebrow {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 20px;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .hero-eyebrow::before {
-    content: '';
-    display: block; width: 32px; height: 2px;
-    background: var(--red);
-  }
-
-  .hero-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: clamp(3.4rem, 6vw, 5.8rem);
-    font-weight: 900;
-    line-height: 0.92;
-    letter-spacing: -1px;
-    text-transform: uppercase;
-    margin-bottom: 28px;
-  }
-  .hero-title em {
-    font-style: italic;
-    color: var(--red);
-  }
-  .hero-title .underline-anim {
-    position: relative; display: inline-block;
-  }
-  .hero-title .underline-anim::after {
-    content: '';
-    position: absolute;
-    bottom: -4px; left: 0;
-    height: 4px;
-    background: var(--red);
-    animation: revealLine 1.2s cubic-bezier(.77,0,.18,1) 0.4s both;
-  }
-  @keyframes revealLine {
-    from { width: 0; }
-    to { width: 100%; }
-  }
-
-  .hero-desc {
-    font-size: 1.05rem;
-    font-weight: 300;
-    color: var(--gray-light);
-    line-height: 1.7;
-    max-width: 420px;
-    margin-bottom: 40px;
-  }
-
-  .hero-actions {
-    display: flex; gap: 16px; flex-wrap: wrap; align-items: center;
-  }
-  .btn-primary {
-    background: var(--red);
-    color: #fff;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 16px 36px;
-    text-decoration: none;
-    transition: background .2s, transform .15s;
-    display: inline-flex; align-items: center; gap: 10px;
-  }
+  .hero-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--red); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 2px; background: var(--red); }
+  .hero-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(3.4rem, 7vw, 6.4rem); font-weight: 900; line-height: 0.92; letter-spacing: -1px; text-transform: uppercase; margin-bottom: 28px; }
+  .hero-title em { font-style: italic; color: var(--red); }
+  .hero-title .underline-anim { position: relative; display: inline-block; }
+  .hero-title .underline-anim::after { content: ''; position: absolute; bottom: -4px; left: 0; height: 4px; background: var(--red); animation: revealLine 1.2s cubic-bezier(.77,0,.18,1) 0.4s both; }
+  @keyframes revealLine { from { width: 0; } to { width: 100%; } }
+  .hero-desc { font-size: 1.05rem; font-weight: 300; color: var(--gray-light); line-height: 1.7; max-width: 520px; margin-bottom: 40px; }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin-bottom: 64px; }
+  .btn-primary { background: var(--red); color: #fff; font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 16px 36px; text-decoration: none; transition: background .2s, transform .15s; display: inline-flex; align-items: center; gap: 10px; }
   .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); }
-  .btn-secondary {
-    color: var(--white);
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 16px 0;
-    text-decoration: none;
-    border-bottom: 2px solid var(--border);
-    transition: border-color .2s;
-  }
-  .btn-secondary:hover { border-color: var(--red); color: var(--off-white); }
+  .btn-secondary { color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 16px 0; text-decoration: none; border-bottom: 2px solid var(--border); transition: border-color .2s; }
+  .btn-secondary:hover { border-color: var(--red); }
 
-  .hero-stats {
-    display: grid; grid-template-columns: repeat(3,1fr); gap: 2px;
+  /* ─── 3 PILARES (HERO) ─── */
+  .hero-pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
     border-top: 1px solid var(--border);
-    padding-top: 40px;
-    margin-top: 40px;
+    padding-top: 0;
   }
-  .stat {
-    padding: 0 24px 0 0;
-    border-right: 1px solid var(--border);
-  }
-  .stat:last-child { border-right: none; }
-  .stat-n {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 2.4rem; font-weight: 900; line-height: 1;
-    color: var(--white);
-  }
-  .stat-n .red { color: var(--red); }
-  .stat-label {
-    font-size: 0.75rem; font-weight: 400;
-    color: var(--gray); text-transform: uppercase; letter-spacing: 1px;
-    margin-top: 4px;
-  }
-
-  /* Hero right */
-  .hero-right {
-    display: flex; flex-direction: column; gap: 16px;
-  }
-  .hero-card {
+  .pillar-card {
     background: var(--bg2);
     border: 1px solid var(--border);
-    border-left: 3px solid var(--red);
-    padding: 20px 24px;
-    display: flex; align-items: center; gap: 16px;
-    transition: border-color .2s, background .2s;
-    opacity: 0;
-    animation: fadeUp .5s ease forwards;
+    padding: 36px 32px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: background .25s;
+    cursor: default;
+    text-decoration: none;
+    display: block;
+    color: inherit;
   }
-  .hero-card:nth-child(1) { animation-delay: .2s; }
-  .hero-card:nth-child(2) { animation-delay: .35s; }
-  .hero-card:nth-child(3) { animation-delay: .5s; }
-  .hero-card:hover { background: var(--bg3); border-left-color: var(--red); }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateX(20px); }
-    to { opacity: 1; transform: translateX(0); }
+  .pillar-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--red);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .4s cubic-bezier(.77,0,.18,1);
   }
-  .hero-card-icon {
-    font-size: 1.6rem; line-height: 1;
-    min-width: 40px; text-align: center;
-  }
-  .hero-card-label {
+  .pillar-card:hover::before { transform: scaleX(1); }
+  .pillar-card:hover { background: var(--bg3); }
+  .pillar-big-num {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1rem; font-weight: 700; letter-spacing: 1px;
-    text-transform: uppercase; color: var(--white);
+    font-size: 5rem; font-weight: 900; line-height: 1;
+    color: rgba(209,0,0,0.12);
+    position: absolute; top: 16px; right: 20px;
+    letter-spacing: -3px;
+    user-select: none;
   }
-  .hero-card-sub {
-    font-size: 0.8rem; color: var(--gray); margin-top: 2px;
+  .pillar-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--red);
+    margin-bottom: 8px;
   }
+  .pillar-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(1.8rem, 2.5vw, 2.4rem); font-weight: 900;
+    letter-spacing: -0.5px; text-transform: uppercase; line-height: 1;
+    margin-bottom: 14px;
+  }
+  .pillar-name em { color: var(--red); font-style: italic; }
+  .pillar-desc {
+    font-size: 0.82rem; color: var(--gray); line-height: 1.55;
+    margin-bottom: 20px;
+  }
+  .pillar-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--gray-light);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+  }
+  .chip.red { color: var(--red); border-color: rgba(209,0,0,0.35); background: rgba(209,0,0,0.06); }
+
+  /* ─── MARQUEE ─── */
+  .marquee-wrap { background: var(--red); overflow: hidden; padding: 14px 0; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .marquee-track { display: flex; gap: 0; animation: marquee 20s linear infinite; white-space: nowrap; }
+  .marquee-track span { font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.9); padding: 0 32px; }
+  .marquee-track span.dot { color: rgba(255,255,255,0.4); font-size: 0.5rem; padding: 0; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
   /* ─── SECTIONS COMMON ─── */
   section { position: relative; }
-  .section-inner {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 100px 64px;
-  }
-  .section-eyebrow {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.75rem; font-weight: 600;
-    letter-spacing: 4px; text-transform: uppercase;
-    color: var(--red); margin-bottom: 16px;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .section-eyebrow::before {
-    content: '';
-    display: block; width: 24px; height: 2px; background: var(--red);
-  }
-  .section-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: clamp(2.2rem, 4vw, 3.4rem);
-    font-weight: 900; line-height: 1; letter-spacing: -0.5px;
-    text-transform: uppercase; margin-bottom: 16px;
-  }
-  .section-desc {
-    font-size: 1rem; font-weight: 300; color: var(--gray-light);
-    max-width: 520px; line-height: 1.7; margin-bottom: 56px;
-  }
+  .section-inner { max-width: 1280px; margin: 0 auto; padding: 100px 64px; }
+  .section-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--red); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+  .section-eyebrow::before { content: ''; display: block; width: 24px; height: 2px; background: var(--red); }
+  .section-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 900; line-height: 1; letter-spacing: -0.5px; text-transform: uppercase; margin-bottom: 16px; }
+  .section-desc { font-size: 1rem; font-weight: 300; color: var(--gray-light); max-width: 520px; line-height: 1.7; margin-bottom: 56px; }
 
   /* ─── SERVICES ─── */
   #services { background: var(--bg); }
+
+  /* Pillar highlight band above services */
+  .pillar-band {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-bottom: 2px;
+  }
+  .pb-card {
+    position: relative;
+    background: var(--red);
+    padding: 28px 32px;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .pb-card::after {
+    content: attr(data-letter);
+    position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 5rem; font-weight: 900; font-style: italic;
+    color: rgba(255,255,255,0.1); line-height: 1; user-select: none;
+  }
+  .pb-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.6rem; font-weight: 900; letter-spacing: -0.5px;
+    text-transform: uppercase; color: #fff; line-height: 1; position: relative; z-index: 1;
+  }
+  .pb-sub {
+    font-size: 0.75rem; color: rgba(255,255,255,0.65); margin-top: 4px;
+    font-family: 'Barlow', sans-serif; font-weight: 300;
+  }
+  .pb-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 3px;
+    color: rgba(255,255,255,0.5); text-transform: uppercase;
+    position: relative; z-index: 1;
+  }
+
   .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2px;
+    margin-bottom: 2px;
+  }
+  .services-grid-secondary {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
   }
   .service-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    padding: 40px 36px;
-    transition: background .2s;
-    position: relative; overflow: hidden;
+    background: var(--bg2); border: 1px solid var(--border);
+    padding: 40px 36px; transition: background .2s; position: relative; overflow: hidden;
+  }
+  .service-card.pilar {
+    border-top: 3px solid var(--red);
+  }
+  .service-card.secondary {
+    padding: 32px 36px;
+    border-top: 1px solid rgba(209,0,0,0.25);
   }
   .service-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--red);
-    transform: scaleX(0);
-    transform-origin: left;
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--red); transform: scaleX(0); transform-origin: left;
     transition: transform .35s cubic-bezier(.77,0,.18,1);
   }
+  .service-card.pilar::before { display: none; }
   .service-card:hover::before { transform: scaleX(1); }
   .service-card:hover { background: var(--bg3); }
 
-  .service-num {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.7rem; font-weight: 700;
-    letter-spacing: 3px; color: var(--red);
-    text-transform: uppercase; margin-bottom: 12px;
-  }
-  .service-cat {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.6rem; font-weight: 900; letter-spacing: -0.5px;
-    text-transform: uppercase; margin-bottom: 6px;
-  }
-  .service-sub {
-    font-size: 0.8rem; color: var(--gray);
-    margin-bottom: 28px; line-height: 1.4;
-  }
-  .service-items { display: flex; flex-direction: column; gap: 16px; }
-  .service-item-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1rem; font-weight: 700;
-    letter-spacing: 0.5px; color: var(--white);
-    margin-bottom: 4px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .service-item-title::before {
-    content: ''; display: block;
-    width: 6px; height: 6px; background: var(--red);
-    flex-shrink: 0;
-  }
-  .service-item-desc {
-    font-size: 0.82rem; color: var(--gray);
-    line-height: 1.5; padding-left: 14px;
-  }
-  .service-badge {
+  .pilar-marker {
     display: inline-flex; align-items: center; gap: 8px;
-    margin-top: 28px;
-    background: rgba(209,0,0,0.1);
-    border: 1px solid rgba(209,0,0,0.3);
-    padding: 8px 14px;
+    background: var(--red); padding: 5px 12px;
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.78rem; font-weight: 700;
-    letter-spacing: 1px; text-transform: uppercase; color: var(--red);
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; color: #fff; margin-bottom: 16px;
   }
+  .service-num { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 3px; color: var(--red); text-transform: uppercase; margin-bottom: 12px; }
+  .service-cat { font-family: 'Barlow Condensed', sans-serif; font-size: 1.7rem; font-weight: 900; letter-spacing: -0.5px; text-transform: uppercase; margin-bottom: 6px; }
+  .service-sub { font-size: 0.8rem; color: var(--gray); margin-bottom: 28px; line-height: 1.4; }
+  .service-items { display: flex; flex-direction: column; gap: 16px; }
+  .service-item-title { font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 0.5px; color: var(--white); margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+  .service-item-title::before { content: ''; display: block; width: 6px; height: 6px; background: var(--red); flex-shrink: 0; }
+  .service-item-desc { font-size: 0.82rem; color: var(--gray); line-height: 1.5; padding-left: 14px; }
+  .service-badge { display: inline-flex; align-items: center; gap: 8px; margin-top: 28px; background: rgba(209,0,0,0.1); border: 1px solid rgba(209,0,0,0.3); padding: 8px 14px; font-family: 'Barlow Condensed', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--red); }
+
+  /* ECU Stage pills */
+  .stage-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+  .stage-pill {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem; font-weight: 800; letter-spacing: 1px;
+    text-transform: uppercase; padding: 8px 18px;
+    border: 1px solid rgba(209,0,0,0.5);
+    color: var(--red);
+    position: relative;
+    overflow: hidden;
+    transition: all .2s;
+  }
+  .stage-pill:hover { background: var(--red); color: #fff; }
+
+  /* ─── Secondary card layout (Mecânica Leve) ─── */
+  .secondary-inner {
+    display: grid; grid-template-columns: 260px 1fr; gap: 48px; align-items: start;
+  }
+  .secondary-items-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
 
   /* ─── WHY US ─── */
   #why { background: var(--bg2); }
-  .why-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
-  }
-  .why-right {
-    display: flex; flex-direction: column; gap: 2px;
-  }
-  .why-item {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    padding: 24px 28px;
-    display: flex; align-items: flex-start; gap: 20px;
-    transition: border-color .2s;
-  }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .why-right { display: flex; flex-direction: column; gap: 2px; }
+  .why-item { background: var(--bg); border: 1px solid var(--border); padding: 24px 28px; display: flex; align-items: flex-start; gap: 20px; transition: border-color .2s; }
   .why-item:hover { border-color: rgba(209,0,0,0.3); }
   .why-icon { font-size: 1.4rem; line-height: 1; flex-shrink: 0; padding-top: 2px; }
-  .why-item-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.05rem; font-weight: 700; letter-spacing: 0.5px;
-    text-transform: uppercase; margin-bottom: 4px;
-  }
-  .why-item-desc {
-    font-size: 0.85rem; color: var(--gray); line-height: 1.55;
-  }
-
-  /* Manifesto */
-  .manifesto {
-    margin-top: 40px;
-    background: var(--red);
-    padding: 36px 36px;
-    position: relative;
-  }
-  .manifesto::before {
-    content: '"';
-    position: absolute; top: -10px; left: 28px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 6rem; font-weight: 900; color: rgba(255,255,255,0.15);
-    line-height: 1;
-  }
-  .manifesto p {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.4rem; font-weight: 700; font-style: italic;
-    line-height: 1.4; color: #fff;
-    position: relative; z-index: 1;
-  }
-  .manifesto-author {
-    font-size: 0.78rem; letter-spacing: 2px; font-style: normal;
-    color: rgba(255,255,255,0.7); margin-top: 12px;
-    font-family: 'Barlow', sans-serif; font-weight: 500;
-    text-transform: uppercase;
-  }
-
-  /* ─── MARQUEE ─── */
-  .marquee-wrap {
-    background: var(--red);
-    overflow: hidden; padding: 16px 0;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-  }
-  .marquee-track {
-    display: flex; gap: 0;
-    animation: marquee 18s linear infinite;
-    white-space: nowrap;
-  }
-  .marquee-track span {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.82rem; font-weight: 700; letter-spacing: 3px;
-    text-transform: uppercase; color: rgba(255,255,255,0.9);
-    padding: 0 32px;
-  }
-  .marquee-track span.dot {
-    color: rgba(255,255,255,0.4); font-size: 0.5rem; padding: 0;
-  }
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
+  .why-item-title { font-family: 'Barlow Condensed', sans-serif; font-size: 1.05rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 4px; }
+  .why-item-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.55; }
+  .manifesto { margin-top: 40px; background: var(--red); padding: 36px 36px; position: relative; }
+  .manifesto::before { content: '"'; position: absolute; top: -10px; left: 28px; font-family: 'Barlow Condensed', sans-serif; font-size: 6rem; font-weight: 900; color: rgba(255,255,255,0.15); line-height: 1; }
+  .manifesto p { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 700; font-style: italic; line-height: 1.4; color: #fff; position: relative; z-index: 1; }
+  .manifesto-author { font-size: 0.78rem; letter-spacing: 2px; font-style: normal; color: rgba(255,255,255,0.7); margin-top: 12px; font-family: 'Barlow', sans-serif; font-weight: 500; text-transform: uppercase; }
 
   /* ─── CONTACT ─── */
   #contact { background: var(--bg); }
-  .contact-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
-  }
-  .contact-right iframe {
-    width: 100%; height: 380px;
-    border: 1px solid var(--border);
-    filter: grayscale(100%) invert(90%) contrast(90%);
-  }
-  .cta-stack {
-    display: flex; flex-direction: column; gap: 12px; margin-top: 36px;
-  }
-  .cta-btn {
-    display: flex; align-items: center; gap: 14px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.05rem; font-weight: 700; letter-spacing: 1px;
-    text-transform: uppercase; text-decoration: none;
-    padding: 18px 24px;
-    border: 1px solid var(--border);
-    transition: all .2s; color: var(--white);
-  }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .contact-right iframe { width: 100%; height: 380px; border: 1px solid var(--border); filter: grayscale(100%) invert(90%) contrast(90%); }
+  .cta-stack { display: flex; flex-direction: column; gap: 12px; margin-top: 36px; }
+  .cta-btn { display: flex; align-items: center; gap: 14px; font-family: 'Barlow Condensed', sans-serif; font-size: 1.05rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; padding: 18px 24px; border: 1px solid var(--border); transition: all .2s; color: var(--white); }
   .cta-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
   .cta-btn.wa { background: var(--bg2); }
   .cta-btn.wa:hover { background: #25D366; border-color: #25D366; }
   .cta-btn.gm { background: var(--bg2); }
   .cta-btn.gm:hover { background: var(--red); border-color: var(--red); }
-
-  .contact-info-block {
-    margin-bottom: 12px;
-    font-size: 0.88rem; color: var(--gray);
-    display: flex; align-items: flex-start; gap: 10px;
-  }
-  .contact-info-block strong {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700; letter-spacing: 0.5px;
-    text-transform: uppercase; color: var(--white);
-    display: block; font-size: 0.78rem; margin-bottom: 2px;
-  }
+  .contact-info-block { margin-bottom: 12px; font-size: 0.88rem; color: var(--gray); display: flex; align-items: flex-start; gap: 10px; }
+  .contact-info-block strong { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--white); display: block; font-size: 0.78rem; margin-bottom: 2px; }
 
   /* ─── FOOTER ─── */
-  footer {
-    background: var(--bg2);
-    border-top: 1px solid var(--border);
-    padding: 32px 64px;
-    max-width: 100%;
-  }
-  .footer-inner {
-    max-width: 1280px; margin: 0 auto;
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 16px;
-  }
-  .footer-copy {
-    font-size: 0.8rem; color: var(--gray); letter-spacing: 0.5px;
-  }
-  .footer-logo {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.2rem; font-weight: 900; letter-spacing: -0.3px;
-  }
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 32px 64px; }
+  .footer-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  .footer-copy { font-size: 0.8rem; color: var(--gray); letter-spacing: 0.5px; }
+  .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 1.2rem; font-weight: 900; letter-spacing: -0.3px; }
   .footer-logo .r { color: var(--red); }
   .footer-logo .w { color: var(--white); }
 
   /* ─── SCROLL REVEAL ─── */
-  .reveal {
-    opacity: 0; transform: translateY(30px);
-    transition: opacity .6s ease, transform .6s ease;
-  }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .6s ease, transform .6s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
   /* ─── RESPONSIVE ─── */
   @media (max-width: 960px) {
     nav a { display: none; }
     .hamburger { display: flex; }
-
-    .hero-inner { grid-template-columns: 1fr; gap: 40px; padding: 60px 32px; }
-    .hero-right { display: none; }
-    .hero-stats { grid-template-columns: repeat(3,1fr); }
-
+    .hero-inner { padding: 60px 32px; }
     .section-inner { padding: 72px 32px; }
-
-    .services-grid { grid-template-columns: 1fr; }
+    .pillar-band, .services-grid { grid-template-columns: 1fr; }
+    .hero-pillars { grid-template-columns: 1fr; }
     .why-grid { grid-template-columns: 1fr; }
     .contact-grid { grid-template-columns: 1fr; }
     .contact-right iframe { height: 280px; }
-
+    .secondary-inner { grid-template-columns: 1fr; gap: 24px; }
+    .secondary-items-grid { grid-template-columns: 1fr 1fr; }
     footer { padding: 28px 32px; }
   }
   @media (max-width: 560px) {
@@ -632,11 +371,8 @@
     .lang-switcher { display: none; }
     .section-inner { padding: 60px 20px; }
     .hero-inner { padding: 48px 20px; }
-    .hero-stats { grid-template-columns: 1fr; gap: 16px; }
-    .stat { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 16px; }
-    .stat:last-child { border-bottom: none; }
+    .secondary-items-grid { grid-template-columns: 1fr; }
   }
-
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
@@ -684,59 +420,60 @@
   <div class="hero-accent"></div>
   <div class="hero-red-bar"></div>
   <div class="hero-inner">
-    <div class="hero-left">
-      <div class="hero-eyebrow" data-i18n="hero_eyebrow">Presidente Franco · Paraguay</div>
-      <h1 class="hero-title">
-        <span data-i18n="hero_t1">Tu auto.</span><br>
-        <em><span class="underline-anim" data-i18n="hero_t2">OTRA CATEGORÍA.</span></em>
-      </h1>
-      <p class="hero-desc" data-i18n="hero_desc">
-        Performance, estética premium y mecánica de precisión. Cada detalle ejecutado al límite.
-      </p>
-      <div class="hero-actions">
-        <a href="https://wa.me/595986641668" target="_blank" class="btn-primary">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-          <span data-i18n="hero_cta">WhatsApp</span>
-        </a>
-        <a href="#services" class="btn-secondary" data-i18n="hero_cta2">Ver servicios ↓</a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat">
-          <div class="stat-n">+500<span class="red">+</span></div>
-          <div class="stat-label" data-i18n="stat1">Vehículos</div>
-        </div>
-        <div class="stat">
-          <div class="stat-n">3<span class="red">X</span></div>
-          <div class="stat-label" data-i18n="stat2">Servicios</div>
-        </div>
-        <div class="stat">
-          <div class="stat-n">100<span class="red">%</span></div>
-          <div class="stat-label" data-i18n="stat3">Premium</div>
-        </div>
-      </div>
+    <div class="hero-eyebrow" data-i18n="hero_eyebrow">Presidente Franco · Paraguay</div>
+    <h1 class="hero-title">
+      <span data-i18n="hero_t1">Tu auto.</span><br>
+      <em><span class="underline-anim" data-i18n="hero_t2">OTRA CATEGORÍA.</span></em>
+    </h1>
+    <p class="hero-desc" data-i18n="hero_desc">
+      Escape inox, estética premium y reprogramación ECU. Los tres pilares donde los entusiastas confían su máquina.
+    </p>
+    <div class="hero-actions">
+      <a href="https://wa.me/595986641668" target="_blank" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        <span data-i18n="hero_cta">WhatsApp</span>
+      </a>
+      <a href="#services" class="btn-secondary" data-i18n="hero_cta2">Ver servicios ↓</a>
     </div>
-    <div class="hero-right">
-      <div class="hero-card">
-        <div class="hero-card-icon">P</div>
-        <div>
-          <div class="hero-card-label" data-i18n="hc1_title">Performance</div>
-          <div class="hero-card-sub" data-i18n="hc1_sub">Escape · Admisión · TIG · Electrónica</div>
+
+    <!-- 3 PILARES no hero -->
+    <div class="hero-pillars">
+      <a href="#svc-escape" class="pillar-card">
+        <div class="pillar-big-num">01</div>
+        <div class="pillar-tag" data-i18n="p1_tag">Pilar 01</div>
+        <div class="pillar-name" data-i18n="p1_name">ESCAPE<br><em>INOX</em></div>
+        <div class="pillar-desc" data-i18n="p1_desc">Fabricação completa em aço, inox, alumínio e titânio. Solda TIG de precisão.</div>
+        <div class="pillar-chips">
+          <span class="chip red">TIG</span>
+          <span class="chip">Catback</span>
+          <span class="chip">Downpipe</span>
+          <span class="chip">Inox</span>
         </div>
-      </div>
-      <div class="hero-card">
-        <div class="hero-card-icon">D</div>
-        <div>
-          <div class="hero-card-label" data-i18n="hc2_title">Estética Premium</div>
-          <div class="hero-card-sub" data-i18n="hc2_sub">Pulido · Coating Cerámico · Detailing</div>
+      </a>
+      <a href="#svc-estetica" class="pillar-card">
+        <div class="pillar-big-num">02</div>
+        <div class="pillar-tag" data-i18n="p2_tag">Pilar 02</div>
+        <div class="pillar-name" data-i18n="p2_name">ESTÉTICA<br><em>PREMIUM</em></div>
+        <div class="pillar-desc" data-i18n="p2_desc">Coating nano-cerámico, corrección de pintura y detailing profesional de alto nivel.</div>
+        <div class="pillar-chips">
+          <span class="chip red">Coating</span>
+          <span class="chip">Pulido</span>
+          <span class="chip">Detailing</span>
+          <span class="chip">Faros</span>
         </div>
-      </div>
-      <div class="hero-card">
-        <div class="hero-card-icon">M</div>
-        <div>
-          <div class="hero-card-label" data-i18n="hc3_title">Mecánica Leve</div>
-          <div class="hero-card-sub" data-i18n="hc3_sub">Mantenimiento · Inspección · Reparación</div>
+      </a>
+      <a href="#svc-ecu" class="pillar-card">
+        <div class="pillar-big-num">03</div>
+        <div class="pillar-tag" data-i18n="p3_tag">Pilar 03</div>
+        <div class="pillar-name" data-i18n="p3_name">REPROG.<br><em>ECU</em></div>
+        <div class="pillar-desc" data-i18n="p3_desc">Tune personalizado, Stage X y Hardcut. Más potencia, más respuesta, mismo motor.</div>
+        <div class="pillar-chips">
+          <span class="chip red">Stage X</span>
+          <span class="chip">Hardcut</span>
+          <span class="chip">Tune</span>
+          <span class="chip">ECU</span>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
@@ -745,17 +482,24 @@
 <div class="marquee-wrap">
   <div class="marquee-track" id="marquee-track">
     <span data-i18n="mq1">ESCAPE INOX</span><span class="dot">◆</span>
+    <span data-i18n="mq_ecu">REPROG. ECU</span><span class="dot">◆</span>
     <span data-i18n="mq2">COATING CERÁMICO</span><span class="dot">◆</span>
     <span data-i18n="mq3">SOLDA TIG</span><span class="dot">◆</span>
+    <span data-i18n="mq_stage">STAGE X</span><span class="dot">◆</span>
     <span data-i18n="mq4">LAUNCH CONTROL</span><span class="dot">◆</span>
     <span data-i18n="mq5">DETAILING PREMIUM</span><span class="dot">◆</span>
+    <span data-i18n="mq_hc">HARDCUT</span><span class="dot">◆</span>
     <span data-i18n="mq6">INTERCOOLER</span><span class="dot">◆</span>
     <span data-i18n="mq7">PRESIDENTE FRANCO PY</span><span class="dot">◆</span>
+    <!-- repeat for seamless loop -->
     <span data-i18n="mq1">ESCAPE INOX</span><span class="dot">◆</span>
+    <span data-i18n="mq_ecu">REPROG. ECU</span><span class="dot">◆</span>
     <span data-i18n="mq2">COATING CERÁMICO</span><span class="dot">◆</span>
     <span data-i18n="mq3">SOLDA TIG</span><span class="dot">◆</span>
+    <span data-i18n="mq_stage">STAGE X</span><span class="dot">◆</span>
     <span data-i18n="mq4">LAUNCH CONTROL</span><span class="dot">◆</span>
     <span data-i18n="mq5">DETAILING PREMIUM</span><span class="dot">◆</span>
+    <span data-i18n="mq_hc">HARDCUT</span><span class="dot">◆</span>
     <span data-i18n="mq6">INTERCOOLER</span><span class="dot">◆</span>
     <span data-i18n="mq7">PRESIDENTE FRANCO PY</span><span class="dot">◆</span>
   </div>
@@ -766,14 +510,40 @@
   <div class="section-inner">
     <div class="section-eyebrow reveal" data-i18n="srv_eyebrow">Lo que hacemos</div>
     <h2 class="section-title reveal" data-i18n="srv_title">SERVICIOS</h2>
-    <p class="section-desc reveal" data-i18n="srv_desc">Tres áreas de especialización. Un mismo estándar de excelencia.</p>
-    <div class="services-grid reveal">
+    <p class="section-desc reveal" data-i18n="srv_desc">Três pilares. Um padrão de excelência.</p>
 
-      <!-- Card 01 -->
-      <div class="service-card">
-        <div class="service-num">01 · <span data-i18n="s1_cat">PERFORMANCE</span></div>
-        <div class="service-cat" data-i18n="s1_cat">PERFORMANCE</div>
-        <div class="service-sub" data-i18n="s1_sub">Escape · Admisión · Electrónica · TIG</div>
+    <!-- Pillar band labels -->
+    <div class="pillar-band reveal">
+      <div class="pb-card" data-letter="E">
+        <div>
+          <div class="pb-label" data-i18n="pb1">ESCAPE</div>
+          <div class="pb-sub" data-i18n="pb1_sub">Fabricação · TIG · Inox · Alumínio</div>
+        </div>
+        <div class="pb-num">PILAR 01</div>
+      </div>
+      <div class="pb-card" data-letter="D">
+        <div>
+          <div class="pb-label" data-i18n="pb2">ESTÉTICA</div>
+          <div class="pb-sub" data-i18n="pb2_sub">Coating · Pulido · Detailing</div>
+        </div>
+        <div class="pb-num">PILAR 02</div>
+      </div>
+      <div class="pb-card" data-letter="R">
+        <div>
+          <div class="pb-label" data-i18n="pb3">REPROG. ECU</div>
+          <div class="pb-sub" data-i18n="pb3_sub">Stage X · Hardcut · Tune</div>
+        </div>
+        <div class="pb-num">PILAR 03</div>
+      </div>
+    </div>
+
+    <!-- 3 Main pillar service cards -->
+    <div class="services-grid reveal" id="svc-escape">
+      <!-- Card 01 — ESCAPE -->
+      <div class="service-card pilar">
+        <div class="pilar-marker">● <span data-i18n="pilar_badge">PILAR</span> 01</div>
+        <div class="service-cat" data-i18n="s1_cat">ESCAPE</div>
+        <div class="service-sub" data-i18n="s1_sub">Fabricación · TIG · Inox · Alumínio · Titânio</div>
         <div class="service-items">
           <div class="service-item">
             <div class="service-item-title" data-i18n="s1_t1">Línea de Escape Completa</div>
@@ -792,12 +562,12 @@
             <div class="service-item-desc" data-i18n="s1_d4">Módulos, Launch Control, Rev. Limiter, Panel Racing, Bypass, Harness.</div>
           </div>
         </div>
-        <div class="service-badge">• <span data-i18n="s1_badge">Solda TIG · Aço · Inox · Alumínio · Titânio</span></div>
+        <div class="service-badge">● <span data-i18n="s1_badge">TIG · Aço · Inox · Alumínio · Titânio</span></div>
       </div>
 
-      <!-- Card 02 -->
-      <div class="service-card">
-        <div class="service-num">02 · <span data-i18n="s2_cat">ESTÉTICA</span></div>
+      <!-- Card 02 — ESTÉTICA -->
+      <div class="service-card pilar" id="svc-estetica">
+        <div class="pilar-marker">● <span data-i18n="pilar_badge">PILAR</span> 02</div>
         <div class="service-cat" data-i18n="s2_cat">ESTÉTICA</div>
         <div class="service-sub" data-i18n="s2_sub">Lavado · Pulido · Coating · Customización</div>
         <div class="service-items">
@@ -824,29 +594,62 @@
         </div>
       </div>
 
-      <!-- Card 03 -->
-      <div class="service-card">
-        <div class="service-num">03 · <span data-i18n="s3_cat">MECÁNICA LEVE</span></div>
-        <div class="service-cat" data-i18n="s3_cat">MECÁNICA LEVE</div>
-        <div class="service-sub" data-i18n="s3_sub">Mantenimiento · Reparaciones · Inspección</div>
+      <!-- Card 03 — REPROGRAMAÇÃO ECU -->
+      <div class="service-card pilar" id="svc-ecu">
+        <div class="pilar-marker">● <span data-i18n="pilar_badge">PILAR</span> 03</div>
+        <div class="service-cat" data-i18n="s3_cat">REPROG. ECU</div>
+        <div class="service-sub" data-i18n="s3_sub">Stage X · Hardcut · Tune · Módulos</div>
+        <div class="stage-pills">
+          <span class="stage-pill" data-i18n="pill_stage">STAGE X</span>
+          <span class="stage-pill" data-i18n="pill_hardcut">HARDCUT</span>
+          <span class="stage-pill" data-i18n="pill_tune">TUNE</span>
+        </div>
         <div class="service-items">
           <div class="service-item">
-            <div class="service-item-title" data-i18n="s3_t1">Mantenimiento General</div>
-            <div class="service-item-desc" data-i18n="s3_d1">Revisión preventiva de aceite, filtros, frenos y correas externas.</div>
+            <div class="service-item-title" data-i18n="s3_t1">Reprogramación ECU</div>
+            <div class="service-item-desc" data-i18n="s3_d1">Mapeamento personalizado para o perfil do motor. Ganho real de potência e torque.</div>
           </div>
           <div class="service-item">
-            <div class="service-item-title" data-i18n="s3_t2">Ajustes y Reparaciones</div>
-            <div class="service-item-desc" data-i18n="s3_d2">Vidrios eléctricos, cierres, suspensión leve y piezas que requieran soldadura.</div>
+            <div class="service-item-title" data-i18n="s3_t2">Stage X</div>
+            <div class="service-item-desc" data-i18n="s3_d2">Tune progressivo adaptado a cada modificação do motor: admissão, escape, boost e mais.</div>
           </div>
           <div class="service-item">
-            <div class="service-item-title" data-i18n="s3_t3">Inspección Completa</div>
-            <div class="service-item-desc" data-i18n="s3_d3">Elevamos el vehículo para revisión visual de motor, suspensión, frenos y escape.</div>
+            <div class="service-item-title" data-i18n="s3_t3">Hardcut Limiter</div>
+            <div class="service-item-desc" data-i18n="s3_d3">Corte de combustível no limite de rotação para um som de válvulas característico do motorsport.</div>
           </div>
         </div>
-        <div class="service-badge">• <span data-i18n="s3_badge">Diagnóstico completo incluido</span></div>
+        <div class="service-badge">● <span data-i18n="s3_badge">Diagnóstico completo incluido</span></div>
       </div>
-
     </div>
+
+    <!-- Card 04 — MECÁNICA LEVE (secondary, full width) -->
+    <div class="services-grid-secondary reveal" style="margin-top:2px;">
+      <div class="service-card secondary" id="svc-mecanica">
+        <div class="secondary-inner">
+          <div>
+            <div class="service-num" data-i18n="s4_num">04 · SOPORTE</div>
+            <div class="service-cat" data-i18n="s4_cat">MECÁNICA LEVE</div>
+            <div class="service-sub" data-i18n="s4_sub">Mantenimiento · Reparaciones · Inspección</div>
+            <div class="service-badge" style="margin-top:16px">● <span data-i18n="s4_badge">Diagnóstico incluido</span></div>
+          </div>
+          <div class="secondary-items-grid">
+            <div class="service-item">
+              <div class="service-item-title" data-i18n="s4_t1">Mantenimiento General</div>
+              <div class="service-item-desc" data-i18n="s4_d1">Revisión de aceite, filtros, frenos y correas externas.</div>
+            </div>
+            <div class="service-item">
+              <div class="service-item-title" data-i18n="s4_t2">Ajustes y Reparaciones</div>
+              <div class="service-item-desc" data-i18n="s4_d2">Vidrios eléctricos, cierres, suspensión leve y soldadura.</div>
+            </div>
+            <div class="service-item">
+              <div class="service-item-title" data-i18n="s4_t3">Inspección Completa</div>
+              <div class="service-item-desc" data-i18n="s4_d3">Vehículo elevado para revisión visual de motor, suspensión, frenos y escape.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -866,7 +669,7 @@
         <div class="why-item">
           <div class="why-icon">01</div>
           <div>
-            <div class="why-item-title" data-i18n="w1t">Especialistas en Performance</div>
+            <div class="why-item-title" data-i18n="w1t">Escape & Fabricación TIG</div>
             <div class="why-item-desc" data-i18n="w1d">Soldadura TIG en acero, inox, aluminio y titanio. Fabricación a medida para cada proyecto racing.</div>
           </div>
         </div>
@@ -880,8 +683,8 @@
         <div class="why-item">
           <div class="why-icon">03</div>
           <div>
-            <div class="why-item-title" data-i18n="w3t">Frontera Estratégica</div>
-            <div class="why-item-desc" data-i18n="w3d">En Presidente Franco, a pasos de la Triple Frontera. Fácil acceso desde Brasil y Argentina.</div>
+            <div class="why-item-title" data-i18n="w3t">Reprogramación ECU Especializada</div>
+            <div class="why-item-desc" data-i18n="w3d">Stage X y Hardcut calibrados para cada motor. Tune real, não genérico — adaptado ao seu setup.</div>
           </div>
         </div>
         <div class="why-item">
@@ -938,44 +741,52 @@
 </footer>
 
 <script>
-// ── i18n ──
 const translations = {
   es: {
-    nav_services: "Servicios", nav_why: "Nosotros", nav_contact: "Contacto", nav_cta: "Agendar",
-    hero_eyebrow: "Presidente Franco · Paraguay",
-    hero_t1: "Tu auto.", hero_t2: "OTRA CATEGORÍA.",
-    hero_desc: "Performance, estética premium y mecánica de precisión. Cada detalle ejecutado al límite.",
-    hero_cta: "WhatsApp", hero_cta2: "Ver servicios ↓",
-    stat1: "Vehículos", stat2: "Servicios", stat3: "Premium",
-    hc1_title: "Performance", hc1_sub: "Escape · Admisión · TIG · Electrónica",
-    hc2_title: "Estética Premium", hc2_sub: "Pulido · Coating Cerámico · Detailing",
-    hc3_title: "Mecánica Leve", hc3_sub: "Mantenimiento · Inspección · Reparación",
-    mq1:"ESCAPE INOX", mq2:"COATING CERÁMICO", mq3:"SOLDA TIG", mq4:"LAUNCH CONTROL",
-    mq5:"DETAILING PREMIUM", mq6:"INTERCOOLER", mq7:"PRESIDENTE FRANCO PY",
-    srv_eyebrow: "Lo que hacemos", srv_title: "SERVICIOS",
-    srv_desc: "Tres áreas de especialización. Un mismo estándar de excelencia.",
-    s1_cat:"PERFORMANCE", s1_sub:"Escape · Admisión · Electrónica · TIG",
+    nav_services:"Servicios", nav_why:"Nosotros", nav_contact:"Contacto", nav_cta:"Agendar",
+    hero_eyebrow:"Presidente Franco · Paraguay",
+    hero_t1:"Tu auto.", hero_t2:"OTRA CATEGORÍA.",
+    hero_desc:"Escape inox, estética premium y reprogramación ECU. Los tres pilares donde los entusiastas confían su máquina.",
+    hero_cta:"WhatsApp", hero_cta2:"Ver servicios ↓",
+    p1_tag:"Pilar 01", p1_name:"ESCAPE\nINOX", p1_desc:"Fabricación completa en acero, inox, aluminio y titanio. Solda TIG de precisión.",
+    p2_tag:"Pilar 02", p2_name:"ESTÉTICA\nPREMIUM", p2_desc:"Coating nano-cerámico, corrección de pintura y detailing profesional de alto nivel.",
+    p3_tag:"Pilar 03", p3_name:"REPROG.\nECU", p3_desc:"Tune personalizado, Stage X y Hardcut. Más potencia, más respuesta, mismo motor.",
+    mq1:"ESCAPE INOX", mq_ecu:"REPROG. ECU", mq2:"COATING CERÁMICO", mq3:"SOLDA TIG",
+    mq_stage:"STAGE X", mq4:"LAUNCH CONTROL", mq5:"DETAILING PREMIUM", mq_hc:"HARDCUT",
+    mq6:"INTERCOOLER", mq7:"PRESIDENTE FRANCO PY",
+    srv_eyebrow:"Lo que hacemos", srv_title:"SERVICIOS", srv_desc:"Tres pilares. Un estándar de excelencia.",
+    pb1:"ESCAPE", pb1_sub:"Fabricación · TIG · Inox · Aluminio",
+    pb2:"ESTÉTICA", pb2_sub:"Coating · Pulido · Detailing",
+    pb3:"REPROG. ECU", pb3_sub:"Stage X · Hardcut · Tune",
+    pilar_badge:"PILAR",
+    s1_cat:"ESCAPE", s1_sub:"Fabricación · TIG · Inox · Aluminio · Titanio",
     s1_t1:"Línea de Escape Completa", s1_d1:"Múltiple, Downpipe, MidPipe, Catback.",
     s1_t2:"Sistema de Admisión", s1_d2:"Cañería, Intake, Inlet, ChargePipes, BOV, Intercooler.",
     s1_t3:"Fabricación a Medida", s1_d3:"Soportes, refuerzos, ajustes y personalizaciones racing.",
     s1_t4:"Electrónica Racing", s1_d4:"Módulos, Launch Control, Rev. Limiter, Panel Racing, Bypass, Harness.",
-    s1_badge:"Solda TIG · Acero · Inox · Aluminio · Titanio",
+    s1_badge:"TIG · Acero · Inox · Aluminio · Titanio",
     s2_cat:"ESTÉTICA", s2_sub:"Lavado · Pulido · Coating · Customización",
     s2_t1:"Lavado Detallado", s2_d1:"Interno y externo. Hidratación de plásticos y cueros.",
     s2_t2:"Lavado Técnico de Motor", s2_d2:"Líquido no conductor, vapor y productos especiales.",
     s2_t3:"Pulido Técnico & Faros", s2_d3:"Corrección de imperfecciones. Restauración de faros.",
     s2_t4:"Tratamiento de Pintura", s2_d4:"Descontaminación. Coat Nano-Cerámico.",
     s2_t5:"Customizaciones Internas", s2_d5:"Multimedia, Ambient Light, Star Roof y más.",
-    s3_cat:"MECÁNICA LEVE", s3_sub:"Mantenimiento · Reparaciones · Inspección",
-    s3_t1:"Mantenimiento General", s3_d1:"Revisión preventiva de aceite, filtros, frenos y correas externas.",
-    s3_t2:"Ajustes y Reparaciones", s3_d2:"Vidrios eléctricos, cierres, suspensión leve y piezas que requieran soldadura.",
-    s3_t3:"Inspección Completa", s3_d3:"Elevamos el vehículo para revisión visual de motor, suspensión, frenos y escape.",
+    s3_cat:"REPROG. ECU", s3_sub:"Stage X · Hardcut · Tune · Módulos",
+    pill_stage:"STAGE X", pill_hardcut:"HARDCUT", pill_tune:"TUNE",
+    s3_t1:"Reprogramación ECU", s3_d1:"Mapeado personalizado para el perfil del motor. Ganancia real de potencia y torque.",
+    s3_t2:"Stage X", s3_d2:"Tune progresivo adaptado a cada modificación del motor: admisión, escape, boost y más.",
+    s3_t3:"Hardcut Limiter", s3_d3:"Corte de combustible en el límite de RPM para el sonido de válvulas característico del motorsport.",
     s3_badge:"Diagnóstico completo incluido",
+    s4_num:"04 · SOPORTE", s4_cat:"MECÁNICA LEVE", s4_sub:"Mantenimiento · Reparaciones · Inspección",
+    s4_t1:"Mantenimiento General", s4_d1:"Revisión de aceite, filtros, frenos y correas externas.",
+    s4_t2:"Ajustes y Reparaciones", s4_d2:"Vidrios eléctricos, cierres, suspensión leve y soldadura.",
+    s4_t3:"Inspección Completa", s4_d3:"Vehículo elevado para revisión visual de motor, suspensión, frenos y escape.",
+    s4_badge:"Diagnóstico incluido",
     why_eyebrow:"Por qué elegirnos", why_title:"SIN CONCESIONES.",
-    why_manifesto:"No somos solo un lavandero. Somos el taller donde los entusiastas confían su máquina.",
-    w1t:"Especialistas en Performance", w1d:"Soldadura TIG en acero, inox, aluminio y titanio. Fabricación a medida para cada proyecto racing.",
+    why_manifesto:"No somos solo un lavadero. Somos el taller donde los entusiastas confían su máquina.",
+    w1t:"Escape & Fabricación TIG", w1d:"Soldadura TIG en acero, inox, aluminio y titanio. Fabricación a medida para cada proyecto racing.",
     w2t:"Detailing de Precisión", w2d:"Coating nano-cerámico, corrección de pintura y restauración de faros con productos de nivel profesional.",
-    w3t:"Frontera Estratégica", w3d:"En Presidente Franco, a pasos de la Triple Frontera. Fácil acceso desde Brasil y Argentina.",
+    w3t:"Reprogramación ECU Especializada", w3d:"Stage X y Hardcut calibrados para cada motor. Tune real, no genérico — adaptado a tu setup.",
     w4t:"Atención Directa", w4d:"Hablamos tu idioma — español, portugués e inglés. Presupuesto sin compromiso por WhatsApp.",
     ct_eyebrow:"Contacto", ct_title:"AGENDÁ TU TURNO",
     ct_desc:"Escribinos por WhatsApp para presupuesto inmediato. Sin burocracia, sin esperas.",
@@ -984,41 +795,50 @@ const translations = {
     footer:"© 2025 FlatOutPY · Presidente Franco, Paraguay"
   },
   pt: {
-    nav_services: "Serviços", nav_why: "Sobre nós", nav_contact: "Contato", nav_cta: "Agendar",
-    hero_eyebrow: "Presidente Franco · Paraguai",
-    hero_t1: "Seu carro.", hero_t2: "OUTRO NÍVEL.",
-    hero_desc: "Performance, estética premium e mecânica de precisão. Cada detalhe executado no limite.",
-    hero_cta: "WhatsApp", hero_cta2: "Ver serviços ↓",
-    stat1: "Veículos", stat2: "Serviços", stat3: "Premium",
-    hc1_title: "Performance", hc1_sub: "Escapamento · Admissão · TIG · Eletrônica",
-    hc2_title: "Estética Premium", hc2_sub: "Polimento · Coating Cerâmico · Detailing",
-    hc3_title: "Mecânica Leve", hc3_sub: "Manutenção · Inspeção · Reparo",
-    mq1:"ESCAPAMENTO INOX", mq2:"COATING CERÂMICO", mq3:"SOLDA TIG", mq4:"LAUNCH CONTROL",
-    mq5:"DETAILING PREMIUM", mq6:"INTERCOOLER", mq7:"PRESIDENTE FRANCO PY",
-    srv_eyebrow: "O que fazemos", srv_title: "SERVIÇOS",
-    srv_desc: "Três áreas de especialização. Um único padrão de excelência.",
-    s1_cat:"PERFORMANCE", s1_sub:"Escapamento · Admissão · Eletrônica · TIG",
+    nav_services:"Serviços", nav_why:"Sobre nós", nav_contact:"Contato", nav_cta:"Agendar",
+    hero_eyebrow:"Presidente Franco · Paraguai",
+    hero_t1:"Seu carro.", hero_t2:"OUTRO NÍVEL.",
+    hero_desc:"Escapamento inox, estética premium e reprogramação ECU. Os três pilares onde os entusiastas confiam o seu carro.",
+    hero_cta:"WhatsApp", hero_cta2:"Ver serviços ↓",
+    p1_tag:"Pilar 01", p1_name:"ESCAPE\nINOX", p1_desc:"Fabricação completa em aço, inox, alumínio e titânio. Solda TIG de precisão.",
+    p2_tag:"Pilar 02", p2_name:"ESTÉTICA\nPREMIUM", p2_desc:"Coating nano-cerâmico, correção de pintura e detailing profissional de alto nível.",
+    p3_tag:"Pilar 03", p3_name:"REPROG.\nECU", p3_desc:"Tune personalizado, Stage X e Hardcut. Mais potência, mais resposta, mesmo motor.",
+    mq1:"ESCAPAMENTO INOX", mq_ecu:"REPROG. ECU", mq2:"COATING CERÂMICO", mq3:"SOLDA TIG",
+    mq_stage:"STAGE X", mq4:"LAUNCH CONTROL", mq5:"DETAILING PREMIUM", mq_hc:"HARDCUT",
+    mq6:"INTERCOOLER", mq7:"PRESIDENTE FRANCO PY",
+    srv_eyebrow:"O que fazemos", srv_title:"SERVIÇOS", srv_desc:"Três pilares. Um padrão de excelência.",
+    pb1:"ESCAPE", pb1_sub:"Fabricação · TIG · Inox · Alumínio",
+    pb2:"ESTÉTICA", pb2_sub:"Coating · Polimento · Detailing",
+    pb3:"REPROG. ECU", pb3_sub:"Stage X · Hardcut · Tune",
+    pilar_badge:"PILAR",
+    s1_cat:"ESCAPE", s1_sub:"Fabricação · TIG · Inox · Alumínio · Titânio",
     s1_t1:"Linha de Escapamento Completa", s1_d1:"Múltiplo, Downpipe, MidPipe, Catback.",
     s1_t2:"Sistema de Admissão", s1_d2:"Dutos, Intake, Inlet, ChargePipes, BOV, Intercooler.",
     s1_t3:"Fabricação Sob Medida", s1_d3:"Suportes, reforços, ajustes e personalizações racing.",
     s1_t4:"Eletrônica Racing", s1_d4:"Módulos, Launch Control, Rev. Limiter, Painel Racing, Bypass, Harness.",
-    s1_badge:"Solda TIG · Aço · Inox · Alumínio · Titânio",
+    s1_badge:"TIG · Aço · Inox · Alumínio · Titânio",
     s2_cat:"ESTÉTICA", s2_sub:"Lavagem · Polimento · Coating · Customização",
     s2_t1:"Lavagem Detalhada", s2_d1:"Interna e externa. Hidratação de plásticos e couros.",
     s2_t2:"Lavagem Técnica de Motor", s2_d2:"Líquido não condutor, vapor e produtos especiais.",
     s2_t3:"Polimento & Faróis", s2_d3:"Correção de imperfeições. Restauração de faróis.",
     s2_t4:"Tratamento de Pintura", s2_d4:"Descontaminação. Coat Nano-Cerâmico.",
     s2_t5:"Customizações Internas", s2_d5:"Multimídia, Ambient Light, Star Roof e mais.",
-    s3_cat:"MECÂNICA LEVE", s3_sub:"Manutenção · Reparos · Inspeção",
-    s3_t1:"Manutenção Geral", s3_d1:"Revisão preventiva de óleo, filtros, freios e correias externas.",
-    s3_t2:"Ajustes e Reparos", s3_d2:"Vidros elétricos, fechos, suspensão leve e peças que precisem de solda.",
-    s3_t3:"Inspeção Completa", s3_d3:"Elevamos o veículo para inspeção visual de motor, suspensão, freios e escapamento.",
+    s3_cat:"REPROG. ECU", s3_sub:"Stage X · Hardcut · Tune · Módulos",
+    pill_stage:"STAGE X", pill_hardcut:"HARDCUT", pill_tune:"TUNE",
+    s3_t1:"Reprogramação ECU", s3_d1:"Mapeamento personalizado para o perfil do motor. Ganho real de potência e torque.",
+    s3_t2:"Stage X", s3_d2:"Tune progressivo adaptado a cada modificação do motor: admissão, escapamento, boost e mais.",
+    s3_t3:"Hardcut Limiter", s3_d3:"Corte de combustível no limite de rotação para o som de válvulas característico do motorsport.",
     s3_badge:"Diagnóstico completo incluído",
+    s4_num:"04 · SUPORTE", s4_cat:"MECÂNICA LEVE", s4_sub:"Manutenção · Reparos · Inspeção",
+    s4_t1:"Manutenção Geral", s4_d1:"Revisão de óleo, filtros, freios e correias externas.",
+    s4_t2:"Ajustes e Reparos", s4_d2:"Vidros elétricos, fechos, suspensão leve e soldagem.",
+    s4_t3:"Inspeção Completa", s4_d3:"Veículo elevado para inspeção visual de motor, suspensão, freios e escapamento.",
+    s4_badge:"Diagnóstico incluído",
     why_eyebrow:"Por que nos escolher", why_title:"SEM CONCESSÕES.",
     why_manifesto:"Não somos apenas um lava-rápido. Somos a oficina onde os entusiastas confiam o seu carro.",
-    w1t:"Especialistas em Performance", w1d:"Solda TIG em aço, inox, alumínio e titânio. Fabricação sob medida para cada projeto racing.",
+    w1t:"Escapamento & Fabricação TIG", w1d:"Solda TIG em aço, inox, alumínio e titânio. Fabricação sob medida para cada projeto racing.",
     w2t:"Detailing de Precisão", w2d:"Coating nano-cerâmico, correção de pintura e restauração de faróis com produtos de nível profissional.",
-    w3t:"Localização Estratégica", w3d:"Em Presidente Franco, perto da Tríplice Fronteira. Fácil acesso pelo Brasil e Argentina.",
+    w3t:"Reprogramação ECU Especializada", w3d:"Stage X e Hardcut calibrados para cada motor. Tune real, não genérico — adaptado ao seu setup.",
     w4t:"Atendimento Direto", w4d:"Falamos o seu idioma — espanhol, português e inglês. Orçamento sem compromisso pelo WhatsApp.",
     ct_eyebrow:"Contato", ct_title:"AGENDE SUA VISITA",
     ct_desc:"Fale com a gente pelo WhatsApp para orçamento imediato. Sem burocracia, sem espera.",
@@ -1027,41 +847,50 @@ const translations = {
     footer:"© 2025 FlatOutPY · Presidente Franco, Paraguai"
   },
   en: {
-    nav_services: "Services", nav_why: "About", nav_contact: "Contact", nav_cta: "Book Now",
-    hero_eyebrow: "Presidente Franco · Paraguay",
-    hero_t1: "Your car.", hero_t2: "ANOTHER LEVEL.",
-    hero_desc: "Performance upgrades, premium detailing and precision mechanics. Every detail executed to the limit.",
-    hero_cta: "WhatsApp", hero_cta2: "View services ↓",
-    stat1: "Vehicles", stat2: "Services", stat3: "Premium",
-    hc1_title: "Performance", hc1_sub: "Exhaust · Intake · TIG · Electronics",
-    hc2_title: "Premium Detailing", hc2_sub: "Polish · Ceramic Coating · Detailing",
-    hc3_title: "Light Mechanics", hc3_sub: "Maintenance · Inspection · Repair",
-    mq1:"STAINLESS EXHAUST", mq2:"CERAMIC COATING", mq3:"TIG WELDING", mq4:"LAUNCH CONTROL",
-    mq5:"PREMIUM DETAILING", mq6:"INTERCOOLER", mq7:"PRESIDENTE FRANCO PY",
-    srv_eyebrow: "What we do", srv_title: "SERVICES",
-    srv_desc: "Three areas of expertise. One standard of excellence.",
-    s1_cat:"PERFORMANCE", s1_sub:"Exhaust · Intake · Electronics · TIG",
+    nav_services:"Services", nav_why:"About", nav_contact:"Contact", nav_cta:"Book Now",
+    hero_eyebrow:"Presidente Franco · Paraguay",
+    hero_t1:"Your car.", hero_t2:"ANOTHER LEVEL.",
+    hero_desc:"Stainless exhaust, premium detailing and ECU remapping. The three pillars where enthusiasts trust their machine.",
+    hero_cta:"WhatsApp", hero_cta2:"View services ↓",
+    p1_tag:"Pillar 01", p1_name:"EXHAUST\nINOX", p1_desc:"Full fabrication in steel, stainless, aluminum and titanium. Precision TIG welding.",
+    p2_tag:"Pillar 02", p2_name:"PREMIUM\nDETAILING", p2_desc:"Nano-ceramic coating, paint correction and professional-grade detailing.",
+    p3_tag:"Pillar 03", p3_name:"ECU\nREMAP", p3_desc:"Custom tune, Stage X and Hardcut. More power, more response, same engine.",
+    mq1:"STAINLESS EXHAUST", mq_ecu:"ECU REMAP", mq2:"CERAMIC COATING", mq3:"TIG WELDING",
+    mq_stage:"STAGE X", mq4:"LAUNCH CONTROL", mq5:"PREMIUM DETAILING", mq_hc:"HARDCUT",
+    mq6:"INTERCOOLER", mq7:"PRESIDENTE FRANCO PY",
+    srv_eyebrow:"What we do", srv_title:"SERVICES", srv_desc:"Three pillars. One standard of excellence.",
+    pb1:"EXHAUST", pb1_sub:"Fabrication · TIG · Stainless · Aluminum",
+    pb2:"DETAILING", pb2_sub:"Coating · Polish · Detailing",
+    pb3:"ECU REMAP", pb3_sub:"Stage X · Hardcut · Tune",
+    pilar_badge:"PILLAR",
+    s1_cat:"EXHAUST", s1_sub:"Fabrication · TIG · Stainless · Aluminum · Titanium",
     s1_t1:"Full Exhaust System", s1_d1:"Manifold, Downpipe, MidPipe, Catback.",
     s1_t2:"Intake System", s1_d2:"Piping, Intake, Inlet, ChargePipes, BOV, Intercooler.",
     s1_t3:"Custom Fabrication", s1_d3:"Brackets, braces, adjustments and racing customizations.",
     s1_t4:"Racing Electronics", s1_d4:"Modules, Launch Control, Rev. Limiter, Racing Panel, Bypass, Harness.",
-    s1_badge:"TIG Welding · Steel · Stainless · Aluminum · Titanium",
+    s1_badge:"TIG · Steel · Stainless · Aluminum · Titanium",
     s2_cat:"DETAILING", s2_sub:"Wash · Polish · Coating · Customization",
     s2_t1:"Full Detail Wash", s2_d1:"Interior and exterior. Plastic and leather conditioning.",
     s2_t2:"Engine Bay Cleaning", s2_d2:"Non-conductive fluid, steam and specialized products.",
     s2_t3:"Paint Correction & Headlights", s2_d3:"Imperfection correction. Headlight restoration.",
     s2_t4:"Paint Treatment", s2_d4:"Decontamination. Nano-Ceramic coating.",
     s2_t5:"Interior Customizations", s2_d5:"Multimedia, Ambient Light, Star Roof and more.",
-    s3_cat:"LIGHT MECHANICS", s3_sub:"Maintenance · Repairs · Inspection",
-    s3_t1:"General Maintenance", s3_d1:"Preventive check: oil, filters, brakes and external belts.",
-    s3_t2:"Adjustments & Repairs", s3_d2:"Electric windows, locks, light suspension and parts requiring welding.",
-    s3_t3:"Full Inspection", s3_d3:"Vehicle lifted for visual inspection of engine, suspension, brakes and exhaust.",
+    s3_cat:"ECU REMAP", s3_sub:"Stage X · Hardcut · Tune · Modules",
+    pill_stage:"STAGE X", pill_hardcut:"HARDCUT", pill_tune:"TUNE",
+    s3_t1:"ECU Remapping", s3_d1:"Custom map for your engine profile. Real gains in power and torque.",
+    s3_t2:"Stage X", s3_d2:"Progressive tune adapted to each engine mod: intake, exhaust, boost and more.",
+    s3_t3:"Hardcut Limiter", s3_d3:"Fuel cut at the RPM limit for the valve-flutter sound characteristic of motorsport.",
     s3_badge:"Full diagnostic included",
+    s4_num:"04 · SUPPORT", s4_cat:"LIGHT MECHANICS", s4_sub:"Maintenance · Repairs · Inspection",
+    s4_t1:"General Maintenance", s4_d1:"Oil, filters, brakes and external belts check.",
+    s4_t2:"Adjustments & Repairs", s4_d2:"Electric windows, locks, light suspension and welding.",
+    s4_t3:"Full Inspection", s4_d3:"Vehicle lifted for visual inspection of engine, suspension, brakes and exhaust.",
+    s4_badge:"Diagnostic included",
     why_eyebrow:"Why choose us", why_title:"NO COMPROMISES.",
     why_manifesto:"We're not just a car wash. We're the place where enthusiasts trust their machine.",
-    w1t:"Performance Specialists", w1d:"TIG welding in steel, stainless, aluminum and titanium. Custom fabrication for every racing build.",
+    w1t:"Exhaust & TIG Fabrication", w1d:"TIG welding in steel, stainless, aluminum and titanium. Custom fabrication for every racing build.",
     w2t:"Precision Detailing", w2d:"Nano-ceramic coating, paint correction and headlight restoration with professional-grade products.",
-    w3t:"Strategic Location", w3d:"In Presidente Franco, steps from the Triple Frontier. Easy access from Brazil and Argentina.",
+    w3t:"Specialized ECU Remapping", w3d:"Stage X and Hardcut calibrated for each engine. Real tune, not generic — adapted to your setup.",
     w4t:"Direct Service", w4d:"We speak your language — Spanish, Portuguese and English. Free quote on WhatsApp.",
     ct_eyebrow:"Contact", ct_title:"BOOK YOUR SLOT",
     ct_desc:"Message us on WhatsApp for an instant quote. No red tape, no waiting.",
@@ -1077,37 +906,26 @@ function setLang(lang) {
   currentLang = lang;
   document.documentElement.lang = lang;
   localStorage.setItem('flatoutpy_lang', lang);
-
-  // hide overlay
   document.getElementById('lang-overlay').classList.add('hidden');
-
-  // apply translations
   const t = translations[lang];
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (t[key] !== undefined) el.textContent = t[key];
   });
-
-  // update active lang buttons
   document.querySelectorAll('.ls-btn').forEach(btn => {
     btn.classList.toggle('active', btn.textContent.toLowerCase().startsWith(lang));
   });
 }
 
-// On load
 window.addEventListener('DOMContentLoaded', () => {
   const saved = localStorage.getItem('flatoutpy_lang');
-  if (saved) {
-    setLang(saved);
-  }
-  // else show overlay (default)
+  if (saved) setLang(saved);
 });
 
-// Scroll reveal
 const revealEls = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-}, { threshold: 0.12 });
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
 revealEls.forEach(el => observer.observe(el));
 </script>
 </body>
