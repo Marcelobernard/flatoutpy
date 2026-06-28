@@ -1,1623 +1,1117 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Rastreamento-->
-    <script type="text/javascript">
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "ubtnk1qp9f");
-    </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ETLKCDMT5S"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-    
-      gtag('config', 'G-ETLKCDMT5S');
-    </script>
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-    <link rel="manifest" href="favicon/site.webmanifest">
-    <link rel="shortcut icon" href="favicon/favicon.ico">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <title>FlatOutPY - Contacto</title>
-    <style>
-        /* ========================================
-           LOADING SCREEN
-           ======================================== */
-        #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #121212;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease-out;
-        }
-
-        #loading-screen.fade-out {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .loader-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 180px;
-            height: 180px;
-            font-family: "Montserrat", sans-serif;
-            font-size: 1.4rem;
-            font-weight: 300;
-            color: #D1D1D1;
-            border-radius: 50%;
-            background-color: transparent;
-            user-select: none;
-        }
-
-        .loader {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            border-radius: 50%;
-            background-color: transparent;
-            animation: loader-rotate 2s linear infinite;
-            z-index: 0;
-        }
-
-        @keyframes loader-rotate {
-            0% {
-                transform: rotate(90deg);
-                box-shadow:
-                    0 10px 20px 0 #D1D1D1 inset,
-                    0 20px 30px 0 #D62828 inset,
-                    0 60px 60px 0 #A4161A inset;
-            }
-            50% {
-                transform: rotate(270deg);
-                box-shadow:
-                    0 10px 20px 0 #D1D1D1 inset,
-                    0 20px 10px 0 #D62828 inset,
-                    0 40px 60px 0 #2C2C2C inset;
-            }
-            100% {
-                transform: rotate(450deg);
-                box-shadow:
-                    0 10px 20px 0 #D1D1D1 inset,
-                    0 20px 30px 0 #D62828 inset,
-                    0 60px 60px 0 #A4161A inset;
-            }
-        }
-
-        .loader-letter {
-            display: inline-block;
-            opacity: 0.4;
-            transform: translateY(0);
-            animation: loader-letter-anim 2s infinite;
-            z-index: 1;
-            border-radius: 50ch;
-            border: none;
-        }
-
-        .loader-letter:nth-child(1) {
-            animation-delay: 0s;
-        }
-        .loader-letter:nth-child(2) {
-            animation-delay: 0.1s;
-        }
-        .loader-letter:nth-child(3) {
-            animation-delay: 0.2s;
-        }
-        .loader-letter:nth-child(4) {
-            animation-delay: 0.3s;
-        }
-        .loader-letter:nth-child(5) {
-            animation-delay: 0.4s;
-        }
-        .loader-letter:nth-child(6) {
-            animation-delay: 0.5s;
-        }
-        .loader-letter:nth-child(7) {
-            animation-delay: 0.6s;
-        }
-        .loader-letter:nth-child(8) {
-            animation-delay: 0.7s;
-        }
-        .loader-letter:nth-child(9) {
-            animation-delay: 0.8s;
-        }
-        .loader-letter:nth-child(10) {
-            animation-delay: 0.9s;
-        }
-
-        @keyframes loader-letter-anim {
-            0%,
-            100% {
-                opacity: 0.4;
-                transform: translateY(0);
-            }
-            20% {
-                opacity: 1;
-                transform: scale(1.15);
-            }
-            40% {
-                opacity: 0.7;
-                transform: translateY(0);
-            }
-        }
-
-        /* ========================================
-           PRESET DE CORES - FLATOUT PY
-           ======================================== */
-        :root {
-            /* Primary - Preto profundo (fundo principal) */
-            --color-primary: #121212;
-            --color-primary-rgb: 18, 18, 18;
-            
-            /* Secondary - Cinza grafite (fundo secundário) */
-            --color-secondary: #2C2C2C;
-            --color-secondary-rgb: 44, 44, 44;
-            
-            /* Detail - Cinza claro (texto, bordas, detalhes) */
-            --color-detail: #D1D1D1;
-            --color-detail-rgb: 209, 209, 209;
-            
-            /* Destaque - Vermelho destaque (botões, títulos, call-to-action) */
-            --color-destaque: #ff0000;
-            --color-destaque-rgb: 214, 40, 40;
-            
-            /* Hover - Vermelho escuro (hover, estados ativos, contraste) */
-            --color-hover: #A4161A;
-            --color-hover-rgb: 164, 22, 26;
-        }
-
-        * {
-            cursor: crosshair !important;
-            box-sizing: border-box;
-        }
-        
-        html {
-            overflow-x: hidden;
-            max-width: 100vw;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Montserrat', sans-serif;
-            font-optical-sizing: auto;
-            font-weight: 400;
-            font-style: normal;
-            background-color: rgb(9, 9, 9);
-            overflow-x: hidden;
-            max-width: 100vw;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-
-        /* Efeito de Poeira 3D */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(46, 0, 0, 0.25) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(46, 0, 0, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 40% 20%, rgba(46, 0, 0, 0.22) 0%, transparent 50%),
-                radial-gradient(circle at 60% 60%, rgba(46, 0, 0, 0.18) 0%, transparent 50%),
-                radial-gradient(circle at 10% 90%, rgba(46, 0, 0, 0.20) 0%, transparent 50%),
-                radial-gradient(circle at 90% 30%, rgba(46, 0, 0, 0.16) 0%, transparent 50%);
-            background-size: 200% 200%, 180% 180%, 220% 220%, 190% 190%, 210% 210%, 200% 200%;
-            background-position: 0% 0%, 100% 100%, 50% 50%, 30% 70%, 80% 20%, 60% 40%;
-            animation: dustMove 20s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 30% 40%, rgba(46, 0, 0, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 70% 70%, rgba(46, 0, 0, 0.10) 0%, transparent 40%),
-                radial-gradient(circle at 50% 10%, rgba(46, 0, 0, 0.14) 0%, transparent 40%),
-                radial-gradient(circle at 15% 60%, rgba(46, 0, 0, 0.11) 0%, transparent 40%),
-                radial-gradient(circle at 85% 25%, rgba(46, 0, 0, 0.09) 0%, transparent 40%);
-            background-size: 250% 250%, 230% 230%, 240% 240%, 220% 220%, 260% 260%;
-            background-position: 20% 20%, 80% 80%, 50% 50%, 10% 90%, 90% 10%;
-            animation: dustMove 25s ease-in-out infinite reverse;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        @keyframes dustMove {
-            0%, 100% {
-                background-position: 0% 0%, 100% 100%, 50% 50%, 30% 70%, 80% 20%, 60% 40%;
-            }
-            25% {
-                background-position: 15% 10%, 85% 90%, 55% 45%, 40% 65%, 75% 25%, 50% 45%;
-            }
-            50% {
-                background-position: 30% 20%, 70% 80%, 60% 40%, 50% 60%, 70% 30%, 40% 50%;
-            }
-            75% {
-                background-position: 15% 10%, 85% 90%, 55% 45%, 40% 65%, 75% 25%, 50% 45%;
-            }
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-            position: relative;
-            z-index: 1;
-            padding: 0 1rem;
-            box-sizing: border-box;
-        }
-
-        /* Header */
-        .header {
-            width: 100%;
-            background-color: #000000;
-            position: relative;
-            overflow: hidden;
-            padding: 4rem 1rem;
-            margin: 0;
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 200px;
-            box-sizing: border-box;
-            align-self: stretch;
-        }
-
-        /* Container para partículas de poeira */
-        .dust-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .dust-particle {
-            position: absolute;
-            pointer-events: none;
-            will-change: transform, opacity;
-            transform-origin: center;
-        }
-
-        /* Logo */
-        .logo-container {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
-
-        .logo-container img {
-            max-height: 5rem;
-            width: auto;
-            object-fit: contain;
-        }
-
-        /* Descrição */
-        .description {
-            text-align: center;
-            color: var(--color-detail);
-            font-size: 1.2rem;
-            line-height: 1.6;
-            max-width: 800px;
-            padding: 0 1rem;
-            letter-spacing: 0.2em;
-        }
-
-        /* Container de Botões de Serviços */
-        .services-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            width: calc(100% - 2rem);
-            max-width: 1200px;
-            margin: 0 auto;
-            margin-bottom: 0;
-        }
-
-        /* Espaçamento mínimo entre botões para evitar toques acidentais */
-        .service-item-wrapper {
-            margin-bottom: 0.5rem;
-        }
-
-        /* Botão de Categoria */
-        .service-button {
-            background: rgba(255, 0, 0, 0.436);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-top: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 15px;
-            padding: 1.5rem 3.5rem 1.5rem 1.5rem;
-            color: rgb(255, 255, 255);
-            font-size: 1.2rem;
-            font-weight: 600;
-            text-align: center;
-            cursor: pointer;
-            position: relative;
-            overflow: visible;
-            backdrop-filter: blur(10px);
-            /* Box-shadow 3D - Profundidade e elevação */
-            box-shadow: 
-                /* Sombra externa profunda - cria a base 3D */
-                0 16px 48px rgba(0, 0, 0, 0.7),
-                /* Sombra média - define a forma */
-                0 6px 20px rgba(0, 0, 0, 0.5),
-                /* Sombra próxima - detalhe fino */
-                0 2px 8px rgba(0, 0, 0, 0.4),
-                /* Brilho vermelho sutil */
-                0 0 30px rgba(255, 0, 0, 0.2),
-                /* Sombra interna superior - profundidade */
-                inset 0 2px 4px rgba(0, 0, 0, 0.4),
-                /* Highlight interno sutil - brilho superior */
-                inset 0 -2px 6px rgba(0, 0, 0, 0.3),
-                /* Brilho interno superior sutil */
-                inset 0 1px 0 rgba(255, 255, 255, 0.08);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            z-index: 2;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            min-height: 60px;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-            user-select: none;
-        }
-
-        /* Indicador de seta/chevron - estilo aba */
-        .service-button::after {
-            content: '▼';
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.9);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-            flex-shrink: 0;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-            position: absolute;
-            right: 1.5rem;
-        }
-
-
-        /* Seta rotaciona quando ativo */
-        .service-button.active::after {
-            transform: rotate(180deg);
-            color: rgba(255, 255, 255, 1);
-            text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
-        }
-
-        /* Efeito ripple ao tocar */
-        .service-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* Estado ativo ao tocar - feedback imediato */
-        .service-button:active {
-            transform: scale(0.97);
-            background: rgba(255, 0, 0, 0.6);
-            border-top: 3px solid rgba(255, 255, 255, 0.4);
-            /* Box-shadow 3D pressionado - mais próximo da superfície */
-            box-shadow: 
-                /* Sombra externa reduzida - botão pressionado */
-                0 8px 24px rgba(0, 0, 0, 0.8),
-                /* Sombra média reduzida */
-                0 3px 12px rgba(0, 0, 0, 0.6),
-                /* Sombra próxima */
-                0 1px 4px rgba(0, 0, 0, 0.5),
-                /* Brilho vermelho intensificado */
-                0 0 25px rgba(255, 0, 0, 0.5),
-                /* Sombra interna superior intensificada - pressionado */
-                inset 0 3px 8px rgba(0, 0, 0, 0.6),
-                /* Sombra interna inferior */
-                inset 0 -2px 8px rgba(0, 0, 0, 0.5),
-                /* Brilho interno reduzido */
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.25);
-        }
-
-        .service-button:active::after {
-            transform: scale(0.9);
-        }
-
-        .service-button:active::before {
-            width: 300px;
-            height: 300px;
-            opacity: 1;
-            transition: width 0.3s ease, height 0.3s ease, opacity 0.2s ease;
-        }
-
-        .service-button.active {
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            background: rgba(255, 0, 0, 0.55);
-            border-top: 3px solid rgba(255, 255, 255, 0.5);
-            border-color: rgba(255, 255, 255, 0.3);
-            /* Box-shadow 3D quando ativo - mais elevação */
-            box-shadow: 
-                /* Sombra externa profunda intensificada */
-                0 20px 60px rgba(0, 0, 0, 0.8),
-                /* Sombra média ampliada */
-                0 8px 24px rgba(0, 0, 0, 0.6),
-                /* Sombra próxima */
-                0 3px 10px rgba(0, 0, 0, 0.5),
-                /* Brilho vermelho mais intenso */
-                0 0 40px rgba(255, 0, 0, 0.4),
-                /* Sombra interna superior */
-                inset 0 2px 5px rgba(0, 0, 0, 0.5),
-                /* Highlight interno */
-                inset 0 -2px 8px rgba(0, 0, 0, 0.4),
-                /* Brilho interno superior */
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-
-        .service-button.active:active {
-            transform: scale(0.97);
-            background: rgba(255, 0, 0, 0.7);
-            /* Box-shadow 3D quando ativo e pressionado */
-            box-shadow: 
-                0 12px 36px rgba(0, 0, 0, 0.9),
-                0 5px 16px rgba(0, 0, 0, 0.7),
-                0 2px 6px rgba(0, 0, 0, 0.6),
-                0 0 30px rgba(255, 0, 0, 0.6),
-                inset 0 3px 10px rgba(0, 0, 0, 0.7),
-                inset 0 -2px 10px rgba(0, 0, 0, 0.6),
-                inset 0 1px 0 rgba(255, 255, 255, 0.06);
-        }
-
-        /* Estado focus para acessibilidade (navegação por teclado) */
-        .service-button:focus-visible {
-            outline: 3px solid rgba(255, 0, 0, 0.6);
-            outline-offset: 3px;
-        }
-
-        /* Painel de Serviços que desce */
-        .service-panel {
-            background: rgba(0, 0, 0, 0.15);
-            border: white;
-            border-top: 2px solid rgba(var(--color-destaque-rgb), 0);
-            border-radius: 0 0 24px 24px;
-            padding: 0;
-            color: var(--color-detail);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            /* Box-shadow 3D - Profundidade e elevação */
-            box-shadow: 
-                /* Sombra externa profunda - cria a base 3D */
-                0 20px 60px rgba(0, 0, 0, 0.8),
-                /* Sombra média - define a forma */
-                0 8px 24px rgba(0, 0, 0, 0.6),
-                /* Sombra próxima - detalhe fino */
-                0 2px 8px rgba(0, 0, 0, 0.4),
-                /* Sombra interna superior - profundidade */
-                inset 0 2px 4px rgba(0, 0, 0, 0.5),
-                /* Highlight interno sutil - brilho superior */
-                inset 0 -2px 8px rgba(0, 0, 0, 0.3);
-            max-height: 0;
-            opacity: 0;
-            transform: translateY(-30px) scale(0.98);
-            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-            margin-top: -1.5rem;
-            margin-bottom: 0.5rem;
-            z-index: 1;
-            width: 100%;
-        }
-
-        .service-panel::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, 
-                transparent 0%,
-                rgba(var(--color-destaque-rgb), 0.8) 50%,
-                transparent 100%);
-            opacity: 0;
-            transition: opacity 0.6s ease 0.2s;
-        }
-
-        .service-panel.active {
-            max-height: 2000px;
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            padding: 3rem;
-            margin-bottom: 1rem;
-            border-top-color: rgba(var(--color-destaque-rgb), 0.5);
-            /* Box-shadow 3D intensificado quando ativo - mais elevação */
-            box-shadow: 
-                /* Sombra externa profunda - elevação máxima */
-                0 30px 80px rgba(0, 0, 0, 0.9),
-                /* Sombra média ampliada */
-                0 12px 32px rgba(0, 0, 0, 0.7),
-                /* Sombra próxima - definição */
-                0 4px 12px rgba(0, 0, 0, 0.5),
-                /* Brilho vermelho sutil nas bordas */
-                0 0 50px rgba(var(--color-destaque-rgb), 0.25),
-                /* Sombra interna superior - profundidade */
-                inset 0 2px 6px rgba(0, 0, 0, 0.6),
-                /* Highlight interno sutil */
-                inset 0 -3px 10px rgba(0, 0, 0, 0.4),
-                /* Brilho interno superior sutil */
-                inset 0 1px 0 rgba(255, 255, 255, 0.03);
-        }
-
-        .service-panel.active::before {
-            opacity: 1;
-        }
-
-        .service-panel .service-list {
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.4s ease 0.1s;
-        }
-
-        .service-panel.active .service-list {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .service-box {
-            display: none;
-        }
-
-        /* Container de Selos */
-        .seals-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            width: 100%;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .seal {
-            max-width: 120px;
-            max-height: 120px;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
-            transition: transform 0.3s ease;
-        }
-
-        .seal:active {
-            transform: scale(0.95);
-            transition: transform 0.15s ease;
-        }
-
-        .services-title {
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--color-detail);
-            text-align: center;
-            width: 100%;
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-        }
-
-        .service-category {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--color-destaque);
-            margin-top: 1.5rem;
-            margin-bottom: 1.2rem;
-            text-align: center;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-        }
-
-        .service-category:first-of-type {
-            margin-top: 0;
-        }
-
-        .service-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .service-list li {
-            padding: 0.6rem 0;
-            padding-left: 1.8rem;
-            position: relative;
-            line-height: 1.7;
-            letter-spacing: 0.05rem;
-            transition: color 0.3s ease;
-        }
-
-        .service-list li::before {
-            content: "▸";
-            position: absolute;
-            left: 0;
-            color: var(--color-destaque);
-            font-weight: bold;
-            font-size: 1.5rem;
-            opacity: 0.8;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        .service-list li:active {
-            color: rgba(var(--color-detail-rgb), 0.95);
-        }
-
-        .service-list li:active::before {
-            opacity: 1;
-            transform: translateX(2px);
-        }
-
-        .service-item {
-            margin-bottom: 0.4rem;
-            font-size: 1.05rem;
-        }
-
-        /* Botões de Contato */
-        .contact-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .contact-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            padding: 1.2rem 2rem;
-            background: linear-gradient(135deg, rgba(var(--color-secondary-rgb), 0.8) 0%, rgba(var(--color-primary-rgb), 0.9) 100%);
-            border: 2px solid rgba(var(--color-detail-rgb), 0.15);
-            border-radius: 15px;
-            color: var(--color-detail);
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 500;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            /* Box-shadow 3D - Profundidade e elevação */
-            box-shadow: 
-                /* Sombra externa profunda - cria a base 3D */
-                0 16px 48px rgba(var(--color-primary-rgb), 0.8),
-                /* Sombra média - define a forma */
-                0 6px 20px rgba(var(--color-primary-rgb), 0.6),
-                /* Sombra próxima - detalhe fino */
-                0 2px 8px rgba(0, 0, 0, 0.5),
-                /* Sombra interna superior - profundidade */
-                inset 0 2px 4px rgba(0, 0, 0, 0.4),
-                /* Highlight interno sutil - brilho superior */
-                inset 0 -2px 6px rgba(0, 0, 0, 0.3),
-                /* Brilho interno superior sutil */
-                inset 0 1px 0 rgba(var(--color-detail-rgb), 0.12);
-            width: 100%;
-            min-height: 56px;
-            position: relative;
-            overflow: hidden;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-            user-select: none;
-        }
-
-        /* Efeito ripple ao tocar */
-        .contact-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(var(--color-destaque-rgb), 0.2);
-            transform: translate(-50%, -50%);
-            transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* Estado ativo ao tocar - feedback imediato e claro */
-        .contact-button:active {
-            transform: scale(0.96);
-            background: linear-gradient(135deg, rgba(var(--color-secondary-rgb), 0.95) 0%, rgba(var(--color-primary-rgb), 0.98) 100%);
-            border-color: rgba(var(--color-destaque-rgb), 0.5);
-            color: var(--color-destaque);
-            /* Box-shadow 3D pressionado - mais próximo da superfície */
-            box-shadow: 
-                /* Sombra externa reduzida - botão pressionado */
-                0 8px 24px rgba(var(--color-primary-rgb), 0.9),
-                /* Sombra média reduzida */
-                0 3px 12px rgba(var(--color-primary-rgb), 0.7),
-                /* Sombra próxima */
-                0 1px 4px rgba(0, 0, 0, 0.6),
-                /* Brilho vermelho intensificado */
-                0 0 30px rgba(var(--color-destaque-rgb), 0.5),
-                /* Sombra interna superior intensificada - pressionado */
-                inset 0 3px 8px rgba(0, 0, 0, 0.6),
-                /* Sombra interna inferior */
-                inset 0 -2px 8px rgba(0, 0, 0, 0.5),
-                /* Brilho interno reduzido */
-                inset 0 1px 0 rgba(var(--color-detail-rgb), 0.08);
-        }
-
-        .contact-button:active::before {
-            width: 400px;
-            height: 400px;
-            opacity: 1;
-            transition: width 0.3s ease, height 0.3s ease, opacity 0.2s ease;
-        }
-
-        /* Estado focus para acessibilidade (navegação por teclado) */
-        .contact-button:focus-visible {
-            outline: 3px solid rgba(var(--color-destaque-rgb), 0.6);
-            outline-offset: 3px;
-        }
-
-        /* Melhor feedback visual para ícones ao tocar */
-        .contact-button:active svg {
-            transform: scale(1.1);
-            transition: transform 0.2s ease;
-        }
-
-        .contact-button svg {
-            width: 24px;
-            height: 24px;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s ease;
-        }
-
-        .contact-button span {
-            text-align: center;
-        }
-
-        .contact-button .whatsapp-icon {
-            fill: currentColor;
-        }
-
-        .contact-button .instagram-icon {
-            fill: currentColor;
-        }
-
-        .contact-button .location-icon {
-            stroke: currentColor;
-            fill: none;
-            stroke-width: 2;
-        }
-
-        .contact-button .location-icon path,
-        .contact-button .location-icon circle {
-            stroke: currentColor;
-            fill: none;
-            stroke-width: 2;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header {
-                padding: 3rem 1rem;
-                min-height: 15rem;
-            }
-
-            .logo-container img {
-                max-height: 2rem;
-            }
-
-            .service-button {
-                padding: 1.2rem 1.5rem;
-                font-size: 1rem;
-                min-height: 56px;
-            }
-
-            .service-panel.active {
-                padding: 2rem 1.5rem;
-            }
-
-            .seals-container {
-                gap: 1.5rem;
-                margin-bottom: 1.5rem;
-            }
-
-            .seal {
-                max-width: 90px;
-                max-height: 90px;
-            }
-
-            .services-title {
-                font-size: 1.4rem;
-            }
-
-            .service-category {
-                font-size: 1.4rem;
-                margin-bottom: 1rem;
-            }
-
-            .description {
-                font-size: 0.88rem;
-            }
-
-            .contact-button {
-                padding: 1rem 1.5rem;
-                font-size: 1rem;
-                min-height: 52px;
-            }
-
-            .contact-buttons {
-                max-width: 100%;
-            }
-
-            .footer {
-                font-size: 1rem;
-            }
-
-            .map-wrapper {
-                height: 300px;
-            }
-
-            .map-title {
-                font-size: 1.7rem;
-            }
-        }
-
-        /* Media query específica para telas muito verticais (celulares em retrato) */
-        @media (max-width: 480px) and (orientation: portrait) {
-            .header {
-                padding: 2.5rem 1rem;
-                min-height: 12rem;
-            }
-
-            .logo-container img {
-                max-width: 80%;
-                max-height: 3.5rem;
-            }
-        }
-
-        /* Media query para telas muito pequenas e verticais */
-        @media (max-width: 360px) {
-            .header {
-                padding: 2rem 0.8rem;
-                min-height: 10rem;
-            }
-
-            .logo-container img {
-                max-width: 80%;
-                max-height: 3rem;
-            }
-        }
-
-        /* Footer */
-        /* Mapa */
-        .map-container {
-            width: 100%;
-            max-width: 1200px;
-            margin-top: 0;
-            position: relative;
-            z-index: 1;
-        }
-
-        .map-section-wrapper {
-            position: relative;
-            width: 100%;
-            background-color: #00000000;
-            padding: 2rem 1rem;
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-            overflow: hidden;
-            box-sizing: border-box;
-            align-self: stretch;
-        }
-
-        .map-section-wrapper .container {
-            position: relative;
-            z-index: 1;
-        }
-
-        .contact-buttons {
-            position: relative;
-            z-index: 1;
-        }
-
-        .map-title {
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--color-detail);
-            text-align: center;
-            width: 100%;
-            margin-bottom: 1.5rem;
-            letter-spacing: 0.2em;
-        }
-
-        .map-wrapper {
-            width: 100%;
-            height: 450px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 
-                0 10px 40px rgba(var(--color-primary-rgb), 0.6),
-                inset 0 1px 0 rgba(var(--color-detail-rgb), 0.1);
-            border: 2px solid rgba(var(--color-detail-rgb), 0.15);
-            margin-top: 2rem;
-        }
-
-        #map {
-            width: 100%;
-            height: 100%;
-        }
-
-        .footer {
-            width: 100%;
-            text-align: center;
-            color: var(--color-detail);
-            font-size: 1rem;
-            padding: 2rem 1rem;
-            opacity: 0.7;
-        }
-
-        .service-item-wrapper {
-            position: relative;
-            width: 100%;
-        }
-
-        /* Botão de Download */
-        .download-button {
-            margin-top: 1.5rem;
-            padding: 1rem 2rem;
-            background: rgba(18, 76, 0, 0.432);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            color: rgb(255, 255, 255);
-            font-size: 1rem;
-            font-weight: 600;
-            text-align: center;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 48px;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-            user-select: none;
-            box-shadow: 
-                0 8px 24px rgba(0, 0, 0, 0.6),
-                0 3px 10px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-
-        .download-button:active {
-            transform: scale(0.97);
-            box-shadow: 
-                0 4px 12px rgba(0, 0, 0, 0.7),
-                0 1px 4px rgba(0, 0, 0, 0.5),
-                inset 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Popup Overlay */
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            padding: 1rem;
-            box-sizing: border-box;
-        }
-
-        .popup-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Popup Container */
-        .popup-container {
-            position: relative;
-            max-width: 90%;
-            max-height: 90vh;
-            background: rgba(0, 0, 0, 0.9);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 0;
-            box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.9),
-                0 8px 24px rgba(0, 0, 0, 0.7),
-                0 0 40px rgba(255, 0, 0, 0.3);
-            transform: scale(0.9);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            overflow: hidden;
-        }
-
-        .popup-overlay.active .popup-container {
-            transform: scale(1);
-        }
-
-        /* Botão de Fechar */
-        .popup-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 0, 0, 0.8);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            color: white;
-            font-size: 1.7rem;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10001;
-            transition: all 0.2s ease;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-            box-shadow: 
-                0 4px 12px rgba(0, 0, 0, 0.6),
-                0 0 15px rgba(255, 0, 0, 0.4);
-        }
-
-        .popup-close:hover,
-        .popup-close:active {
-            background: rgba(255, 0, 0, 1);
-            box-shadow: 
-                0 6px 16px rgba(0, 0, 0, 0.7),
-                0 0 20px rgba(255, 0, 0, 0.6);
-        }
-
-        /* Imagem do Popup */
-        .popup-image {
-            width: 100%;
-            height: auto;
-            max-height: 90vh;
-            object-fit: contain;
-            display: block;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .popup-container {
-                max-width: 95%;
-                max-height: 95vh;
-            }
-
-            .popup-close {
-                width: 36px;
-                height: 36px;
-                font-size: 1.4rem;
-                top: 0.75rem;
-                right: 0.75rem;
-            }
-
-            .download-button {
-                padding: 0.9rem 1.5rem;
-                font-size: 0.9rem;
-                min-height: 44px;
-            }
-        }
-        /* End of styles */
-    </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FLATOUTPY — Performance & Estética · Presidente Franco, PY</title>
+<meta name="description" content="Oficina de performance y estética premium en Presidente Franco, Paraguay. Escape inox, tuning, detailing y más."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --red: #D10000;
+    --red-dark: #9a0000;
+    --red-glow: rgba(209,0,0,0.18);
+    --white: #FFFFFF;
+    --off-white: #E8E8E8;
+    --gray: #8A8A8A;
+    --gray-light: #C0C0C0;
+    --bg: #080808;
+    --bg2: #111111;
+    --bg3: #181818;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── LANG POPUP ─── */
+  #lang-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(8px);
+  }
+  #lang-overlay.hidden { display: none; }
+  .lang-popup {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--red);
+    padding: 48px 56px;
+    text-align: center;
+    max-width: 460px;
+    width: 90%;
+  }
+  .lang-popup .logo-popup {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2.6rem;
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+  }
+  .lang-popup .logo-popup span.r { color: var(--red); }
+  .lang-popup .logo-popup span.w { color: var(--white); }
+  .lang-popup p {
+    color: var(--gray-light);
+    font-size: 0.95rem;
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
+  .lang-btns {
+    display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  }
+  .lang-btn {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 14px 28px;
+    cursor: pointer;
+    transition: all .2s;
+    text-transform: uppercase;
+  }
+  .lang-btn:hover, .lang-btn.active {
+    background: var(--red);
+    border-color: var(--red);
+    color: #fff;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(8,8,8,0.95);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    transition: background .3s;
+  }
+  .header-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 68px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    text-decoration: none;
+    line-height: 1;
+  }
+  .logo .r { color: var(--red); }
+  .logo .w { color: var(--white); }
+
+  nav { display: flex; align-items: center; gap: 36px; }
+  nav a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  nav a:hover { color: var(--white); }
+
+  .lang-switcher {
+    display: flex; gap: 4px; margin-left: 16px;
+  }
+  .ls-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--gray);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 4px 8px;
+    cursor: pointer;
+    transition: all .2s;
+    text-transform: uppercase;
+  }
+  .ls-btn:hover { color: var(--white); }
+  .ls-btn.active {
+    color: var(--red);
+    border-color: var(--red);
+  }
+
+  .header-cta {
+    background: var(--red);
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: background .2s;
+    white-space: nowrap;
+  }
+  .header-cta:hover { background: var(--red-dark); }
+
+  .hamburger {
+    display: none;
+    flex-direction: column; gap: 5px;
+    cursor: pointer; background: none; border: none; padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--white); transition: all .3s;
+  }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 68px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: 
+      linear-gradient(135deg, rgba(209,0,0,0.08) 0%, transparent 50%),
+      repeating-linear-gradient(
+        -55deg,
+        transparent,
+        transparent 60px,
+        rgba(255,255,255,0.013) 60px,
+        rgba(255,255,255,0.013) 61px
+      ),
+      var(--bg);
+  }
+  .hero-accent {
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--red);
+  }
+  .hero-red-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--red) 0%, transparent 60%);
+  }
+
+  .hero-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 64px;
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block; width: 32px; height: 2px;
+    background: var(--red);
+  }
+
+  .hero-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(3.4rem, 6vw, 5.8rem);
+    font-weight: 900;
+    line-height: 0.92;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--red);
+  }
+  .hero-title .underline-anim {
+    position: relative; display: inline-block;
+  }
+  .hero-title .underline-anim::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    height: 4px;
+    background: var(--red);
+    animation: revealLine 1.2s cubic-bezier(.77,0,.18,1) 0.4s both;
+  }
+  @keyframes revealLine {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--gray-light);
+    line-height: 1.7;
+    max-width: 420px;
+    margin-bottom: 40px;
+  }
+
+  .hero-actions {
+    display: flex; gap: 16px; flex-wrap: wrap; align-items: center;
+  }
+  .btn-primary {
+    background: var(--red);
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    text-decoration: none;
+    transition: background .2s, transform .15s;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); }
+  .btn-secondary {
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 16px 0;
+    text-decoration: none;
+    border-bottom: 2px solid var(--border);
+    transition: border-color .2s;
+  }
+  .btn-secondary:hover { border-color: var(--red); color: var(--off-white); }
+
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 2px;
+    border-top: 1px solid var(--border);
+    padding-top: 40px;
+    margin-top: 40px;
+  }
+  .stat {
+    padding: 0 24px 0 0;
+    border-right: 1px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-n {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2.4rem; font-weight: 900; line-height: 1;
+    color: var(--white);
+  }
+  .stat-n .red { color: var(--red); }
+  .stat-label {
+    font-size: 0.75rem; font-weight: 400;
+    color: var(--gray); text-transform: uppercase; letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  /* Hero right */
+  .hero-right {
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .hero-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--red);
+    padding: 20px 24px;
+    display: flex; align-items: center; gap: 16px;
+    transition: border-color .2s, background .2s;
+    opacity: 0;
+    animation: fadeUp .5s ease forwards;
+  }
+  .hero-card:nth-child(1) { animation-delay: .2s; }
+  .hero-card:nth-child(2) { animation-delay: .35s; }
+  .hero-card:nth-child(3) { animation-delay: .5s; }
+  .hero-card:hover { background: var(--bg3); border-left-color: var(--red); }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  .hero-card-icon {
+    font-size: 1.6rem; line-height: 1;
+    min-width: 40px; text-align: center;
+  }
+  .hero-card-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--white);
+  }
+  .hero-card-sub {
+    font-size: 0.8rem; color: var(--gray); margin-top: 2px;
+  }
+
+  /* ─── SECTIONS COMMON ─── */
+  section { position: relative; }
+  .section-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 100px 64px;
+  }
+  .section-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--red); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-eyebrow::before {
+    content: '';
+    display: block; width: 24px; height: 2px; background: var(--red);
+  }
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    font-weight: 900; line-height: 1; letter-spacing: -0.5px;
+    text-transform: uppercase; margin-bottom: 16px;
+  }
+  .section-desc {
+    font-size: 1rem; font-weight: 300; color: var(--gray-light);
+    max-width: 520px; line-height: 1.7; margin-bottom: 56px;
+  }
+
+  /* ─── SERVICES ─── */
+  #services { background: var(--bg); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .service-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 40px 36px;
+    transition: background .2s;
+    position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--red);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .35s cubic-bezier(.77,0,.18,1);
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover { background: var(--bg3); }
+
+  .service-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 3px; color: var(--red);
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .service-cat {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.6rem; font-weight: 900; letter-spacing: -0.5px;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .service-sub {
+    font-size: 0.8rem; color: var(--gray);
+    margin-bottom: 28px; line-height: 1.4;
+  }
+  .service-items { display: flex; flex-direction: column; gap: 16px; }
+  .service-item {}
+  .service-item-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    letter-spacing: 0.5px; color: var(--white);
+    margin-bottom: 4px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .service-item-title::before {
+    content: ''; display: block;
+    width: 6px; height: 6px; background: var(--red);
+    flex-shrink: 0;
+  }
+  .service-item-desc {
+    font-size: 0.82rem; color: var(--gray);
+    line-height: 1.5; padding-left: 14px;
+  }
+  .service-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 28px;
+    background: rgba(209,0,0,0.1);
+    border: 1px solid rgba(209,0,0,0.3);
+    padding: 8px 14px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase; color: var(--red);
+  }
+
+  /* ─── WHY US ─── */
+  #why { background: var(--bg2); }
+  .why-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
+  }
+  .why-left {}
+  .why-right {
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .why-item {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+    display: flex; align-items: flex-start; gap: 20px;
+    transition: border-color .2s;
+  }
+  .why-item:hover { border-color: rgba(209,0,0,0.3); }
+  .why-icon { font-size: 1.4rem; line-height: 1; flex-shrink: 0; padding-top: 2px; }
+  .why-item-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.05rem; font-weight: 700; letter-spacing: 0.5px;
+    text-transform: uppercase; margin-bottom: 4px;
+  }
+  .why-item-desc {
+    font-size: 0.85rem; color: var(--gray); line-height: 1.55;
+  }
+
+  /* Manifesto */
+  .manifesto {
+    margin-top: 40px;
+    background: var(--red);
+    padding: 36px 36px;
+    position: relative;
+  }
+  .manifesto::before {
+    content: '"';
+    position: absolute; top: -10px; left: 28px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 6rem; font-weight: 900; color: rgba(255,255,255,0.15);
+    line-height: 1;
+  }
+  .manifesto p {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.4rem; font-weight: 700; font-style: italic;
+    line-height: 1.4; color: #fff;
+    position: relative; z-index: 1;
+  }
+  .manifesto-author {
+    font-size: 0.78rem; letter-spacing: 2px; font-style: normal;
+    color: rgba(255,255,255,0.7); margin-top: 12px;
+    font-family: 'Barlow', sans-serif; font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  /* ─── MARQUEE ─── */
+  .marquee-wrap {
+    background: var(--red);
+    overflow: hidden; padding: 16px 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .marquee-track {
+    display: flex; gap: 0;
+    animation: marquee 18s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-track span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.82rem; font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; color: rgba(255,255,255,0.9);
+    padding: 0 32px;
+  }
+  .marquee-track span.dot {
+    color: rgba(255,255,255,0.4); font-size: 0.5rem; padding: 0;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ─── CONTACT ─── */
+  #contact { background: var(--bg); }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
+  }
+  .contact-left {}
+  .contact-right iframe {
+    width: 100%; height: 380px;
+    border: 1px solid var(--border);
+    filter: grayscale(100%) invert(90%) contrast(90%);
+  }
+  .cta-stack {
+    display: flex; flex-direction: column; gap: 12px; margin-top: 36px;
+  }
+  .cta-btn {
+    display: flex; align-items: center; gap: 14px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.05rem; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; text-decoration: none;
+    padding: 18px 24px;
+    border: 1px solid var(--border);
+    transition: all .2s; color: var(--white);
+  }
+  .cta-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+  .cta-btn.wa { background: var(--bg2); }
+  .cta-btn.wa:hover { background: #25D366; border-color: #25D366; }
+  .cta-btn.gm { background: var(--bg2); }
+  .cta-btn.gm:hover { background: var(--red); border-color: var(--red); }
+
+  .contact-info-block {
+    margin-bottom: 12px;
+    font-size: 0.88rem; color: var(--gray);
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .contact-info-block strong {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; letter-spacing: 0.5px;
+    text-transform: uppercase; color: var(--white);
+    display: block; font-size: 0.78rem; margin-bottom: 2px;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 32px 64px;
+    max-width: 100%;
+  }
+  .footer-inner {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .footer-copy {
+    font-size: 0.8rem; color: var(--gray); letter-spacing: 0.5px;
+  }
+  .footer-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.2rem; font-weight: 900; letter-spacing: -0.3px;
+  }
+  .footer-logo .r { color: var(--red); }
+  .footer-logo .w { color: var(--white); }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 960px) {
+    nav a { display: none; }
+    .hamburger { display: flex; }
+
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; padding: 60px 32px; }
+    .hero-right { display: none; }
+    .hero-stats { grid-template-columns: repeat(3,1fr); }
+
+    .section-inner { padding: 72px 32px; }
+
+    .services-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .contact-right iframe { height: 280px; }
+
+    footer { padding: 28px 32px; }
+  }
+  @media (max-width: 560px) {
+    .header-inner { padding: 0 20px; }
+    .lang-switcher { display: none; }
+    .section-inner { padding: 60px 20px; }
+    .hero-inner { padding: 48px 20px; }
+    .hero-stats { grid-template-columns: 1fr; gap: 16px; }
+    .stat { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 16px; }
+    .stat:last-child { border-bottom: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div id="loading-screen">
-        <div class="loader-wrapper">
-            <span class="loader-letter">F</span>
-            <span class="loader-letter">l</span>
-            <span class="loader-letter">a</span>
-            <span class="loader-letter">t</span>
-            <span class="loader-letter">O</span>
-            <span class="loader-letter">u</span>
-            <span class="loader-letter">t</span>
-            <span class="loader-letter">P</span>
-            <span class="loader-letter">Y</span>
-            <span class="loader-letter">.</span>
-            <span class="loader-letter">.</span>
-            <span class="loader-letter">.</span>
-            <div class="loader"></div>
-        </div>
+
+<!-- ── LANGUAGE OVERLAY ── -->
+<div id="lang-overlay">
+  <div class="lang-popup">
+    <div class="logo-popup"><span class="r">FLAT</span><span class="r">OUT</span><span class="w">PY</span></div>
+    <p id="popup-label">Seleccione su idioma preferido<br>/ Escolha seu idioma / Choose your language</p>
+    <div class="lang-btns">
+      <button class="lang-btn" onclick="setLang('es')">ES-PY</button>
+      <button class="lang-btn" onclick="setLang('pt')">PT-BR</button>
+      <button class="lang-btn" onclick="setLang('en')">EN-US</button>
     </div>
-    <!-- Header com Logo -->
-    <header class="header">
-        <div class="logo-container">
-            <img src="img/title3.png" alt="Flatout PY">
+  </div>
+</div>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo"><span class="r">FLAT</span><span class="r">OUT</span><span class="w">PY</span></a>
+    <nav>
+      <a href="#services" data-i18n="nav_services">Servicios</a>
+      <a href="#why" data-i18n="nav_why">Nosotros</a>
+      <a href="#contact" data-i18n="nav_contact">Contacto</a>
+      <div class="lang-switcher">
+        <button class="ls-btn active" onclick="setLang('es')">ES</button>
+        <button class="ls-btn" onclick="setLang('pt')">PT</button>
+        <button class="ls-btn" onclick="setLang('en')">EN</button>
+      </div>
+      <a href="https://wa.me/595986641668" target="_blank" class="header-cta" data-i18n="nav_cta">Agendar</a>
+    </nav>
+    <button class="hamburger" id="ham" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-accent"></div>
+  <div class="hero-red-bar"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow" data-i18n="hero_eyebrow">Presidente Franco · Paraguay</div>
+      <h1 class="hero-title">
+        <span data-i18n="hero_t1">Tu auto.</span><br>
+        <em><span class="underline-anim" data-i18n="hero_t2">OTRA CATEGORÍA.</span></em>
+      </h1>
+      <p class="hero-desc" data-i18n="hero_desc">
+        Performance, estética premium y mecánica de precisión. Cada detalle ejecutado al límite.
+      </p>
+      <div class="hero-actions">
+        <a href="https://wa.me/595986641668" target="_blank" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          <span data-i18n="hero_cta">WhatsApp</span>
+        </a>
+        <a href="#services" class="btn-secondary" data-i18n="hero_cta2">Ver servicios ↓</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-n">+500<span class="red">+</span></div>
+          <div class="stat-label" data-i18n="stat1">Vehículos</div>
         </div>
-    </header>
-
-    <div class="container">
-
-        <h2 class="services-title">SERVICIOS PROFISSIONALES</h2>
-        <div class="description">Estamos bien equipados, con equipos profesionales y un amplio sentido de responsabilidad para garantizar su confianza y satisfacción.</div>
-        <!-- Selos -->
-        <div class="seals-container">
-            <img src="img/elevador_selo.png" alt="Elevador" class="seal">
-            <img src="img/escape_selo.png" alt="Escape" class="seal">
-            <img src="img/estetica_selo.png" alt="Estética" class="seal">
+        <div class="stat">
+          <div class="stat-n">3<span class="red">X</span></div>
+          <div class="stat-label" data-i18n="stat2">Servicios</div>
         </div>
-
-        <!-- Título dos Serviços -->
-        <h2 class="services-title">Nuestros servicios</h2>
-        <!-- Botões e Painéis de Serviços -->
-        <div class="services-container">
-            <!-- PERFORMANCE -->
-            <div class="service-item-wrapper">
-                <button class="service-button" onclick="toggleService('performance')">
-                    PERFORMANCE
-                </button>
-                <div id="performance-panel" class="service-panel">
-                    <ul class="service-list">
-                        <li class="service-item"><strong>LÍNEA DE ESCAPE COMPLETA</strong><br>Múltiple, Downpipe, MidPipe, Catback.</li>
-                        <li class="service-item"><strong>SISTEMA DE ADMISIÓN</strong><br>Cañería, Intake, Inlet, ChargePipes, BOV, Intercooler.</li>
-                        <li class="service-item"><strong>FABRICACIÓN</strong><br>Soportes a medida, Refuerzos, Ajustes & Personalizaciones Racing.</li>
-                        <li class="service-item"><strong>ELECTRÓNICA</strong><br>Módulos, Add-Ons (Launch Control, Rev. Limiter), Panel Racing (Switches), Bypass de sistema, Harness.</li>
-                        <li class="service-item"><strong>SOLDADURA EN PROCESO TIG.</strong><br>ACERO-INOX-ALUMINIO-TITÂNIO.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- ESTÉTICA -->
-            <div class="service-item-wrapper">
-                <button class="service-button" onclick="toggleService('estetica')">
-                    ESTÉTICA
-                </button>
-                <div id="estetica-panel" class="service-panel">
-                    <ul class="service-list">
-                        <li class="service-item"><strong>LAVADO DETALLADO - INTERNO|EXTERNO.</strong><br>Hidratación de Plásticos & Cueros.</li>
-                        <li class="service-item"><strong>LAVADO TECNICO DE MOTOR.</strong><br>Líquido no conductor, Vapor, Productos especiales.</li>
-                        <li class="service-item"><strong>PULIDO TÉCNICO DE PINTURA - RESTAURACIÓN DE FAROS.</strong><br>Corrección de imperfecciones leves.</li>
-                        <li class="service-item"><strong>TRATAMIENTO DE PINTURA.</strong><br>Descontaminación, Coat Nano-Cerámico.</li>
-                        <li class="service-item"><strong>CUSTOMIZACIONES INTERNAS.</strong><br>Multimedia, Ambient Light, Star Roof, etc...</li>
-                    </ul>
-                    <button class="download-button" onclick="openPopup('img/estetica-menu.PNG')">Mostrar precios</button>
-                </div>
-            </div>
-
-            <!-- MECÁNICA LIGERA -->
-            <div class="service-item-wrapper">
-                <button class="service-button" onclick="toggleService('mecanica')">
-                    MECÁNICA LIGERA
-                </button>
-                <div id="mecanica-panel" class="service-panel">
-                    <ul class="service-list">
-                        <li class="service-item">
-                            <strong>MANTENIMIENTO GENERAL</strong><br>
-                            Revisión y mantenimiento preventivo de aceite, filtros, frenos y correas externas.
-                        </li>
-                        <li class="service-item">
-                            <strong>AJUSTES Y REPARACIONES LIGERAS</strong><br>
-                            Reparación de vidrios eléctricos, cierres de puertas, suspensiones leves y pequeños componentes, incluyendo piezas internas o soportes dañados que requieran ajustes o soldadura.
-                        </li>                        
-                        <li class="service-item">
-                            <strong>INSPECCIÓN COMPLETA</strong><br>
-                            Levantamos el vehículo para revisar visualmente motor, suspensión, frenos y sistema de escape, identificando posibles problemas de mantenimiento.
-                        </li>
-                    </ul>
-                </div>
-            </div>            
+        <div class="stat">
+          <div class="stat-n">100<span class="red">%</span></div>
+          <div class="stat-label" data-i18n="stat3">Premium</div>
         </div>
+      </div>
     </div>
-
-    <!-- Seção Mapa e Botões com Background -->
-    <div class="map-section-wrapper">
-        <div class="container">
-            <!-- Mapa -->
-            <div id="ubicacion" class="map-container">
-                <div class="map-wrapper">
-                    <iframe 
-                        id="map"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3599.651309130373!2d-54.63067292500069!3d-25.549989377485552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94f68ffbb716cc81%3A0xcb31cbefce999f34!2sFlatoutPY!5e0!3m2!1sen!2spy!4v1764098627847!5m2!1sen!2spy"
-                        style="border:0; width:100%; height:100%;" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade"
-                        title="Ubicación FlatOutPY">
-                    </iframe>
-                </div>
-            </div>
-            <!-- Botões de Contato -->
-            <div id="contacto" class="contact-buttons">
-                <!-- Botão Ubicación -->
-                <a href="https://maps.app.goo.gl/bjTmPqTZEkWAqAmZA" target="_blank" class="contact-button">
-                    <svg class="location-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                        <circle cx="12" cy="10" r="3"/>
-                    </svg>
-                    <span>Ubicación</span>
-                </a>
-                <!-- Botão WhatsApp -->
-                <a href="https://wa.me/595986641668" target="_blank" class="contact-button">
-                    <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                    </svg>
-                    <span>+595 986 641668</span>
-                </a>
-                <div><br><br></div>
-            </div>
+    <div class="hero-right">
+      <div class="hero-card">
+        <div class="hero-card-icon">P</div>
+        <div>
+          <div class="hero-card-label" data-i18n="hc1_title">Performance</div>
+          <div class="hero-card-sub" data-i18n="hc1_sub">Escape · Admisión · TIG · Electrónica</div>
         </div>
-    </div>
-
-    <div class="container">
-        <!-- Footer -->
-        <footer class="footer">
-            @FlatoutPY - MotorSport Club
-        </footer>
-    </div>
-
-    <!-- Popup de Imagem -->
-    <div id="image-popup-overlay" class="popup-overlay">
-        <div class="popup-container">
-            <button class="popup-close" onclick="closePopup()" aria-label="Cerrar">×</button>
-            <img id="popup-image" class="popup-image" src="" alt="Menu de servicios">
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-icon">D</div>
+        <div>
+          <div class="hero-card-label" data-i18n="hc2_title">Estética Premium</div>
+          <div class="hero-card-sub" data-i18n="hc2_sub">Pulido · Coating Cerámico · Detailing</div>
         </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-icon">M</div>
+        <div>
+          <div class="hero-card-label" data-i18n="hc3_title">Mecánica Leve</div>
+          <div class="hero-card-sub" data-i18n="hc3_sub">Mantenimiento · Inspección · Reparación</div>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <script>
-        // Loading Screen
-        window.addEventListener('load', function() {
-            const loadingScreen = document.getElementById('loading-screen');
-            // Aguarda um breve momento para garantir que tudo foi carregado
-            setTimeout(() => {
-                loadingScreen.classList.add('fade-out');
-                // Remove o elemento do DOM após a transição
-                setTimeout(() => {
-                    loadingScreen.style.display = 'none';
-                }, 500);
-            }, 500);
-        });
+<!-- ── MARQUEE ── -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marquee-track">
+    <span data-i18n="mq1">ESCAPE INOX</span><span class="dot">◆</span>
+    <span data-i18n="mq2">COATING CERÁMICO</span><span class="dot">◆</span>
+    <span data-i18n="mq3">SOLDA TIG</span><span class="dot">◆</span>
+    <span data-i18n="mq4">LAUNCH CONTROL</span><span class="dot">◆</span>
+    <span data-i18n="mq5">DETAILING PREMIUM</span><span class="dot">◆</span>
+    <span data-i18n="mq6">INTERCOOLER</span><span class="dot">◆</span>
+    <span data-i18n="mq7">PRESIDENTE FRANCO PY</span><span class="dot">◆</span>
+    <span data-i18n="mq1">ESCAPE INOX</span><span class="dot">◆</span>
+    <span data-i18n="mq2">COATING CERÁMICO</span><span class="dot">◆</span>
+    <span data-i18n="mq3">SOLDA TIG</span><span class="dot">◆</span>
+    <span data-i18n="mq4">LAUNCH CONTROL</span><span class="dot">◆</span>
+    <span data-i18n="mq5">DETAILING PREMIUM</span><span class="dot">◆</span>
+    <span data-i18n="mq6">INTERCOOLER</span><span class="dot">◆</span>
+    <span data-i18n="mq7">PRESIDENTE FRANCO PY</span><span class="dot">◆</span>
+  </div>
+</div>
 
-        function toggleService(serviceId) {
-            const panel = document.getElementById(serviceId + '-panel');
-            const button = event.target;
-            
-            // Fechar todos os outros painéis
-            const allPanels = document.querySelectorAll('.service-panel');
-            const allButtons = document.querySelectorAll('.service-button');
-            
-            allPanels.forEach(p => {
-                if (p !== panel) {
-                    p.classList.remove('active');
-                }
-            });
-            
-            allButtons.forEach(b => {
-                if (b !== button) {
-                    b.classList.remove('active');
-                }
-            });
-            
-            // Toggle do painel atual
-            panel.classList.toggle('active');
-            button.classList.toggle('active');
-        }
+<!-- ── SERVICES ── -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal" data-i18n="srv_eyebrow">Lo que hacemos</div>
+    <h2 class="section-title reveal" data-i18n="srv_title">SERVICIOS</h2>
+    <p class="section-desc reveal" data-i18n="srv_desc">Tres áreas de especialización. Un mismo estándar de excelencia.</p>
+    <div class="services-grid reveal">
 
-        // Função reutilizável para efeito de poeira
-        function createDustEffect(containerSelector) {
-            const container = document.querySelector(containerSelector);
-            if (!container) return;
+      <!-- Card 01 -->
+      <div class="service-card">
+        <div class="service-num">01 · <span data-i18n="s1_cat">PERFORMANCE</span></div>
+        <div class="service-cat" data-i18n="s1_cat">PERFORMANCE</div>
+        <div class="service-sub" data-i18n="s1_sub">Escape · Admisión · Electrónica · TIG</div>
+        <div class="service-items">
+          <div class="service-item">
+            <div class="service-item-title" data-i18n="s1_t1">Línea de Escape Completa</div>
+            <div class="service-item-desc" data-i18n="s1_d1">Múltiple, Downpipe, MidPipe, Catback.</div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-title" data-i18n="s1_t2">Sistema de Admisión</div>
+            <div class="service-item-desc" data-i18n="s1_d2">Cañería, Intake, Inlet, ChargePipes, BOV, Intercooler.</div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-title" data-i18n="s1_t3">Fabricación a Medida</div>
+            <div class="service-item-desc" data-i18n="s1_d3">Soportes, refuerzos, ajustes y personalizaciones racing.</div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-title" data-i18n="s1_t4">Electrónica Racing</div>
+            <div class="service-item-desc" data-i18n="s1_d4">Módulos, Launch Control, Rev. Limiter, Panel Racing, Bypass, Harness.</div>
+          </div>
+        </div>
+        <div class="service-badge">• <span data-i18n="s1_badge">Solda TIG · Aço · Inox · Alumínio · Titânio</span></div>
+      </div>
 
-            const dustContainer = document.createElement('div');
-            dustContainer.className = 'dust-container';
-            container.appendChild(dustContainer);
+      <!-- Card 02 -->
+      <div class="service-card">
+        <div class="service-num">02 · <span data-i18n="s2_cat">ESTÉTICA</span></div>
+        <div class="service-cat" data-i18n="s2_cat">ESTÉTICA</div>
+        <div class="service-sub" data-i18n="s2_sub">Lavado · Pulido · Coating · Customización</div>
+        <div class="service-items">
+          <div class="service-item">
+            <div class="service-item-title" data-i18n="s2_t1">Lavado Detallado</div>
+            <div class="service-item-desc" data-i18n="s2_d1">Interno y externo. Hidratación de plásticos y cueros.</div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-title" data-i18n="s2_t2">Lavado Técnico de Motor</div>
+            <div class="service-item-desc" data-i18n="s2_d2">Líquido no conductor, vapor y productos especiales.</div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-title" data-i18n="s2_t3">Pulido Técnico & Faros</div>
+            <div class="service-item-desc" data-i18n="s2_d3">Corrección de imperfecciones. Restauración de faros.</div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-title" data-i18n="s2_t4">Tratamiento de Pintura</div>
+            <div class="service-item-desc" data-i18n="s2_d4">Descontaminación. Coat Nano-Cerámico.</div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-title" data-i18n="s2_t5">Customizaciones Internas</div>
+            <div class="service-item-desc" data-i18n="s2_d5">Multimedia, Ambient Light, Star Roof y más.</div>
+          </div>
+        </div>
+      </div>
 
-            const particles = [];
-            let lastSpawnTime = 0;
-            const spawnInterval = 200; // Gerar nova partícula a cada 200ms
+      <!-- Card 03 -->
+      <div class="service-card">
+        <div class="service-num">03 · <span data-i18n="s3_cat">MECÁNICA LEVE</span></div>
+        <div class="service-cat" data-i18n="s3_cat">MECÁNICA LEVE</div>
+        <div class="service-sub" data-i18n="s3_sub">Mantenimiento · Reparaciones · Inspección</div>
+        <div class="service-items">
+          <div class="service-item">
+            <div class="service-item-title" data-i18n="s3_t1">Mantenimiento General</div>
+            <div class="service-item-desc" data-i18n="s3_d1">Revisión preventiva de aceite, filtros, frenos y correas externas.</div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-title" data-i18n="s3_t2">Ajustes y Reparaciones</div>
+            <div class="service-item-desc" data-i18n="s3_d2">Vidrios eléctricos, cierres, suspensión leve y piezas que requieran soldadura.</div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-title" data-i18n="s3_t3">Inspección Completa</div>
+            <div class="service-item-desc" data-i18n="s3_d3">Elevamos el vehículo para revisión visual de motor, suspensión, frenos y escape.</div>
+          </div>
+        </div>
+        <div class="service-badge">• <span data-i18n="s3_badge">Diagnóstico completo incluido</span></div>
+      </div>
 
-            // Função para gerar número aleatório
-            function random(min, max) {
-                return Math.random() * (max - min) + min;
-            }
+    </div>
+  </div>
+</section>
 
-            // Criar partículas com forma de nuvem
-            function createParticle() {
-                const particle = document.createElement('div');
-                particle.className = 'dust-particle';
-                
-                // Tamanhos variados para parecer nuvem
-                const width = random(100, 300);
-                const height = random(80, 250);
-                
-                // Cores aleatórias (branco ou vermelho)
-                const isRed = Math.random() > 0.5;
-                const opacity = random(0.02, 0.04);
-                const color = isRed 
-                    ? `rgba(255, 0, 0, ${opacity})` 
-                    : `rgba(255, 255, 255, ${opacity})`;
-                
-                // Forma mais orgânica, não circular
-                const borderRadius = random(40, 60) + '%';
-                
-                particle.style.width = width + 'px';
-                particle.style.height = height + 'px';
-                particle.style.borderRadius = borderRadius;
-                particle.style.background = `radial-gradient(ellipse, ${color} 0%, transparent 65%)`;
-                
-                const containerHeight = container.offsetHeight;
-                const containerWidth = container.offsetWidth;
-                
-                // Sempre começar da esquerda (fora da tela)
-                particle.style.left = -width + 'px';
-                particle.style.top = random(-20, containerHeight + 20) + 'px';
-                
-                // Movimento principal da esquerda para direita, com variação vertical
-                particle.vx = random(0.4, 0.8); // Sempre positivo (esquerda para direita)
-                particle.vy = random(-0.15, 0.15); // Movimento vertical sutil
-                particle.rotation = random(0, 360);
-                particle.rotationSpeed = random(-0.3, 0.3);
-                
-                // Variação de escala para efeito de nuvem
-                particle.scale = random(0.8, 1.2);
-                particle.scaleSpeed = random(-0.001, 0.001);
-                
-                dustContainer.appendChild(particle);
-                particles.push(particle);
-            }
+<!-- ── WHY US ── -->
+<section id="why">
+  <div class="section-inner">
+    <div class="why-grid">
+      <div class="why-left">
+        <div class="section-eyebrow reveal" data-i18n="why_eyebrow">Por qué elegirnos</div>
+        <h2 class="section-title reveal" data-i18n="why_title">SIN CONCESIONES.</h2>
+        <div class="manifesto reveal">
+          <p data-i18n="why_manifesto">No somos una lavandería de autos. Somos el taller donde los entusiastas confían su máquina.</p>
+          <div class="manifesto-author">— FlatOutPY · Presidente Franco, PY</div>
+        </div>
+      </div>
+      <div class="why-right reveal">
+        <div class="why-item">
+          <div class="why-icon">01</div>
+          <div>
+            <div class="why-item-title" data-i18n="w1t">Especialistas en Performance</div>
+            <div class="why-item-desc" data-i18n="w1d">Soldadura TIG en acero, inox, aluminio y titanio. Fabricación a medida para cada proyecto racing.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">02</div>
+          <div>
+            <div class="why-item-title" data-i18n="w2t">Detailing de Precisión</div>
+            <div class="why-item-desc" data-i18n="w2d">Coating nano-cerámico, corrección de pintura y restauración de faros con productos de nivel profesional.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">03</div>
+          <div>
+            <div class="why-item-title" data-i18n="w3t">Frontera Estratégica</div>
+            <div class="why-item-desc" data-i18n="w3d">En Presidente Franco, a pasos de la Triple Frontera. Fácil acceso desde Brasil y Argentina.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">04</div>
+          <div>
+            <div class="why-item-title" data-i18n="w4t">Atención Directa</div>
+            <div class="why-item-desc" data-i18n="w4d">Hablamos tu idioma — español, portugués e inglés. Presupuesto sin compromiso por WhatsApp.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            // Inicializar algumas partículas
-            for (let i = 0; i < 15; i++) {
-                createParticle();
-                // Distribuir no tempo
-                lastSpawnTime = Date.now() - (spawnInterval * i);
-            }
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="contact-left">
+        <div class="section-eyebrow reveal" data-i18n="ct_eyebrow">Contacto</div>
+        <h2 class="section-title reveal" data-i18n="ct_title">AGENDÁ TU TURNO</h2>
+        <p class="section-desc reveal" data-i18n="ct_desc">Escribinos por WhatsApp para presupuesto inmediato. Sin burocracia, sin esperas.</p>
+        <div class="contact-info-block reveal">
+          <div>
+            <strong data-i18n="ct_loc_label">Ubicación</strong>
+            <span data-i18n="ct_loc">Presidente Franco, Alto Paraná · Paraguay</span>
+          </div>
+        </div>
+        <div class="cta-stack reveal">
+          <a href="https://wa.me/595986641668" target="_blank" class="cta-btn wa">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            +595 986 641668
+          </a>
+          <a href="https://maps.app.goo.gl/bjTmPqTZEkWAqAmZA" target="_blank" class="cta-btn gm">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span data-i18n="ct_map">Ver en Google Maps</span>
+          </a>
+        </div>
+      </div>
+      <div class="contact-right reveal">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3599.651309130373!2d-54.63067292500069!3d-25.549989377485552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94f68ffbb716cc81%3A0xcb31cbefce999f34!2sFlatoutPY!5e0!3m2!1sen!2spy!4v1764098627847!5m2!1sen!2spy" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="FlatOutPY"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
 
-            // Animar partículas
-            function animate() {
-                const currentTime = Date.now();
-                const containerWidth = container.offsetWidth;
-                const containerHeight = container.offsetHeight;
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo"><span class="r">FLAT</span><span class="r">OUT</span><span class="w">PY</span></div>
+    <div class="footer-copy" data-i18n="footer">© 2025 FlatOutPY · Presidente Franco, Paraguay</div>
+    <div class="footer-logo" style="opacity:0;pointer-events:none"><span class="r">FLAT</span><span class="r">OUT</span><span class="w">PY</span></div>
+  </div>
+</footer>
 
-                // Gerar novas partículas continuamente
-                if (currentTime - lastSpawnTime >= spawnInterval) {
-                    createParticle();
-                    lastSpawnTime = currentTime;
-                }
+<script>
+// ── i18n ──
+const translations = {
+  es: {
+    nav_services: "Servicios", nav_why: "Nosotros", nav_contact: "Contacto", nav_cta: "Agendar",
+    hero_eyebrow: "Presidente Franco · Paraguay",
+    hero_t1: "Tu auto.", hero_t2: "OTRA CATEGORÍA.",
+    hero_desc: "Performance, estética premium y mecánica de precisión. Cada detalle ejecutado al límite.",
+    hero_cta: "WhatsApp", hero_cta2: "Ver servicios ↓",
+    stat1: "Vehículos", stat2: "Servicios", stat3: "Premium",
+    hc1_title: "Performance", hc1_sub: "Escape · Admisión · TIG · Electrónica",
+    hc2_title: "Estética Premium", hc2_sub: "Pulido · Coating Cerámico · Detailing",
+    hc3_title: "Mecánica Leve", hc3_sub: "Mantenimiento · Inspección · Reparación",
+    mq1:"ESCAPE INOX", mq2:"COATING CERÁMICO", mq3:"SOLDA TIG", mq4:"LAUNCH CONTROL",
+    mq5:"DETAILING PREMIUM", mq6:"INTERCOOLER", mq7:"PRESIDENTE FRANCO PY",
+    srv_eyebrow: "Lo que hacemos", srv_title: "SERVICIOS",
+    srv_desc: "Tres áreas de especialización. Un mismo estándar de excelencia.",
+    s1_cat:"PERFORMANCE", s1_sub:"Escape · Admisión · Electrónica · TIG",
+    s1_t1:"Línea de Escape Completa", s1_d1:"Múltiple, Downpipe, MidPipe, Catback.",
+    s1_t2:"Sistema de Admisión", s1_d2:"Cañería, Intake, Inlet, ChargePipes, BOV, Intercooler.",
+    s1_t3:"Fabricación a Medida", s1_d3:"Soportes, refuerzos, ajustes y personalizaciones racing.",
+    s1_t4:"Electrónica Racing", s1_d4:"Módulos, Launch Control, Rev. Limiter, Panel Racing, Bypass, Harness.",
+    s1_badge:"Solda TIG · Acero · Inox · Aluminio · Titanio",
+    s2_cat:"ESTÉTICA", s2_sub:"Lavado · Pulido · Coating · Customización",
+    s2_t1:"Lavado Detallado", s2_d1:"Interno y externo. Hidratación de plásticos y cueros.",
+    s2_t2:"Lavado Técnico de Motor", s2_d2:"Líquido no conductor, vapor y productos especiales.",
+    s2_t3:"Pulido Técnico & Faros", s2_d3:"Corrección de imperfecciones. Restauración de faros.",
+    s2_t4:"Tratamiento de Pintura", s2_d4:"Descontaminación. Coat Nano-Cerámico.",
+    s2_t5:"Customizaciones Internas", s2_d5:"Multimedia, Ambient Light, Star Roof y más.",
+    s3_cat:"MECÁNICA LEVE", s3_sub:"Mantenimiento · Reparaciones · Inspección",
+    s3_t1:"Mantenimiento General", s3_d1:"Revisión preventiva de aceite, filtros, frenos y correas externas.",
+    s3_t2:"Ajustes y Reparaciones", s3_d2:"Vidrios eléctricos, cierres, suspensión leve y piezas que requieran soldadura.",
+    s3_t3:"Inspección Completa", s3_d3:"Elevamos el vehículo para revisión visual de motor, suspensión, frenos y escape.",
+    s3_badge:"Diagnóstico completo incluido",
+    why_eyebrow:"Por qué elegirnos", why_title:"SIN CONCESIONES.",
+    why_manifesto:"No somos una lavandería de autos. Somos el taller donde los entusiastas confían su máquina.",
+    w1t:"Especialistas en Performance", w1d:"Soldadura TIG en acero, inox, aluminio y titanio. Fabricación a medida para cada proyecto racing.",
+    w2t:"Detailing de Precisión", w2d:"Coating nano-cerámico, corrección de pintura y restauración de faros con productos de nivel profesional.",
+    w3t:"Frontera Estratégica", w3d:"En Presidente Franco, a pasos de la Triple Frontera. Fácil acceso desde Brasil y Argentina.",
+    w4t:"Atención Directa", w4d:"Hablamos tu idioma — español, portugués e inglés. Presupuesto sin compromiso por WhatsApp.",
+    ct_eyebrow:"Contacto", ct_title:"AGENDÁ TU TURNO",
+    ct_desc:"Escribinos por WhatsApp para presupuesto inmediato. Sin burocracia, sin esperas.",
+    ct_loc_label:"Ubicación", ct_loc:"Presidente Franco, Alto Paraná · Paraguay",
+    ct_map:"Ver en Google Maps",
+    footer:"© 2025 FlatOutPY · Presidente Franco, Paraguay"
+  },
+  pt: {
+    nav_services: "Serviços", nav_why: "Sobre nós", nav_contact: "Contato", nav_cta: "Agendar",
+    hero_eyebrow: "Presidente Franco · Paraguai",
+    hero_t1: "Seu carro.", hero_t2: "OUTRO NÍVEL.",
+    hero_desc: "Performance, estética premium e mecânica de precisão. Cada detalhe executado no limite.",
+    hero_cta: "WhatsApp", hero_cta2: "Ver serviços ↓",
+    stat1: "Veículos", stat2: "Serviços", stat3: "Premium",
+    hc1_title: "Performance", hc1_sub: "Escapamento · Admissão · TIG · Eletrônica",
+    hc2_title: "Estética Premium", hc2_sub: "Polimento · Coating Cerâmico · Detailing",
+    hc3_title: "Mecânica Leve", hc3_sub: "Manutenção · Inspeção · Reparo",
+    mq1:"ESCAPAMENTO INOX", mq2:"COATING CERÂMICO", mq3:"SOLDA TIG", mq4:"LAUNCH CONTROL",
+    mq5:"DETAILING PREMIUM", mq6:"INTERCOOLER", mq7:"PRESIDENTE FRANCO PY",
+    srv_eyebrow: "O que fazemos", srv_title: "SERVIÇOS",
+    srv_desc: "Três áreas de especialização. Um único padrão de excelência.",
+    s1_cat:"PERFORMANCE", s1_sub:"Escapamento · Admissão · Eletrônica · TIG",
+    s1_t1:"Linha de Escapamento Completa", s1_d1:"Múltiplo, Downpipe, MidPipe, Catback.",
+    s1_t2:"Sistema de Admissão", s1_d2:"Dutos, Intake, Inlet, ChargePipes, BOV, Intercooler.",
+    s1_t3:"Fabricação Sob Medida", s1_d3:"Suportes, reforços, ajustes e personalizações racing.",
+    s1_t4:"Eletrônica Racing", s1_d4:"Módulos, Launch Control, Rev. Limiter, Painel Racing, Bypass, Harness.",
+    s1_badge:"Solda TIG · Aço · Inox · Alumínio · Titânio",
+    s2_cat:"ESTÉTICA", s2_sub:"Lavagem · Polimento · Coating · Customização",
+    s2_t1:"Lavagem Detalhada", s2_d1:"Interna e externa. Hidratação de plásticos e couros.",
+    s2_t2:"Lavagem Técnica de Motor", s2_d2:"Líquido não condutor, vapor e produtos especiais.",
+    s2_t3:"Polimento & Faróis", s2_d3:"Correção de imperfeições. Restauração de faróis.",
+    s2_t4:"Tratamento de Pintura", s2_d4:"Descontaminação. Coat Nano-Cerâmico.",
+    s2_t5:"Customizações Internas", s2_d5:"Multimídia, Ambient Light, Star Roof e mais.",
+    s3_cat:"MECÂNICA LEVE", s3_sub:"Manutenção · Reparos · Inspeção",
+    s3_t1:"Manutenção Geral", s3_d1:"Revisão preventiva de óleo, filtros, freios e correias externas.",
+    s3_t2:"Ajustes e Reparos", s3_d2:"Vidros elétricos, fechos, suspensão leve e peças que precisem de solda.",
+    s3_t3:"Inspeção Completa", s3_d3:"Elevamos o veículo para inspeção visual de motor, suspensão, freios e escapamento.",
+    s3_badge:"Diagnóstico completo incluído",
+    why_eyebrow:"Por que nos escolher", why_title:"SEM CONCESSÕES.",
+    why_manifesto:"Não somos um lava-rápido. Somos a oficina onde os entusiastas confiam o seu carro.",
+    w1t:"Especialistas em Performance", w1d:"Solda TIG em aço, inox, alumínio e titânio. Fabricação sob medida para cada projeto racing.",
+    w2t:"Detailing de Precisão", w2d:"Coating nano-cerâmico, correção de pintura e restauração de faróis com produtos de nível profissional.",
+    w3t:"Localização Estratégica", w3d:"Em Presidente Franco, perto da Tríplice Fronteira. Fácil acesso pelo Brasil e Argentina.",
+    w4t:"Atendimento Direto", w4d:"Falamos o seu idioma — espanhol, português e inglês. Orçamento sem compromisso pelo WhatsApp.",
+    ct_eyebrow:"Contato", ct_title:"AGENDE SUA VISITA",
+    ct_desc:"Fale com a gente pelo WhatsApp para orçamento imediato. Sem burocracia, sem espera.",
+    ct_loc_label:"Localização", ct_loc:"Presidente Franco, Alto Paraná · Paraguai",
+    ct_map:"Ver no Google Maps",
+    footer:"© 2025 FlatOutPY · Presidente Franco, Paraguai"
+  },
+  en: {
+    nav_services: "Services", nav_why: "About", nav_contact: "Contact", nav_cta: "Book Now",
+    hero_eyebrow: "Presidente Franco · Paraguay",
+    hero_t1: "Your car.", hero_t2: "ANOTHER LEVEL.",
+    hero_desc: "Performance upgrades, premium detailing and precision mechanics. Every detail executed to the limit.",
+    hero_cta: "WhatsApp", hero_cta2: "View services ↓",
+    stat1: "Vehicles", stat2: "Services", stat3: "Premium",
+    hc1_title: "Performance", hc1_sub: "Exhaust · Intake · TIG · Electronics",
+    hc2_title: "Premium Detailing", hc2_sub: "Polish · Ceramic Coating · Detailing",
+    hc3_title: "Light Mechanics", hc3_sub: "Maintenance · Inspection · Repair",
+    mq1:"STAINLESS EXHAUST", mq2:"CERAMIC COATING", mq3:"TIG WELDING", mq4:"LAUNCH CONTROL",
+    mq5:"PREMIUM DETAILING", mq6:"INTERCOOLER", mq7:"PRESIDENTE FRANCO PY",
+    srv_eyebrow: "What we do", srv_title: "SERVICES",
+    srv_desc: "Three areas of expertise. One standard of excellence.",
+    s1_cat:"PERFORMANCE", s1_sub:"Exhaust · Intake · Electronics · TIG",
+    s1_t1:"Full Exhaust System", s1_d1:"Manifold, Downpipe, MidPipe, Catback.",
+    s1_t2:"Intake System", s1_d2:"Piping, Intake, Inlet, ChargePipes, BOV, Intercooler.",
+    s1_t3:"Custom Fabrication", s1_d3:"Brackets, braces, adjustments and racing customizations.",
+    s1_t4:"Racing Electronics", s1_d4:"Modules, Launch Control, Rev. Limiter, Racing Panel, Bypass, Harness.",
+    s1_badge:"TIG Welding · Steel · Stainless · Aluminum · Titanium",
+    s2_cat:"DETAILING", s2_sub:"Wash · Polish · Coating · Customization",
+    s2_t1:"Full Detail Wash", s2_d1:"Interior and exterior. Plastic and leather conditioning.",
+    s2_t2:"Engine Bay Cleaning", s2_d2:"Non-conductive fluid, steam and specialized products.",
+    s2_t3:"Paint Correction & Headlights", s2_d3:"Imperfection correction. Headlight restoration.",
+    s2_t4:"Paint Treatment", s2_d4:"Decontamination. Nano-Ceramic coating.",
+    s2_t5:"Interior Customizations", s2_d5:"Multimedia, Ambient Light, Star Roof and more.",
+    s3_cat:"LIGHT MECHANICS", s3_sub:"Maintenance · Repairs · Inspection",
+    s3_t1:"General Maintenance", s3_d1:"Preventive check: oil, filters, brakes and external belts.",
+    s3_t2:"Adjustments & Repairs", s3_d2:"Electric windows, locks, light suspension and parts requiring welding.",
+    s3_t3:"Full Inspection", s3_d3:"Vehicle lifted for visual inspection of engine, suspension, brakes and exhaust.",
+    s3_badge:"Full diagnostic included",
+    why_eyebrow:"Why choose us", why_title:"NO COMPROMISES.",
+    why_manifesto:"We're not a car wash. We're the shop where enthusiasts trust their machine.",
+    w1t:"Performance Specialists", w1d:"TIG welding in steel, stainless, aluminum and titanium. Custom fabrication for every racing build.",
+    w2t:"Precision Detailing", w2d:"Nano-ceramic coating, paint correction and headlight restoration with professional-grade products.",
+    w3t:"Strategic Location", w3d:"In Presidente Franco, steps from the Triple Frontier. Easy access from Brazil and Argentina.",
+    w4t:"Direct Service", w4d:"We speak your language — Spanish, Portuguese and English. Free quote on WhatsApp.",
+    ct_eyebrow:"Contact", ct_title:"BOOK YOUR SLOT",
+    ct_desc:"Message us on WhatsApp for an instant quote. No red tape, no waiting.",
+    ct_loc_label:"Location", ct_loc:"Presidente Franco, Alto Paraná · Paraguay",
+    ct_map:"View on Google Maps",
+    footer:"© 2025 FlatOutPY · Presidente Franco, Paraguay"
+  }
+};
 
-                // Animar e remover partículas que saíram
-                for (let i = particles.length - 1; i >= 0; i--) {
-                    const particle = particles[i];
-                    let left = parseFloat(particle.style.left);
-                    let top = parseFloat(particle.style.top);
+let currentLang = 'es';
 
-                    // Movimento da esquerda para direita com variação vertical
-                    left += particle.vx;
-                    top += particle.vy;
-                    
-                    // Rotação suave
-                    particle.rotation += particle.rotationSpeed;
-                    particle.style.transform = `rotate(${particle.rotation}deg) scale(${particle.scale})`;
-                    
-                    // Variação de escala
-                    particle.scale += particle.scaleSpeed;
-                    if (particle.scale > 1.3 || particle.scale < 0.7) {
-                        particle.scaleSpeed *= -1;
-                    }
-                    
-                    const particleWidth = parseFloat(particle.style.width);
-                    
-                    // Remover partículas que saíram pela direita
-                    if (left > containerWidth + particleWidth) {
-                        particle.remove();
-                        particles.splice(i, 1);
-                        continue;
-                    }
-                    
-                    // Manter partículas dentro dos limites verticais (com margem)
-                    if (top < -50) {
-                        top = -50;
-                        particle.vy *= -0.5;
-                    } else if (top > containerHeight + 50) {
-                        top = containerHeight + 50;
-                        particle.vy *= -0.5;
-                    }
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  localStorage.setItem('flatoutpy_lang', lang);
 
-                    particle.style.left = left + 'px';
-                    particle.style.top = top + 'px';
-                }
+  // hide overlay
+  document.getElementById('lang-overlay').classList.add('hidden');
 
-                requestAnimationFrame(animate);
-            }
+  // apply translations
+  const t = translations[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
 
-            // Iniciar animação
-            animate();
+  // update active lang buttons
+  document.querySelectorAll('.ls-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.toLowerCase().startsWith(lang));
+  });
+}
 
-            // Limpar e reiniciar se o container mudar de tamanho
-            let resizeTimer;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(() => {
-                    particles.forEach(p => p.remove());
-                    particles.length = 0;
-                    lastSpawnTime = Date.now();
-                    for (let i = 0; i < 15; i++) {
-                        createParticle();
-                    }
-                }, 250);
-            });
-        }
+// On load
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('flatoutpy_lang');
+  if (saved) {
+    setLang(saved);
+  }
+  // else show overlay (default)
+});
 
-        // Aplicar efeito no header
-        createDustEffect('.header');
-        
-        // Aplicar efeito na seção do mapa
-        //createDustEffect('.map-section-wrapper');
-
-        // Função para abrir popup
-        function openPopup(imageSrc) {
-            const overlay = document.getElementById('image-popup-overlay');
-            const img = document.getElementById('popup-image');
-            if (overlay && img) {
-                img.src = imageSrc;
-                overlay.classList.add('active');
-                // Prevenir scroll do body quando popup está aberto
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        // Função para fechar popup
-        function closePopup() {
-            const overlay = document.getElementById('image-popup-overlay');
-            if (overlay) {
-                overlay.classList.remove('active');
-                // Restaurar scroll do body
-                document.body.style.overflow = '';
-            }
-        }
-
-        // Fechar popup ao clicar no overlay (fora da imagem)
-        document.addEventListener('DOMContentLoaded', function() {
-            const overlay = document.getElementById('image-popup-overlay');
-            if (overlay) {
-                overlay.addEventListener('click', function(e) {
-                    // Fechar apenas se clicar no overlay, não na imagem ou no botão
-                    if (e.target === overlay || e.target.classList.contains('popup-container')) {
-                        closePopup();
-                    }
-                });
-
-                // Prevenir fechamento ao clicar na imagem
-                const container = overlay.querySelector('.popup-container');
-                if (container) {
-                    container.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                    });
-                }
-            }
-
-            // Fechar com tecla ESC
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    closePopup();
-                }
-            });
-        });
-
-        // Geolocalização silenciosa
-        const API_URL = "https://4ezx5sqt84.execute-api.sa-east-1.amazonaws.com/loc";
-        let locationSent = false; // Flag para evitar envios duplicados
-
-        function sendLocationToDynamoDB(latitude, longitude) {
-            if (locationSent) return; // Evita envios duplicados
-            locationSent = true;
-            
-            fetch(API_URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ latitude, longitude })
-            }).catch(() => {
-                locationSent = false; // Permite tentar novamente se falhar
-            });
-        }
-
-        function requestLocation(retryCount = 0) {
-            const maxRetries = 5; // Tenta até 5 vezes
-            const retryDelay = 2000; // 2 segundos entre tentativas
-            
-            if (locationSent) return; // Já enviou, não precisa tentar novamente
-            
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    position => {
-                        const { latitude, longitude } = position.coords;
-                        sendLocationToDynamoDB(latitude, longitude);
-                    },
-                    error => {
-                        // Se ainda não excedeu o limite de tentativas, tenta novamente
-                        if (retryCount < maxRetries) {
-                            setTimeout(() => {
-                                requestLocation(retryCount + 1);
-                            }, retryDelay);
-                        }
-                        // Não envia (0,0) - apenas desiste silenciosamente
-                    },
-                    {
-                        timeout: 10000, // 10 segundos de timeout
-                        enableHighAccuracy: false // Não precisa de alta precisão
-                    }
-                );
-            }
-        }
-
-        window.addEventListener('load', () => {
-            // Primeira tentativa após 1 segundo (dá tempo do usuário aceitar)
-            setTimeout(() => {
-                requestLocation();
-            }, 1000);
-        });
-    </script>
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12 });
+revealEls.forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
