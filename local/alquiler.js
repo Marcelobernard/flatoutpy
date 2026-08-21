@@ -1,13 +1,11 @@
 (() => {
   const QUOTA_MENSAL = 4_000_000;
   const MOEDA = 'PYG';
-  const meses = [
-    'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
-    'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
-  ];
+  let translations;
+  let language = localStorage.getItem('flatoutpy-language') || 'pt';
   const currentYear = new Date().getFullYear();
   const money = new Intl.NumberFormat('es-PY', { style: 'currency', currency: MOEDA, maximumFractionDigits: 0 });
-  const dateFormat = new Intl.DateTimeFormat('pt-BR');
+  let dateFormat;
   const $ = (selector) => document.querySelector(selector);
 
   const RING_COLOR = {
@@ -24,10 +22,25 @@
     months: $('#months'),
     startLabel: $('#start-label'),
     services: $('#services'),
-    serviceYear: $('#service-year')
+    serviceYear: $('#service-year'),
+    language: $('#language')
   };
 
   let data;
+
+  function t(key) {
+    return translations?.[language]?.[key] || translations?.pt?.[key] || key;
+  }
+
+  function applyTranslations() {
+    document.documentElement.lang = language === 'es' ? 'es-PY' : 'pt-BR';
+    document.title = `${t('title')} · Flatoutpy`;
+    dateFormat = new Intl.DateTimeFormat(language === 'es' ? 'es-PY' : 'pt-BR');
+    document.querySelectorAll('[data-i18n]').forEach((element) => {
+      element.textContent = t(element.dataset.i18n);
+    });
+    elements.language.setAttribute('aria-label', t('languageLabel'));
+  }
 
   function parseDate(value) {
     if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
@@ -76,13 +89,14 @@
     const services = selectedServices(year);
     const total = services.reduce((sum, service) => sum + service.valor, 0);
     const startMonth = year === data.defaultYear ? data.startMonth : 0;
-    const startText = `${meses[startMonth]} de ${year}`;
-    elements.startLabel.textContent = `Cálculo iniciado em ${startText}`;
+    const months = t('months');
+    const startText = `${months[startMonth]} de ${year}`;
+    elements.startLabel.textContent = `${t('calculationStarted')} ${startText}`;
     elements.serviceYear.textContent = year;
 
-    elements.months.innerHTML = meses.map((month, index) => {
+    elements.months.innerHTML = months.map((month, index) => {
       let status = 'paid';
-      let statusLabel = 'PAGO';
+      let statusLabel = t('paid');
       let debit = 0;
       let pct = 100;
       if (index >= startMonth) {
@@ -92,7 +106,7 @@
         pct = Math.round(((QUOTA_MENSAL - debit) / QUOTA_MENSAL) * 100);
         if (debit > 0) {
           status = 'due';
-          statusLabel = 'A PAGAR';
+          statusLabel = t('due');
         }
       }
       return `<article class="month-card${index === startMonth ? ' is-start' : ''}" data-status="${status}">
@@ -103,7 +117,7 @@
           </div>
         </div>
         <span class="status status-${status}">${statusLabel}</span>
-        <div class="month-detail"><span>Em débito</span><strong>${money.format(debit)}</strong></div>
+        <div class="month-detail"><span>${t('debit')}</span><strong>${money.format(debit)}</strong></div>
       </article>`;
     }).join('');
 
@@ -112,7 +126,7 @@
         <div class="service-name">${escapeHtml(service.nome)}</div>
         <div class="service-date">${dateFormat.format(service.date)}</div>
         <div class="service-value" data-zero="${service.valor === 0}">${money.format(service.valor)}</div>
-      </div>`).join('') : '<div class="empty">Nenhum veículo cadastrado para este ano.</div>';
+      </div>`).join('') : `<div class="empty">${t('noVehicles')}</div>`;
   }
 
   function escapeHtml(value) {
@@ -121,19 +135,32 @@
 
   async function init() {
     try {
-      const response = await fetch('./alquiler.json', { cache: 'no-store' });
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      data = normalize(await response.json());
+      const [dataResponse, translationResponse] = await Promise.all([
+        fetch('./alquiler.json', { cache: 'no-store' }),
+        fetch('./alquiler.translations.json', { cache: 'no-store' })
+      ]);
+      if (!dataResponse.ok || !translationResponse.ok) throw new Error('Arquivos não encontrados');
+      data = normalize(await dataResponse.json());
+      translations = await translationResponse.json();
+      elements.language.value = translations[language] ? language : 'pt';
+      language = elements.language.value;
+      applyTranslations();
       renderYears();
       render(Number(elements.year.value));
       elements.year.addEventListener('change', () => render(Number(elements.year.value)));
+      elements.language.addEventListener('change', () => {
+        language = elements.language.value;
+        localStorage.setItem('flatoutpy-language', language);
+        applyTranslations();
+        render(Number(elements.year.value));
+      });
       elements.loading.hidden = true;
       elements.content.hidden = false;
     } catch (error) {
       console.error(error);
       elements.loading.hidden = true;
       elements.error.hidden = false;
-      elements.error.textContent = 'Não foi possível carregar os dados. Verifique o arquivo alquiler.json e abra esta página por um servidor local.';
+      elements.error.textContent = t('error');
     }
   }
 

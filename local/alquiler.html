@@ -10,15 +10,24 @@
 <body>
 	<div class="page-shell">
 		<header class="topbar">
+			<label class="language-control" for="language">
+				<span data-i18n="languageLabel">Selecionar idioma</span>
+				<span class="select-wrap">
+					<select id="language" aria-label="Selecionar idioma">
+						<option value="pt" data-i18n="portuguese">Português</option>
+						<option value="es" data-i18n="spanish">Español</option>
+					</select>
+				</span>
+			</label>
 			<div class="brand">
 				<div>
 					<p class="eyebrow">Flatoutpy</p>
-					<h1>Alquiler</h1>
-					<p class="tagline">Painel de pagamentos do aluguel da oficina</p>
+					<h1 data-i18n="title">Alquiler</h1>
+					<p class="tagline" data-i18n="tagline">Painel de pagamentos do aluguel da oficina</p>
 				</div>
 			</div>
 			<label class="year-control" for="year">
-				<span>Ano de referência</span>
+				<span data-i18n="yearLabel">Ano de referência</span>
 				<span class="select-wrap">
 					<select id="year" aria-label="Selecionar ano"></select>
 				</span>
@@ -26,13 +35,13 @@
 		</header>
 
 		<main>
-			<div id="loading" class="card empty" role="status">Carregando calendário...</div>
+			<div id="loading" class="card empty" role="status" data-i18n="loading">Carregando calendário...</div>
 			<div id="error" class="message" role="alert" hidden></div>
 
 			<div id="content" hidden>
 				<section aria-labelledby="months-title">
 					<div class="section-heading">
-						<h2 id="months-title">Visão mensal</h2>
+						<h2 id="months-title" data-i18n="monthsTitle">Visão mensal</h2>
 						<p id="start-label" class="section-note">—</p>
 					</div>
 					<div id="months" class="month-grid"></div>
@@ -40,15 +49,15 @@
 
 				<section aria-labelledby="services-title">
 					<div class="section-heading">
-						<h2 id="services-title">Veículos registrados em <span id="service-year">—</span></h2>
-						<p class="section-note">Dados mantidos diretamente no arquivo JSON</p>
+						<h2 id="services-title"><span data-i18n="servicesTitle">Veículos registrados em</span> <span id="service-year">—</span></h2>
+						<p class="section-note" data-i18n="servicesNote">Dados mantidos diretamente no arquivo JSON</p>
 					</div>
 					<div id="services" class="services card"></div>
 				</section>
 			</div>
 		</main>
 
-		<footer>Flatoutpy · atualizado a partir de alquiler.json</footer>
+		<footer data-i18n="footer">Flatoutpy · atualizado a partir de alquiler.json</footer>
 	</div>
 	<script src="./alquiler.js" defer></script>
 </body>

@@ -1,0 +1,42 @@
+{
+  "pt": {
+    "languageLabel": "Selecionar idioma",
+    "portuguese": "Português",
+    "spanish": "Español",
+    "title": "Alquiler",
+    "tagline": "Painel de pagamentos do aluguel da oficina",
+    "yearLabel": "Ano de referência",
+    "loading": "Carregando calendário...",
+    "monthsTitle": "Visão mensal",
+    "servicesTitle": "Veículos registrados em",
+    "servicesNote": "Dados mantidos diretamente no arquivo JSON",
+    "calculationStarted": "Cálculo iniciado em",
+    "paid": "PAGO",
+    "due": "A PAGAR",
+    "debit": "Em débito",
+    "noVehicles": "Nenhum veículo cadastrado para este ano.",
+    "error": "Não foi possível carregar os dados. Verifique os arquivos JSON e abra esta página por um servidor local.",
+    "footer": "Flatoutpy · atualizado a partir de alquiler.json",
+    "months": ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"]
+  },
+  "es": {
+    "languageLabel": "Seleccionar idioma",
+    "portuguese": "Portugués",
+    "spanish": "Español",
+    "title": "Alquiler",
+    "tagline": "Panel de pagos del alquiler del taller",
+    "yearLabel": "Año de referencia",
+    "loading": "Cargando calendario...",
+    "monthsTitle": "Vista mensual",
+    "servicesTitle": "Vehículos registrados en",
+    "servicesNote": "Datos mantenidos directamente en el archivo JSON",
+    "calculationStarted": "Cálculo iniciado en",
+    "paid": "PAGADO",
+    "due": "A PAGAR",
+    "debit": "Pendiente",
+    "noVehicles": "No hay vehículos registrados para este año.",
+    "error": "No se pudieron cargar los datos. Verifique los archivos JSON y abra esta página mediante un servidor local.",
+    "footer": "Flatoutpy · actualizado a partir de alquiler.json",
+    "months": ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+  }
+}
