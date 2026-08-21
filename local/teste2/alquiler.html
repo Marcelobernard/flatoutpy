@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Aluguel - FLATOUTPY">
-	<title>Alquiler · Flatoutpy</title>
+	<meta name="description" content="Calendário de pagamentos e serviços da Flatoutpy">
+	<title>Alquiler</title>
 	<link rel="stylesheet" href="./alquiler.css">
 </head>
 <body>
@@ -14,14 +14,11 @@
 				<div>
 					<p class="eyebrow">Flatoutpy</p>
 					<h1>Alquiler</h1>
-					<p class="tagline">Painel de pagamentos do aluguel da oficina</p>
 				</div>
 			</div>
 			<label class="year-control" for="year">
 				<span>Ano de referência</span>
-				<span class="select-wrap">
-					<select id="year" aria-label="Selecionar ano"></select>
-				</span>
+				<select id="year" aria-label="Selecionar ano"></select>
 			</label>
 		</header>
 
@@ -40,7 +37,7 @@
 
 				<section aria-labelledby="services-title">
 					<div class="section-heading">
-						<h2 id="services-title">Veículos registrados em <span id="service-year">—</span></h2>
+						<h2 id="services-title">Carros registrados em <span id="service-year">—</span></h2>
 						<p class="section-note">Dados mantidos diretamente no arquivo JSON</p>
 					</div>
 					<div id="services" class="services card"></div>
@@ -48,7 +45,6 @@
 			</div>
 		</main>
 
-		<footer>Flatoutpy · atualizado a partir de alquiler.json</footer>
 	</div>
 	<script src="./alquiler.js" defer></script>
 </body>

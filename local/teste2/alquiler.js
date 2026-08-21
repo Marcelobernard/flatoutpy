@@ -10,12 +10,6 @@
   const dateFormat = new Intl.DateTimeFormat('pt-BR');
   const $ = (selector) => document.querySelector(selector);
 
-  const RING_COLOR = {
-    paid: 'var(--lime)',
-    due: 'var(--amber)',
-    next: 'var(--sky)'
-  };
-
   const elements = {
     loading: $('#loading'),
     error: $('#error'),
@@ -84,26 +78,19 @@
       let status = 'paid';
       let statusLabel = 'PAGO';
       let debit = 0;
-      let pct = 100;
       if (index >= startMonth) {
         const monthsElapsed = index - startMonth;
         const availableForMonth = Math.max(total - (monthsElapsed * QUOTA_MENSAL), 0);
         debit = Math.max(QUOTA_MENSAL - availableForMonth, 0);
-        pct = Math.round(((QUOTA_MENSAL - debit) / QUOTA_MENSAL) * 100);
         if (debit > 0) {
           status = 'due';
           statusLabel = 'A PAGAR';
         }
       }
       return `<article class="month-card${index === startMonth ? ' is-start' : ''}" data-status="${status}">
-        <div class="month-card-top">
-          <div class="month-name">${month}</div>
-          <div class="gauge" style="--pct:${pct};--ring-color:${RING_COLOR[status]}">
-            <span class="gauge-value">${pct}%</span>
-          </div>
-        </div>
+        <div class="month-name">${month}</div>
         <span class="status status-${status}">${statusLabel}</span>
-        <div class="month-detail"><span>Em débito</span><strong>${money.format(debit)}</strong></div>
+        <div class="month-detail"><span>${status === 'next' ? 'Aguardando' : 'Em débito'}</span><strong>${status === 'next' ? '—' : money.format(debit)}</strong></div>
       </article>`;
     }).join('');
 
@@ -111,8 +98,8 @@
       <div class="service-row">
         <div class="service-name">${escapeHtml(service.nome)}</div>
         <div class="service-date">${dateFormat.format(service.date)}</div>
-        <div class="service-value" data-zero="${service.valor === 0}">${money.format(service.valor)}</div>
-      </div>`).join('') : '<div class="empty">Nenhum veículo cadastrado para este ano.</div>';
+        <div class="service-value">${money.format(service.valor)}</div>
+      </div>`).join('') : '<div class="empty">Nenhum carro cadastrado para este ano.</div>';
   }
 
   function escapeHtml(value) {
