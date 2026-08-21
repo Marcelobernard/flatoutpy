@@ -133,6 +133,16 @@
     return value.replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[character]);
   }
 
+  function changeLanguage() {
+    if (!translations) return;
+    language = elements.language.value;
+    localStorage.setItem('flatoutpy-language', language);
+    applyTranslations();
+    if (data) render(Number(elements.year.value));
+  }
+
+  elements.language.addEventListener('change', changeLanguage);
+
   async function init() {
     try {
       const [dataResponse, translationResponse] = await Promise.all([
@@ -148,12 +158,6 @@
       renderYears();
       render(Number(elements.year.value));
       elements.year.addEventListener('change', () => render(Number(elements.year.value)));
-      elements.language.addEventListener('change', () => {
-        language = elements.language.value;
-        localStorage.setItem('flatoutpy-language', language);
-        applyTranslations();
-        render(Number(elements.year.value));
-      });
       elements.loading.hidden = true;
       elements.content.hidden = false;
     } catch (error) {

@@ -266,9 +266,20 @@ footer { padding: 40px 0 32px; color: var(--muted-2); font-size: 12px; font-fami
 /* -- responsive ------------------------------------------------------------- */
 @media (max-width: 760px) {
   .page-shell { width: min(100% - 24px, 560px); }
-  .topbar { display: flex; align-items: start; flex-direction: column; gap: 20px; padding-top: 28px; }
-  .brand { order: -1; width: 100%; }
-  .language-control, .year-control { align-self: stretch; justify-content: space-between; }
+  .topbar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "brand brand"
+      "language year";
+    align-items: start;
+    gap: 20px 12px;
+    padding-top: 28px;
+  }
+  .brand { width: 100%; }
+  .language-control, .year-control { width: 100%; align-self: stretch; justify-content: space-between; flex-direction: column; align-items: stretch; gap: 7px; }
+  .year-control { justify-self: stretch; }
+  .language-control select, .year-control select { width: 100%; min-width: 0; }
   .stats { grid-template-columns: repeat(2, 1fr); }
   .stat { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .stat:nth-child(even) { border-right: 0; }
