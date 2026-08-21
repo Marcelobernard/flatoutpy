@@ -146,8 +146,8 @@ select:focus-visible { border-color: var(--sky); box-shadow: 0 0 0 3px var(--sky
   flex: 0 0 145px;
   width: 145px;
   gap: 8px;
-  min-height: 46px;
-  padding: 6px 12px 6px 7px;
+  min-height: 50px;
+  padding: 4px 7px;
   border: 1px solid var(--line);
   border-radius: 12px;
   color: var(--ink);
@@ -159,8 +159,8 @@ select:focus-visible { border-color: var(--sky); box-shadow: 0 0 0 3px var(--sky
   cursor: pointer;
   transition: transform .15s, border-color .15s, box-shadow .15s, background .15s;
 }
-.theme-toggle img { width: 34px; height: 34px; object-fit: cover; border-radius: 8px; pointer-events: none; }
-.theme-toggle span { display: block; min-width: 84px; text-align: center; white-space: nowrap; }
+.theme-toggle img { width: 40px; height: 40px; object-fit: cover; border-radius: 8px; pointer-events: none; }
+.theme-toggle span { display: block; min-width: 78px; text-align: center; white-space: nowrap; }
 .theme-toggle:hover { transform: translateY(-2px); border-color: var(--sky); box-shadow: 0 7px 16px rgba(31, 52, 71, .18); }
 .theme-toggle:focus-visible { outline: none; border-color: var(--sky); box-shadow: 0 0 0 3px var(--sky-soft); }
 
@@ -307,21 +307,19 @@ footer { padding: 40px 0 32px; color: var(--muted-2); font-size: 12px; font-fami
 @media (max-width: 760px) {
   .page-shell { width: min(100% - 24px, 560px); }
   .topbar {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "brand brand"
-      "language year";
+    display: flex;
     align-items: start;
-    gap: 20px 12px;
+    flex-direction: column;
+    gap: 18px;
     padding-top: 28px;
   }
-  .brand { width: 100%; }
-  .header-controls { width: 100%; align-items: stretch; gap: 8px; }
-  .language-control { width: auto; align-self: stretch; justify-content: space-between; flex-direction: column; align-items: stretch; gap: 7px; }
-  .year-control { justify-self: stretch; }
+  .header-controls { display: contents; }
+  .brand { order: -3; width: 100%; }
+  .language-control, .year-control { width: 100%; align-self: stretch; justify-content: space-between; flex-direction: column; align-items: stretch; gap: 7px; }
+  .language-control { order: -2; }
+  .year-control { order: -1; justify-self: stretch; }
   .language-control select, .year-control select { width: 100%; min-width: 0; }
-  .theme-toggle { flex: 0 0 145px; width: 145px; align-self: end; }
+  .theme-toggle { order: 0; flex: 0 0 auto; width: 145px; height: 50px; min-height: 50px; align-self: center; }
   .stats { grid-template-columns: repeat(2, 1fr); }
   .stat { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .stat:nth-child(even) { border-right: 0; }
