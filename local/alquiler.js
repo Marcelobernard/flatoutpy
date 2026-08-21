@@ -7,6 +7,7 @@
   ];
   const currentYear = new Date().getFullYear();
   const money = new Intl.NumberFormat('es-PY', { style: 'currency', currency: MOEDA, maximumFractionDigits: 0 });
+  const dateFormat = new Intl.DateTimeFormat('pt-BR');
   const $ = (selector) => document.querySelector(selector);
 
   const elements = {
@@ -15,7 +16,9 @@
     content: $('#content'),
     year: $('#year'),
     months: $('#months'),
-    startLabel: $('#start-label')
+    startLabel: $('#start-label'),
+    services: $('#services'),
+    serviceYear: $('#service-year')
   };
 
   let data;
@@ -69,6 +72,7 @@
     const startMonth = year === data.defaultYear ? data.startMonth : 0;
     const startText = `${meses[startMonth]} de ${year}`;
     elements.startLabel.textContent = `Cálculo iniciado em ${startText}`;
+    elements.serviceYear.textContent = year;
 
     elements.months.innerHTML = meses.map((month, index) => {
       let status = 'paid';
@@ -89,6 +93,17 @@
         <div class="month-detail"><span>${status === 'next' ? 'Aguardando' : 'Em débito'}</span><strong>${status === 'next' ? '—' : money.format(debit)}</strong></div>
       </article>`;
     }).join('');
+
+    elements.services.innerHTML = services.length ? services.map((service) => `
+      <div class="service-row">
+        <div class="service-name">${escapeHtml(service.nome)}</div>
+        <div class="service-date">${dateFormat.format(service.date)}</div>
+        <div class="service-value">${money.format(service.valor)}</div>
+      </div>`).join('') : '<div class="empty">Nenhum carro cadastrado para este ano.</div>';
+  }
+
+  function escapeHtml(value) {
+    return value.replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[character]);
   }
 
   async function init() {

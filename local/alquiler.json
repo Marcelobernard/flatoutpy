@@ -1,33 +1,43 @@
 {
   "padrao": {
-    "mes": 5,
+    "mes": 1,
     "ano": 2026
   },
   "servicos": [
     {
-      "nome": "Land Cruiser HDJ80",
-      "data": "2026-05-05",
-      "valor": 4000000
+      "nome": "Land Cruiser Cinza Azulada",
+      "data": "2026-06-29",
+      "valor": 4250000
     },
     {
-      "nome": "Toyota Hilux SW4",
-      "data": "2026-06-05",
-      "valor": 4000000
+      "nome": "LC GXR Blanca",
+      "data": "2026-02-05",
+      "valor": 1000000
     },
     {
-      "nome": "Jeep Wrangler Rubicon",
-      "data": "2026-07-05",
-      "valor": 4000000
+      "nome": "FJ Cruiser",
+      "data": "2026-02-05",
+      "valor": 1150000
     },
     {
-      "nome": "Ford Bronco",
-      "data": "2026-08-05",
-      "valor": 4000000
+      "nome": "Sportage",
+      "data": "2026-02-10",
+      "valor": 1550000
     },
     {
-      "nome": "Toyota FJ Cruiser",
-      "data": "2026-09-05",
-      "valor": 6000000
+      "nome": "LC HDJ80",
+      "data": "2026-03-20",
+      "valor": 6740000
+    },
+    {
+      "nome": "LC VX Blindada",
+      "data": "2026-04-15",
+      "valor": 1550000
+    },
+    {
+      "nome": "Total otras ayer febrero",
+      "data": "2026-01-01",
+      "valor": 4500000
     }
   ]
 }
