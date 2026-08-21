@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Calendário de pagamentos e serviços da Flatoutpy">
+	<title>Alquiler</title>
+	<link rel="stylesheet" href="./alquiler.css">
+</head>
+<body>
+	<div class="page-shell">
+		<header class="topbar">
+			<div class="brand">
+				<div>
+					<p class="eyebrow">Flatoutpy</p>
+					<h1>Alquiler</h1>
+				</div>
+			</div>
+			<label class="year-control" for="year">
+				<span>Ano de referência</span>
+				<select id="year" aria-label="Selecionar ano"></select>
+			</label>
+		</header>
+
+		<main>
+			<div id="loading" class="card empty" role="status">Carregando calendário...</div>
+			<div id="error" class="message" role="alert" hidden></div>
+
+			<div id="content" hidden>
+				<section aria-labelledby="months-title">
+					<div class="section-heading">
+						<h2 id="months-title">Visão mensal</h2>
+						<p id="start-label" class="section-note">—</p>
+					</div>
+					<div id="months" class="month-grid"></div>
+				</section>
+			</div>
+		</main>
+
+	</div>
+	<script src="./alquiler.js" defer></script>
+</body>
+</html>
