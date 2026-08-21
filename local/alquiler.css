@@ -2,16 +2,16 @@
 
 :root {
   /* -- palette -------------------------------------------------- */
-  --bg: #0d1015;
-  --surface: #151a22;
-  --surface-2: #1b212b;
-  --surface-3: #222a36;
-  --line: #262e3b;
-  --line-soft: #1d2430;
+  --bg: #f3f6fa;
+  --surface: #ffffff;
+  --surface-2: #eef3f7;
+  --surface-3: #e4ebf2;
+  --line: #d6e0e8;
+  --line-soft: #e4eaf0;
 
-  --ink: #edf1f7;
-  --muted: #8892a3;
-  --muted-2: #57606f;
+  --ink: #17212b;
+  --muted: #637181;
+  --muted-2: #7b8794;
 
   --lime: #a3e264;
   --lime-soft: rgba(163, 226, 100, .13);
@@ -20,12 +20,26 @@
   --sky: #5fd0e6;
   --sky-soft: rgba(95, 208, 230, .14);
 
-  --shadow: 0 24px 60px rgba(0, 0, 0, .35);
-  --shadow-sm: 0 10px 24px rgba(0, 0, 0, .28);
+  --shadow: 0 24px 60px rgba(31, 52, 71, .12);
+  --shadow-sm: 0 10px 24px rgba(31, 52, 71, .09);
 
   --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
   --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+}
+
+.dark-theme {
+  --bg: #0d1015;
+  --surface: #151a22;
+  --surface-2: #1b212b;
+  --surface-3: #222a36;
+  --line: #262e3b;
+  --line-soft: #1d2430;
+  --ink: #edf1f7;
+  --muted: #8892a3;
+  --muted-2: #57606f;
+  --shadow: 0 24px 60px rgba(0, 0, 0, .35);
+  --shadow-sm: 0 10px 24px rgba(0, 0, 0, .28);
 }
 
 * { box-sizing: border-box; }
@@ -60,6 +74,7 @@ button, select { font: inherit; }
   gap: 24px;
   border-bottom: 1px solid var(--line-soft);
 }
+.header-controls { grid-area: language; display: flex; align-items: end; gap: 14px; }
 .brand { grid-area: brand; display: flex; align-items: center; justify-content: center; text-align: center; }
 .eyebrow {
   margin: 0 0 10px;
@@ -93,7 +108,7 @@ h1 {
 .tagline { margin: 0; color: var(--muted); font-size: 14px; max-width: 40ch; }
 
 .language-control, .year-control { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; }
-.language-control { grid-area: language; }
+.language-control { flex: 1; }
 .year-control { grid-area: year; justify-self: end; }
 .select-wrap { position: relative; }
 .select-wrap::after {
@@ -123,6 +138,31 @@ select {
 }
 select:hover { border-color: #333c4a; }
 select:focus-visible { border-color: var(--sky); box-shadow: 0 0 0 3px var(--sky-soft); }
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 0 0 145px;
+  width: 145px;
+  gap: 8px;
+  min-height: 46px;
+  padding: 6px 12px 6px 7px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--ink);
+  background: var(--surface);
+  box-shadow: 0 4px 12px rgba(31, 52, 71, .12);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  cursor: pointer;
+  transition: transform .15s, border-color .15s, box-shadow .15s, background .15s;
+}
+.theme-toggle img { width: 34px; height: 34px; object-fit: cover; border-radius: 8px; pointer-events: none; }
+.theme-toggle span { display: block; min-width: 84px; text-align: center; white-space: nowrap; }
+.theme-toggle:hover { transform: translateY(-2px); border-color: var(--sky); box-shadow: 0 7px 16px rgba(31, 52, 71, .18); }
+.theme-toggle:focus-visible { outline: none; border-color: var(--sky); box-shadow: 0 0 0 3px var(--sky-soft); }
 
 main { padding-bottom: 64px; }
 
@@ -277,9 +317,11 @@ footer { padding: 40px 0 32px; color: var(--muted-2); font-size: 12px; font-fami
     padding-top: 28px;
   }
   .brand { width: 100%; }
-  .language-control, .year-control { width: 100%; align-self: stretch; justify-content: space-between; flex-direction: column; align-items: stretch; gap: 7px; }
+  .header-controls { width: 100%; align-items: stretch; gap: 8px; }
+  .language-control { width: auto; align-self: stretch; justify-content: space-between; flex-direction: column; align-items: stretch; gap: 7px; }
   .year-control { justify-self: stretch; }
   .language-control select, .year-control select { width: 100%; min-width: 0; }
+  .theme-toggle { flex: 0 0 145px; width: 145px; align-self: end; }
   .stats { grid-template-columns: repeat(2, 1fr); }
   .stat { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .stat:nth-child(even) { border-right: 0; }

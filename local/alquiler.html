@@ -10,15 +10,21 @@
 <body>
 	<div class="page-shell">
 		<header class="topbar">
-			<label class="language-control" for="language">
-				<span data-i18n="languageLabel">Selecionar idioma</span>
-				<span class="select-wrap">
-					<select id="language" aria-label="Selecionar idioma">
-						<option value="pt" data-i18n="portuguese">Português</option>
-						<option value="es" data-i18n="spanish">Español (Paraguay)</option>
-					</select>
-				</span>
-			</label>
+			<div class="header-controls">
+				<label class="language-control" for="language">
+					<span data-i18n="languageLabel">Selecionar idioma</span>
+					<span class="select-wrap">
+						<select id="language" aria-label="Selecionar idioma">
+							<option value="pt" data-i18n="portuguese">Português</option>
+							<option value="es" data-i18n="spanish">Español (Paraguay)</option>
+						</select>
+					</span>
+				</label>
+				<button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">
+					<img id="theme-image" src="./fotos/charles_aceso.png" alt="">
+					<span data-i18n="themeLight">Modo Claro</span>
+				</button>
+			</div>
 			<div class="brand">
 				<div>
 					<p class="eyebrow">Flatoutpy</p>

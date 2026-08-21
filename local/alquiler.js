@@ -3,6 +3,7 @@
   const MOEDA = 'PYG';
   let translations;
   let language = localStorage.getItem('flatoutpy-language') || 'pt';
+  let theme = localStorage.getItem('flatoutpy-theme') || 'light';
   const currentYear = new Date().getFullYear();
   const money = new Intl.NumberFormat('es-PY', { style: 'currency', currency: MOEDA, maximumFractionDigits: 0 });
   let dateFormat;
@@ -23,7 +24,9 @@
     startLabel: $('#start-label'),
     services: $('#services'),
     serviceYear: $('#service-year'),
-    language: $('#language')
+    language: $('#language'),
+    themeToggle: $('#theme-toggle'),
+    themeImage: $('#theme-image')
   };
 
   let data;
@@ -40,6 +43,16 @@
       element.textContent = t(element.dataset.i18n);
     });
     elements.language.setAttribute('aria-label', t('languageLabel'));
+    elements.themeToggle.setAttribute('aria-label', t(theme === 'light' ? 'themeLight' : 'themeDark'));
+    elements.themeToggle.querySelector('[data-i18n]').textContent = t(theme === 'light' ? 'themeLight' : 'themeDark');
+  }
+
+  function applyTheme() {
+    const isDark = theme === 'dark';
+    document.body.classList.toggle('dark-theme', isDark);
+    elements.themeToggle.setAttribute('aria-pressed', String(isDark));
+    elements.themeImage.src = `./fotos/${isDark ? 'charles_apagado' : 'charles_aceso'}.png`;
+    if (translations) applyTranslations();
   }
 
   function parseDate(value) {
@@ -142,6 +155,11 @@
   }
 
   elements.language.addEventListener('change', changeLanguage);
+  elements.themeToggle.addEventListener('click', () => {
+    theme = theme === 'light' ? 'dark' : 'light';
+    localStorage.setItem('flatoutpy-theme', theme);
+    applyTheme();
+  });
 
   async function init() {
     try {
@@ -154,6 +172,7 @@
       translations = await translationResponse.json();
       elements.language.value = translations[language] ? language : 'pt';
       language = elements.language.value;
+      applyTheme();
       applyTranslations();
       renderYears();
       render(Number(elements.year.value));
