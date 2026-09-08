@@ -37,22 +37,37 @@
     {
       "nome": "Land Cruiser Bege",
       "data": "2026-07-01",
-      "valor": 0
+      "valor": 3100000
     },
     {
       "nome": "Hilux Blanca",
       "data": "2026-07-21",
-      "valor": 0
+      "valor": 1600000
     },
     {
       "nome": "Land Cruiser Gris",
       "data": "2026-07-28",
-      "valor": 0
+      "valor": 4420000
+    },
+    {
+      "nome": "Land Cruiser Blindada Gris",
+      "data": "2026-07-28",
+      "valor": 1350000
     },
     {
       "nome": "Land Cruiser Blanca",
       "data": "2026-08-04",
-      "valor": 0
+      "valor": 3200000
+    },
+    {
+      "nome": "Land Cruiser Roja Blindada",
+      "data": "2026-07-01",
+      "valor": 950000
+    },
+    {
+      "nome": "Land Cruiser Blanca Blindada",
+      "data": "2026-07-01",
+      "valor": 1350000
     },
     {
       "nome": "Total otras ayer febrero",
