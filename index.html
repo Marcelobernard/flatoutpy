@@ -122,11 +122,17 @@
   .hero-title .underline-anim::after { content: ''; position: absolute; bottom: -4px; left: 0; height: 4px; background: var(--red); animation: revealLine 1.2s cubic-bezier(.77,0,.18,1) 0.4s both; }
   @keyframes revealLine { from { width: 0; } to { width: 100%; } }
   .hero-desc { font-size: 1.05rem; font-weight: 300; color: var(--gray-light); line-height: 1.7; max-width: 520px; margin-bottom: 40px; }
-  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin-bottom: 64px; }
+  .hero-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 64px; }
+  .hero-main-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
   .btn-primary { background: var(--red); color: #fff; font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 16px 36px; text-decoration: none; transition: background .2s, transform .15s; display: inline-flex; align-items: center; gap: 10px; }
   .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); }
   .btn-secondary { color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 16px 0; text-decoration: none; border-bottom: 2px solid var(--border); transition: border-color .2s; }
   .btn-secondary:hover { border-color: var(--red); }
+  .btn-calculator { position: relative; isolation: isolate; overflow: hidden; display: inline-flex; align-items: center; color: #fff; background: var(--red); font-family: 'Barlow Condensed', sans-serif; font-size: 0.98rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 14px 22px; text-decoration: none; border: 1px solid #ef3333; box-shadow: 0 0 0 1px rgba(209,0,0,0.2), 0 0 22px rgba(209,0,0,0.42); animation: calculatorPulse 2.8s ease-in-out infinite; transition: background .2s, transform .2s, box-shadow .2s; }
+  .btn-calculator::after { content: ''; position: absolute; inset: -30% auto -30% -35%; z-index: -1; width: 28%; background: rgba(255,255,255,0.38); transform: skewX(-20deg) translateX(-220%); animation: calculatorShine 3.4s ease-in-out infinite; }
+  .btn-calculator:hover { background: var(--red-dark); transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(209,0,0,0.3), 0 0 30px rgba(209,0,0,0.62); }
+  @keyframes calculatorPulse { 0%, 100% { box-shadow: 0 0 0 1px rgba(209,0,0,0.2), 0 0 18px rgba(209,0,0,0.32); } 50% { box-shadow: 0 0 0 1px rgba(209,0,0,0.35), 0 0 28px rgba(209,0,0,0.58); } }
+  @keyframes calculatorShine { 0%, 35% { transform: skewX(-20deg) translateX(-220%); } 65%, 100% { transform: skewX(-20deg) translateX(520%); } }
 
   /* ─── 3 PILARES (HERO) ─── */
   .hero-pillars {
@@ -443,11 +449,14 @@
       Escape inox, estética premium y reprogramación ECU. Los tres pilares donde los entusiastas confían su máquina.
     </p>
     <div class="hero-actions">
+      <div class="hero-main-actions">
       <a href="https://wa.me/595986641668?text=Hola!%20Llegu%C3%A9%20aqu%C3%AD%20por%20su%20sitio%20web.%20Me%20gustar%C3%ADa%20aclarar%20una%20duda%20o%20solicitar%20un%20presupuesto.%20*POR%20FAVOR,%20NO%20BORRAR%20ESTE%20MENSAJE*" target="_blank" class="btn-primary">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
         <span data-i18n="hero_cta">WhatsApp</span>
       </a>
       <a href="#services" class="btn-secondary" data-i18n="hero_cta2">Ver servicios ↓</a>
+      </div>
+      <a href="escape/index-es.html" class="btn-calculator" id="calculator-cta" data-i18n="hero_calc">Calcular mi escape ideal →</a>
     </div>
 
     <!-- 3 PILARES no hero -->
@@ -761,7 +770,7 @@ const translations = {
     hero_eyebrow:"Presidente Franco · Paraguay",
     hero_t1:"Tu auto.", hero_t2:"OTRA CATEGORÍA.",
     hero_desc:"Escape inox, estética premium y reprogramación ECU. Los tres pilares donde los entusiastas confían su máquina.",
-    hero_cta:"WhatsApp", hero_cta2:"Ver servicios ↓",
+    hero_cta:"WhatsApp", hero_cta2:"Ver servicios ↓", hero_calc:"Haz clic aquí para calcular tu escape ideal →",
     p1_tag:"Pilar 01", p1_name:"ESCAPE\nINOX", p1_desc:"Fabricación completa en acero, inox, aluminio y titanio. Solda TIG de precisión.",
     p2_tag:"Pilar 02", p2_name:"ESTÉTICA\nPREMIUM", p2_desc:"Coating nano-cerámico, corrección de pintura y detailing profesional de alto nivel.",
     p3_tag:"Pilar 03", p3_name:"REPROG.\nECU", p3_desc:"Tune personalizado, Stage X y Hardcut. Más potencia, más respuesta, mismo motor.",
@@ -813,7 +822,7 @@ const translations = {
     hero_eyebrow:"Presidente Franco · Paraguai",
     hero_t1:"Seu carro.", hero_t2:"OUTRO NÍVEL.",
     hero_desc:"Escapamento inox, estética premium e reprogramação ECU. Os três pilares onde os entusiastas confiam o seu carro.",
-    hero_cta:"WhatsApp", hero_cta2:"Ver serviços ↓",
+    hero_cta:"WhatsApp", hero_cta2:"Ver serviços ↓", hero_calc:"Clique aqui para calcular seu escapamento ideal →",
     p1_tag:"Pilar 01", p1_name:"ESCAPE\nINOX", p1_desc:"Fabricação completa em aço, inox, alumínio e titânio. Solda TIG de precisão.",
     p2_tag:"Pilar 02", p2_name:"ESTÉTICA\nPREMIUM", p2_desc:"Coating nano-cerâmico, correção de pintura e detailing profissional de alto nível.",
     p3_tag:"Pilar 03", p3_name:"REPROG.\nECU", p3_desc:"Tune personalizado, Stage X e Hardcut. Mais potência, mais resposta, mesmo motor.",
@@ -865,7 +874,7 @@ const translations = {
     hero_eyebrow:"Presidente Franco · Paraguay",
     hero_t1:"Your car.", hero_t2:"ANOTHER LEVEL.",
     hero_desc:"Stainless exhaust, premium detailing and ECU remapping. The three pillars where enthusiasts trust their machine.",
-    hero_cta:"WhatsApp", hero_cta2:"View services ↓",
+    hero_cta:"WhatsApp", hero_cta2:"View services ↓", hero_calc:"Click here to calculate your ideal exhaust →",
     p1_tag:"Pillar 01", p1_name:"EXHAUST\nINOX", p1_desc:"Full fabrication in steel, stainless, aluminum and titanium. Precision TIG welding.",
     p2_tag:"Pillar 02", p2_name:"PREMIUM\nDETAILING", p2_desc:"Nano-ceramic coating, paint correction and professional-grade detailing.",
     p3_tag:"Pillar 03", p3_name:"ECU\nREMAP", p3_desc:"Custom tune, Stage X and Hardcut. More power, more response, same engine.",
@@ -926,6 +935,14 @@ function setLang(lang) {
     const key = el.getAttribute('data-i18n');
     if (t[key] !== undefined) el.textContent = t[key];
   });
+  const calculatorCta = document.getElementById('calculator-cta');
+  if (calculatorCta) {
+    calculatorCta.href = {
+      es: 'escape/index-es.html',
+      pt: 'escape/index.html',
+      en: 'escape/index-en.html'
+    }[lang];
+  }
   document.querySelectorAll('.ls-btn').forEach(btn => {
     btn.classList.toggle('active', btn.textContent.toLowerCase().startsWith(lang));
   });

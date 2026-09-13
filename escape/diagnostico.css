@@ -1,0 +1,231 @@
+/* Diagnóstico visual de escape — estilos complementares.
+   Reaproveita as variáveis de cor/tipografia já definidas em index-CJvZHiDm.css,
+   sem sobrescrever nenhuma regra existente do site. */
+
+/* Header aligned with the main FlatOutPY site. */
+.app-header {
+  position: sticky;
+  top: 0;
+  background: rgba(8, 8, 8, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.app-header-inner {
+  max-width: 1280px;
+  height: 68px;
+  padding: 0 32px;
+}
+
+.brand {
+  gap: 0;
+}
+
+.brand-mark {
+  display: none;
+}
+
+.brand h1 {
+  width: 154px;
+  height: 30px;
+  background: url('../img/logob.png') center / contain no-repeat;
+  font-size: 0;
+}
+
+.brand h1::after {
+  content: none;
+}
+
+.brand-sub {
+  display: none;
+}
+
+.brand-tag {
+  display: none;
+}
+
+.language-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  margin-right: 16px;
+}
+
+.language-nav a {
+  color: var(--text-muted);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 4px 8px;
+  text-decoration: none;
+}
+
+.language-nav a:hover,
+.language-nav a.active {
+  color: #fff;
+}
+
+.language-nav a.active {
+  border: 1px solid #d10000;
+  color: #d10000;
+}
+
+@media (max-width: 560px) {
+  .app-header-inner {
+    padding: 0 20px;
+  }
+
+  .brand h1 {
+    width: 135px;
+    height: 26px;
+  }
+
+  .language-nav {
+    margin-right: 8px;
+  }
+
+  .language-nav a {
+    font-size: 0.68rem;
+    padding: 4px;
+  }
+}
+
+.diag-card {
+  border-color: var(--red-dim);
+}
+
+.app-footer p strong {
+  display: block;
+  color: var(--red);
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  margin-bottom: 5px;
+}
+
+.app-footer p .footer-note {
+  display: block;
+}
+
+.diag-selector {
+  margin: 4px 0 16px;
+  max-width: 320px;
+}
+
+.diag-headline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.diag-headline-diam {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.diag-verdict-pill {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  white-space: nowrap;
+}
+
+.diag-current-note {
+  color: var(--text-muted);
+  font-size: 12.5px;
+  margin-bottom: 14px;
+}
+
+.diag-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 20px;
+  margin-bottom: 16px;
+}
+@media (max-width: 640px) {
+  .diag-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.diag-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13.5px;
+}
+
+.diag-row-label {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.diag-row-trend {
+  text-align: right;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.diag-row-note {
+  display: block;
+  font-weight: 400;
+  color: var(--text-faint);
+  font-size: 11.5px;
+  margin-top: 2px;
+}
+
+.diag-footer {
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+}
+
+.diag-best {
+  font-size: 14.5px;
+  margin-bottom: 8px;
+}
+.diag-best strong {
+  color: var(--red);
+  font-family: var(--font-display);
+  font-size: 16px;
+}
+
+.diag-compare {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  margin-bottom: 12px;
+}
+
+.diag-why-toggle {
+  font-size: 12.5px;
+  padding: 7px 12px;
+  margin-top: 0;
+}
+
+.diag-why-text {
+  margin-top: 10px;
+}
