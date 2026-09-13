@@ -74,6 +74,44 @@
 }
 
 @media (max-width: 560px) {
+  .app-main {
+    padding: 12px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .form-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .field {
+    min-width: 0;
+  }
+
+  .field > * {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .field input,
+  .field select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .field-inline {
+    min-width: 0;
+  }
+
+  .results-grid,
+  .goal-grid {
+    grid-template-columns: 1fr;
+  }
+
   .app-header-inner {
     padding: 0 20px;
   }
