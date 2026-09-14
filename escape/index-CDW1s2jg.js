@@ -9389,7 +9389,9 @@ function Sj({ value: e, onChange: t, onLoadExample: r }) {
                     step: 1,
                     value: e.cylinders,
                     onChange: (u) =>
-                      t({ cylinders: parseInt(u.target.value) || 1 }),
+                      t({
+                        cylinders: u.target.value === "" ? "" : parseInt(u.target.value) || 1,
+                      }),
                   }),
                 ],
               }),
@@ -9424,7 +9426,9 @@ function Sj({ value: e, onChange: t, onLoadExample: r }) {
                     step: 100,
                     value: e.rpmMax,
                     onChange: (u) =>
-                      t({ rpmMax: parseInt(u.target.value) || 0 }),
+                      t({
+                        rpmMax: u.target.value === "" ? "" : parseInt(u.target.value) || 0,
+                      }),
                   }),
                 ],
               }),
@@ -9668,7 +9672,9 @@ function Sj({ value: e, onChange: t, onLoadExample: r }) {
                     step: 1,
                     value: e.pipeCount,
                     onChange: (u) =>
-                      t({ pipeCount: parseInt(u.target.value) || 1 }),
+                      t({
+                        pipeCount: u.target.value === "" ? "" : parseInt(u.target.value) || 1,
+                      }),
                   }),
                 ],
               }),
