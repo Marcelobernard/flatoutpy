@@ -168,9 +168,9 @@
 
   function getNumberInput(label) {
     if (!label) return null;
-    var input = label.querySelector('input[type="number"]');
+    var input = label.querySelector('input');
     if (!input || input.value === '') return null;
-    var val = parseFloat(input.value);
+    var val = parseFloat(input.value.replace(',', '.'));
     return isNaN(val) ? null : val;
   }
 

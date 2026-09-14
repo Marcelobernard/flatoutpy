@@ -9320,9 +9320,15 @@ function jf(e, t) {
 }
 function Sj({ value: e, onChange: t, onLoadExample: r }) {
   const [n, i] = B.useState(""),
+    [d, h] = B.useState(String(e.displacement).replace(".", ",")),
     a = e.egtUnit === "C" ? e.egt : cj(e.egt),
     o = Ef(e.atmPressure, e.pressureUnit),
     l = Ef(e.backpressure, e.pressureUnit);
+  B.useEffect(() => {
+    const parsed = parseFloat(d.replace(",", "."));
+    if ((d === "" && e.displacement === 0) || parsed === e.displacement) return;
+    h(String(e.displacement).replace(".", ","));
+  }, [e.displacement]);
   return O.jsxs("div", {
     className: "input-form",
     children: [
@@ -9351,12 +9357,14 @@ function Sj({ value: e, onChange: t, onLoadExample: r }) {
                     className: "field-inline",
                     children: [
                       O.jsx("input", {
-                        type: "number",
-                        min: 0,
-                        step: 0.1,
-                        value: e.displacement,
-                        onChange: (u) =>
-                          t({ displacement: parseFloat(u.target.value) || 0 }),
+                        type: "text",
+                        inputMode: "decimal",
+                        value: d,
+                        onChange: (u) => {
+                          const raw = u.target.value.replace(",", ".");
+                          h(u.target.value);
+                          t({ displacement: raw === "" ? 0 : parseFloat(raw) || 0 });
+                        },
                       }),
                       O.jsxs("select", {
                         value: e.displacementUnit,
